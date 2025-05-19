@@ -21,6 +21,16 @@ public class CalculoFinanceiro {
         return saldo;
     }
     
+    public BigDecimal saldoContaAtualizar(int gptrans, BigDecimal saldo, BigDecimal valor, BigDecimal valorAtual){
+        if(gptrans == 1){
+            saldo = (saldo.add(valor)).subtract(valorAtual);
+        }
+        if(gptrans == 2){
+            saldo = (saldo.subtract(valor)).add(valorAtual);
+        }
+        return saldo;
+    }
+        
     public BigDecimal aplicaRendimento(BigDecimal saldo, BigDecimal indice){
         BigDecimal resultado = Utilidade.converter("0,00");
         resultado = ((saldo.multiply(indice)).divide(Utilidade.converter("100,00"))).add(saldo);

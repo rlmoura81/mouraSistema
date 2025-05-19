@@ -674,19 +674,33 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
             movcx2 = new MovimentoCaixa();
             movcx2.setVl_credito(Utilidade.converter("0,00"));
             movcx2.setVl_debito(Utilidade.converter("0,00"));
-        }
-        if(movcx.getTipotransacao().getGptrans().getCd_gptrans() == 1){
-            if(!Utilidade.formatoValor.format(movcx.getVl_credito()).equals(Utilidade.formatoValor.format(movcx2.getVl_credito()))){
-                csaldo.setVl_saldo(cf.saldoConta(gptrans.getCd_gptrans(), csaldo.getVl_saldo(), movcx.getVl_credito()));
-                csaldor.alterar(csaldo);
+            
+            if(movcx.getTipotransacao().getGptrans().getCd_gptrans() == 1){
+                if(!Utilidade.formatoValor.format(movcx.getVl_credito()).equals(Utilidade.formatoValor.format(movcx2.getVl_credito()))){
+                    csaldo.setVl_saldo(cf.saldoConta(gptrans.getCd_gptrans(), csaldo.getVl_saldo(), movcx.getVl_credito()));
+                    csaldor.alterar(csaldo);
+                }
             }
-        }
-        if(movcx.getTipotransacao().getGptrans().getCd_gptrans() == 2){
-            if(!Utilidade.formatoValor.format(movcx.getVl_debito()).equals(Utilidade.formatoValor.format(movcx2.getVl_debito()))){
-                csaldo.setVl_saldo(cf.saldoConta(gptrans.getCd_gptrans(), csaldo.getVl_saldo(), movcx.getVl_debito()));
-                csaldor.alterar(csaldo);
+            if(movcx.getTipotransacao().getGptrans().getCd_gptrans() == 2){
+                if(!Utilidade.formatoValor.format(movcx.getVl_debito()).equals(Utilidade.formatoValor.format(movcx2.getVl_debito()))){
+                    csaldo.setVl_saldo(cf.saldoConta(gptrans.getCd_gptrans(), csaldo.getVl_saldo(), movcx.getVl_debito()));
+                    csaldor.alterar(csaldo);
+                }
             }
-        }
+        }else{
+            if(movcx.getTipotransacao().getGptrans().getCd_gptrans() == 1){
+                if(!Utilidade.formatoValor.format(movcx.getVl_credito()).equals(Utilidade.formatoValor.format(movcx2.getVl_credito()))){
+                    csaldo.setVl_saldo(cf.saldoContaAtualizar(gptrans.getCd_gptrans(), csaldo.getVl_saldo(), movcx.getVl_credito(), movcx2.getVl_credito()));
+                    csaldor.alterar(csaldo);
+                }
+            }
+            if(movcx.getTipotransacao().getGptrans().getCd_gptrans() == 2){
+                if(!Utilidade.formatoValor.format(movcx.getVl_debito()).equals(Utilidade.formatoValor.format(movcx2.getVl_debito()))){
+                    csaldo.setVl_saldo(cf.saldoContaAtualizar(gptrans.getCd_gptrans(), csaldo.getVl_saldo(), movcx.getVl_debito(), movcx2.getVl_debito()));
+                    csaldor.alterar(csaldo);
+                }
+            }            
+        }    
         movcx2 = null;
         jLSaldo.setText("Saldo: " + Utilidade.formatoValor.format(csaldo.getVl_saldo()));   
     }

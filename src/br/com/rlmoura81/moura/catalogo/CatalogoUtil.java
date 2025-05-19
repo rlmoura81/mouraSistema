@@ -60,7 +60,7 @@ public class CatalogoUtil {
     }
     
     public void tabelaCatalogo(JTable o){
-        String[] nomeColuna = {"Titulo", "Numero", "Volume", "Edicao", "Observação", "Editora", "Tipo", "Status"};
+        String[] nomeColuna = {"Titulo", "Numero", "Volume", "Edicao", "Status", "Editora", "Tipo", "Observação"};
         lista = catalogor.getLista();
         Object [][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for (int i = 0; i < lista.size(); i++){
