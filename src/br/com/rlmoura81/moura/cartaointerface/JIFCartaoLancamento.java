@@ -507,8 +507,10 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     private void jbBotaoTransacoes(){
         if(jRBEmAberto.isSelected() == true){
             jPTransacaoBotoes.setVisible(false);
+            jChkBParcela.setVisible(false);
         }else{
             jPTransacaoBotoes.setVisible(true);
+            jChkBParcela.setVisible(true);
         }
     }
     
@@ -584,12 +586,12 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             cartaoparc.setCategoria(categoria);
             cartaoparc.setNm_parcela(Integer.parseInt(jTFParcela.getText()));
             cartaoparc.setCd_usuario(JPLogin.codloginuser);
-            try {
+            /*try {
                 cartaoparcr.inserirParcela(cartaoparc);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao salvar:\n" +
                     ex.getMessage(), "Cartão Parcelamento", JOptionPane.ERROR_MESSAGE);
-            }
+            }*/
             calculaParcela();
             JOptionPane.showMessageDialog(null, "Salvo Parcelamento.", "Cartão Parcelamento", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -901,11 +903,12 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRBEmAbertoActionPerformed
 
     private void jBLancaParcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLancaParcelaActionPerformed
-        if((CartaoLancamento)cartaolancu.getSelectObject(jTTransacao) != null){
+        if((CartaoLancamento)cartaoparcu.getSelectObject(jTTransacao) != null){
             ultimoRegistro();
             cartaolanc.setCartao(cartao);
             cartaolanc.setDespesa(despesa);
-            cartaolanc.setDt_despesa(cartaoparc.getDt_parcela());
+            //cartaolanc.setDt_despesa(cartaoparc.getDt_parcela());
+            cartaolanc.setDt_despesa(util.recebeData(jFTFData.getText()));
             cartaolanc.setDs_despesa(jTFDescricao.getText());
             cartaolanc.setNm_valor(Utilidade.converter(jFTFValor.getText()));
             cartaolanc.setCategoria(categoria);
@@ -920,7 +923,6 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             valorFatura();
             jbBotaoTransacoes();            
         }
-
     }//GEN-LAST:event_jBLancaParcelaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
