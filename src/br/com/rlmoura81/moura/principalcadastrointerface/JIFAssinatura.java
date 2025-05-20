@@ -448,6 +448,7 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
             presserv = (PrestadorServico)jCBPresserv.getSelectedItem();
             jTFServico.setText(presserv.getDs_presserv());
         }else{
+            presserv.setCd_presserv(0);
             jTFServico.setText(null);
         }
     }//GEN-LAST:event_jCBPresservActionPerformed
