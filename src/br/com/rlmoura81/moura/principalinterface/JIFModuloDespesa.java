@@ -707,7 +707,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
             if(animald.getProduto() == null){
                 jCBProduto.setSelectedIndex(0);
             }else{
-                jCBProduto.setSelectedItem(animald.getProduto());
+                jCBProduto.getModel().setSelectedItem(animald.getProduto());
             }
         }
         if(obj.getClass().equals(veiculo.getClass())){
@@ -716,7 +716,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
             if(veiculod.getPresserv() == null){
                 jCBPresserv.setSelectedIndex(0);
             }else{
-                jCBPresserv.setSelectedItem(veiculod.getPresserv());
+                jCBPresserv.getModel().setSelectedItem(veiculod.getPresserv());
             }
             jTFNota.setText(veiculod.getNm_nota());
             jFTFData.setText(Utilidade.formatoData.format(veiculod.getDt_despesa().getTime()));
@@ -730,7 +730,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
             if(imoveld.getPresserv() == null){
                 jCBPresserv.setSelectedIndex(0);
             }else{
-                jCBPresserv.setSelectedItem(imoveld.getPresserv());
+                jCBPresserv.getModel().setSelectedItem(imoveld.getPresserv());
             }
             jTFNota.setText(imoveld.getNm_nota());
             jFTFData.setText(Utilidade.formatoData.format(imoveld.getDt_despesa().getTime()));
