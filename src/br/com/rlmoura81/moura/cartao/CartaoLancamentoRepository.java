@@ -143,7 +143,7 @@ public class CartaoLancamentoRepository implements IPadraoRepository{
                   "  FROM cartaolanc" +
                   " WHERE cd_cartao = ?" +
                   "   AND cd_usuario = ?" +
-                  " ORDER BY dt_despesa";
+                  " ORDER BY dt_despesa, ds_despesa";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, cd_cartao);
             ps.setInt(2, JPLogin.codloginuser);

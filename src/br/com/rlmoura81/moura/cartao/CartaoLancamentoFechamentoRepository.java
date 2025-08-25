@@ -171,7 +171,8 @@ public class CartaoLancamentoFechamentoRepository implements IPadraoRepository{
                   "  FROM cartaolancf" +
                   " WHERE dt_fechamento = ? " +
                   "   AND cd_cartao = ? " +
-                  "   AND cd_usuario = ?";
+                  "   AND cd_usuario = ?" +
+                  " ORDER BY dt_despesa, ds_despesa";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, Utilidade.formatoData.format(data.getTime()));
             ps.setInt(2, cd_cartao);

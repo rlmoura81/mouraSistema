@@ -14,8 +14,8 @@ public class ConexaoPersistencia {
             String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";            
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
             Class.forName(JDBC_DRIVER);            
-              con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","moura","moura"); 
-//              con = DriverManager.getConnection("jdbc:oracle:thin:@10.1.1.72:1521:xe","moura","moura");                     
+//              con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","moura","moura"); 
+              con = DriverManager.getConnection("jdbc:oracle:thin:@10.1.1.72:1521:xe","moura","moura");                     
 //              con = DriverManager.getConnection("jdbc:oracle:thin:@hgc09pw9160.sn.mynetname.net:9021:xe","moura","moura"); 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco:\n" + 
