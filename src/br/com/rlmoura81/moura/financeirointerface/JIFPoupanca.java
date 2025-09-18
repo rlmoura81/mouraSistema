@@ -14,6 +14,16 @@ public class JIFPoupanca extends javax.swing.JInternalFrame {
     
     private static JIFPoupanca jifpoupanca;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFPoupanca}.  
+     * If not yet created, instantiates the frame and sets its title to "Poupança".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFPoupanca}.  
+     * Se non ancora creata, istanzia il frame e imposta il titolo su "Poupança".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton de {@link JIFPoupanca}.  
+     * Caso ainda não exista, cria o frame e define o título como "Poupança".</p>
+     */
     public static JIFPoupanca getInstancia(){
         if(jifpoupanca == null){
             jifpoupanca = new JIFPoupanca();
@@ -222,14 +232,29 @@ public class JIFPoupanca extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Populates the account combo box with available accounts.</p>
+     * <p><strong>IT:</strong> Popola la combo box dei conti con i conti disponibili.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo box de contas com as contas disponíveis.</p>
+     */
     private void jcConta(){
         contau.jcConta(jCBConta);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads and displays savings accounts for the given account ID in the table.</p>
+     * <p><strong>IT:</strong> Carica e visualizza i conti di risparmio per l'ID del conto fornito nella tabella.</p>
+     * <p><strong>PT-BR:</strong> Carrega e exibe as poupanças do ID da conta informado na tabela.</p>
+     */
     private void tabelaPoupanca(int num){
         poupancau.tabelaPoupanca(jTPoupanca, num);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the required fields for savings account registration.</p>
+     * <p><strong>IT:</strong> Convalida i campi obbligatori per la registrazione del conto di risparmio.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios para cadastro de poupança.</p>
+     */
     private boolean validaCampos(){
         if(conta == null){
             JOptionPane.showMessageDialog(null, "Selecione a conta.", "Poupança", JOptionPane.INFORMATION_MESSAGE);
@@ -244,10 +269,20 @@ public class JIFPoupanca extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all input fields in the savings account form.</p>
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input nel modulo del conto di risparmio.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada no formulário de poupança.</p>
+     */
     private void limpaCampos(){
         jTFVariacao.setText(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new savings account with the entered data and initializes the balance with 0.00.</p>
+     * <p><strong>IT:</strong> Salva un nuovo conto di risparmio con i dati inseriti e inizializza il saldo a 0,00.</p>
+     * <p><strong>PT-BR:</strong> Salva uma nova poupança com os dados informados e inicializa o saldo em 0,00.</p>
+     */
     private void salvar(){
         poupanca.setConta(conta);
         poupanca.setNm_variaca(jTFVariacao.getText());
@@ -256,12 +291,22 @@ public class JIFPoupanca extends javax.swing.JInternalFrame {
         poupancar.inserir(poupanca);
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing savings account with the modified data.</p>
+     * <p><strong>IT:</strong> Aggiorna un conto di risparmio esistente con i dati modificati.</p>
+     * <p><strong>PT-BR:</strong> Altera uma poupança existente com os dados modificados.</p>
+     */
     private void alterar(){
         poupanca.setConta(conta);
         poupanca.setNm_variaca(jTFVariacao.getText());
         poupancar.alterar(poupanca);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected savings account from the database.</p>
+     * <p><strong>IT:</strong> Elimina il conto di risparmio selezionato dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui a poupança selecionada do banco de dados.</p>
+     */
     private void excluir(){
         poupanca.setCd_poupanca(poupanca.getCd_poupanca());
         poupancar.excluir(poupanca);

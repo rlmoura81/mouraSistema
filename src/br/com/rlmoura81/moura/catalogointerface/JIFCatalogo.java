@@ -12,6 +12,23 @@ public class JIFCatalogo extends javax.swing.JInternalFrame {
     
     private static JIFCatalogo jifcatalogo;
     
+    /**
+     * <p><strong>EN:</strong> Provides a singleton instance of the {@link JIFCatalogo} window.  
+     * If no instance exists, a new one is created, titled "Catalog", and maximized.  
+     * Ensures that only one window of this type can be opened at a time.</p>
+     *
+     * <p><strong>IT:</strong> Fornisce un'istanza singleton della finestra {@link JIFCatalogo}.  
+     * Se non esiste alcuna istanza, ne viene creata una nuova, con titolo "Catalogo" e massimizzata.  
+     * Garantisce che sia possibile aprire solo una finestra di questo tipo alla volta.</p>
+     *
+     * <p><strong>PT-BR:</strong> Fornece uma instância singleton da janela {@link JIFCatalogo}.  
+     * Se não existir uma instância, uma nova é criada, com título "Catálogo" e maximizada.  
+     * Garante que apenas uma janela desse tipo possa ser aberta por vez.</p>
+     *
+     * @return EN: the single instance of {@link JIFCatalogo}  
+     *         IT: l'istanza unica di {@link JIFCatalogo}  
+     *         PT-BR: a instância única de {@link JIFCatalogo}
+     */
     public static JIFCatalogo getInstancia(){
         if(jifcatalogo == null){
             jifcatalogo = new JIFCatalogo();
@@ -184,6 +201,16 @@ public class JIFCatalogo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Opens the {@link JIFCatalogoCadastro} screen for catalog registration.  
+     * The new internal frame is added to the parent container, displayed, and the current window is closed.</p>
+     *
+     * <p><strong>IT:</strong> Apre la finestra {@link JIFCatalogoCadastro} per la registrazione del catalogo.  
+     * Il nuovo internal frame viene aggiunto al contenitore padre, visualizzato e la finestra corrente viene chiusa.</p>
+     *
+     * <p><strong>PT-BR:</strong> Abre a tela {@link JIFCatalogoCadastro} para cadastro de catálogo.  
+     * O novo internal frame é adicionado ao contêiner pai, exibido e a janela atual é encerrada.</p>
+     */
     private void telaCatalogoCadastro(){
         JIFCatalogoCadastro telacatalogocad = new JIFCatalogoCadastro();
         getParent().add(telacatalogocad);

@@ -8,6 +8,19 @@ public class JIFAtivoSaldo extends javax.swing.JInternalFrame {
     
     public static int tpativo;
     
+    /**
+     * <p><strong>EN:</strong> Returns the instance of {@link JIFAtivoSaldo} based on the given type.  
+     * If {@code num = 0}, initializes the screen for stock assets (Ação).  
+     * If {@code num = 1}, initializes the screen for Real Estate Funds (FII).</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza di {@link JIFAtivoSaldo} in base al tipo fornito.  
+     * Se {@code num = 0}, inizializza la finestra per gli attivi azionari (Azione).  
+     * Se {@code num = 1}, inizializza la finestra per i Fondi Immobiliari (FII).</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância de {@link JIFAtivoSaldo} conforme o tipo informado.  
+     * Se {@code num = 0}, inicializa a tela para ativos de ações.  
+     * Se {@code num = 1}, inicializa a tela para Fundos Imobiliários (FII).</p>
+     */
     public static JIFAtivoSaldo getInstancia(int num){
         if(jifativosaldo == null | num == 0 ){
             JIFAtivoSaldo.tpativo = 1;  

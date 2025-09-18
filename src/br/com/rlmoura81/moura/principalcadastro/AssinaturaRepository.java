@@ -11,12 +11,20 @@ import javax.swing.JOptionPane;
 
 public class AssinaturaRepository implements IPadraoRepository{
         
-    String sql = "";
-    
-    PrestadorServicoRepository presservr = new PrestadorServicoRepository();
-    
+    String sql = "";    
+    PrestadorServicoRepository presservr = new PrestadorServicoRepository();    
     Utilidade util = new Utilidade();
     
+    /**
+     * <p><strong>EN:</strong> Inserts a new <code>Assinatura</code> (subscription) record into the database.
+     * Persists service, credentials, price, type, validity date, provider, and user.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un nuovo record di <code>Assinatura</code> (abbonamento) nel database.
+     * Salva servizio, credenziali, valore, tipo, data di validità, fornitore e utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um novo registro de <code>Assinatura</code> no banco de dados.
+     * Persiste serviço, credenciais, valor, tipo, validade, prestador e usuário.</p>
+     */
     @Override
     public void inserir(Object o) {
         Assinatura a = (Assinatura) o;
@@ -41,6 +49,16 @@ public class AssinaturaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing <code>Assinatura</code> record.
+     * Changes service, credentials, price, type, validity date, and provider for the given id and user.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record esistente di <code>Assinatura</code>.
+     * Modifica servizio, credenziali, valore, tipo, data di validità e fornitore per l’id e l’utente indicati.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro existente de <code>Assinatura</code>.
+     * Altera serviço, credenciais, valor, tipo, validade e prestador para o id e usuário informados.</p>
+     */
     @Override
     public void alterar(Object o) {
         Assinatura a = (Assinatura) o;
@@ -74,6 +92,13 @@ public class AssinaturaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes an <code>Assinatura</code> record by its id and user.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un record di <code>Assinatura</code> tramite id e utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um registro de <code>Assinatura</code> pelo id e usuário.</p>
+     */
     @Override
     public void excluir(Object o) {
         Assinatura a = (Assinatura) o;
@@ -93,6 +118,16 @@ public class AssinaturaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all <code>Assinatura</code> records for the current user,
+     * ordered by service name.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutti i record di <code>Assinatura</code> dell’utente corrente,
+     * ordinati per nome del servizio.</p>
+     *
+     * <p><strong>PT-BR:</strong> Busca todas as <code>Assinaturas</code> do usuário atual,
+     * ordenadas pelo nome do serviço.</p>
+     */
     @Override
     public ArrayList getLista() {
         ArrayList assinatura = new ArrayList();
@@ -125,6 +160,16 @@ public class AssinaturaRepository implements IPadraoRepository{
         return assinatura;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves <code>Assinatura</code> records filtered by service name (case-insensitive)
+     * for the current user, ordered by service.</p>
+     *
+     * <p><strong>IT:</strong> Recupera i record di <code>Assinatura</code> filtrati per nome del servizio (senza distinzione maiuscole/minuscole)
+     * per l’utente corrente, ordinati per servizio.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna registros de <code>Assinatura</code> filtrados pelo nome do serviço (sem diferenciar maiúsculas/minúsculas)
+     * do usuário atual, ordenados pelo serviço.</p>
+     */
     public ArrayList getLista(String ds_servico) {
         ArrayList assinatura = new ArrayList();
         try{
@@ -159,6 +204,13 @@ public class AssinaturaRepository implements IPadraoRepository{
         return assinatura;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves a single <code>Assinatura</code> by its id.</p>
+     *
+     * <p><strong>IT:</strong> Recupera una singola <code>Assinatura</code> tramite il suo id.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém uma <code>Assinatura</code> pelo seu id.</p>
+     */
     @Override
     public Object getById(int id) {
         Assinatura assinatura = null;

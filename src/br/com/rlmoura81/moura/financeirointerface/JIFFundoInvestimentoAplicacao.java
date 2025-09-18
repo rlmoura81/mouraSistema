@@ -26,6 +26,16 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
     
     private static JIFFundoInvestimentoAplicacao jiffdinvestaplic;
     
+    /**
+     * <p><strong>EN:</strong> Opens the {@link JIFFundoInvestimentoAplicacao} screen for fund investment application.  
+     * If no instance exists, a new one is created and its title is set. Returns the instance.</p>
+     *
+     * <p><strong>IT:</strong> Apre la finestra {@link JIFFundoInvestimentoAplicacao} per l'applicazione di fondi di investimento.  
+     * Se non esiste un'istanza, ne viene creata una nuova e viene impostato il titolo. Restituisce l'istanza.</p>
+     *
+     * <p><strong>PT-BR:</strong> Abre a tela {@link JIFFundoInvestimentoAplicacao} para aplicação de fundos de investimento.  
+     * Caso não exista uma instância, uma nova é criada e o título é definido. Retorna a instância.</p>
+     */
     public static JIFFundoInvestimentoAplicacao getInstancia(){
         if(jiffdinvestaplic == null){
             jiffdinvestaplic = new JIFFundoInvestimentoAplicacao();
@@ -35,11 +45,9 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
     }
     
     Conta conta = new Conta();
-    ContaRepository contar = new ContaRepository();
     ContaUtil contau = new ContaUtil();
     
     FundoInvestimento fdinvest = new FundoInvestimento();
-    FundoInvestimentoRepository fdinvestr = new FundoInvestimentoRepository();
     FundoInvestimentoUtil fdinvestu = new FundoInvestimentoUtil();
     
     FundoInvestimentoAplicacao fia = new FundoInvestimentoAplicacao();
@@ -55,7 +63,6 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
     FundoInvestimentoRendimentoUtil firu = new FundoInvestimentoRendimentoUtil();
     
     GrupoTransacao gptrans = new GrupoTransacao();
-    GrupoTransacaoRepository gptransr = new GrupoTransacaoRepository();
     
     Utilidade util = new Utilidade();
     CalculoFinanceiro cf = new CalculoFinanceiro();
@@ -388,27 +395,57 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Loads the list of accounts into the ComboBox.</p>
+     * <p><strong>IT:</strong> Carica l'elenco dei conti nella ComboBox.</p>
+     * <p><strong>PT-BR:</strong> Carrega a lista de contas no ComboBox.</p>
+     */
     private void jcConta(){
         contau.jcConta(jCBConta);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads the investment funds into the ComboBox filtered by group.</p>
+     * <p><strong>IT:</strong> Carica i fondi di investimento nella ComboBox filtrati per gruppo.</p>
+     * <p><strong>PT-BR:</strong> Carrega os fundos de investimento no ComboBox filtrados por grupo.</p>
+     */
     private void jcFdInvest(int fundo){
         fdinvestu.jcFdInvest(jCBFundoInvestimento, fundo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Reloads the investment funds in the ComboBox using the selected account as a filter.</p>
+     * <p><strong>IT:</strong> Ricarica i fondi di investimento nella ComboBox utilizzando il conto selezionato come filtro.</p>
+     * <p><strong>PT-BR:</strong> Recarrega os fundos de investimento na ComboBox usando a conta selecionada como filtro.</p>
+     */
     private void jcFdInvestFiltro(){
         jCBFundoInvestimento.removeAllItems();
         fdinvestu.jcFdInvestFiltro(jCBFundoInvestimento, conta.getCd_conta());
     }
     
+    /**
+     * <p><strong>EN:</strong> Displays the list of investment fund applications in the table.</p>
+     * <p><strong>IT:</strong> Mostra l'elenco delle applicazioni ai fondi di investimento nella tabella.</p>
+     * <p><strong>PT-BR:</strong> Exibe a lista de aplicações em fundos de investimento na tabela.</p>
+     */
     private void tabelaFundoInvestimentoAplic(int num){
         fiau.tabelaFundoInvestimentoAplicacao(jTFdInvestAplic, num);
     }
     
+    /**
+     * <p><strong>EN:</strong> Displays the list of fund investment transactions in the table.</p>
+     * <p><strong>IT:</strong> Mostra l'elenco delle transazioni dei fondi di investimento nella tabella.</p>
+     * <p><strong>PT-BR:</strong> Exibe a lista de transações dos fundos de investimento na tabela.</p>
+     */
     private void tabelaFundoInvestimentoTrans(int fdinvestaplic, int conta){
         fitu.tabelaFundoInvestimentoTransacao(jTFdInvestTrans, fdinvestaplic, conta);
     }
     
+    /**
+     * <p><strong>EN:</strong> Formats date and value fields used in transactions and yields.</p>
+     * <p><strong>IT:</strong> Format i campi di data e valore utilizzati nelle transazioni e nei rendimenti.</p>
+     * <p><strong>PT-BR:</strong> Formata os campos de data e valores usados em transações e rendimentos.</p>
+     */
     private void formataCampos(){
         util.formataDataCampo(jFTFDtTransacao);
         jFTFVlTransacao.setFormatterFactory(Utilidade.formataValorCampo(ui));
@@ -416,6 +453,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         util.formataDataCampo(jFTFDtRentabilidade);
     }
     
+    /**
+     * <p><strong>EN:</strong> Disables all input fields and action buttons in the screen.</p>
+     * <p><strong>IT:</strong> Disabilita tutti i campi di input e i pulsanti di azione nella schermata.</p>
+     * <p><strong>PT-BR:</strong> Desativa todos os campos de entrada e botões de ação da tela.</p>
+     */
     private void desativaCampos(){
         jCBFundoInvestimento.setEnabled(false);
         jFTFDtTransacao.setEnabled(false);
@@ -431,6 +473,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         jBExcluir.setEnabled(false);
     }
     
+    /**
+     * <p><strong>EN:</strong> Enables the input fields and buttons required for a new transaction.</p>
+     * <p><strong>IT:</strong> Abilita i campi di input e i pulsanti necessari per una nuova transazione.</p>
+     * <p><strong>PT-BR:</strong> Ativa os campos de entrada e botões necessários para uma nova transação.</p>
+     */
     private void ativaCampos(){
         jCBFundoInvestimento.setEnabled(true);
         jFTFDtTransacao.setEnabled(true);
@@ -444,6 +491,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
 
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the fields required for registering a fund transaction.</p>
+     * <p><strong>IT:</strong> Convalida i campi richiesti per registrare una transazione di fondo.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios para registrar uma transação de fundo.</p>
+     */
     private boolean validaCamposTransacao(){
         if(((FundoInvestimento)jCBFundoInvestimento.getSelectedItem()).getCd_fdinvest() == 0){
             JOptionPane.showMessageDialog(null, "Selecione o fundo de investimento.");
@@ -462,6 +514,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the fields required for recording fund yield (profitability).</p>
+     * <p><strong>IT:</strong> Convalida i campi richiesti per registrare il rendimento del fondo.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios para registrar o rendimento do fundo.</p>
+     */
     private boolean validaCamposRendimento(){
         if(fia.getFdinvest() == null){
             JOptionPane.showMessageDialog(null, "Selecione um fundo de investimento da lista.");
@@ -485,6 +542,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all input fields and resets tables related to funds and transactions.</p>
+     * <p><strong>IT:</strong> Cancella tutti i campi di input e reimposta le tabelle relative a fondi e transazioni.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada e reinicia as tabelas relacionadas a fundos e transações.</p>
+     */
     private void limpaCampos(){
         jcFdInvestFiltro();
         jFTFDtTransacao.setText(null);
@@ -495,6 +557,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         fia.setCd_fdinvestaplic(0);
     }
     
+    /**
+     * <p><strong>EN:</strong> Executes an application or redemption transaction, updating balances accordingly.</p>
+     * <p><strong>IT:</strong> Esegue una transazione di applicazione o riscatto, aggiornando i saldi.</p>
+     * <p><strong>PT-BR:</strong> Executa uma transação de aplicação ou resgate, atualizando os saldos.</p>
+     */
     private void executaTransacao(){
         if(fia.getCd_fdinvestaplic() == 0){            
             fia.setConta(conta);
@@ -511,6 +578,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates if the balance is sufficient for a redemption transaction.</p>
+     * <p><strong>IT:</strong> Convalida se il saldo è sufficiente per una transazione di riscatto.</p>
+     * <p><strong>PT-BR:</strong> Valida se o saldo é suficiente para uma transação de resgate.</p>
+     */
     private boolean validaSaldo(){
         if(fia.getVl_saldo().compareTo(Utilidade.converter(jFTFVlTransacao.getText())) < 0){
             JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
@@ -519,6 +591,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new transaction of application or redemption in the system.</p>
+     * <p><strong>IT:</strong> Salva una nuova transazione di applicazione o riscatto nel sistema.</p>
+     * <p><strong>PT-BR:</strong> Salva uma nova transação de aplicação ou resgate no sistema.</p>
+     */
     private void salvaTransacao(){
         fit.setDt_transacao(util.recebeData(jFTFDtTransacao.getText()));
         fit.setVl_transacao(Utilidade.converter(jFTFVlTransacao.getText()));
@@ -529,6 +606,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         fitr.inserir(fit);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a yield (profitability) entry related to the selected fund application.</p>
+     * <p><strong>IT:</strong> Salva una registrazione di rendimento relativa all'applicazione del fondo selezionato.</p>
+     * <p><strong>PT-BR:</strong> Salva um registro de rendimento relacionado à aplicação do fundo selecionado.</p>
+     */
     private void salvaRendimento(){
         fir.setDt_rendimento(util.recebeData(jFTFDtRentabilidade.getText()));
         fir.setFdinvap(fia);
@@ -536,6 +618,11 @@ public class JIFFundoInvestimentoAplicacao extends javax.swing.JInternalFrame {
         firr.inserir(fir);
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies the yield to the fund application, updating its balance.</p>
+     * <p><strong>IT:</strong> Applica il rendimento all'applicazione del fondo, aggiornandone il saldo.</p>
+     * <p><strong>PT-BR:</strong> Aplica o rendimento à aplicação do fundo, atualizando o saldo.</p>
+     */
     private void aplicaRendimento(){
         fia.setCd_fdinvestaplic(fia.getCd_fdinvestaplic());
         fia.setCd_usuario(JPLogin.codloginuser);

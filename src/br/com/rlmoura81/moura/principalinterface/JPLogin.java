@@ -114,12 +114,22 @@ public class JPLogin extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
         
+    /**
+     * <p><strong>EN:</strong> Clears the login and password fields, setting focus on the login field.</p>
+     * <p><strong>IT:</strong> Pulisce i campi di login e password, impostando il focus sul campo login.</p>
+     * <p><strong>PT-BR:</strong> Limpa os campos de login e senha, posicionando o foco no campo de login.</p>
+     */
     private void limpaCampos (){
         jTLogin.setText(null);
         jPFSenha.setText(null);
         jTLogin.requestFocus();
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates if login and password fields are filled.</p>
+     * <p><strong>IT:</strong> Convalida se i campi di login e password sono compilati.</p>
+     * <p><strong>PT-BR:</strong> Valida se os campos de login e senha estão preenchidos.</p>
+     */
     private boolean validaCampos(){
         if ((jTLogin.getText().isEmpty()) | (jPFSenha.getText().isEmpty())){
             JOptionPane.showMessageDialog(null, "Campos em brancos.", "Login", JOptionPane.INFORMATION_MESSAGE);
@@ -128,6 +138,14 @@ public class JPLogin extends javax.swing.JPanel {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves a user from the database by login. 
+     * If found, initializes a Usuario object with the user data.</p>
+     * <p><strong>IT:</strong> Recupera un utente dal database tramite login. 
+     * Se trovato, inizializza un oggetto Usuario con i dati dell'utente.</p>
+     * <p><strong>PT-BR:</strong> Recupera um usuário do banco de dados pelo login. 
+     * Caso encontrado, inicializa um objeto Usuario com os dados do usuário.</p>
+     */
     private Object getUsuario(String login){
         try{
             sql = "SELECT usuario.cd_usuario, usuario.ds_login, usuario.ds_senha, pessoafisica.cd_pessoafisica" +
@@ -150,6 +168,11 @@ public class JPLogin extends javax.swing.JPanel {
         return usuario;
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates if the provided login and password match the retrieved user object.</p>
+     * <p><strong>IT:</strong> Convalida se login e password forniti corrispondono all'oggetto utente recuperato.</p>
+     * <p><strong>PT-BR:</strong> Valida se o login e a senha informados conferem com o objeto usuário recuperado.</p>
+     */
     private boolean validaUsuario(){
             if (!jTLogin.getText().equals(usuario.getDs_login())){
                 JOptionPane.showMessageDialog(null, "Usuario não existente", "Login",JOptionPane.INFORMATION_MESSAGE);
@@ -163,6 +186,11 @@ public class JPLogin extends javax.swing.JPanel {
             return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Opens the main application menu (JFPrincipal) in the Event Dispatch Thread.</p>
+     * <p><strong>IT:</strong> Apre il menu principale dell'applicazione (JFPrincipal) nel thread di gestione eventi.</p>
+     * <p><strong>PT-BR:</strong> Abre o menu principal da aplicação (JFPrincipal) na Event Dispatch Thread.</p>
+     */
     private void abreMenuPrincipal(){
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

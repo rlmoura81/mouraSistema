@@ -11,6 +11,19 @@ public class CombustivelRepository {
 
     String sql = "";
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the list of fuels from the database.
+     * Executes a query on the table <code>combustivel</code> ordered by description
+     * and returns the results as a list of <code>Combustivel</code> objects.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l’elenco dei combustibili dal database.
+     * Esegue una query sulla tabella <code>combustivel</code> ordinata per descrizione
+     * e restituisce i risultati come lista di oggetti <code>Combustivel</code>.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a lista de combustíveis do banco de dados.
+     * Executa uma consulta na tabela <code>combustivel</code> ordenada pela descrição
+     * e retorna os resultados como uma lista de objetos <code>Combustivel</code>.</p>
+     */
     public ArrayList getLista() {
         ArrayList combustivel = new ArrayList();
         try{
@@ -33,6 +46,19 @@ public class CombustivelRepository {
         return combustivel;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a fuel record by its unique identifier.
+     * Executes a query on the table <code>combustivel</code> using the provided ID
+     * and returns the corresponding <code>Combustivel</code> object if found.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un record di combustibile tramite il suo identificatore univoco.
+     * Esegue una query sulla tabella <code>combustivel</code> utilizzando l’ID fornito
+     * e restituisce l’oggetto <code>Combustivel</code> corrispondente, se trovato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera um registro de combustível pelo seu identificador único.
+     * Executa uma consulta na tabela <code>combustivel</code> utilizando o ID informado
+     * e retorna o objeto <code>Combustivel</code> correspondente, se encontrado.</p>
+     */
     public Object getById(int id) {
         Combustivel c = null;
         try{

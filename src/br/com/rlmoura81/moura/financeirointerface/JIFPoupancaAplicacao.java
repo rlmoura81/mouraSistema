@@ -23,6 +23,16 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
     
     private static JIFPoupancaAplicacao jifpoupaplic;
     
+    /**
+     * <p><strong>EN:</strong> Opens the {@link JIFPoupancaAplicacao} screen for savings applications.  
+     * If no instance exists, it creates a new one, sets the title, and returns it.</p>
+     *
+     * <p><strong>IT:</strong> Apre la finestra {@link JIFPoupancaAplicacao} per le applicazioni di risparmio.  
+     * Se non esiste alcuna istanza, ne crea una nuova, imposta il titolo e la restituisce.</p>
+     *
+     * <p><strong>PT-BR:</strong> Abre a tela {@link JIFPoupancaAplicacao} para aplicações de poupança.  
+     * Caso não exista uma instância, cria uma nova, define o título e a retorna.</p>
+     */
     public static JIFPoupancaAplicacao getInstancia(){
         if(jifpoupaplic == null){
             jifpoupaplic = new JIFPoupancaAplicacao();
@@ -376,25 +386,50 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Populates the accounts combo box with available accounts.</p>
+     * <p><strong>IT:</strong> Popola la combo box dei conti con i conti disponibili.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo de contas com as contas disponíveis.</p>
+     */
     private void jcConta(){
         contau.jcConta(jCBConta);
     }
     
+    /**
+     * <p><strong>EN:</strong> Reloads the savings combo box for the selected account, clearing previous items first.</p>
+     * <p><strong>IT:</strong> Ricarica la combo box della poupança per il conto selezionato, svuotando prima gli elementi precedenti.</p>
+     * <p><strong>PT-BR:</strong> Recarrega o combo de poupança para a conta selecionada, limpando os itens anteriores.</p>
+     */
     private void jcPoupanca(){
         jCBPoupanca.removeAllItems();
         poupancau.jcPoupanca(jCBPoupanca, conta.getCd_conta());
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies currency formatters to the transaction and monthly balance fields.</p>
+     * <p><strong>IT:</strong> Applica i formattatori monetari ai campi di transazione e saldo mensile.</p>
+     * <p><strong>PT-BR:</strong> Aplica formatadores monetários aos campos de transação e saldo do mês.</p>
+     */
     private void formataValor(){
         jFTFValorTransacao.setFormatterFactory(Utilidade.formataValorCampo(ui));
         jFTFSaldoMes.setFormatterFactory(Utilidade.formataValorCampo(ui));        
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies date masks/formatters to transaction and monthly balance date fields.</p>
+     * <p><strong>IT:</strong> Applica maschere/formattatori di data ai campi di data di transazione e saldo mensile.</p>
+     * <p><strong>PT-BR:</strong> Aplica máscaras/formatadores de data nos campos de data da transação e do saldo do mês.</p>
+     */
     private void formataData(){
         util.formataDataCampo(jFTFDtTransacao);
         util.formataDataCampo(jFTFDtSaldoMes);
     }
     
+    /**
+     * <p><strong>EN:</strong> Fills the table with either savings transactions (tpoup = 0) or savings balances (tpoup = 1) for the given account.</p>
+     * <p><strong>IT:</strong> Compila la tabella con le transazioni di risparmio (tpoup = 0) o i saldi (tpoup = 1) per il conto indicato.</p>
+     * <p><strong>PT-BR:</strong> Preenche a tabela com transações da poupança (tpoup = 0) ou saldos (tpoup = 1) da conta informada.</p>
+     */
     private void tabelaPoupanca(int tpoup, int poupanca){
         if(tpoup == 0){
             pouptru.tabelaPoupancaTransacao(jTPoupancaAplicacao, poupanca);
@@ -403,7 +438,12 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
             poupancaapu.tabelaPoupancaAplicacao(jTPoupancaAplicacao, poupanca);
         }  
     }
-                
+    
+    /**
+     * <p><strong>EN:</strong> Disables all input fields and action buttons related to savings application and monthly balance.</p>
+     * <p><strong>IT:</strong> Disabilita tutti i campi di input e i pulsanti d’azione relativi all’applicazione e al saldo mensile.</p>
+     * <p><strong>PT-BR:</strong> Desativa todos os campos e botões de ação ligados à aplicação e ao saldo do mês.</p>
+     */
     private void desativaCampos(){
         jFTFDtTransacao.setEnabled(false);
         jFTFValorTransacao.setEnabled(false);
@@ -415,6 +455,11 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
         jBExcluir.setEnabled(false);      
     }
     
+    /**
+     * <p><strong>EN:</strong> Enables input fields and action buttons for savings transactions and monthly balance.</p>
+     * <p><strong>IT:</strong> Abilita i campi di input e i pulsanti d’azione per le transazioni e il saldo mensile della poupança.</p>
+     * <p><strong>PT-BR:</strong> Ativa os campos e botões para transações e saldo do mês da poupança.</p>
+     */
     private void ativaCampos(){
         jFTFDtTransacao.setEnabled(true);       
         jFTFValorTransacao.setEnabled(true);
@@ -425,6 +470,11 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
         jBSalvar.setEnabled(true);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the monthly balance fields (date and value). Shows messages and focuses invalid fields.</p>
+     * <p><strong>IT:</strong> Convalida i campi del saldo mensile (data e valore). Mostra messaggi e imposta il focus sui campi non validi.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos do saldo do mês (data e valor). Exibe mensagens e foca os campos inválidos.</p>
+     */
     private boolean validaCamposSaldoMes(){
         if(util.validaDataCampo(jFTFDtSaldoMes.getText()) == false){
             jFTFDtSaldoMes.requestFocus();
@@ -438,6 +488,11 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
         return true;
     } 
     
+    /**
+     * <p><strong>EN:</strong> Saves the monthly balance entry for the selected savings account and updates the account balance.</p>
+     * <p><strong>IT:</strong> Salva il saldo mensile per la poupança selezionata e aggiorna il saldo del conto.</p>
+     * <p><strong>PT-BR:</strong> Salva o registro de saldo do mês para a poupança selecionada e atualiza o saldo da conta.</p>
+     */
     private void salvar(){
         poupancaap.setDt_saldo(util.recebeData(jFTFDtSaldoMes.getText()));
         poupancaap.setVl_saldo(Utilidade.converter(jFTFSaldoMes.getText()));
@@ -447,6 +502,11 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
         poupancar.atualizaSaldo(poupanca);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the savings transaction fields (date and value). Shows messages and focuses invalid fields.</p>
+     * <p><strong>IT:</strong> Convalida i campi della transazione di risparmio (data e importo). Mostra messaggi e imposta il focus sui campi non validi.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos da transação da poupança (data e valor). Exibe mensagens e foca os campos inválidos.</p>
+     */
     private boolean validaCamposTransacao(){
         if(util.validaDataCampo(jFTFDtTransacao.getText()) == false){
             jFTFDtTransacao.requestFocus();
@@ -460,6 +520,11 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
         return true;
     }
 
+    /**
+     * <p><strong>EN:</strong> Checks if the savings account has enough balance for a withdrawal transaction.</p>
+     * <p><strong>IT:</strong> Verifica se la poupança ha saldo sufficiente per un’operazione di prelievo.</p>
+     * <p><strong>PT-BR:</strong> Verifica se a poupança possui saldo suficiente para a transação de resgate.</p>
+     */
     private boolean validaSaldo(){
         pouptr.setVl_transacao(Utilidade.converter(jFTFValorTransacao.getText()));
         if(poupanca.getVl_saldo().compareTo(pouptr.getVl_transacao()) < 0){
@@ -469,10 +534,20 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates the on-screen label with the current savings account balance.</p>
+     * <p><strong>IT:</strong> Aggiorna l’etichetta a schermo con il saldo corrente della poupança.</p>
+     * <p><strong>PT-BR:</strong> Atualiza o rótulo na tela com o saldo atual da poupança.</p>
+     */   
     private void atualizaSaldoCampo(){      
         jLSaldo.setText("Saldo: " + Utilidade.formatoValor.format(poupanca.getVl_saldo()));
     }
     
+    /**
+     * <p><strong>EN:</strong> Executes a savings transaction (apply or redeem), updates the account balance, and records the transaction.</p>
+     * <p><strong>IT:</strong> Esegue una transazione sulla poupança (applicazione o riscatto), aggiorna il saldo e registra l’operazione.</p>
+     * <p><strong>PT-BR:</strong> Executa a transação da poupança (aplicar ou resgatar), atualiza o saldo e grava a movimentação.</p>
+     */
     private void executaTransacao(int num){
         pouptr.setDt_transacao(util.recebeData(jFTFDtTransacao.getText()));
         pouptr.setVl_transacao(Utilidade.converter(jFTFValorTransacao.getText()));
@@ -483,13 +558,23 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
         pouptrr.inserir(pouptr);
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all transaction and monthly balance input fields.</p>
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input della transazione e del saldo mensile.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de transação e de saldo do mês.</p>
+     */
     private void limpaCampos(){
         jFTFDtTransacao.setText(null);
         jFTFValorTransacao.setValue(null);
         jFTFSaldoMes.setValue(null);
         jFTFDtSaldoMes.setText(null);
     }
-                
+             
+    /**
+     * <p><strong>EN:</strong> Deletes the selected monthly balance record for the savings account.</p>
+     * <p><strong>IT:</strong> Elimina il record di saldo mensile selezionato della poupança.</p>
+     * <p><strong>PT-BR:</strong> Exclui o registro de saldo do mês selecionado da poupança.</p>
+     */
     private void excluir(){
         poupancaap.setCd_poupaplic(poupancaap.getCd_poupaplic());
         poupancaap.setPoupanca(poupanca);
@@ -497,14 +582,25 @@ public class JIFPoupancaAplicacao extends javax.swing.JInternalFrame {
         poupancaapr.excluir(poupancaap);
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves and stores the latest monthly index value used to update savings balances.</p>
+     * <p><strong>IT:</strong> Recupera e memorizza l’ultimo valore dell’indice mensile usato per aggiornare i saldi della poupança.</p>
+     * <p><strong>PT-BR:</strong> Obtém e armazena o último valor do índice mensal utilizado para atualizar os saldos da poupança.</p>
+     */
     private void indiceValor(){
         iv.setVl_mes(ivu.indiceValor(3));
     }
     
+    /**
+     * <p><strong>EN:</strong> Recalculates the savings balance applying the current index value.</p>
+     * <p><strong>IT:</strong> Ricalcola il saldo della poupança applicando il valore corrente dell’indice.</p>
+     * <p><strong>PT-BR:</strong> Recalcula o saldo da poupança aplicando o valor atual do índice.</p>
+     */
     private void calcularSaldo(){
         indiceValor();
         poupanca.setVl_saldo(poupancaapu.atualizaSaldoIndice(poupanca.getVl_saldo(), iv.getVl_mes()));
     }
+    
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         jifpoupaplic = null;
     }//GEN-LAST:event_formInternalFrameClosed

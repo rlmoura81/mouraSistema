@@ -15,6 +15,16 @@ public class JIFImovel extends javax.swing.JInternalFrame {
     
     private static JIFImovel jifimovel;
     
+    /**
+     * <p><strong>EN:</strong> Provides a singleton instance of {@link JIFImovel}.  
+     * If the instance is null, creates a new internal frame and sets its title to "Imóveis".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce un'istanza singleton di {@link JIFImovel}.  
+     * Se l’istanza è null, crea un nuovo internal frame e imposta il titolo su "Imóveis".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna uma instância singleton de {@link JIFImovel}.  
+     * Caso a instância seja nula, cria um novo internal frame e define o título como "Imóveis".</p>
+     */
     public static JIFImovel getInstancia(){
         if(jifimovel == null){
             jifimovel = new JIFImovel();
@@ -293,6 +303,19 @@ public class JIFImovel extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Validates the Real Estate form fields and returns whether the input is valid.  
+     * Checks: matrícula (registration), metragem (area), property value, property type, and city are required.  
+     * If any check fails, shows a message, focuses the field, and returns <code>false</code>; otherwise returns <code>true</code>.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi del modulo Immobile e indica se l’input è valido.  
+     * Verifica: matricola, metratura, valore dell’immobile, tipo di immobile e città sono obbligatori.  
+     * Se un controllo fallisce, mostra un messaggio, mette il focus sul campo e restituisce <code>false</code>; altrimenti <code>true</code>.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário de Imóvel e informa se a entrada é válida.  
+     * Verifica: matrícula, metragem, valor do imóvel, tipo de imóvel e cidade são obrigatórios.  
+     * Se alguma verificação falhar, exibe mensagem, foca no campo e retorna <code>false</code>; caso contrário retorna <code>true</code>.</p>
+     */
     private boolean validaCampos() {
         if(jTFMatricula.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Matrícula em branco.", "Imovel", JOptionPane.INFORMATION_MESSAGE);
@@ -327,19 +350,56 @@ public class JIFImovel extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies numeric currency/decimal formatting to the <em>metragem</em> and <em>valor</em> fields using the shared formatter factory.</p>
+     *
+     * <p><strong>IT:</strong> Applica la formattazione numerica/valutaria ai campi di metratura e valore utilizzando la factory condivisa.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica formatação numérica/monetária aos campos de metragem e valor usando a fábrica de formatadores compartilhada.</p>
+     */
     private void formataValor() {
         jFTFMetragem.setFormatterFactory(Utilidade.formataValorCampo(ui));
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the <code>JComboBox</code> with available property types (Tipo de Imóvel).  
+     * Inserts a placeholder option first, then loads values from the repository.</p>
+     *
+     * <p><strong>IT:</strong> Popola il <code>JComboBox</code> con i tipi di immobile disponibili.  
+     * Inserisce prima un segnaposto, poi carica i valori dal repository.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o <code>JComboBox</code> com os tipos de imóvel disponíveis.  
+     * Insere um placeholder e em seguida carrega os valores do repositório.</p>
+     */
     private void jcTpimovel(){
         tipoimovelu.jcTpimovel(jCBTpImovel);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the <code>JComboBox</code> with available cities.  
+     * Inserts a placeholder option before adding repository data.</p>
+     *
+     * <p><strong>IT:</strong> Popola il <code>JComboBox</code> con le città disponibili.  
+     * Inserisce un segnaposto e poi aggiunge i dati del repository.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o <code>JComboBox</code> com as cidades disponíveis.  
+     * Insere um placeholder e depois adiciona os dados do repositório.</p>
+     */
     private void jcCidade(){
         cidadeu.jcCidade(jCBCidade);
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears the Real Estate form fields and resets combo boxes to their first option.  
+     * Also disables the <em>Delete</em> button.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce i campi del modulo Immobile e reimposta le combo sulla prima opzione.  
+     * Disabilita inoltre il pulsante di <em>Eliminazione</em>.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa os campos do formulário de Imóvel e redefine os combos para a primeira opção.  
+     * Também desativa o botão de <em>Excluir</em>.</p>
+     */
     private void limpaCampos(){
         jCBTpImovel.setSelectedIndex(0);
         jCBCidade.setSelectedIndex(0);
@@ -350,10 +410,30 @@ public class JIFImovel extends javax.swing.JInternalFrame {
         jBExcluir.setEnabled(false);
     }
     
+    /**
+     * <p><strong>EN:</strong> Builds and assigns the Real Estate table model, listing properties with registration, area, value, city, and description.</p>
+     *
+     * <p><strong>IT:</strong> Crea e applica il modello della tabella Immobili, elencando matricola, metratura, valore, città e descrizione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Monta e aplica o modelo da tabela de Imóveis, listando matrícula, metragem, valor, cidade e descrição.</p>
+     */
     private void tabelaImovel(){
         imovelu.tabelaImovel(jTImovel);
     }
     
+    /**
+     * <p><strong>EN:</strong> Persists the Real Estate record.  
+     * If there is no current entity, it creates a new one (insert); otherwise updates the existing one.  
+     * Values are taken from the form fields and linked selections (type and city).</p>
+     *
+     * <p><strong>IT:</strong> Salva il record dell’Immobile.  
+     * Se non c’è un’entità corrente, ne crea una nuova (inserimento); altrimenti aggiorna quella esistente.  
+     * I valori provengono dai campi del modulo e dalle selezioni (tipo e città).</p>
+     *
+     * <p><strong>PT-BR:</strong> Persiste o registro do Imóvel.  
+     * Se não existir entidade corrente, cria uma nova (inserção); caso contrário, atualiza a existente.  
+     * Os valores são obtidos dos campos do formulário e das seleções (tipo e cidade).</p>
+     */
     private void salvar(){
         if(imovel == null){
             imovel = new Imovel();
@@ -379,6 +459,16 @@ public class JIFImovel extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected Real Estate record using its identifiers (property and user).  
+     * Shows a confirmation message on success.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il record dell’Immobile selezionato usando i relativi identificatori (immobile e utente).  
+     * Mostra un messaggio di conferma in caso di successo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o registro de Imóvel selecionado usando seus identificadores (imóvel e usuário).  
+     * Exibe mensagem de confirmação em caso de sucesso.</p>
+     */
     private void excluir(){
         imovel.setCd_imovel(imovel.getCd_imovel());
         imovel.setCd_usuario(imovel.getCd_usuario());

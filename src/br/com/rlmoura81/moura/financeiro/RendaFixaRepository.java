@@ -11,14 +11,21 @@ import javax.swing.JOptionPane;
 
 public class RendaFixaRepository implements IPadraoRepository{
 
-    String sql = "";
-    
-    Utilidade util = new Utilidade();
-    
-    IndiceRepository indicer = new IndiceRepository();
-    
+    String sql = "";    
+    Utilidade util = new Utilidade();    
+    IndiceRepository indicer = new IndiceRepository();    
     TipoAtivoRepository tpativor = new TipoAtivoRepository();
     
+    /**
+     * <p><strong>EN:</strong> Inserts a new fixed income record into the database.</p>
+     * <p><strong>IT:</strong> Inserisce un nuovo record di reddito fisso nel database.</p>
+     * <p><strong>PT-BR:</strong> Insere um novo registro de renda fixa no banco de dados.</p>
+     *
+     * @param o EN: RendaFixa object with data to save |
+     *          IT: Oggetto RendaFixa con i dati da salvare |
+     *          PT-BR: Objeto RendaFixa com os dados a serem salvos
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {
         RendaFixa rf = (RendaFixa) o;        
@@ -43,6 +50,16 @@ public class RendaFixaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing fixed income record in the database.</p>
+     * <p><strong>IT:</strong> Aggiorna un record di reddito fisso esistente nel database.</p>
+     * <p><strong>PT-BR:</strong> Altera um registro existente de renda fixa no banco de dados.</p>
+     *
+     * @param o EN: RendaFixa object with updated data |
+     *          IT: Oggetto RendaFixa con dati aggiornati |
+     *          PT-BR: Objeto RendaFixa com os dados atualizados
+     * @since 1.0.0
+     */
     @Override
     public void alterar(Object o) {
         RendaFixa rf = (RendaFixa) o;
@@ -76,6 +93,16 @@ public class RendaFixaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes a fixed income record from the database.</p>
+     * <p><strong>IT:</strong> Elimina un record di reddito fisso dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui um registro de renda fixa do banco de dados.</p>
+     *
+     * @param o EN: RendaFixa object to be deleted |
+     *          IT: Oggetto RendaFixa da eliminare |
+     *          PT-BR: Objeto RendaFixa a ser excluído
+     * @since 1.0.0
+     */
     @Override
     public void excluir(Object o) {
         RendaFixa rf = (RendaFixa) o;
@@ -95,6 +122,16 @@ public class RendaFixaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all fixed income records of the logged-in user.</p>
+     * <p><strong>IT:</strong> Recupera tutti i record di reddito fisso dell'utente connesso.</p>
+     * <p><strong>PT-BR:</strong> Recupera todos os registros de renda fixa do usuário logado.</p>
+     *
+     * @return EN: List of fixed income records |
+     *         IT: Lista di record di reddito fisso |
+     *         PT-BR: Lista de registros de renda fixa
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {
         ArrayList rendafixa = new ArrayList();
@@ -127,6 +164,19 @@ public class RendaFixaRepository implements IPadraoRepository{
         return rendafixa;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a fixed income record by its ID.</p>
+     * <p><strong>IT:</strong> Recupera un record di reddito fisso tramite il suo ID.</p>
+     * <p><strong>PT-BR:</strong> Recupera um registro de renda fixa pelo seu ID.</p>
+     *
+     * @param id EN: Fixed income record ID |
+     *           IT: ID del record di reddito fisso |
+     *           PT-BR: ID do registro de renda fixa
+     * @return EN: RendaFixa object if found, otherwise null |
+     *         IT: Oggetto RendaFixa se trovato, altrimenti null |
+     *         PT-BR: Objeto RendaFixa se encontrado, senão null
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {
         RendaFixa rf = null;

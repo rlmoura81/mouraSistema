@@ -27,6 +27,16 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
 
     private static JIFMovimentoCaixa jifmovcx;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFMovimentoCaixa}.  
+     * If no instance exists, a new one is created and titled "Movimento Caixa".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFMovimentoCaixa}.  
+     * Se non esiste alcuna istanza, ne viene creata una nuova con il titolo "Movimento Caixa".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton de {@link JIFMovimentoCaixa}.  
+     * Caso não exista uma instância, uma nova é criada com o título "Movimento Caixa".</p>
+     */
     public static JIFMovimentoCaixa getInstancia(){
         if(jifmovcx == null){
             jifmovcx = new JIFMovimentoCaixa();
@@ -498,36 +508,77 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Applies date masks and input formatting to the start, end, and transaction date fields.</p>
+     * <p><strong>IT:</strong> Applica maschere e formattazione delle date ai campi data iniziale, finale e della transazione.</p>
+     * <p><strong>PT-BR:</strong> Aplica máscaras e formatação de data nos campos de data inicial, final e da transação.</p>
+     */
     private void formatarData(){
         util.formataDataCampo(jFTFDataInicio);
         util.formataDataCampo(jFTFDataFinal);
         util.formataDataCampo(jFTFData);       
     }
     
+    /**
+     * <p><strong>EN:</strong> Configures the currency formatter for the value input field.</p>
+     * <p><strong>IT:</strong> Configura il formattatore di valuta per il campo di inserimento del valore.</p>
+     * <p><strong>PT-BR:</strong> Configura o formatador monetário para o campo de valor.</p>
+     */
     private void formataValor() {
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }
-
+    
+    /**
+     * <p><strong>EN:</strong> Populates the account combo box with available accounts.</p>
+     * <p><strong>IT:</strong> Popola la casella combinata dei conti con i conti disponibili.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo de contas com as contas disponíveis.</p>
+     */
     private void jcConta(){
         contau.jcConta(jCBConta);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the category combo box with available categories.</p>
+     * <p><strong>IT:</strong> Popola la casella combinata delle categorie con le categorie disponibili.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo de categorias com as opções disponíveis.</p>
+     */
     private void jcCategoria() {
         categoriau.jcCategoria(jCBCategoria);
     } 
     
+    /**
+     * <p><strong>EN:</strong> Populates the income combo box with recorded incomes.</p>
+     * <p><strong>IT:</strong> Popola la casella combinata dei redditi con i redditi registrati.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo de rendas com as rendas cadastradas.</p>
+     */
     private void jcRenda(){
         rendau.jcRenda(jCBRenda);
     }
+    
+    /**
+     * <p><strong>EN:</strong> Populates the expense combo box with recorded expenses.</p>
+     * <p><strong>IT:</strong> Popola la casella combinata delle spese con le spese registrate.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo de despesas com as despesas cadastradas.</p>
+     */
     private void jcDespesa(){
         despesau.jcDespesa(jCBDespesa);
     }
     
+    /**
+     * <p><strong>EN:</strong> Refreshes the transaction type combo box according to the selected transaction group (credit/debit).</p>
+     * <p><strong>IT:</strong> Aggiorna la casella del tipo di transazione in base al gruppo selezionato (credito/debito).</p>
+     * <p><strong>PT-BR:</strong> Atualiza o combo de tipo de transação conforme o grupo selecionado (crédito/débito).</p>
+     */
     private void jcTpTrans(){
         jCBTpTransacao.removeAllItems();
         tptransu.jcTpTransCredDeb(jCBTpTransacao, gptrans.getCd_gptrans());
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears the form fields and resets selections to their default state.</p>
+     * <p><strong>IT:</strong> Pulisce i campi del modulo e ripristina le selezioni allo stato predefinito.</p>
+     * <p><strong>PT-BR:</strong> Limpa os campos do formulário e restaura as seleções ao padrão.</p>
+     */
     private void limpaCampos(){
         bGTransacao.clearSelection();
         if(jCBRenda.isEnabled()){
@@ -550,6 +601,11 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         movcx = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Enables/disables credit/debit options and related combos based on the selected account and group.</p>
+     * <p><strong>IT:</strong> Abilita/disabilita le opzioni di credito/debito e le relative combo in base al conto e al gruppo selezionati.</p>
+     * <p><strong>PT-BR:</strong> Habilita/desabilita opções de crédito/débito e combos relacionados conforme a conta e o grupo selecionados.</p>
+     */
     private void campoGpTransacao(){
         if(conta != null){
             jChkBCredito.setEnabled(true);
@@ -576,6 +632,11 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         campoPesquisa();
     }
     
+    /**
+     * <p><strong>EN:</strong> Toggles the search date fields and button based on whether an account is selected.</p>
+     * <p><strong>IT:</strong> Attiva/disattiva i campi data di ricerca e il pulsante in base alla selezione del conto.</p>
+     * <p><strong>PT-BR:</strong> Ativa/desativa os campos de data de pesquisa e o botão conforme a seleção da conta.</p>
+     */
     private void campoPesquisa(){
         if(conta == null){
             jFTFDataInicio.setText(null);
@@ -590,6 +651,11 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates required inputs for creating/updating a cash movement (account, group, date, description, value, and type).</p>
+     * <p><strong>IT:</strong> Convalida gli input obbligatori per creare/aggiornare un movimento di cassa (conto, gruppo, data, descrizione, valore e tipo).</p>
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios para criar/atualizar um movimento de caixa (conta, grupo, data, descrição, valor e tipo).</p>
+     */
     private boolean validaCampos(){
         if(conta == null){
             JOptionPane.showMessageDialog(null, "Selecione a conta.", "Conta", JOptionPane.INFORMATION_MESSAGE);
@@ -623,6 +689,11 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Creates or updates a cash movement record based on the selected group (credit/debit) and form data.</p>
+     * <p><strong>IT:</strong> Crea o aggiorna un movimento di cassa in base al gruppo selezionato (credito/debito) e ai dati del modulo.</p>
+     * <p><strong>PT-BR:</strong> Cria ou atualiza um registro de movimento de caixa conforme o grupo selecionado (crédito/débito) e os dados do formulário.</p>
+     */
     private void salvar(){
         if(movcx == null){
             movcx = new MovimentoCaixa();
@@ -669,6 +740,11 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         }     
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates the account balance according to the movement values, handling new and edited records.</p>
+     * <p><strong>IT:</strong> Aggiorna il saldo del conto in base ai valori del movimento, gestendo nuovi record e modifiche.</p>
+     * <p><strong>PT-BR:</strong> Atualiza o saldo da conta conforme os valores do movimento, tratando inclusão e edição.</p>
+     */
     private void saldoConta(){
         if(movcx2 == null){
             movcx2 = new MovimentoCaixa();
@@ -705,6 +781,11 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         jLSaldo.setText("Saldo: " + Utilidade.formatoValor.format(csaldo.getVl_saldo()));   
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves and displays the previous month's balance for the selected account.</p>
+     * <p><strong>IT:</strong> Recupera e visualizza il saldo del mese precedente per il conto selezionato.</p>
+     * <p><strong>PT-BR:</strong> Obtém e exibe o saldo do mês anterior da conta selecionada.</p>
+     */
     private void saldoMesAnterior(){
         MovimentoCaixa saldoMesAnterior = new MovimentoCaixa();
         saldoMesAnterior = (MovimentoCaixa)movcxr.getSaldoMesAnterior(conta.getCd_conta());
@@ -715,6 +796,11 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Calculates and displays the current month's totals (credit, debit, and net) for the selected account.</p>
+     * <p><strong>IT:</strong> Calcola e mostra i totali del mese corrente (credito, debito e netto) per il conto selezionato.</p>
+     * <p><strong>PT-BR:</strong> Calcula e exibe os totais do mês (crédito, débito e líquido) da conta selecionada.</p>
+     */
     private void calculaValoresMes(){
         BigDecimal credito = movcxu.somaCredito(conta.getCd_conta());
         BigDecimal debito = movcxu.somaDebito(conta.getCd_conta());   
@@ -725,6 +811,11 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         jLTotal.setText("Total: " + Utilidade.formatoValor.format(total));
     }
     
+    /**
+     * <p><strong>EN:</strong> Calculates and displays totals (credit, debit, and net) for the selected account within the chosen date range.</p>
+     * <p><strong>IT:</strong> Calcola e mostra i totali (credito, debito e netto) per il conto selezionato nel periodo indicato.</p>
+     * <p><strong>PT-BR:</strong> Calcula e exibe os totais (crédito, débito e líquido) da conta selecionada no intervalo informado.</p>
+     */
     private void calculaValoresPesquisa(){
         BigDecimal credito = movcxu.somaCredito(conta.getCd_conta(), jFTFDataInicio.getText(), jFTFDataFinal.getText());
         BigDecimal debito = movcxu.somaDebito(conta.getCd_conta(), jFTFDataInicio.getText(), jFTFDataFinal.getText());   

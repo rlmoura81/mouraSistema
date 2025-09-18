@@ -11,6 +11,19 @@ public class ModuloRepository {
 
     String sql = "";
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the complete list of modules from the database.
+     * Executes a query on the modulo table and returns a collection of Modulo objects 
+     * with ID and description.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l’elenco completo dei moduli dal database.
+     * Esegue una query sulla tabella modulo e restituisce una collezione di oggetti Modulo 
+     * con ID e descrizione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a lista completa de módulos do banco de dados.
+     * Executa uma consulta na tabela modulo e retorna uma coleção de objetos Modulo 
+     * com ID e descrição.</p>
+     */
     public ArrayList getLista() {
         ArrayList modulo = new ArrayList();
         try{
@@ -31,7 +44,17 @@ public class ModuloRepository {
         }
         return modulo;
     }
-
+    
+    /**
+     * <p><strong>EN:</strong> Retrieves a specific module by its unique identifier.
+     * Runs a parameterized query on the modulo table and returns the corresponding Modulo object.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un modulo specifico tramite il suo identificatore univoco.
+     * Esegue una query parametrizzata sulla tabella modulo e restituisce l’oggetto Modulo corrispondente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera um módulo específico pelo seu identificador único.
+     * Executa uma consulta parametrizada na tabela modulo e retorna o objeto Modulo correspondente.</p>
+     */
     public Object getById(int id) {
         Modulo modulo = null;
         try{
@@ -41,7 +64,6 @@ public class ModuloRepository {
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-
             if(rs.next()){
                     modulo = new Modulo(
                     rs.getInt("cd_modulo"),

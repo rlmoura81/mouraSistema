@@ -15,14 +15,23 @@ import javax.swing.JOptionPane;
 
 public class AluguelRepository implements IPadraoRepository{
 
-    String sql = "";
-    
-    Utilidade util = new Utilidade();
-    
-    ImovelRepository imovelr = new ImovelRepository();
-    
+    String sql = "";    
+    Utilidade util = new Utilidade();    
+    ImovelRepository imovelr = new ImovelRepository();    
     PrestadorServicoRepository presservr = new PrestadorServicoRepository();
     
+    /**
+     * <p><strong>EN:</strong> Inserts a new rental (Aluguel) record into the database.  
+     * Persists contract name, rent amount, admin fee, deposit day, contract due date, property, provider, and user.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un nuovo record di affitto (Aluguel) nel database.  
+     * Salva nome del contratto, canone, tassa amministrativa, giorno del deposito, scadenza del contratto, immobile, fornitore e utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um novo registro de aluguel no banco de dados.  
+     * Persiste nome do contrato, valor do aluguel, taxa administrativa, dia do depósito, vencimento do contrato, imóvel, prestador e usuário.</p>
+     *
+     * @param o EN: instance of Aluguel to insert | IT: istanza di Aluguel da inserire | PT-BR: instância de Aluguel a inserir
+     */
     @Override
     public void inserir(Object o) {
         Aluguel a = (Aluguel) o;
@@ -47,6 +56,18 @@ public class AluguelRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing rental (Aluguel) record.  
+     * Applies new values for contract, amounts, deposit day, due date, property, and provider, constrained by ID and user.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record di affitto (Aluguel) esistente.  
+     * Applica nuovi valori per contratto, importi, giorno del deposito, scadenza, immobile e fornitore, vincolato da ID e utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro de aluguel (Aluguel) existente.  
+     * Aplica novos valores de contrato, valores, dia do depósito, vencimento, imóvel e prestador, restrito por ID e usuário.</p>
+     *
+     * @param o EN: instance of Aluguel with updated data | IT: istanza di Aluguel con dati aggiornati | PT-BR: instância de Aluguel com dados atualizados
+     */
     @Override
     public void alterar(Object o) {
         Aluguel a = (Aluguel) o;
@@ -79,6 +100,15 @@ public class AluguelRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes a rental (Aluguel) record from the database using its ID and user.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un record di affitto (Aluguel) dal database utilizzando il suo ID e l'utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um registro de aluguel (Aluguel) do banco de dados usando seu ID e usuário.</p>
+     *
+     * @param o EN: instance of Aluguel identifying the record to delete | IT: istanza di Aluguel che identifica il record da eliminare | PT-BR: instância de Aluguel que identifica o registro a excluir
+     */
     @Override
     public void excluir(Object o) {
         Aluguel a = (Aluguel) o;
@@ -98,6 +128,18 @@ public class AluguelRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all rental (Aluguel) records for the logged-in user,  
+     * including contract name, amounts, deposit day, contract due date, property, and provider; ordered by contract.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutti i record di affitto (Aluguel) per l'utente connesso,  
+     * includendo nome del contratto, importi, giorno del deposito, scadenza del contratto, immobile e fornitore; ordinati per contratto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todos os registros de aluguel (Aluguel) do usuário logado,  
+     * incluindo nome do contrato, valores, dia do depósito, vencimento do contrato, imóvel e prestador; ordenados por contrato.</p>
+     *
+     * @return EN: list of Aluguel objects | IT: elenco di oggetti Aluguel | PT-BR: lista de objetos Aluguel
+     */
     @Override
     public ArrayList getLista() {
         ArrayList aluguel = new ArrayList();
@@ -130,6 +172,19 @@ public class AluguelRepository implements IPadraoRepository{
         return aluguel;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a rental (Aluguel) record by its ID,  
+     * mapping contract details, amounts, deposit day, due date, property, provider, and user.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un record di affitto (Aluguel) tramite il suo ID,  
+     * mappando dettagli del contratto, importi, giorno del deposito, scadenza, immobile, fornitore e utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém um registro de aluguel (Aluguel) pelo seu ID,  
+     * mapeando detalhes do contrato, valores, dia do depósito, vencimento, imóvel, prestador e usuário.</p>
+     *
+     * @param id EN: unique identifier of the rental | IT: identificatore univoco dell’affitto | PT-BR: identificador único do aluguel
+     * @return EN: Aluguel object if found, otherwise null | IT: Oggetto Aluguel se trovato, altrimenti null | PT-BR: Objeto Aluguel se encontrado, caso contrário null
+     */
     @Override
     public Object getById(int id) {
         Aluguel a = null;

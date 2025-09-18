@@ -26,6 +26,16 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     
     private static JIFNotaCorretagem jifnotacorretagem;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFNotaCorretagem}.  
+     * If the internal frame is not yet created, it initializes it and sets its title to "Nota de Corretagem".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFNotaCorretagem}.  
+     * Se il frame interno non è ancora stato creato, lo inizializza e imposta il titolo a "Nota de Corretagem".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton de {@link JIFNotaCorretagem}.  
+     * Caso o internal frame ainda não tenha sido criado, ele é inicializado e o título definido como "Nota de Corretagem".</p>
+     */
     public static JIFNotaCorretagem getInstancia(){
         if(jifnotacorretagem == null){
             jifnotacorretagem = new JIFNotaCorretagem();
@@ -412,6 +422,16 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Enables or disables note input fields based on the selected account.
+     * Clears the note table when no account is selected and delegates to {@code camposNotaLancamento()}.</p>
+     *
+     * <p><strong>IT:</strong> Abilita o disabilita i campi della nota in base al conto selezionato.
+     * Pulisce la tabella delle note quando nessun conto è selezionato e delega a {@code camposNotaLancamento()}.</p>
+     *
+     * <p><strong>PT-BR:</strong> Habilita ou desabilita os campos da nota conforme a conta selecionada.
+     * Limpa a tabela de notas quando nenhuma conta é selecionada e delega para {@code camposNotaLancamento()}.</p>
+     */
     private void camposNotaCorretagem(){
         if(jCBConta.getSelectedIndex() == 0 && conta == null){
             jFTFData.setEnabled(false);
@@ -424,6 +444,16 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         camposNotaLancamento();
     }
     
+    /**
+     * <p><strong>EN:</strong> Controls availability of launch fields (type, asset, transaction, qty, price)
+     * according to account, date and note number. Updates buttons and clears dependent fields.</p>
+     *
+     * <p><strong>IT:</strong> Gestisce la disponibilità dei campi di lancio (tipo, attivo, transazione, quantità, prezzo)
+     * in base a conto, data e numero nota. Aggiorna i pulsanti e pulisce i campi dipendenti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Controla a disponibilidade dos campos de lançamento (tipo, ativo, transação, qtde, preço)
+     * conforme conta, data e número da nota. Atualiza botões e limpa campos dependentes.</p>
+     */
     private void camposNotaLancamento(){
         if(conta != null && !jFTFData.getText().equals("  /  /    ") && !jTFNumNota.getText().isEmpty()){
             jcTipoAtivo();
@@ -452,6 +482,11 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         btNovo();
     }
     
+    /**
+     * <p><strong>EN:</strong> Enables the “Finalize” button only when both the note and at least one launch exist.</p>
+     * <p><strong>IT:</strong> Abilita il pulsante “Finalizza” solo quando esistono la nota e almeno un lancio.</p>
+     * <p><strong>PT-BR:</strong> Habilita o botão “Finalizar” apenas quando há nota e ao menos um lançamento.</p>
+     */
     private void btFinalizar(){
         if(nota != null && notalanc != null){
             jBFinalizar.setEnabled(true);
@@ -460,6 +495,16 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Toggles the “New” button and locks/unlocks date and note number
+     * depending on whether the note has launches.</p>
+     *
+     * <p><strong>IT:</strong> Attiva/disattiva il pulsante “Nuovo” e blocca/sblocca data e numero nota
+     * a seconda che la nota abbia lanci.</p>
+     *
+     * <p><strong>PT-BR:</strong> Liga/desliga o botão “Novo” e trava/libera data e número da nota
+     * conforme existirem lançamentos.</p>
+     */
     private void btNovo(){
         if(nota != null && jTNotaLancamento.getModel().getRowCount() != 0){
             jBNovo.setEnabled(true);
@@ -472,20 +517,45 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         }
     }
         
+    /**
+     * <p><strong>EN:</strong> Populates the account combo box with available accounts.</p>
+     * <p><strong>IT:</strong> Popola la combo dei conti con i conti disponibili.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo de contas com as contas disponíveis.</p>
+     */
     private void jcConta(){
         contau.jcConta(jCBConta);         
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the asset-type combo (Stocks and REITs only) and resets prior items.</p>
+     * <p><strong>IT:</strong> Popola la combo dei tipi di attivo (Azioni e FII) e reimposta gli elementi precedenti.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo de tipo de ativo (Ações e FII) e reinicia os itens anteriores.</p>
+     */
     private void jcTipoAtivo(){
         jCBTpAtivo.removeAllItems();
         tpativou.jcTipoAtivoAcaoFii(jCBTpAtivo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the transaction group combo with Buy/Sell options and resets previous items.</p>
+     * <p><strong>IT:</strong> Popola la combo del gruppo transazione con opzioni Acquisto/Vendita e reimposta.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo de grupo de transação com opções Compra/Venda e reinicia.</p>
+     */
     private void jcGpTrans(){
         jCBGpTransacao.removeAllItems();
         gptransu.jcGpTransCompraVenda(jCBGpTransacao);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads the asset combo based on the selected type (Stock or REIT);
+     * clears it when the selection is invalid.</p>
+     *
+     * <p><strong>IT:</strong> Carica la combo degli attivi in base al tipo selezionato (Azione o FII);
+     * la pulisce se la selezione non è valida.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega o combo de ativos conforme o tipo selecionado (Ação ou FII);
+     * limpa quando a seleção é inválida.</p>
+     */
     private void jcAtivo(){
         jCBAtivo.removeAllItems();
         if(tpativo != null && jCBTpAtivo.getSelectedIndex() != 0){
@@ -498,18 +568,38 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         }
     }    
     
+    /**
+     * <p><strong>EN:</strong> Applies date formatting to the note date field.</p>
+     * <p><strong>IT:</strong> Applica il formato data al campo della data della nota.</p>
+     * <p><strong>PT-BR:</strong> Aplica a formatação de data ao campo de data da nota.</p>
+     */
     private void formataData(){
         util.formataDataCampo(jFTFData);      
     }   
     
+    /**
+     * <p><strong>EN:</strong> Applies currency formatting to the unit price field.</p>
+     * <p><strong>IT:</strong> Applica il formato valuta al campo del prezzo unitario.</p>
+     * <p><strong>PT-BR:</strong> Aplica a formatação monetária ao campo de preço unitário.</p>
+     */
     private void formataValor() {        
         jFTFPreco.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }
     
+    /**
+     * <p><strong>EN:</strong> Fills the launches table with the items of the current note.</p>
+     * <p><strong>IT:</strong> Compila la tabella dei lanci con gli elementi della nota corrente.</p>
+     * <p><strong>PT-BR:</strong> Preenche a tabela de lançamentos com os itens da nota atual.</p>
+     */
     private void tabelaNotaCorretagemLancamento(){
         notalancu.tabelaNotaCorretagemLancamento(jTNotaLancamento, nota.getCd_nota());
     }
 
+    /**
+     * <p><strong>EN:</strong> Validates required fields for a launch (type, asset, transaction, quantity, unit price).</p>
+     * <p><strong>IT:</strong> Valida i campi obbligatori per un lancio (tipo, attivo, transazione, quantità, prezzo unitario).</p>
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios do lançamento (tipo, ativo, transação, quantidade, preço unitário).</p>
+     */
     private boolean validaCampos(){
         if(tpativo == null){
             JOptionPane.showMessageDialog(null, "Selecione o tipo do ativo.", "Tipo Ativo", JOptionPane.INFORMATION_MESSAGE);
@@ -539,6 +629,16 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Builds and persists a launch for the current note
+     * (note, asset, transaction, quantity, unit price, user).</p>
+     *
+     * <p><strong>IT:</strong> Crea e salva un lancio per la nota corrente
+     * (nota, attivo, transazione, quantità, prezzo unitario, utente).</p>
+     *
+     * <p><strong>PT-BR:</strong> Monta e persiste um lançamento para a nota atual
+     * (nota, ativo, transação, quantidade, preço unitário, usuário).</p>
+     */
     private void notaLancCampos(){
         notalanc = new NotaCorretagemLancamento();
         notalanc.setNota(nota);        
@@ -550,6 +650,11 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         notalancr.inserir(notalanc);
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears dependent launch fields (type, quantity, unit price) after operations.</p>
+     * <p><strong>IT:</strong> Pulisce i campi dipendenti del lancio (tipo, quantità, prezzo unitario) dopo le operazioni.</p>
+     * <p><strong>PT-BR:</strong> Limpa os campos dependentes do lançamento (tipo, quantidade, preço) após as operações.</p>
+     */
     private void limpaNotaLancCampos(){
         if(jCBTpAtivo.isEnabled() == true){
             jCBTpAtivo.setSelectedIndex(0);
@@ -558,6 +663,11 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         jFTFPreco.setValue(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Builds and persists the note header (account, date, note number, user).</p>
+     * <p><strong>IT:</strong> Crea e salva l’intestazione della nota (conto, data, numero nota, utente).</p>
+     * <p><strong>PT-BR:</strong> Monta e persiste o cabeçalho da nota (conta, data, número da nota, usuário).</p>
+     */
     private void notaCampos(){
         nota.setConta(conta);
         nota.setDt_nota(util.recebeData(jFTFData.getText()));
@@ -566,6 +676,11 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         notar.inserir(nota);
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears note header fields and related launch inputs, resetting the state for a new note.</p>
+     * <p><strong>IT:</strong> Pulisce i campi dell’intestazione della nota e i campi di lancio correlati, resettando lo stato.</p>
+     * <p><strong>PT-BR:</strong> Limpa os campos do cabeçalho da nota e os campos de lançamento relacionados, reiniciando o estado.</p>
+     */
     private void limpaNotaCampos(){
         jFTFData.setText(null);
         jTFNumNota.setText(null);
@@ -573,6 +688,16 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         nota = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Creates or updates the asset balance according to the transaction group (buy/sell)
+     * and the launched quantity.</p>
+     *
+     * <p><strong>IT:</strong> Crea o aggiorna il saldo dell’attivo in base al gruppo transazione (acquisto/vendita)
+     * e alla quantità lanciata.</p>
+     *
+     * <p><strong>PT-BR:</strong> Cria ou atualiza o saldo do ativo conforme o grupo de transação (compra/venda)
+     * e a quantidade lançada.</p>
+     */
     private void transacaoAtivo(){
         if(asaldo == null){
             asaldo = new AtivoSaldo();

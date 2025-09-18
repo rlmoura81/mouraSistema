@@ -13,6 +13,16 @@ public class JIFAtivo extends javax.swing.JInternalFrame {
     
     private static JIFAtivo jifativo;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFAtivo}.  
+     * If it does not exist, a new instance is created with the title "Ativos".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFAtivo}.  
+     * Se non esiste, viene creata una nuova istanza con il titolo "Ativos".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância única de {@link JIFAtivo}.  
+     * Caso não exista, uma nova instância é criada com o título "Ativos".</p>
+     */
     public static JIFAtivo getInstancia(){
         if(jifativo == null){
             jifativo = new JIFAtivo();
@@ -247,18 +257,41 @@ public class JIFAtivo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Loads the asset types into the combo box component.</p>
+     * <p><strong>IT:</strong> Carica i tipi di attivo nella casella combinata.</p>
+     * <p><strong>PT-BR:</strong> Carrega os tipos de ativo no componente combo box.</p>
+     */
     private void jcTipoAtivo(){
         tpativou.jcTipoAtivo(jCBTipoAtivo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads and displays the list of assets in the table.</p>
+     * <p><strong>IT:</strong> Carica e mostra l'elenco degli attivi nella tabella.</p>
+     * <p><strong>PT-BR:</strong> Carrega e exibe a lista de ativos na tabela.</p>
+     */
     private void tabelaAtivo(){
         ativou.tabelaAtivo(jTAtivo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Formats the document field with the defined mask (type 2).</p>
+     * <p><strong>IT:</strong> Format il campo documento con la maschera definita (tipo 2).</p>
+     * <p><strong>PT-BR:</strong> Formata o campo documento com a máscara definida (tipo 2).</p>
+     */
     private void formataCampo(){
         util.formataDocumento(jFTFDocumento, 2);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates required fields before saving.  
+     * Ensures the name, symbol, and type are filled.</p>
+     * <p><strong>IT:</strong> Convalida i campi obbligatori prima di salvare.  
+     * Garantisce che nome, sigla e tipo siano compilati.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios antes de salvar.  
+     * Garante que o nome, sigla e tipo estejam preenchidos.</p>
+     */
     private boolean validaCampos(){
         if(jTFAtivo.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Campo em branco.", "Ativo.", JOptionPane.INFORMATION_MESSAGE);
@@ -278,6 +311,11 @@ public class JIFAtivo extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all input fields and resets the form.</p>
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input e reimposta il modulo.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada e reinicia o formulário.</p>
+     */
     private void limpaCampos(){
         jTFAtivo.setText(null);
         jTFSigla.setText(null);
@@ -285,6 +323,11 @@ public class JIFAtivo extends javax.swing.JInternalFrame {
         jCBTipoAtivo.setSelectedIndex(0);
     }
         
+    /**
+     * <p><strong>EN:</strong> Saves a new asset with the provided data into the database.</p>
+     * <p><strong>IT:</strong> Salva un nuovo attivo con i dati forniti nel database.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo ativo com os dados informados no banco de dados.</p>
+     */
     private void salvar(){
         ativo.setDs_ativo(jTFAtivo.getText());
         ativo.setDs_sgativo(jTFSigla.getText());
@@ -294,6 +337,11 @@ public class JIFAtivo extends javax.swing.JInternalFrame {
         ativor.inserir(ativo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing asset with the modified data.</p>
+     * <p><strong>IT:</strong> Aggiorna un attivo esistente con i dati modificati.</p>
+     * <p><strong>PT-BR:</strong> Atualiza um ativo existente com os dados modificados.</p>
+     */
     private void alterar(){
         ativo.setDs_ativo(jTFAtivo.getText());
         ativo.setDs_sgativo(jTFSigla.getText());
@@ -303,6 +351,11 @@ public class JIFAtivo extends javax.swing.JInternalFrame {
         ativor.alterar(ativo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected asset from the database.</p>
+     * <p><strong>IT:</strong> Elimina l'attivo selezionato dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui o ativo selecionado do banco de dados.</p>
+     */
     private void excluir(){
         ativo.setCd_ativo(ativo.getCd_ativo());
         ativor.excluir(ativo);

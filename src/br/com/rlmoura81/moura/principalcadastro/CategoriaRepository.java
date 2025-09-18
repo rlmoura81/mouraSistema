@@ -11,10 +11,19 @@ import javax.swing.JOptionPane;
 
 public class CategoriaRepository {
     
-    String sql = "";
-    
+    String sql = "";    
     GrupoRepository grupor = new GrupoRepository();
     
+    /**
+     * <p><strong>EN:</strong> Inserts a new Category into the database.
+     * Uses a sequence for the primary key and binds name, group, and user fields; shows a success/error dialog.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce una nuova Categoria nel database.
+     * Usa una sequenza per la chiave primaria e associa nome, gruppo e utente; mostra un dialogo di successo/errore.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere uma nova Categoria no banco de dados.
+     * Utiliza uma sequência para a chave primária e vincula nome, grupo e usuário; exibe diálogo de sucesso/erro.</p>
+     */
     public void inserir(Object o){
         Categoria c = (Categoria) o;
         try{
@@ -33,6 +42,16 @@ public class CategoriaRepository {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing Category by ID and user.
+     * Sets the category name and group; confirms with a dialog or shows an error on failure.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna una Categoria esistente per ID e utente.
+     * Imposta nome e gruppo della categoria; conferma con un dialogo o mostra un errore in caso di fallimento.</p>
+     *
+     * <p><strong>PT-BR:</strong> Altera uma Categoria existente por ID e usuário.
+     * Define o nome e o grupo; confirma com um diálogo ou exibe erro em caso de falha.</p>
+     */
     public void aterar(Object o){
         Categoria c = (Categoria) o;
         try{
@@ -55,6 +74,16 @@ public class CategoriaRepository {
         }    
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes a Category by ID for the given user.
+     * Executes a parameterized DELETE and shows a success/error dialog.</p>
+     *
+     * <p><strong>IT:</strong> Elimina una Categoria per ID dell’utente indicato.
+     * Esegue un DELETE parametrizzato e mostra un dialogo di successo/errore.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui uma Categoria pelo ID do usuário informado.
+     * Executa um DELETE parametrizado e exibe diálogo de sucesso/erro.</p>
+     */
     public void excluir(Object o){
         Categoria c = (Categoria) o;
         try{
@@ -74,6 +103,16 @@ public class CategoriaRepository {
         
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all Categories for the logged-in user.
+     * Returns a list ordered by category name, mapping each row to a Category object with its Group.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutte le Categorie per l’utente loggato.
+     * Restituisce un elenco ordinato per nome, mappando ogni riga in un oggetto Categoria con il suo Gruppo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Busca todas as Categorias do usuário logado.
+     * Retorna uma lista ordenada por nome, mapeando cada linha para um objeto Categoria com seu Grupo.</p>
+     */
     public ArrayList getLista(){        
         ArrayList categorias = new ArrayList();        
         try{
@@ -100,6 +139,16 @@ public class CategoriaRepository {
         return categorias;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves a single Category by its ID.
+     * Loads fields (name, group, user) and returns a populated Category or <code>null</code> if not found.</p>
+     *
+     * <p><strong>IT:</strong> Recupera una singola Categoria tramite ID.
+     * Carica i campi (nome, gruppo, utente) e restituisce una Categoria popolata o <code>null</code> se non trovata.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém uma Categoria pelo seu ID.
+     * Carrega os campos (nome, grupo, usuário) e retorna a Categoria preenchida ou <code>null</code> se não encontrada.</p>
+     */
     public Object getById(int id){
         Categoria c = null;
         try {

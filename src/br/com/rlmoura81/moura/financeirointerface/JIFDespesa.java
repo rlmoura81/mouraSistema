@@ -18,6 +18,19 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
 
     private static JIFDespesa jifdespesa;
 
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFDespesa}.  
+     * If it does not exist, creates a new instance, sets the title to "Despesas",  
+     * and maximizes the window. Handles possible {@link PropertyVetoException} when maximizing.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFDespesa}.  
+     * Se non esiste, crea una nuova istanza, imposta il titolo su "Despesas"  
+     * e massimizza la finestra. Gestisce la possibile {@link PropertyVetoException} durante la massimizzazione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton de {@link JIFDespesa}.  
+     * Caso não exista, cria uma nova instância, define o título como "Despesas"  
+     * e maximiza a janela. Trata a possível {@link PropertyVetoException} ao maximizar.</p>
+     */
     public static JIFDespesa getInstancia() {
         if (jifdespesa == null) {
             jifdespesa = new JIFDespesa();
@@ -259,10 +272,23 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Formats the expense value field with the predefined numeric mask.</p>
+     * <p><strong>IT:</strong> Formatta il campo valore della spesa con la maschera numerica predefinita.</p>
+     * <p><strong>PT-BR:</strong> Formata o campo de valor da despesa com a máscara numérica predefinida.</p>
+     */
     private void formataValor() {
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }
 
+    /**
+     * <p><strong>EN:</strong> Validates the mandatory fields of the expense form, ensuring that  
+     * the description, value, provider, and category are filled correctly.</p>
+     * <p><strong>IT:</strong> Valida i campi obbligatori del modulo di spesa, assicurando che  
+     * la descrizione, il valore, il fornitore e la categoria siano compilati correttamente.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios do formulário de despesa, garantindo que  
+     * a descrição, valor, prestador e categoria estejam preenchidos corretamente.</p>
+     */
     private boolean validaCampos() {
         if (jTFDespesa.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo em branco.", "Despesa", JOptionPane.INFORMATION_MESSAGE);
@@ -288,18 +314,38 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
         return true;
     }
 
+    /**
+     * <p><strong>EN:</strong> Loads the category options into the combo box.</p>
+     * <p><strong>IT:</strong> Carica le opzioni di categoria nella combo box.</p>
+     * <p><strong>PT-BR:</strong> Carrega as opções de categoria no combo box.</p>
+     */
     private void jcCategoria() {
         categoriau.jcCategoria(jCBCategoria);
     }
 
+    /**
+     * <p><strong>EN:</strong> Loads the service provider options into the combo box.</p>
+     * <p><strong>IT:</strong> Carica le opzioni del fornitore di servizi nella combo box.</p>
+     * <p><strong>PT-BR:</strong> Carrega as opções de prestador de serviço no combo box.</p>
+     */
     private void jcPresserv() {
         presservu.jcPresserv(jCBPrestador);
     }
 
+    /**
+     * <p><strong>EN:</strong> Fills the expense table with the registered data.</p>
+     * <p><strong>IT:</strong> Compila la tabella delle spese con i dati registrati.</p>
+     * <p><strong>PT-BR:</strong> Preenche a tabela de despesas com os dados cadastrados.</p>
+     */
     private void tabelaDespesa() {
         despesau.tabelaDespesa(jTDespesa);
     }
 
+    /**
+     * <p><strong>EN:</strong> Clears all input fields in the expense form.</p>
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input del modulo di spesa.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada do formulário de despesa.</p>
+     */
     private void limpaCampos(){
         jTFDespesa.setText(null);
         jFTFValor.setValue(null);
@@ -307,10 +353,23 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
         jCBCategoria.setSelectedIndex(0);
     }
     
+    /**
+     * <p><strong>EN:</strong> Calculates the total value of all registered expenses  
+     * and updates the total label.</p>
+     * <p><strong>IT:</strong> Calcola il valore totale di tutte le spese registrate  
+     * e aggiorna l'etichetta del totale.</p>
+     * <p><strong>PT-BR:</strong> Calcula o valor total de todas as despesas registradas  
+     * e atualiza o rótulo do total.</p>
+     */
     private void calculaValorTotal(){
         jLTotal.setText("Total: " + Utilidade.formatoValor.format(despesau.calculaDespesaTotal()));
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new expense record with the filled form data.</p>
+     * <p><strong>IT:</strong> Salva un nuovo record di spesa con i dati compilati nel modulo.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo registro de despesa com os dados preenchidos no formulário.</p>
+     */
     private void salvar() {
         despesa = new Despesa();
         despesa.setDs_despesa(jTFDespesa.getText());
@@ -322,6 +381,11 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
         despesa = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing expense record with the current form data.</p>
+     * <p><strong>IT:</strong> Aggiorna un record di spesa esistente con i dati attuali del modulo.</p>
+     * <p><strong>PT-BR:</strong> Atualiza um registro de despesa existente com os dados atuais do formulário.</p>
+     */
     private void alterar(){
         despesa.setDs_despesa(jTFDespesa.getText());
         despesa.setNm_valor(Utilidade.converter(jFTFValor.getText()));
@@ -330,10 +394,16 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
         despesar.alterar(despesa);
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes the selected expense record from the database.</p>
+     * <p><strong>IT:</strong> Elimina il record di spesa selezionato dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui o registro de despesa selecionado do banco de dados.</p>
+     */
     private void excluir(){
         despesa.setCd_despesa(despesa.getCd_despesa());
         despesar.excluir(despesa);
     }
+    
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         jifdespesa = null;
     }//GEN-LAST:event_formInternalFrameClosed

@@ -12,6 +12,19 @@ public class JIFAnimal extends javax.swing.JInternalFrame {
     
     private static JIFAnimal jifanimal;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the JIFAnimal class.  
+     * If no instance exists, a new one is created and initialized.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton della classe JIFAnimal.  
+     * Se non esiste alcuna istanza, ne viene creata e inizializzata una nuova.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton da classe JIFAnimal.  
+     * Se não existir nenhuma instância, uma nova é criada e inicializada.</p>
+     *
+     * @return EN: singleton instance of JIFAnimal | IT: istanza singleton di JIFAnimal | PT-BR: instância singleton de JIFAnimal
+     * @since 1.0.0
+     */
     public static JIFAnimal getInstancia(){
         if(jifanimal == null){
             jifanimal = new JIFAnimal();
@@ -242,10 +255,29 @@ public class JIFAnimal extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Applies formatting to the date field.</p>
+     *
+     * <p><strong>IT:</strong> Applica la formattazione al campo data.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica a formatação ao campo de data.</p>
+     *
+     * @since 1.0.0
+     */
     private void formataData(){
         util.formataDataCampo(jFTFData);        
     }
    
+    /**
+     * <p><strong>EN:</strong> Validates the form fields before saving or updating an animal record.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi del modulo prima di salvare o aggiornare un record di animale.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário antes de salvar ou atualizar um registro de animal.</p>
+     *
+     * @return EN: true if all fields are valid, false otherwise | IT: true se tutti i campi sono validi, false altrimenti | PT-BR: true se todos os campos forem válidos, false caso contrário
+     * @since 1.0.0
+     */
     private boolean validaCampos(){
         if(jTFNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Campo vazio.", "Animal", JOptionPane.INFORMATION_MESSAGE);
@@ -268,7 +300,16 @@ public class JIFAnimal extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Clears all input fields in the form.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada do formulário.</p>
+     *
+     * @since 1.0.0
+     */    
     private void limpaCampos(){
         jTFNome.setText(null);
         jFTFData.setText(null);
@@ -276,6 +317,15 @@ public class JIFAnimal extends javax.swing.JInternalFrame {
         jCBRaca.setSelectedIndex(0);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new animal record to the database using the form data.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo record di animale nel database utilizzando i dati del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva um novo registro de animal no banco de dados utilizando os dados do formulário.</p>
+     *
+     * @since 1.0.0
+     */  
     private void salvar() {
         animal.setDs_nome(jTFNome.getText());
         animal.setDt_nasc(util.recebeData(jFTFData.getText()));
@@ -284,6 +334,15 @@ public class JIFAnimal extends javax.swing.JInternalFrame {
         animalr.inserir(animal);
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing animal record in the database using the form data.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record di animale esistente nel database utilizzando i dati del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro de animal existente no banco de dados utilizando os dados do formulário.</p>
+     *
+     * @since 1.0.0
+     */
     private void alterar(){
         animal.setDs_nome(jTFNome.getText());
         animal.setDt_nasc(util.recebeData(jFTFData.getText()));
@@ -292,6 +351,15 @@ public class JIFAnimal extends javax.swing.JInternalFrame {
         animalr.alterar(animal);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the current animal record from the database.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il record corrente dell'animale dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o registro atual do animal no banco de dados.</p>
+     *
+     * @since 1.0.0
+     */
     private void excluir(){
         animal.setCd_animal(animal.getCd_animal());
         animalr.excluir(animal);

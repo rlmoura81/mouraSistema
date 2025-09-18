@@ -26,6 +26,16 @@ public class JIFMovimentoCaixaFuturo extends javax.swing.JInternalFrame {
 
     private static JIFMovimentoCaixaFuturo jifmovcxf;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFMovimentoCaixaFuturo}.  
+     * If it does not exist, a new instance is created and titled "Future Cash Flow Movements".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFMovimentoCaixaFuturo}.  
+     * Se non esiste, viene creata una nuova istanza con il titolo "Movimenti di Cassa Futuri".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton de {@link JIFMovimentoCaixaFuturo}.  
+     * Caso não exista, uma nova instância é criada com o título "Movimento Caixa Lançamentos Futuros".</p>
+     */
     public static JIFMovimentoCaixaFuturo getInstancia(){
         if(jifmovcxf == null){
             jifmovcxf = new JIFMovimentoCaixaFuturo();
@@ -459,34 +469,78 @@ public class JIFMovimentoCaixaFuturo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Applies a date mask/format to the field {@code jFTFData} using utility helpers.</p>
+     * <p><strong>IT:</strong> Applica il formato/maschera di data al campo {@code jFTFData} usando le utility.</p>
+     * <p><strong>PT-BR:</strong> Aplica a máscara/formatação de data ao campo {@code jFTFData} utilizando as utilidades.</p>
+     */
     private void formatarData(){
         util.formataDataCampo(jFTFData);       
     }
     
+    /**
+     * <p><strong>EN:</strong> Configures a currency formatter for {@code jFTFValor} with the UI pattern.</p>
+     * <p><strong>IT:</strong> Configura un formattatore monetario per {@code jFTFValor} con il pattern UI.</p>
+     * <p><strong>PT-BR:</strong> Configura o formatador monetário de {@code jFTFValor} com o padrão da UI.</p>
+     */
     private void formataValor() {
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }
 
+    /**
+     * <p><strong>EN:</strong> Populates the account combo box {@code jCBConta} with available accounts.</p>
+     * <p><strong>IT:</strong> Popola la combo {@code jCBConta} con i conti disponibili.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo {@code jCBConta} com as contas disponíveis.</p>
+     */
     private void jcConta(){
         contau.jcConta(jCBConta);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the category combo box {@code jCBCategoria} with registered categories.</p>
+     * <p><strong>IT:</strong> Popola la combo {@code jCBCategoria} con le categorie registrate.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo {@code jCBCategoria} com as categorias cadastradas.</p>
+     */
     private void jcCategoria() {
         categoriau.jcCategoria(jCBCategoria);
     } 
     
+    /**
+     * <p><strong>EN:</strong> Populates the income combo box {@code jCBRenda} with user incomes.</p>
+     * <p><strong>IT:</strong> Popola la combo {@code jCBRenda} con i redditi dell’utente.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo {@code jCBRenda} com as rendas do usuário.</p>
+     */
     private void jcRenda(){
         rendau.jcRenda(jCBRenda);
     }
+    
+    /**
+     * <p><strong>EN:</strong> Populates the expense combo box {@code jCBDespesa} with user expenses.</p>
+     * <p><strong>IT:</strong> Popola la combo {@code jCBDespesa} con le spese dell’utente.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo {@code jCBDespesa} com as despesas do usuário.</p>
+     */
     private void jcDespesa(){
         despesau.jcDespesa(jCBDespesa);
     }
     
+    /**
+     * <p><strong>EN:</strong> Reloads the transaction type combo {@code jCBTpTransacao} filtered by the selected
+     * transaction group ({@code gptrans}).</p>
+     * <p><strong>IT:</strong> Ricarica la combo dei tipi di transazione {@code jCBTpTransacao} filtrando per il gruppo
+     * selezionato ({@code gptrans}).</p>
+     * <p><strong>PT-BR:</strong> Recarrega o combo de tipo de transação {@code jCBTpTransacao} filtrando pelo grupo
+     * selecionado ({@code gptrans}).</p>
+     */
     private void jcTpTrans(){
         jCBTpTransacao.removeAllItems();
         tptransu.jcTpTransCredDeb(jCBTpTransacao, gptrans.getCd_gptrans());
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears the form fields and resets selections for future cash movement entry.</p>
+     * <p><strong>IT:</strong> Pulisce i campi del form e reimposta le selezioni per il lancio futuro di caixa.</p>
+     * <p><strong>PT-BR:</strong> Limpa os campos do formulário e reinicia as seleções para lançamento futuro de caixa.</p>
+     */
     private void limpaCampos(){
         bGTransacao.clearSelection();
         jCBRenda.setSelectedIndex(0);
@@ -502,6 +556,14 @@ public class JIFMovimentoCaixaFuturo extends javax.swing.JInternalFrame {
         renda = (Renda)jCBRenda.getSelectedItem();
     }
     
+    /**
+     * <p><strong>EN:</strong> Enables/disables credit/debit controls according to the selected account and
+     * currently chosen transaction group, keeping the UI consistent.</p>
+     * <p><strong>IT:</strong> Abilita/disabilita i controlli di credito/debito in base al conto selezionato e
+     * al gruppo di transazione scelto, mantenendo la coerenza dell’interfaccia.</p>
+     * <p><strong>PT-BR:</strong> Habilita/desabilita os controles de crédito/débito conforme a conta selecionada e
+     * o grupo de transação escolhido, mantendo a interface consistente.</p>
+     */
     private void campoGpTransacao(){
         if(conta != null){
             jChkBCredito.setEnabled(true);
@@ -527,6 +589,14 @@ public class JIFMovimentoCaixaFuturo extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the form fields for a future cash movement.  
+     * Returns {@code true} when all fields are valid; otherwise shows contextual messages and returns {@code false}.</p>
+     * <p><strong>IT:</strong> Valida i campi del form per un movimento di cassa futuro.  
+     * Restituisce {@code true} se tutto è valido; altrimenti mostra messaggi contestuali e restituisce {@code false}.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário para um lançamento futuro de caixa.  
+     * Retorna {@code true} quando tudo está válido; caso contrário, exibe mensagens e retorna {@code false}.</p>
+     */
     private boolean validaCampos(){
         if(((Conta)jCBConta.getSelectedItem()).getCd_conta() == 0){
             JOptionPane.showMessageDialog(null, "Selecione a conta.");
@@ -560,6 +630,14 @@ public class JIFMovimentoCaixaFuturo extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Determines the next sequential identifier for future cash movements
+     * (based on the user's last record) and assigns it to {@code movcx}.</p>
+     * <p><strong>IT:</strong> Determina il prossimo identificatore sequenziale per i movimenti futuri
+     * (in base all’ultimo record dell’utente) e lo assegna a {@code movcx}.</p>
+     * <p><strong>PT-BR:</strong> Define o próximo identificador sequencial para lançamentos futuros
+     * (com base no último registro do usuário) e o atribui a {@code movcx}.</p>
+     */
     private void ultimoRegistro(){
         movcx.setCd_usuario(JPLogin.codloginuser);
         if((MovimentoCaixa)movcxr.ultimoRegistroLanc(movcx.getCd_usuario()) == null){
@@ -570,6 +648,17 @@ public class JIFMovimentoCaixaFuturo extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Persists the future cash movement.  
+     * Creates a new record if {@code movcx} has no ID; otherwise updates the existing future record,
+     * setting credit/debit, document, description, category and type.</p>
+     * <p><strong>IT:</strong> Salva il movimento di cassa futuro.  
+     * Crea un nuovo record se {@code movcx} non ha ID; altrimenti aggiorna il record esistente,
+     * impostando credito/debito, documento, descrizione, categoria e tipo.</p>
+     * <p><strong>PT-BR:</strong> Persiste o lançamento futuro de caixa.  
+     * Cria um novo registro se {@code movcx} não tiver ID; caso contrário, atualiza o registro existente,
+     * definindo crédito/débito, documento, descrição, categoria e tipo.</p>
+     */
     private void salvar(){           
         if(movcx.getCd_movcx() == 0){
             ultimoRegistro();
@@ -617,10 +706,23 @@ public class JIFMovimentoCaixaFuturo extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected future cash movement from storage.</p>
+     * <p><strong>IT:</strong> Elimina il movimento di cassa futuro selezionato dall’archiviazione.</p>
+     * <p><strong>PT-BR:</strong> Exclui o lançamento futuro de caixa selecionado do armazenamento.</p>
+     */
     private void excluir(){
         movcxr.excluirLanc(movcx);
     }
    
+    /**
+     * <p><strong>EN:</strong> Calculates total future credits, total future debits, their net result, and the projected
+     * final balance (current balance + net). Updates the UI labels accordingly.</p>
+     * <p><strong>IT:</strong> Calcola crediti futuri totali, debiti futuri totali, il risultato netto e il saldo finale
+     * previsto (saldo attuale + netto). Aggiorna le etichette dell’interfaccia.</p>
+     * <p><strong>PT-BR:</strong> Calcula o total de créditos futuros, o total de débitos futuros, o resultado líquido e o
+     * saldo final projetado (saldo atual + líquido). Atualiza os rótulos da interface.</p>
+     */
     private void calculaValores(){
         BigDecimal credito = movcxu.somaCreditoLanc(conta.getCd_conta());
         BigDecimal debito = movcxu.somaDebitoLanc(conta.getCd_conta());

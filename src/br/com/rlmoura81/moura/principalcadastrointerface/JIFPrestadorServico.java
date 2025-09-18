@@ -14,6 +14,23 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
     
     private static JIFPrestadorServico jifprestadorservico;
 
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the 
+     * Prestador de Serviço internal frame.  
+     * If it does not exist, it creates the instance, sets the title, 
+     * and attempts to maximize the window.  
+     * Handles exceptions by displaying an error message and logging the issue.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l’istanza singleton della 
+     * finestra interna Prestador de Serviço.  
+     * Se non esiste, crea l’istanza, imposta il titolo e prova a massimizzare la finestra.  
+     * Gestisce le eccezioni mostrando un messaggio di errore e registrando il problema.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton da 
+     * janela interna Prestador de Serviço.  
+     * Caso não exista, cria a instância, define o título e tenta maximizar a janela.  
+     * Trata exceções exibindo uma mensagem de erro e registrando o problema.</p>
+     */
     public static JIFPrestadorServico getInstancia(){
         if(jifprestadorservico == null){
             jifprestadorservico = new JIFPrestadorServico();
@@ -29,8 +46,7 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
     
     PrestadorServico presserv = null;
     PrestadorServicoRepository presservr = new PrestadorServicoRepository();
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();
-    
+    PrestadorServicoUtil presservu = new PrestadorServicoUtil();    
     Utilidade util = new Utilidade();
         
     public JIFPrestadorServico() {
@@ -230,6 +246,16 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Validates mandatory fields for a Service Provider form.
+     * Ensures that the document and provider name are not empty.</p>
+     *
+     * <p><strong>IT:</strong> Valida i campi obbligatori del modulo Fornitore di Servizi.
+     * Verifica che il documento e il nome del fornitore non siano vuoti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios do formulário de Prestador de Serviço.
+     * Garante que o documento e o nome do prestador não estejam em branco.</p>
+     */
     private boolean validaCampos(){
         if(jFTFDocumento.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Campo em branco.", "Prestador de Serviço", JOptionPane.INFORMATION_MESSAGE);
@@ -244,6 +270,16 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all input fields in the Service Provider form,
+     * resetting the document, provider name, and company name.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input del modulo Fornitore di Servizi,
+     * reimpostando documento, nome del fornitore e ragione sociale.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário de Prestador de Serviço,
+     * resetando documento, nome do prestador e razão social.</p>
+     */
     private void limpaCampos(){
         jFTFDocumento.setText(null);
         jFTFDocumento.setValue(null);
@@ -251,10 +287,30 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
         jTFRazaoSocial.setText(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads and displays the Service Providers list into the JTable.
+     * Populates the table with name, company name, and document.</p>
+     *
+     * <p><strong>IT:</strong> Carica e visualizza l’elenco dei Fornitori di Servizi nella JTable.
+     * Popola la tabella con nome, ragione sociale e documento.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega e exibe a lista de Prestadores de Serviço no JTable.
+     * Preenche a tabela com nome, razão social e documento.</p>
+     */
     private void tabelaPresServ(){
         presservu.tabelaPresServ(jTPrestadorServico);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves the Service Provider data.
+     * If the object is new, it inserts it; otherwise, it updates the existing record.</p>
+     *
+     * <p><strong>IT:</strong> Salva i dati del Fornitore di Servizi.
+     * Se l’oggetto è nuovo, lo inserisce; altrimenti aggiorna il record esistente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva os dados do Prestador de Serviço.
+     * Caso seja um novo objeto, insere; caso contrário, atualiza o registro existente.</p>
+     */
     private void salvar(){
         if(presserv == null){
             presserv = new PrestadorServico();
@@ -274,6 +330,16 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
         }         
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected Service Provider
+     * from the database based on its unique identifier.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il Fornitore di Servizi selezionato
+     * dal database in base al suo identificativo univoco.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o Prestador de Serviço selecionado
+     * do banco de dados com base em seu identificador único.</p>
+     */
     private void excluir(){
         presserv.setCd_presserv(presserv.getCd_presserv());
         presservr.excluir(presserv);

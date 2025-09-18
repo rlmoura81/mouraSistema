@@ -11,14 +11,16 @@ import javax.swing.JOptionPane;
 
 public class FundoImobiliarioProventoRepository implements IPadraoRepository{
 
-    String sql = "";
-    
-    AtivoRepository ativor = new AtivoRepository();
-    
-    TipoProventoRepository tppr = new TipoProventoRepository();
-    
+    String sql = "";    
+    AtivoRepository ativor = new AtivoRepository();    
+    TipoProventoRepository tppr = new TipoProventoRepository();    
     Utilidade util = new Utilidade();
 
+    /**
+     * <p><strong>EN:</strong> Inserts a new real estate fund income record using the provided entity fields (asset, pay date, amount, base-price date, base value, income type, user).</p>
+     * <p><strong>IT:</strong> Inserisce un nuovo record di provento per fondo immobiliare utilizzando i campi dell’entità fornita (attivo, data pagamento, importo, data prezzo base, valore base, tipo provento, utente).</p>
+     * <p><strong>PT-BR:</strong> Insere um novo registro de provento de fundo imobiliário com os dados informados (ativo, data de pagamento, valor, data do preço base, valor base, tipo de provento, usuário).</p>
+     */
     @Override
     public void inserir(Object o) {
         FundoImobiliarioProvento fimobr = (FundoImobiliarioProvento) o;
@@ -47,6 +49,13 @@ public class FundoImobiliarioProventoRepository implements IPadraoRepository{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * <p><strong>EN:</strong> Removes a specific real estate fund dividend record identified by its primary key.</p>
+     * <p><strong>IT:</strong> Rimuove un determinato record di provento di fondo immobiliare identificato dalla chiave primaria.</p>
+     * <p><strong>PT-BR:</strong> Remove um registro de provento de fundo imobiliário específico identificado pela chave primária.</p>
+     *
+     * @param o EN: object carrying the provento id to delete | IT: oggetto con l’id del provento da eliminare | PT-BR: objeto com o id do provento a excluir
+     */
     @Override
     public void excluir(Object o) {
         FundoImobiliarioProvento fimobr = (FundoImobiliarioProvento) o;
@@ -64,6 +73,13 @@ public class FundoImobiliarioProventoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all real estate fund dividend records, joining lookups to build full objects and ordering by asset and payment date.</p>
+     * <p><strong>IT:</strong> Recupera tutti i proventi dei fondi immobiliari, con join per comporre gli oggetti completi e ordinamento per asset e data di pagamento.</p>
+     * <p><strong>PT-BR:</strong> Busca todos os proventos de fundos imobiliários, realizando consultas auxiliares para montar os objetos e ordenando por ativo e data de pagamento.</p>
+     *
+     * @return EN: list of FII provento records | IT: elenco di record di proventi FII | PT-BR: lista de registros de proventos de FII
+     */
     @Override
     public ArrayList getLista() {
         ArrayList fimobr = new ArrayList();
@@ -93,6 +109,14 @@ public class FundoImobiliarioProventoRepository implements IPadraoRepository{
         return fimobr;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a single real estate fund dividend record by its id.</p>
+     * <p><strong>IT:</strong> Recupera un singolo provento di fondo immobiliare tramite il suo id.</p>
+     * <p><strong>PT-BR:</strong> Obtém um único registro de provento de fundo imobiliário pelo seu id.</p>
+     *
+     * @param id EN: primary key of the provento | IT: chiave primaria del provento | PT-BR: chave primária do provento
+     * @return EN: matching FII provento or null | IT: provento corrispondente o null | PT-BR: provento correspondente ou null
+     */
     @Override
     public Object getById(int id) {
         FundoImobiliarioProvento fimobr = null;
@@ -122,6 +146,14 @@ public class FundoImobiliarioProventoRepository implements IPadraoRepository{
         return fimobr;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves the most recent provento for a given asset, returning the record with the latest payment date for that asset.</p>
+     * <p><strong>IT:</strong> Recupera il provento più recente per un determinato asset, restituendo il record con la data di pagamento più recente per quell’asset.</p>
+     * <p><strong>PT-BR:</strong> Busca o provento mais recente de um ativo, retornando o registro com a última data de pagamento para esse ativo.</p>
+     *
+     * @param id EN: asset id to look up latest provento | IT: id dell’asset per cercare l’ultimo provento | PT-BR: id do ativo para consultar o último provento
+     * @return EN: latest provento for the asset or null | IT: ultimo provento per l’asset o null | PT-BR: último provento do ativo ou null
+     */
     public Object getByIdProvento(int id) {
         FundoImobiliarioProvento fimobr = null;
         try{

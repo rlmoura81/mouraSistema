@@ -4,13 +4,25 @@ import br.com.rlmoura81.moura.catalogo.CatalogoUtil;
 import br.com.rlmoura81.moura.catalogo.Editora;
 import br.com.rlmoura81.moura.catalogo.EditoraRepository;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class JIFEditora extends javax.swing.JInternalFrame {
     
     private static JIFEditora jifeditora;
     
+    /**
+     * <p><strong>EN:</strong> Returns the single instance of {@link JIFEditora}.  
+     * If the instance does not exist, it creates a new one, sets its title, 
+     * and returns it (Singleton pattern for internal frames).</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'unica istanza di {@link JIFEditora}.  
+     * Se l'istanza non esiste, ne crea una nuova, imposta il titolo 
+     * e la restituisce (pattern Singleton per internal frame).</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a única instância de {@link JIFEditora}.  
+     * Se a instância não existir, cria uma nova, define o título 
+     * e a retorna (padrão Singleton para internal frames).</p>
+     */  
     public static JIFEditora getInstacia(){
         if(jifeditora == null){
             jifeditora = new JIFEditora();
@@ -19,11 +31,8 @@ public class JIFEditora extends javax.swing.JInternalFrame {
     }
 
     Editora editora = new Editora();
-    EditoraRepository editorar = new EditoraRepository();
-    
-    CatalogoUtil catalogou = new CatalogoUtil();
-    
-    ArrayList lista;
+    EditoraRepository editorar = new EditoraRepository();    
+    CatalogoUtil catalogou = new CatalogoUtil();    
     
     public JIFEditora() {
         initComponents();
@@ -187,16 +196,38 @@ public class JIFEditora extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Disables the "Update" and "Delete" buttons.</p>
+     * <p><strong>IT:</strong> Disattiva i pulsanti "Modifica" e "Elimina".</p>
+     * <p><strong>PT-BR:</strong> Desativa os botões "Alterar" e "Excluir".</p>
+     */    
     private void desativaBotoes(){
         jBAlterar.setEnabled(false);
         jBExcluir.setEnabled(false);
     }
     
+    /**
+     * <p><strong>EN:</strong> Enables the "Update" and "Delete" buttons.</p>
+     * <p><strong>IT:</strong> Attiva i pulsanti "Modifica" e "Elimina".</p>
+     * <p><strong>PT-BR:</strong> Ativa os botões "Alterar" e "Excluir".</p>
+     */
     private void ativaBotoes(){
         jBAlterar.setEnabled(true);
         jBExcluir.setEnabled(true);
     }
-    
+ 
+    /**
+     * <p><strong>EN:</strong> Validates the "name" field of the publisher form.  
+     * If it is empty, shows a warning message and requests focus.</p>
+     *
+     * <p><strong>IT:</strong> Valida il campo "nome" del modulo dell'editore.  
+     * Se è vuoto, mostra un messaggio di avviso e richiede il focus.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida o campo "nome" do formulário da editora.  
+     * Se estiver vazio, exibe uma mensagem de aviso e solicita o foco.</p>
+     *
+     * @return true if the field is valid, false otherwise.
+     */
     private boolean validaCampo(){
         if(jTFNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Digite o nome da editora.", "Editora", JOptionPane.INFORMATION_MESSAGE);
@@ -205,16 +236,41 @@ public class JIFEditora extends javax.swing.JInternalFrame {
         } return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears the "name" field of the form.</p>
+     * <p><strong>IT:</strong> Pulisce il campo "nome" del modulo.</p>
+     * <p><strong>PT-BR:</strong> Limpa o campo "nome" do formulário.</p>
+     */
     private void limpaCampo(){
         jTFNome.setText(null);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Saves a new publisher using the entered name 
+     * and the current logged-in user.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo editore utilizzando il nome inserito 
+     * e l'utente attualmente connesso.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva uma nova editora utilizando o nome informado 
+     * e o usuário atualmente logado.</p>
+     */    
     private void salvar(){
         editora.setDs_nome(jTFNome.getText());
         editora.setCd_usuario(JPLogin.codloginuser);
         editorar.inserir(editora);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Updates the selected publisher with the new name 
+     * and the current logged-in user.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna l'editore selezionato con il nuovo nome 
+     * e l'utente attualmente connesso.</p>
+     *
+     * <p><strong>PT-BR:</strong> Altera a editora selecionada com o novo nome 
+     * e o usuário atualmente logado.</p>
+     */    
     private void alterar(){
         editora.setCd_editora(editora.getCd_editora());
         editora.setDs_nome(jTFNome.getText());
@@ -222,7 +278,12 @@ public class JIFEditora extends javax.swing.JInternalFrame {
         editorar.alterar(editora);
         jTFNome.setText(null);
     }
-    
+ 
+    /**
+     * <p><strong>EN:</strong> Deletes the selected publisher from the system.</p>
+     * <p><strong>IT:</strong> Elimina l'editore selezionato dal sistema.</p>
+     * <p><strong>PT-BR:</strong> Exclui a editora selecionada do sistema.</p>
+     */
     private void excluir(){
         editora.setCd_editora(editora.getCd_editora());
         editorar.excluir(editora);

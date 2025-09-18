@@ -11,12 +11,22 @@ import javax.swing.JOptionPane;
 
 public class FundoInvestimentoRendimentoRepository implements IPadraoRepository{
 
-    String sql = "";
-    
-    FundoInvestimentoAplicacaoRepository fiar = new FundoInvestimentoAplicacaoRepository();
-    
+    String sql = "";    
+    FundoInvestimentoAplicacaoRepository fiar = new FundoInvestimentoAplicacaoRepository();    
     Utilidade util = new Utilidade();
 
+    /**
+     * <p><strong>EN:</strong> Inserts a <em>FundoInvestimentoRendimento</em> record into the database.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un record di <em>FundoInvestimentoRendimento</em> nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um registro de <em>FundoInvestimentoRendimento</em> no banco de dados.</p>
+     *
+     * @param o EN: object to insert (expects FundoInvestimentoRendimento) | IT: oggetto da inserire (atteso FundoInvestimentoRendimento) | PT-BR: objeto a ser inserido (espera FundoInvestimentoRendimento)
+     * @return EN: no direct return; persists data | IT: nessun valore restituito; persiste i dati | PT-BR: sem retorno direto; persiste os dados
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {
         FundoInvestimentoRendimento fir = (FundoInvestimentoRendimento) o;
@@ -46,7 +56,17 @@ public class FundoInvestimentoRendimentoRepository implements IPadraoRepository{
     public void excluir(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    /**
+     * <p><strong>EN:</strong> Retrieves all <em>FundoInvestimentoRendimento</em> records for the logged-in user.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutti i record di <em>FundoInvestimentoRendimento</em> per l'utente connesso.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todos os registros de <em>FundoInvestimentoRendimento</em> do usuário logado.</p>
+     *
+     * @return EN: list of yields | IT: elenco dei rendimenti | PT-BR: lista de rendimentos
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {
         ArrayList fdinvrd = new ArrayList();
@@ -73,7 +93,19 @@ public class FundoInvestimentoRendimentoRepository implements IPadraoRepository{
         }
         return fdinvrd;
     }
-        
+     
+    /**
+     * <p><strong>EN:</strong> Retrieves all <em>FundoInvestimentoRendimento</em> records tied to a specific application.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutti i record di <em>FundoInvestimentoRendimento</em> associati a una specifica applicazione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todos os registros de <em>FundoInvestimentoRendimento</em> vinculados a uma aplicação específica.</p>
+     *
+     * @param cd_fdinvestaplic EN: application identifier | IT: identificatore dell'applicazione | PT-BR: identificador da aplicação
+     * @return EN: list of yields for the given application | IT: elenco dei rendimenti per l'applicazione indicata | PT-BR: lista de rendimentos da aplicação informada
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco
+     * @since 1.0.0
+     */
     public ArrayList getListaRendimento(int cd_fdinvestaplic) {
         ArrayList fdinvrd = new ArrayList();
         try{
@@ -102,6 +134,18 @@ public class FundoInvestimentoRendimentoRepository implements IPadraoRepository{
         return fdinvrd;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a <em>FundoInvestimentoRendimento</em> record by its identifier.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un record di <em>FundoInvestimentoRendimento</em> tramite il suo identificatore.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera um registro de <em>FundoInvestimentoRendimento</em> pelo seu identificador.</p>
+     *
+     * @param id EN: yield identifier | IT: identificatore del rendimento | PT-BR: identificador do rendimento
+     * @return EN: the found record or <code>null</code> if not found | IT: il record trovato o <code>null</code> se non trovato | PT-BR: o registro encontrado ou <code>null</code> se não encontrado
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {
         FundoInvestimentoRendimento fdinvrd = null;

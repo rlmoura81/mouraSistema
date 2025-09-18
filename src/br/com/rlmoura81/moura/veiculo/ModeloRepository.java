@@ -10,17 +10,25 @@ import javax.swing.JOptionPane;
 
 public class ModeloRepository implements IPadraoRepository{
 
-    String sql = "";
-    
+    String sql = "";    
     MarcaRepository marcar = new MarcaRepository();
     
+    /**
+     * <p><strong>EN:</strong> Inserts a new record into the <code>modelo</code> table, including the model description,
+     * associated brand, and user code.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un nuovo record nella tabella <code>modelo</code>, includendo la descrizione del modello,
+     * il marchio associato e il codice utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um novo registro na tabela <code>modelo</code>, incluindo a descrição do modelo,
+     * a marca associada e o código do usuário.</p>
+     */
     @Override
     public void inserir(Object o) {       
         Modelo m = (Modelo) o;
         try{
             sql = "INSERT INTO modelo (cd_modelo, ds_modelo, cd_marca, cd_usuario)" +
-                  "     VALUES (sq_modelo.nextval, ?, ?, ?)";
-            
+                  "     VALUES (sq_modelo.nextval, ?, ?, ?)";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, m.getDs_modelo());
             ps.setInt(2, m.getMarca().getCd_marca());
@@ -34,6 +42,13 @@ public class ModeloRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing <code>modelo</code> record with a new description, brand, and user code.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record esistente di <code>modelo</code> con nuova descrizione, marchio e codice utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro existente em <code>modelo</code> com nova descrição, marca e código do usuário.</p>
+     */
     @Override
     public void alterar(Object o) {       
         Modelo m = (Modelo) o;        
@@ -57,6 +72,13 @@ public class ModeloRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes a record from the <code>modelo</code> table based on its unique identifier.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un record dalla tabella <code>modelo</code> in base al suo identificatore univoco.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um registro da tabela <code>modelo</code> com base em seu identificador único.</p>
+     */
     @Override
     public void excluir(Object o) {        
         Modelo m = (Modelo) o;        
@@ -74,6 +96,16 @@ public class ModeloRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a list of all <code>modelo</code> records, ordered by description.
+     * Each item contains the model ID, description, associated brand, and user code.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un elenco di tutti i record <code>modelo</code>, ordinati per descrizione.
+     * Ogni elemento contiene l'ID del modello, la descrizione, il marchio associato e il codice utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera uma lista de todos os registros de <code>modelo</code>, ordenados pela descrição.
+     * Cada item contém o ID do modelo, a descrição, a marca associada e o código do usuário.</p>
+     */
     @Override
     public ArrayList getLista() {
         ArrayList modelo = new ArrayList();
@@ -99,6 +131,16 @@ public class ModeloRepository implements IPadraoRepository{
         return modelo;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a single <code>modelo</code> record by ID, including description,
+     * associated brand, and user code.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un singolo record <code>modelo</code> per ID, includendo la descrizione,
+     * il marchio associato e il codice utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera um único registro de <code>modelo</code> pelo ID, incluindo a descrição,
+     * a marca associada e o código do usuário.</p>
+     */
     @Override
     public Object getById(int id) {
         Modelo m = null;

@@ -12,6 +12,19 @@ public class JIFRaca extends javax.swing.JInternalFrame {
     
     private static JIFRaca jifraca;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the JIFRaca class.  
+     * If no instance exists, a new one is created and initialized.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton della classe JIFRaca.  
+     * Se non esiste alcuna istanza, ne viene creata e inizializzata una nuova.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton da classe JIFRaca.  
+     * Se não existir nenhuma instância, uma nova é criada e inicializada.</p>
+     *
+     * @return EN: singleton instance of JIFRaca | IT: istanza singleton di JIFRaca | PT-BR: instância singleton de JIFRaca
+     * @since 1.0.0
+     */    
     public static JIFRaca getInstancia(){
         if(jifraca == null){
             jifraca = new JIFRaca();
@@ -21,8 +34,7 @@ public class JIFRaca extends javax.swing.JInternalFrame {
 
     Raca raca = new Raca();
     RacaRepository racar = new RacaRepository();
-    RacaUtil racau = new RacaUtil();
-    
+    RacaUtil racau = new RacaUtil();    
     Especie especie = null;
     EspecieUtil especieu = new EspecieUtil();    
         
@@ -203,6 +215,16 @@ public class JIFRaca extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Validates the form fields before saving or updating a breed (Raca).</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi del modulo prima di salvare o aggiornare una razza (Raca).</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário antes de salvar ou atualizar uma raça (Raca).</p>
+     *
+     * @return EN: true if all fields are valid, false otherwise | IT: true se tutti i campi sono validi, false altrimenti | PT-BR: true se todos os campos forem válidos, false caso contrário
+     * @since 1.0.0
+     */
     private boolean validaCampos(){
         if(especie == null){
             JOptionPane.showMessageDialog(null, "Selecione a especie.", "Especie", JOptionPane.INFORMATION_MESSAGE);
@@ -217,25 +239,61 @@ public class JIFRaca extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all input fields in the breed (Raca) form.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input nel modulo razza (Raca).</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada no formulário de raça (Raca).</p>
+     *
+     * @since 1.0.0
+     */    
     private void limpaCampos(){
         jCBEspecie.setSelectedIndex(0);
         jTFRaca.setText(null);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Saves a new breed (Raca) record to the database using the form data.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo record di razza (Raca) nel database utilizzando i dati del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva um novo registro de raça (Raca) no banco de dados utilizando os dados do formulário.</p>
+     *
+     * @since 1.0.0
+     */    
     private void salvar(){
         raca.setEspecie(especie);
         raca.setDs_raca(jTFRaca.getText());
         raca.setCd_usuario(JPLogin.codloginuser);
         racar.inserir(raca);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Updates an existing breed (Raca) record in the database using the form data.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record di razza (Raca) esistente nel database utilizzando i dati del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro de raça (Raca) existente no banco de dados utilizando os dados do formulário.</p>
+     *
+     * @since 1.0.0
+     */    
     private void alterar(){
         raca.setEspecie(especie);
         raca.setDs_raca(jTFRaca.getText());
         raca.setCd_usuario(JPLogin.codloginuser);
         racar.alterar(raca);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Deletes the current breed (Raca) record from the database.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il record corrente della razza (Raca) dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o registro atual da raça (Raca) no banco de dados.</p>
+     *
+     * @since 1.0.0
+     */    
     private void excluir(){
         raca.setCd_raca(raca.getCd_raca());
         racar.excluir(raca);

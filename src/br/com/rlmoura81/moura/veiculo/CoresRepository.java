@@ -11,6 +11,16 @@ public class CoresRepository{
     
     String sql = "";
     
+    /**
+     * <p><strong>EN:</strong> Retrieves all color records from the <em>cores</em> table,
+     * ordered by description, maps them to <code>Cores</code> objects, and returns the list.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutti i record dei colori dalla tabella <em>cores</em>,
+     * ordinati per descrizione, li mappa in oggetti <code>Cores</code> e restituisce la lista.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todos os registros de cores da tabela <em>cores</em>,
+     * ordenados pela descrição, mapeia para objetos <code>Cores</code> e retorna a lista.</p>
+     */
     public ArrayList getLista() {
         ArrayList<Cores> cor = new ArrayList();
         try{
@@ -33,6 +43,16 @@ public class CoresRepository{
         return cor;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves a color record by its unique identifier (<code>cd_cor</code>)
+     * from the <em>cores</em> table and returns the corresponding <code>Cores</code> object, or <code>null</code> if not found.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un record di colore tramite il suo identificatore univoco (<code>cd_cor</code>)
+     * dalla tabella <em>cores</em> e restituisce l'oggetto <code>Cores</code> corrispondente, oppure <code>null</code> se non trovato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera um registro de cor pelo identificador único (<code>cd_cor</code>)
+     * na tabela <em>cores</em> e retorna o objeto <code>Cores</code> correspondente, ou <code>null</code> se não encontrado.</p>
+     */
     public Object getById(int id) {
         Cores c = null;
         try{

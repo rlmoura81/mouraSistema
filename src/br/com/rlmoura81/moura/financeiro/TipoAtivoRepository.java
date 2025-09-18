@@ -11,6 +11,15 @@ public class TipoAtivoRepository{
 
     String sql = "";
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all asset types ordered by description.</p>
+     * <p><strong>IT:</strong> Recupera tutti i tipi di attivo ordinati per descrizione.</p>
+     * <p><strong>PT-BR:</strong> Recupera todos os tipos de ativo ordenados pela descrição.</p>
+     *
+     * @return EN: list of all asset types | IT: elenco di tutti i tipi di attivo | PT-BR: lista de todos os tipos de ativo
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     public ArrayList getLista() {
         ArrayList tpfundimob = new ArrayList();
         try{
@@ -33,6 +42,15 @@ public class TipoAtivoRepository{
         return tpfundimob;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves only fixed-income asset types (IDs 3 and 4), ordered by description.</p>
+     * <p><strong>IT:</strong> Recupera solo i tipi di attivo a reddito fisso (ID 3 e 4), ordinati per descrizione.</p>
+     * <p><strong>PT-BR:</strong> Recupera apenas os tipos de ativo de renda fixa (IDs 3 e 4), ordenados pela descrição.</p>
+     *
+     * @return EN: list of fixed-income asset types | IT: elenco dei tipi di attivo a reddito fisso | PT-BR: lista de tipos de ativo de renda fixa
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     public ArrayList getListaTipoRendaFixa() {
         ArrayList tpfundimob = new ArrayList();
         try{
@@ -56,7 +74,15 @@ public class TipoAtivoRepository{
         return tpfundimob;
     }
     
-    //Lista Tipo de Ativo por Ação ou FII.
+    /**
+     * <p><strong>EN:</strong> Retrieves only stock and REIT/real-estate fund asset types (IDs 1 and 2), ordered by description.</p>
+     * <p><strong>IT:</strong> Recupera solo i tipi di attivo azionari e fondi immobiliari (ID 1 e 2), ordinati per descrizione.</p>
+     * <p><strong>PT-BR:</strong> Recupera apenas os tipos de ativo de Ação e FII (IDs 1 e 2), ordenados pela descrição.</p>
+     *
+     * @return EN: list of stock/REIT asset types | IT: elenco dei tipi di attivo azionari/immobiliari | PT-BR: lista de tipos de ativo de Ação/FII
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     public ArrayList getListaTipoAtivoAcaoFII() {
         ArrayList tpfundimob = new ArrayList();
         try{
@@ -80,6 +106,16 @@ public class TipoAtivoRepository{
         return tpfundimob;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a single asset type by its identifier.</p>
+     * <p><strong>IT:</strong> Recupera un singolo tipo di attivo tramite il suo identificatore.</p>
+     * <p><strong>PT-BR:</strong> Recupera um único tipo de ativo pelo seu identificador.</p>
+     *
+     * @param id EN: asset type ID to search | IT: ID del tipo di attivo da cercare | PT-BR: ID do tipo de ativo a pesquisar
+     * @return EN: asset type object if found, otherwise null | IT: oggetto del tipo di attivo se trovato, altrimenti null | PT-BR: objeto do tipo de ativo se encontrado, caso contrário null
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     public Object getById(int id) {
         TipoAtivo tpativo = null;
         try{

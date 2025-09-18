@@ -5,11 +5,16 @@ import javax.swing.JComboBox;
 
 public class TipoAtivoUtil {
     
-    TipoAtivo tpativo = new TipoAtivo();
-    TipoAtivoRepository tpativor = new TipoAtivoRepository();
-    
-    ArrayList lista = new ArrayList();
-    
+    TipoAtivoRepository tpativor = new TipoAtivoRepository();    
+
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with all asset types.</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con tutti i tipi di attivo.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com todos os tipos de ativo.</p>
+     *
+     * @param o EN: JComboBox to populate | IT: JComboBox da popolare | PT-BR: JComboBox a ser preenchido
+     * @since 1.0.0
+     */    
     public void jcTipoAtivo(JComboBox o){
         ArrayList<TipoAtivo> lista = tpativor.getLista();
         TipoAtivo tpaZero = new TipoAtivo(0, "<Tipo>");
@@ -19,7 +24,14 @@ public class TipoAtivoUtil {
         }
     }
 
-    //Ativo por Ação ou FII
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with stock and REIT asset types (Ação/FII).</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con i tipi di attivo azionari e fondi immobiliari (Azione/FII).</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com os tipos de ativo Ação e FII.</p>
+     *
+     * @param o EN: JComboBox to populate | IT: JComboBox da popolare | PT-BR: JComboBox a ser preenchido
+     * @since 1.0.0
+     */
     public void jcTipoAtivoAcaoFii(JComboBox o){
         ArrayList<TipoAtivo> lista = tpativor.getListaTipoAtivoAcaoFII();
         TipoAtivo tpaZero = new TipoAtivo(0, "<Tipo>");
@@ -29,6 +41,14 @@ public class TipoAtivoUtil {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with fixed-income asset types (Renda Fixa).</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con i tipi di attivo a reddito fisso (Renda Fixa).</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com os tipos de ativo de Renda Fixa.</p>
+     *
+     * @param o EN: JComboBox to populate | IT: JComboBox da popolare | PT-BR: JComboBox a ser preenchido
+     * @since 1.0.0
+     */
     public void jcTipoAtivoRendaFixa(JComboBox o){
         ArrayList<TipoAtivo> lista = tpativor.getListaTipoRendaFixa();
         TipoAtivo tpaZero = new TipoAtivo(0, "<Tipo>");

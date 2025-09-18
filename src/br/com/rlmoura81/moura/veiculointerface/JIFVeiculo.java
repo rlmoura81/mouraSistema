@@ -14,6 +14,16 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
 
     private static JIFVeiculo jifveiculo;
     
+    /**
+     * <p><strong>EN:</strong> Returns the single instance of the vehicle management screen 
+     * (Singleton pattern). If it does not exist, creates a new one.</p>
+     * 
+     * <p><strong>IT:</strong> Restituisce l'unica istanza della schermata di gestione veicoli 
+     * (pattern Singleton). Se non esiste, ne crea una nuova.</p>
+     * 
+     * <p><strong>PT-BR:</strong> Retorna a única instância da tela de gestão de veículos 
+     * (padrão Singleton). Caso não exista, cria uma nova.</p>
+     */
     public static JIFVeiculo getInstacia(){
         if(jifveiculo == null){
             jifveiculo = new JIFVeiculo();
@@ -22,12 +32,9 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
     }
     
     Modelo modelo = null;
-    ModeloUtil modelou = new ModeloUtil();
-    
-    Combustivel combustivel = null;
-    
-    Cores cor = null;
-    
+    ModeloUtil modelou = new ModeloUtil();    
+    Combustivel combustivel = null;    
+    Cores cor = null;    
     Veiculo veiculo = new Veiculo();
     VeiculoRepository veiculor = new VeiculoRepository();
     VeiculoUtil veiculou = new VeiculoUtil();
@@ -350,22 +357,50 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
    
+    /**
+     * <p><strong>EN:</strong> Loads vehicle records into the table component.</p>
+     * <p><strong>IT:</strong> Carica i record dei veicoli nella tabella.</p>
+     * <p><strong>PT-BR:</strong> Carrega os registros de veículos na tabela.</p>
+     */
     private void tabelaVeiculo(){
         veiculou.tabelaVeiculo(jTVeiculos);
     }
 
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with the list of models.</p>
+     * <p><strong>IT:</strong> Popola la casella combinata con l'elenco dei modelli.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo box com a lista de modelos.</p>
+     */
     private void jcModelo(){
         modelou.jcModelo(jCBModelo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with the list of fuel types.</p>
+     * <p><strong>IT:</strong> Popola la casella combinata con l'elenco dei tipi di carburante.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo box com a lista de combustíveis.</p>
+     */
     private void jcCombustivel(){
        veiculou.jcCombusivel(jCBCombustivel);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with the list of colors.</p>
+     * <p><strong>IT:</strong> Popola la casella combinata con l'elenco dei colori.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo box com a lista de cores.</p>
+     */
     private void jcCor(){
         veiculou.jcCor(jCBCor);
     }
         
+    /**
+     * <p><strong>EN:</strong> Validates the fields of the vehicle form, ensuring mandatory 
+     * data is filled in correctly.</p>
+     * <p><strong>IT:</strong> Convalida i campi del modulo veicolo, garantendo che i dati 
+     * obbligatori siano compilati correttamente.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário de veículo, garantindo que 
+     * os dados obrigatórios estejam preenchidos corretamente.</p>
+     */
     private boolean validaCampos(){
         if(modelo == null){
             JOptionPane.showMessageDialog(null, "Selecione o modelo.", "Modelo", JOptionPane.INFORMATION_MESSAGE);
@@ -405,6 +440,11 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears the fields of the vehicle form and resets combo boxes.</p>
+     * <p><strong>IT:</strong> Pulisce i campi del modulo veicolo e reimposta le caselle combinate.</p>
+     * <p><strong>PT-BR:</strong> Limpa os campos do formulário de veículo e reseta os combo boxes.</p>
+     */
     private void limpaCampos(){
         jCBModelo.setSelectedIndex(0);
         jCBCombustivel.setSelectedIndex(0);
@@ -416,6 +456,11 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jTFAnoMod.setText(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new vehicle record using the data entered in the form.</p>
+     * <p><strong>IT:</strong> Salva un nuovo record di veicolo utilizzando i dati inseriti nel modulo.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo registro de veículo utilizando os dados informados no formulário.</p>
+     */
     private void salvar(){
         veiculo.setModelo(modelo);
         veiculo.setCombustivel(combustivel);
@@ -430,6 +475,11 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         veiculo = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing vehicle record with the form data.</p>
+     * <p><strong>IT:</strong> Aggiorna un record di veicolo esistente con i dati del modulo.</p>
+     * <p><strong>PT-BR:</strong> Atualiza um registro de veículo existente com os dados do formulário.</p>
+     */
     private void alterar(){
         veiculo.setCd_veiculo(veiculo.getCd_veiculo());
         veiculo.setModelo(modelo);
@@ -444,6 +494,11 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         veiculo = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected vehicle record.</p>
+     * <p><strong>IT:</strong> Elimina il record del veicolo selezionato.</p>
+     * <p><strong>PT-BR:</strong> Exclui o registro de veículo selecionado.</p>
+     */
     private void excluir(){
         veiculo.setCd_veiculo(veiculo.getCd_veiculo());
         veiculor.excluir(veiculo);

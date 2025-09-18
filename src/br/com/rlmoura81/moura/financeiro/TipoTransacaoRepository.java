@@ -9,10 +9,18 @@ import javax.swing.JOptionPane;
 
 public class TipoTransacaoRepository{
 
-    String sql = "";
-    
+    String sql = "";    
     GrupoTransacaoRepository gptransr = new GrupoTransacaoRepository();
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the complete list of transaction types (TipoTransacao) from the database.</p>
+     * <p><strong>IT:</strong> Recupera l'elenco completo dei tipi di transazione (TipoTransacao) dal database.</p>
+     * <p><strong>PT-BR:</strong> Recupera a lista completa de tipos de transação (TipoTransacao) do banco de dados.</p>
+     *
+     * @return EN: List of transaction types |
+     *         IT: Elenco di tipi di transazione |
+     *         PT-BR: Lista de tipos de transação
+     */
     public ArrayList getLista() {
         ArrayList tptrans = new ArrayList();
         try{
@@ -35,6 +43,18 @@ public class TipoTransacaoRepository{
         return tptrans;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves a filtered list of transaction types (TipoTransacao) for a specific transaction group.</p>
+     * <p><strong>IT:</strong> Recupera un elenco filtrato di tipi di transazione (TipoTransacao) per un gruppo di transazioni specifico.</p>
+     * <p><strong>PT-BR:</strong> Recupera uma lista filtrada de tipos de transação (TipoTransacao) para um grupo específico.</p>
+     *
+     * @param cd_gptrans EN: Transaction group ID |
+     *                   IT: ID del gruppo di transazioni |
+     *                   PT-BR: ID do grupo de transações
+     * @return EN: Filtered list of transaction types |
+     *         IT: Elenco filtrato di tipi di transazione |
+     *         PT-BR: Lista filtrada de tipos de transação
+     */
     public ArrayList getLista(int cd_gptrans) {
         ArrayList tptrans = new ArrayList();
         try{
@@ -59,6 +79,18 @@ public class TipoTransacaoRepository{
         return tptrans;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a transaction type (TipoTransacao) by its unique ID.</p>
+     * <p><strong>IT:</strong> Recupera un tipo di transazione (TipoTransacao) tramite il suo ID univoco.</p>
+     * <p><strong>PT-BR:</strong> Recupera um tipo de transação (TipoTransacao) pelo seu ID único.</p>
+     *
+     * @param id EN: Transaction type ID |
+     *           IT: ID del tipo di transazione |
+     *           PT-BR: ID do tipo de transação
+     * @return EN: Transaction type object or null if not found |
+     *         IT: Oggetto TipoTransacao o null se non trovato |
+     *         PT-BR: Objeto TipoTransacao ou null se não encontrado
+     */
     public Object getById(int id) {
         TipoTransacao tptrans = null;
         try{

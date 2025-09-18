@@ -11,16 +11,24 @@ import javax.swing.JOptionPane;
 
 public class FundoInvestimentoTransacaoRepository implements IPadraoRepository{
 
-    String sql = "";
-    
-    GrupoTransacaoRepository gptransr = new GrupoTransacaoRepository();
-    
-    FundoInvestimentoAplicacaoRepository fiar = new FundoInvestimentoAplicacaoRepository();
-    
-    ContaRepository contar = new ContaRepository();
-    
+    String sql = "";    
+    GrupoTransacaoRepository gptransr = new GrupoTransacaoRepository();    
+    FundoInvestimentoAplicacaoRepository fiar = new FundoInvestimentoAplicacaoRepository();    
+    ContaRepository contar = new ContaRepository();    
     Utilidade util = new Utilidade();
 
+    /**
+     * <p><strong>EN:</strong> Inserts a fund investment transaction record.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un record di transazione di fondo di investimento.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um registro de transação de fundo de investimento.</p>
+     *
+     * @param o EN: object to insert (expected: FundoInvestimentoTransacao) | IT: oggetto da inserire (atteso: FundoInvestimentoTransacao) | PT-BR: objeto a ser inserido (esperado: FundoInvestimentoTransacao)
+     * @return EN: created record in the fdinvesttrans table | IT: record creato nella tabella fdinvesttrans | PT-BR: registro criado na tabela fdinvesttrans
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {
         FundoInvestimentoTransacao fit = (FundoInvestimentoTransacao) o;
@@ -52,6 +60,17 @@ public class FundoInvestimentoTransacaoRepository implements IPadraoRepository{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all fund investment transactions for the logged user.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutte le transazioni di fondi di investimento per l'utente loggato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todas as transações de fundos de investimento do usuário logado.</p>
+     *
+     * @return EN: list of FundoInvestimentoTransacao | IT: elenco di FundoInvestimentoTransacao | PT-BR: lista de FundoInvestimentoTransacao
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {
         ArrayList fdinvtr = new ArrayList();
@@ -81,6 +100,19 @@ public class FundoInvestimentoTransacaoRepository implements IPadraoRepository{
         return fdinvtr;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves fund investment transactions by application and account.</p>
+     *
+     * <p><strong>IT:</strong> Recupera le transazioni di fondi di investimento per applicazione e conto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera transações de fundos de investimento por aplicação e conta.</p>
+     *
+     * @param fdinvestaplic EN: investment application ID | IT: ID dell'applicazione di investimento | PT-BR: ID da aplicação de investimento
+     * @param conta EN: account ID | IT: ID del conto | PT-BR: ID da conta
+     * @return EN: list of FundoInvestimentoTransacao | IT: elenco di FundoInvestimentoTransacao | PT-BR: lista de FundoInvestimentoTransacao
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     public ArrayList getListaFdInvestTrans(int fdinvestaplic, int conta) {
         ArrayList fdinvtr = new ArrayList();
         try{
@@ -94,8 +126,7 @@ public class FundoInvestimentoTransacaoRepository implements IPadraoRepository{
             ps.setInt(1, fdinvestaplic);
             ps.setInt(2, conta);
             ps.setInt(3, JPLogin.codloginuser);
-            ResultSet rs = ps.executeQuery();
-            
+            ResultSet rs = ps.executeQuery();            
             while(rs.next()){
                 FundoInvestimentoTransacao fit = new FundoInvestimentoTransacao(
                         rs.getInt("cd_fdinvesttrans"),
@@ -115,6 +146,18 @@ public class FundoInvestimentoTransacaoRepository implements IPadraoRepository{
         return fdinvtr;
     }
         
+    /**
+     * <p><strong>EN:</strong> Retrieves a fund investment transaction by ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera una transazione di fondo di investimento tramite ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera uma transação de fundo de investimento pelo ID.</p>
+     *
+     * @param id EN: transaction ID | IT: ID della transazione | PT-BR: ID da transação
+     * @return EN: FundoInvestimentoTransacao instance or null if not found | IT: istanza di FundoInvestimentoTransacao o null se non trovata | PT-BR: instância de FundoInvestimentoTransacao ou null se não encontrada
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {
         FundoInvestimentoTransacao fdinvtr = null;

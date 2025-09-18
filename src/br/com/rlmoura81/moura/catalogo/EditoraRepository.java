@@ -12,6 +12,16 @@ public class EditoraRepository implements IPadraoRepository{
 
     String sql = "";
 
+    /**
+     * <p><strong>EN:</strong> Inserts a new publisher (Editora) into the database.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un nuovo editore (Editora) nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere uma nova editora (Editora) no banco de dados.</p>
+     *
+     * @param o EN: Editora object to insert | IT: Oggetto Editora da inserire | PT-BR: Objeto Editora a ser inserido
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {        
         Editora e = (Editora) o;        
@@ -30,6 +40,16 @@ public class EditoraRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing publisher (Editora) with the provided data.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un editore (Editora) esistente con i dati forniti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza uma editora (Editora) existente com os dados informados.</p>
+     *
+     * @param o EN: Editora object with updated values | IT: Oggetto Editora con valori aggiornati | PT-BR: Objeto Editora com valores atualizados
+     * @since 1.0.0
+     */
     @Override
     public void alterar(Object o) {        
         Editora e = (Editora) o;        
@@ -52,6 +72,16 @@ public class EditoraRepository implements IPadraoRepository{
         
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes a publisher (Editora) by its identifier.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un editore (Editora) tramite il suo identificatore.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui uma editora (Editora) pelo seu identificador.</p>
+     *
+     * @param o EN: Editora object containing the ID to delete | IT: Oggetto Editora contenente l'ID da eliminare | PT-BR: Objeto Editora contendo o ID para exclusão
+     * @since 1.0.0
+     */
     @Override
     public void excluir(Object o) {        
         Editora e = (Editora) o;        
@@ -69,6 +99,16 @@ public class EditoraRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all publishers (Editora), ordered by name.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutti gli editori (Editora), ordinati per nome.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todas as editoras (Editora), ordenadas por nome.</p>
+     *
+     * @return EN: list of Editora objects | IT: elenco di oggetti Editora | PT-BR: lista de objetos Editora
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {       
         ArrayList editoras = new ArrayList();        
@@ -93,6 +133,17 @@ public class EditoraRepository implements IPadraoRepository{
         return editoras;
     }
 
+    /**
+     * <p><strong>EN:</strong> Gets a publisher (Editora) by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un editore (Editora) tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém uma editora (Editora) pelo seu ID.</p>
+     *
+     * @param id EN: unique identifier of the publisher | IT: identificatore univoco dell'editore | PT-BR: identificador único da editora
+     * @return EN: Editora object if found, otherwise null | IT: Oggetto Editora se trovato, altrimenti null | PT-BR: Objeto Editora se encontrado, caso contrário null
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {        
         Editora e = null;        

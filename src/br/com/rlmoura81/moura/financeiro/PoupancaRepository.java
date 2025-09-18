@@ -3,7 +3,6 @@ package br.com.rlmoura81.moura.financeiro;
 import br.com.rlmoura81.moura.conexao.ConexaoPersistencia;
 import br.com.rlmoura81.moura.principal.IPadraoRepository;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
-import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,10 +13,19 @@ import javax.swing.JOptionPane;
 public class PoupancaRepository implements IPadraoRepository{
 
     Connection conn = ConexaoPersistencia.getConnection();
-    String sql = "";
-    
+    String sql = "";    
     ContaRepository contar = new ContaRepository();
         
+    /**
+     * <p><strong>EN:</strong> Inserts a new savings account record into the database.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un nuovo record di conto di risparmio nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um novo registro de conta poupança no banco de dados.</p>
+     *
+     * @param o EN: Savings account object | IT: Oggetto conto di risparmio | PT-BR: Objeto da conta poupança
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {
         Poupanca p = (Poupanca) o;
@@ -39,6 +47,16 @@ public class PoupancaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing savings account record.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record esistente di conto di risparmio.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro existente de conta poupança.</p>
+     *
+     * @param o EN: Savings account object with updated data | IT: Oggetto conto di risparmio con dati aggiornati | PT-BR: Objeto da conta poupança com dados atualizados
+     * @since 1.0.0
+     */
     @Override
     public void alterar(Object o) {
         Poupanca p = (Poupanca) o;
@@ -59,6 +77,16 @@ public class PoupancaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes a savings account record from the database.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un record di conto di risparmio dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um registro de poupança do banco de dados.</p>
+     *
+     * @param o EN: Poupanca object to be deleted | IT: Oggetto Poupanca da eliminare | PT-BR: Objeto Poupanca a ser excluído
+     * @since 1.0.0
+     */
     @Override
     public void excluir(Object o) {
         Poupanca p =(Poupanca) o;
@@ -76,6 +104,16 @@ public class PoupancaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the list of all savings accounts of the logged user.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l'elenco di tutti i conti di risparmio dell'utente loggato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a lista de todas as poupanças do usuário logado.</p>
+     *
+     * @return EN: list of savings accounts | IT: elenco dei conti di risparmio | PT-BR: lista de poupanças
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {
         ArrayList poupanca = new ArrayList();
@@ -104,6 +142,17 @@ public class PoupancaRepository implements IPadraoRepository{
         return poupanca;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves the list of savings accounts for a specific bank account.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l'elenco di conti di risparmio per un conto bancario specifico.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a lista de poupanças para uma conta bancária específica.</p>
+     *
+     * @param cd_conta EN: account ID | IT: ID del conto | PT-BR: ID da conta
+     * @return EN: list of savings accounts linked to the account | IT: elenco dei conti di risparmio legati al conto | PT-BR: lista de poupanças vinculadas à conta
+     * @since 1.0.0
+     */
     public ArrayList getLista(int cd_conta) {
         ArrayList poupanca = new ArrayList();
         try{
@@ -133,6 +182,17 @@ public class PoupancaRepository implements IPadraoRepository{
         return poupanca;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves a savings account by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un conto di risparmio tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera uma poupança pelo seu ID.</p>
+     *
+     * @param id EN: savings account ID | IT: ID del conto di risparmio | PT-BR: ID da poupança
+     * @return EN: savings account object | IT: oggetto conto di risparmio | PT-BR: objeto poupança
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {
         Poupanca p = null;
@@ -159,6 +219,16 @@ public class PoupancaRepository implements IPadraoRepository{
         return p;
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates the balance of a savings account.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna il saldo di un conto di risparmio.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza o saldo de uma poupança.</p>
+     *
+     * @param o EN: Poupanca object with updated balance | IT: Oggetto Poupanca con saldo aggiornato | PT-BR: Objeto Poupanca com saldo atualizado
+     * @since 1.0.0
+     */
     public void atualizaSaldo(Object o) {
         Poupanca p = (Poupanca) o;
         try{

@@ -13,6 +13,16 @@ public class JIFFundoInvestimento extends javax.swing.JInternalFrame {
     
     private static JIFFundoInvestimento jiffdinvestimento;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFFundoInvestimento}.  
+     * If no instance exists, a new one is created, titled "Fundos de Investimentos", and returned.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFFundoInvestimento}.  
+     * Se non esiste alcuna istanza, ne viene creata una nuova con il titolo "Fundos de Investimentos" e restituita.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton de {@link JIFFundoInvestimento}.  
+     * Se não existir uma instância, uma nova é criada, com o título "Fundos de Investimentos", e retornada.</p>
+     */
     public static JIFFundoInvestimento getInstancia(){
         if(jiffdinvestimento == null){
             jiffdinvestimento = new JIFFundoInvestimento();
@@ -212,6 +222,90 @@ public class JIFFundoInvestimento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Loads and displays the investment fund data in the specified table component.</p>
+     * <p><strong>IT:</strong> Carica e visualizza i dati dei fondi di investimento nella tabella specificata.</p>
+     * <p><strong>PT-BR:</strong> Carrega e exibe os dados dos fundos de investimento no componente de tabela informado.</p>
+     */
+    private void tabelaFundoInvestimento(){
+        fdinvestu.tabelaFundoInvestimento(jTFdInvestimento);
+    }    
+    
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with the list of fund groups.</p>
+     * <p><strong>IT:</strong> Popola la combo box con l'elenco dei gruppi di fondi.</p>
+     * <p><strong>PT-BR:</strong> Preenche a combo box com a lista dos grupos de fundos.</p>
+     */
+    private void jcGpFundo(){
+        gpfundou.jcGpFundo(jCBGpFundo);
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Validates the form fields before saving or updating a fund record.  
+     * Ensures that a fund type is selected and the fund name is not empty.</p>
+     * <p><strong>IT:</strong> Convalida i campi del modulo prima di salvare o aggiornare un fondo.  
+     * Verifica che sia selezionato un tipo di fondo e che il nome non sia vuoto.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário antes de salvar ou atualizar um fundo.  
+     * Verifica se um tipo de fundo foi selecionado e se o nome não está vazio.</p>
+     */
+    private boolean validaCampos(){
+        if(((GrupoFundo)jCBGpFundo.getSelectedItem()).getCd_gpfundo() == 0){
+            JOptionPane.showMessageDialog(null, "Selecione o Tipo de Fundo.");
+            jCBGpFundo.requestFocus();
+            return false;
+        }
+        if(jTFFundo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Digite o nome do fundo.");
+            jTFFundo.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Clears the form fields, resetting the fund type selection and the fund name.</p>
+     * <p><strong>IT:</strong> Pulisce i campi del modulo, reimpostando la selezione del tipo di fondo e il nome del fondo.</p>
+     * <p><strong>PT-BR:</strong> Limpa os campos do formulário, redefinindo a seleção do tipo de fundo e o nome do fundo.</p>
+     */
+    private void limpaCampos(){
+        jCBGpFundo.setSelectedIndex(0);
+        jTFFundo.setText(null);
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Saves a new investment fund record to the database with the entered data.</p>
+     * <p><strong>IT:</strong> Salva un nuovo record di fondo di investimento nel database con i dati inseriti.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo registro de fundo de investimento no banco de dados com os dados informados.</p>
+     */
+    private void salvar(){
+        fdinvest.setGpfundo(gpfundo);
+        fdinvest.setDs_fdinvest(jTFFundo.getText());
+        fdinvest.setCd_usuario(JPLogin.codloginuser);
+        fdinvestr.inserir(fdinvest);
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Updates the selected investment fund record with the modified data.</p>
+     * <p><strong>IT:</strong> Aggiorna il record del fondo di investimento selezionato con i dati modificati.</p>
+     * <p><strong>PT-BR:</strong> Atualiza o registro do fundo de investimento selecionado com os dados modificados.</p>
+     */
+    private void alterar(){
+        fdinvest.setGpfundo(gpfundo);
+        fdinvest.setDs_fdinvest(jTFFundo.getText());
+        fdinvest.setCd_usuario(JPLogin.codloginuser);
+        fdinvestr.alterar(fdinvest);
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Deletes the selected investment fund record from the database.</p>
+     * <p><strong>IT:</strong> Elimina il record del fondo di investimento selezionato dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui o registro do fundo de investimento selecionado do banco de dados.</p>
+     */
+    private void excluir(){
+        fdinvest.setCd_fdinvest(fdinvest.getCd_fdinvest());
+        fdinvestr.excluir(fdinvest);
+    }
+    
     private void jCBGpFundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBGpFundoActionPerformed
         gpfundo = (GrupoFundo)jCBGpFundo.getSelectedItem();
     }//GEN-LAST:event_jCBGpFundoActionPerformed
@@ -254,51 +348,6 @@ public class JIFFundoInvestimento extends javax.swing.JInternalFrame {
         jCBGpFundo.setSelectedItem(fdinvest.getGpfundo());
         jTFFundo.setText(fdinvest.getDs_fdinvest());
     }//GEN-LAST:event_jTFdInvestimentoMouseClicked
-
-    private void tabelaFundoInvestimento(){
-        fdinvestu.tabelaFundoInvestimento(jTFdInvestimento);
-    }    
-    private void jcGpFundo(){
-        gpfundou.jcGpFundo(jCBGpFundo);
-    }
-    
-    private boolean validaCampos(){
-        if(((GrupoFundo)jCBGpFundo.getSelectedItem()).getCd_gpfundo() == 0){
-            JOptionPane.showMessageDialog(null, "Selecione o Tipo de Fundo.");
-            jCBGpFundo.requestFocus();
-            return false;
-        }
-        if(jTFFundo.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Digite o nome do fundo.");
-            jTFFundo.requestFocus();
-            return false;
-        }
-        return true;
-    }
-    
-    private void limpaCampos(){
-        jCBGpFundo.setSelectedIndex(0);
-        jTFFundo.setText(null);
-    }
-    
-    private void salvar(){
-        fdinvest.setGpfundo(gpfundo);
-        fdinvest.setDs_fdinvest(jTFFundo.getText());
-        fdinvest.setCd_usuario(JPLogin.codloginuser);
-        fdinvestr.inserir(fdinvest);
-    }
-    
-    private void alterar(){
-        fdinvest.setGpfundo(gpfundo);
-        fdinvest.setDs_fdinvest(jTFFundo.getText());
-        fdinvest.setCd_usuario(JPLogin.codloginuser);
-        fdinvestr.alterar(fdinvest);
-    }
-    
-    private void excluir(){
-        fdinvest.setCd_fdinvest(fdinvest.getCd_fdinvest());
-        fdinvestr.excluir(fdinvest);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterar;

@@ -11,6 +11,16 @@ public class TipoMidiaRepository{
     
     String sql = "";
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all media type records from the database, ordered by ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutti i record dei tipi di media dal database, ordinati per ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todos os registros de tipos de mídia do banco de dados, ordenados pelo ID.</p>
+     *
+     * @return EN: list of TipoMidia objects | IT: elenco di oggetti TipoMidia | PT-BR: lista de objetos TipoMidia
+     * @since 1.0.0
+     */
     public ArrayList getLista() {        
         ArrayList tipoMidias = new ArrayList();
         try {  
@@ -33,6 +43,17 @@ public class TipoMidiaRepository{
         return tipoMidias;  
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a specific media type by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un tipo di media specifico tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera um tipo de mídia específico pelo seu ID.</p>
+     *
+     * @param id EN: unique identifier of the media type | IT: identificatore univoco del tipo di media | PT-BR: identificador único do tipo de mídia
+     * @return EN: TipoMidia object if found, otherwise null | IT: Oggetto TipoMidia se trovato, altrimenti null | PT-BR: Objeto TipoMidia se encontrado, caso contrário null
+     * @since 1.0.0
+     */
     public Object getById(int id) {        
         TipoMidia tm = null;        
         try{

@@ -15,6 +15,16 @@ public class JIFRendaFixa extends javax.swing.JInternalFrame {
 
     private static JIFRendaFixa jifrendafixa;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFRendaFixa}.  
+     * If the instance does not exist, it is created, its title set to "Renda Fixa.", and then returned.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFRendaFixa}.  
+     * Se l'istanza non esiste, viene creata, il titolo impostato su "Renda Fixa." e quindi restituita.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton de {@link JIFRendaFixa}.  
+     * Se a instância não existir, ela é criada, o título definido como "Renda Fixa." e então retornada.</p>
+     */
     public static JIFRendaFixa getInstancia(){
         if(jifrendafixa == null){
             jifrendafixa = new JIFRendaFixa();
@@ -299,28 +309,57 @@ public class JIFRendaFixa extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with fixed-income asset types by delegating to the utility layer.</p>
+     * <p><strong>IT:</strong> Compila la combo con i tipi di attivi a reddito fisso delegando al livello utility.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo com tipos de ativos de renda fixa delegando para a camada utilitária.</p>
+     */
     private void jcAtivoRendaFixa(){
         tpativou.jcTipoAtivoRendaFixa(jCBTipoAtivo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads the list of indices into the corresponding combo box.</p>
+     * <p><strong>IT:</strong> Carica l’elenco degli indici nella relativa combo.</p>
+     * <p><strong>PT-BR:</strong> Carrega a lista de índices no combo correspondente.</p>
+     */
     private void jcIndice(){
         indiceu.jcIndice(jCBIndice);
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies numeric formatters to value fields (applied amount and rate).</p>
+     * <p><strong>IT:</strong> Applica i formattatori numerici ai campi di valore (importo applicato e tasso).</p>
+     * <p><strong>PT-BR:</strong> Aplica formatadores numéricos aos campos de valor (valor aplicado e taxa).</p>
+     */
     private void formataValor() {
         jFTFValorAplicado.setFormatterFactory(Utilidade.formataValorCampo(ui));
         jFTFTaxa.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }  
     
+    /**
+     * <p><strong>EN:</strong> Applies date masks/formatting to the application and maturity date fields.</p>
+     * <p><strong>IT:</strong> Applica maschere/formattazione data ai campi di applicazione e scadenza.</p>
+     * <p><strong>PT-BR:</strong> Aplica máscaras/formatação de data nos campos de aplicação e vencimento.</p>
+     */
     private void formatarData(){
         util.formataDataCampo(jFTFDataAplicacao);
         util.formataDataCampo(jFTFDataVencimento);       
     }
-    
+    /**
+     * <p><strong>EN:</strong> Fills the fixed-income table with the current dataset.</p>
+     * <p><strong>IT:</strong> Popola la tabella di reddito fisso con i dati correnti.</p>
+     * <p><strong>PT-BR:</strong> Preenche a tabela de renda fixa com os dados atuais.</p>
+     */
     private void tabelaRendaFixa(){
         rendafixau.tabelaRendaFixa(jTRendaFixa);
     } 
     
+    /**
+     * <p><strong>EN:</strong> Clears all input fields and resets combo boxes to their default selection.</p>
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input e reimposta le combo alla selezione predefinita.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos e redefine os combos para a seleção padrão.</p>
+     */
     private void limparCampos(){
         jCBTipoAtivo.setSelectedIndex(0);
         jCBIndice.setSelectedIndex(0);
@@ -331,6 +370,11 @@ public class JIFRendaFixa extends javax.swing.JInternalFrame {
         jFTFDataVencimento.setText(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates user input for fixed-income registration, ensuring required fields and formats are correct.</p>
+     * <p><strong>IT:</strong> Convalida l’input per la registrazione del reddito fisso, verificando campi obbligatori e formati.</p>
+     * <p><strong>PT-BR:</strong> Valida as entradas para cadastro de renda fixa, verificando campos obrigatórios e formatos.</p>
+     */
     private boolean validaCampos(){
         if(tpativo == null){
             JOptionPane.showMessageDialog(null, "Selecione o tipo de ativo.", "Ativo", JOptionPane.INFORMATION_MESSAGE);
@@ -368,6 +412,11 @@ public class JIFRendaFixa extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Persists a new fixed-income instrument using the filled form fields.</p>
+     * <p><strong>IT:</strong> Salva un nuovo strumento a reddito fisso utilizzando i campi compilati.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo título de renda fixa utilizando os campos preenchidos.</p>
+     */
     private void salvar(){
         rendafixa.setTipoativo(tpativo);
         rendafixa.setIndice(indice);
@@ -380,6 +429,11 @@ public class JIFRendaFixa extends javax.swing.JInternalFrame {
         rendafixar.inserir(rendafixa);
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates the selected fixed-income instrument with the edited values.</p>
+     * <p><strong>IT:</strong> Aggiorna lo strumento a reddito fisso selezionato con i valori modificati.</p>
+     * <p><strong>PT-BR:</strong> Atualiza o título de renda fixa selecionado com os valores editados.</p>
+     */
     private void alterar(){
         rendafixa.setTipoativo(tpativo);
         rendafixa.setIndice(indice);
@@ -391,6 +445,11 @@ public class JIFRendaFixa extends javax.swing.JInternalFrame {
         rendafixar.alterar(rendafixa);        
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the currently selected fixed-income instrument.</p>
+     * <p><strong>IT:</strong> Elimina lo strumento a reddito fisso attualmente selezionato.</p>
+     * <p><strong>PT-BR:</strong> Exclui o título de renda fixa atualmente selecionado.</p>
+     */
     private void excluir(){
         rendafixa.setCd_rendafixa(rendafixa.getCd_rendafixa());
         rendafixar.excluir(rendafixa);

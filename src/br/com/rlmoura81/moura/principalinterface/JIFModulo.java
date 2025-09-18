@@ -15,6 +15,22 @@ public class JIFModulo extends javax.swing.JInternalFrame {
     
     private static JIFModulo jifmodulo;
     
+    /**
+     * <p><strong>EN:</strong> Provides a singleton instance of 
+     * <code>JIFModulo</code>.  
+     * Creates the internal frame if it does not exist and sets 
+     * its title to <em>"Módulos."</em>.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce un'istanza singleton di 
+     * <code>JIFModulo</code>.  
+     * Crea il frame interno se non esiste e imposta il titolo 
+     * su <em>"Módulos."</em>.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna uma instância singleton de 
+     * <code>JIFModulo</code>.  
+     * Cria o frame interno caso não exista e define o título como 
+     * <em>"Módulos."</em>.</p>
+     */
     public static JIFModulo getInstancia(){
         if(jifmodulo == null){
             jifmodulo = new JIFModulo();
@@ -23,83 +39,14 @@ public class JIFModulo extends javax.swing.JInternalFrame {
     }
     
     Modulo modulo = new Modulo();
-    ModuloUtil modulou = new ModuloUtil();
-    
+    ModuloUtil modulou = new ModuloUtil();    
     ModuloAplicativo modapp = new ModuloAplicativo();
     ModuloAplicativoRepository modappr = new ModuloAplicativoRepository();
-    ModuloAplicativoUtil modappu = new ModuloAplicativoUtil();
-    
+    ModuloAplicativoUtil modappu = new ModuloAplicativoUtil();    
     Categoria categoria = new Categoria();
-    CategoriaUtil categoriau = new CategoriaUtil();
-    
+    CategoriaUtil categoriau = new CategoriaUtil();    
     PrestadorServico presserv = new PrestadorServico();
     PrestadorServicoUtil presservu = new PrestadorServicoUtil();
-
-    public JIFModulo() {
-        initComponents();
-        
-        jcModulo();
-    }
-    
-    private void jcModulo(){
-        modulou.jcModulo(jCBModulo);
-    }
-    
-    private void jcCategoria(){
-        categoriau.jcCategoria(jCBModuloApp);
-    }
-    
-    private void jcPresserv(){
-        presservu.jcPresserv(jCBModuloApp);
-    }
-    
-    private void jcModApp(){
-        jCBModuloApp.removeAllItems();
-        if(jRBCategoria.isSelected() == true){
-            jcCategoria();
-            modappu.tabelaModuloAppCategoria(jTModulo);            
-        }
-        if(jRBPresServ.isSelected() == true){
-            jcPresserv();
-            modappu.tabelaModuloAppPresserv(jTModulo);            
-        }
-    }
-    
-    private boolean validaCampos(){
-        if(jCBModuloApp.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(null, "Selecione uma opção.", "Modulo", JOptionPane.INFORMATION_MESSAGE);
-            jCBModuloApp.requestFocus();
-            return false;
-        }
-        if(jCBModulo.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(null, "Selecione um módulo.", "Modulo", JOptionPane.INFORMATION_MESSAGE);
-            jCBModulo.requestFocus();
-            return false;
-        }
-        return true;
-    }
-    
-    private void limpaCampos(){
-        bGModulo.clearSelection();
-        jCBModuloApp.removeAllItems();
-        jCBModulo.setSelectedIndex(0);
-    }
-    
-    private void salvar(){
-        modapp.setCd_usuario(JPLogin.codloginuser);        
-        if(jRBCategoria.isSelected()){
-            modapp.setCategoria(categoria);
-            modapp.setModulo(modulo);
-            modappr.inserirCatMod(modapp);
-            modappu.tabelaModuloAppCategoria(jTModulo);
-        }
-        if(jRBPresServ.isSelected()){
-            modapp.setPresserv(presserv);
-            modapp.setModulo(modulo);
-            modappr.inserirPresServMod(modapp);
-            modappu.tabelaModuloAppPresserv(jTModulo);
-        }
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -285,6 +232,151 @@ public class JIFModulo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     public JIFModulo() {
+        initComponents();
+        
+        jcModulo();
+    }
+    
+     /**
+     * <p><strong>EN:</strong> Populates the module combo box 
+     * with available modules.</p>
+     *
+     * <p><strong>IT:</strong> Popola la casella combinata dei moduli 
+     * con i moduli disponibili.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o combo box de módulos 
+     * com os módulos disponíveis.</p>
+     */
+    private void jcModulo(){
+        modulou.jcModulo(jCBModulo);
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with categories 
+     * from the database.</p>
+     *
+     * <p><strong>IT:</strong> Popola la casella combinata con le categorie 
+     * dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o combo box com categorias 
+     * vindas do banco de dados.</p>
+     */
+    private void jcCategoria(){
+        categoriau.jcCategoria(jCBModuloApp);
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with service providers 
+     * from the database.</p>
+     *
+     * <p><strong>IT:</strong> Popola la casella combinata con i prestatori di servizio 
+     * dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o combo box com prestadores de serviço 
+     * do banco de dados.</p>
+     */
+    private void jcPresserv(){
+        presservu.jcPresserv(jCBModuloApp);
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Updates the module-app combo box and 
+     * refreshes the table depending on whether "Category" 
+     * or "Service Provider" is selected.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna la casella combinata dei moduli-app 
+     * e ricarica la tabella a seconda se è selezionata "Categoria" 
+     * o "Prestatore di Servizio".</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza o combo box de módulo-app 
+     * e recarrega a tabela conforme a seleção de "Categoria" 
+     * ou "Prestador de Serviço".</p>
+     */
+    private void jcModApp(){
+        jCBModuloApp.removeAllItems();
+        if(jRBCategoria.isSelected() == true){
+            jcCategoria();
+            modappu.tabelaModuloAppCategoria(jTModulo);            
+        }
+        if(jRBPresServ.isSelected() == true){
+            jcPresserv();
+            modappu.tabelaModuloAppPresserv(jTModulo);            
+        }
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Validates that a module-app option 
+     * and a module are selected before proceeding.</p>
+     *
+     * <p><strong>IT:</strong> Valida che siano selezionati un'opzione modulo-app 
+     * e un modulo prima di continuare.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida se uma opção de módulo-app 
+     * e um módulo foram selecionados antes de prosseguir.</p>
+     */
+    private boolean validaCampos(){
+        if(jCBModuloApp.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Selecione uma opção.", "Modulo", JOptionPane.INFORMATION_MESSAGE);
+            jCBModuloApp.requestFocus();
+            return false;
+        }
+        if(jCBModulo.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Selecione um módulo.", "Modulo", JOptionPane.INFORMATION_MESSAGE);
+            jCBModulo.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Clears the form fields, resets 
+     * the module-app combo box and radio button selections.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce i campi del modulo, reimposta 
+     * la casella combinata modulo-app e le selezioni dei pulsanti radio.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa os campos do formulário, 
+     * reseta o combo box de módulo-app e as seleções dos botões de opção.</p>
+     */
+    private void limpaCampos(){
+        bGModulo.clearSelection();
+        jCBModuloApp.removeAllItems();
+        jCBModulo.setSelectedIndex(0);
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Saves the selected relation.  
+     * If "Category" is selected, links the category to the module.  
+     * If "Service Provider" is selected, links the provider to the module.  
+     * Updates the corresponding table afterwards.</p>
+     *
+     * <p><strong>IT:</strong> Salva la relazione selezionata.  
+     * Se è selezionata "Categoria", associa la categoria al modulo.  
+     * Se è selezionato "Prestatore di Servizio", associa il prestatore al modulo.  
+     * Successivamente aggiorna la tabella corrispondente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva a relação selecionada.  
+     * Se "Categoria" estiver selecionado, vincula a categoria ao módulo.  
+     * Se "Prestador de Serviço" estiver selecionado, vincula o prestador ao módulo.  
+     * Em seguida, atualiza a tabela correspondente.</p>
+     */
+    private void salvar(){
+        modapp.setCd_usuario(JPLogin.codloginuser);        
+        if(jRBCategoria.isSelected()){
+            modapp.setCategoria(categoria);
+            modapp.setModulo(modulo);
+            modappr.inserirCatMod(modapp);
+            modappu.tabelaModuloAppCategoria(jTModulo);
+        }
+        if(jRBPresServ.isSelected()){
+            modapp.setPresserv(presserv);
+            modapp.setModulo(modulo);
+            modappr.inserirPresServMod(modapp);
+            modappu.tabelaModuloAppPresserv(jTModulo);
+        }
+    }
+    
     private void jRBCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRBCategoriaMouseClicked
         jcModApp();
     }//GEN-LAST:event_jRBCategoriaMouseClicked

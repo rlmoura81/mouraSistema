@@ -11,6 +11,14 @@ public class TipoContaRepository{
 
     String sql = "";
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a list of all account types from the database.</p>
+     * <p><strong>IT:</strong> Recupera un elenco di tutti i tipi di conto dal database.</p>
+     * <p><strong>PT-BR:</strong> Retorna uma lista de todos os tipos de conta do banco de dados.</p>
+     *
+     * @return EN: List of account types | IT: Elenco dei tipi di conto | PT-BR: Lista de tipos de conta
+     * @since 1.0.0
+     */
     public ArrayList getLista() {
         ArrayList tipoconta = new ArrayList();
         try{
@@ -32,6 +40,15 @@ public class TipoContaRepository{
         return tipoconta;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves an account type by its identifier.</p>
+     * <p><strong>IT:</strong> Recupera un tipo di conto in base al suo identificatore.</p>
+     * <p><strong>PT-BR:</strong> Retorna um tipo de conta pelo seu identificador.</p>
+     *
+     * @param id EN: Account type ID | IT: ID del tipo di conto | PT-BR: ID do tipo de conta
+     * @return EN: Account type object or null if not found | IT: Oggetto TipoConto o null se non trovato | PT-BR: Objeto TipoConta ou null se não encontrado
+     * @since 1.0.0
+     */
     public Object getById(int id) {
         TipoConta tpc = null;
         try{

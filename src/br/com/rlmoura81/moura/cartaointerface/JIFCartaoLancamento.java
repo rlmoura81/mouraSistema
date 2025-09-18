@@ -27,6 +27,19 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     
     private static JIFCartaoLancamento jifcartaolancamento;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the JIFCartaoLancamento internal frame.  
+     * If the instance does not exist, it is created and initialized with the title "Cartão Lançamentos".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton del frame interno JIFCartaoLancamento.  
+     * Se l'istanza non esiste, viene creata e inizializzata con il titolo "Cartão Lançamentos".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton do frame interno JIFCartaoLancamento.  
+     * Caso a instância não exista, ela é criada e inicializada com o título "Cartão Lançamentos".</p>
+     *
+     * @return EN: unique instance of JIFCartaoLancamento | IT: istanza unica di JIFCartaoLancamento | PT-BR: instância única de JIFCartaoLancamento
+     * @since 1.0.0
+     */
     public static JIFCartaoLancamento getInstancia(){
         if(jifcartaolancamento == null){
             jifcartaolancamento = new JIFCartaoLancamento();
@@ -35,29 +48,22 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     }
     
     Banco banco = new Banco();
-    BancoUtil bancou = new BancoUtil();
-    
+    BancoUtil bancou = new BancoUtil();    
     Cartao cartao = null;
-    CartaoUtil cartaou = new CartaoUtil();
-    
+    CartaoUtil cartaou = new CartaoUtil();    
     Categoria categoria = null;
-    CategoriaUtil categoriau = new CategoriaUtil();
-    
+    CategoriaUtil categoriau = new CategoriaUtil();    
     Despesa despesa = new Despesa();
-    DespesaUtil despesau = new DespesaUtil();
-    
+    DespesaUtil despesau = new DespesaUtil();    
     CartaoLancamento cartaolanc = new CartaoLancamento();
     CartaoLancamentoRepository cartaolancr = new CartaoLancamentoRepository();
-    CartaoLancamentoUtil cartaolancu = new CartaoLancamentoUtil();
-    
+    CartaoLancamentoUtil cartaolancu = new CartaoLancamentoUtil();    
     CartaoLancamentoFechamento cartaolancf = new CartaoLancamentoFechamento();
     CartaoLancamentoFechamentoRepository cartaolancfr = new CartaoLancamentoFechamentoRepository();
-    CartaoLancamentoFechamentoUtil cartaolancfu = new CartaoLancamentoFechamentoUtil();
-        
+    CartaoLancamentoFechamentoUtil cartaolancfu = new CartaoLancamentoFechamentoUtil();        
     CartaoParcelamento cartaoparc = new CartaoParcelamento();
     CartaoParcelamentoRepository cartaoparcr = new CartaoParcelamentoRepository();
-    CartaoParcelamentoUtil cartaoparcu = new CartaoParcelamentoUtil();
-    
+    CartaoParcelamentoUtil cartaoparcu = new CartaoParcelamentoUtil();    
     Utilidade util = new Utilidade();
         
     public JIFCartaoLancamento() {
@@ -459,32 +465,95 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Applies date formatting to the expense and closing date fields.</p>
+     *
+     * <p><strong>IT:</strong> Applica la formattazione della data ai campi data spesa e data di chiusura.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica a formatação de data aos campos de data da despesa e de fechamento.</p>
+     *
+     * @since 1.0.0
+     */
     private void formataData(){
         util.formataDataCampo(jFTFData);    
         util.formataDataCampo(jFTFFechamento);
     }  
-        
+
+    /**
+     * <p><strong>EN:</strong> Applies currency/amount formatting to the value input field.</p>
+     *
+     * <p><strong>IT:</strong> Applica la formattazione valuta/importo al campo del valore.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica a formatação de moeda/valor ao campo de valor.</p>
+     *
+     * @since 1.0.0
+     */
     private void formataValor() {        
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }  
 
+    /**
+     * <p><strong>EN:</strong> Populates the bank JComboBox.</p>
+     *
+     * <p><strong>IT:</strong> Popola il JComboBox delle banche.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o JComboBox dos bancos.</p>
+     *
+     * @since 1.0.0
+     */
     private void jcBanco(){
         bancou.jcBanco(jCBBanco);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Clears and repopulates the card JComboBox with cards from the selected bank.</p>
+     *
+     * <p><strong>IT:</strong> Svuota e ripopola il JComboBox delle carte con le carte della banca selezionata.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa e preenche novamente o JComboBox de cartões com os cartões do banco selecionado.</p>
+     *
+     * @since 1.0.0
+     */    
     private void jcCartao(){
         jCBCartao.removeAllItems();
         cartaou.jcCartao(jCBCartao, banco.getCd_banco());
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Populates the category JComboBox.</p>
+     *
+     * <p><strong>IT:</strong> Popola il JComboBox delle categorie.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o JComboBox das categorias.</p>
+     *
+     * @since 1.0.0
+     */    
     private void jcCategoria() {
         categoriau.jcCategoria(jCBCategoria);
     }
 
+    /**
+     * <p><strong>EN:</strong> Populates the expense JComboBox.</p>
+     *
+     * <p><strong>IT:</strong> Popola il JComboBox delle spese.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o JComboBox das despesas.</p>
+     *
+     * @since 1.0.0
+     */
     private void jcDespesa(){
         despesau.jcDespesa(jCBDespesa);
     }
-                
+ 
+    /**
+     * <p><strong>EN:</strong> Enables or disables the invoice closing controls based on the existence of the user's last transaction.</p>
+     *
+     * <p><strong>IT:</strong> Abilita o disabilita i controlli di chiusura fattura in base all'esistenza dell'ultima transazione dell'utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Habilita ou desabilita os controles de fechamento da fatura conforme a existência do último lançamento do usuário.</p>
+     *
+     * @since 1.0.0
+     */
     private void jbBotaoFechamento(){
         if((CartaoLancamento)cartaolancr.ultimoRegistro(cartaolanc.getCd_usuario()) == null){
             jFTFFechamento.setEnabled(false);
@@ -495,7 +564,16 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             jBFechamento.setEnabled(true);
         }
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Enables or disables the 'launch installment' button depending on whether the user has installment records.</p>
+     *
+     * <p><strong>IT:</strong> Abilita o disabilita il pulsante per lanciare rate a seconda che l'utente abbia o meno rate registrate.</p>
+     *
+     * <p><strong>PT-BR:</strong> Habilita ou desabilita o botão de lançamento de parcelas conforme a existência de registros de parcelamento do usuário.</p>
+     *
+     * @since 1.0.0
+     */    
     private void jbBotaoLancarParcela(){
         if((CartaoParcelamento)cartaoparcr.ultimoRegistro(cartaolanc.getCd_usuario()) == null){
             jBLancaParcela.setEnabled(false);
@@ -504,6 +582,15 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Shows or hides transaction action controls depending on the selected filter (open vs. closed).</p>
+     *
+     * <p><strong>IT:</strong> Mostra o nasconde i controlli delle azioni di transazione in base al filtro selezionato (aperte vs chiuse).</p>
+     *
+     * <p><strong>PT-BR:</strong> Exibe ou oculta os controles de ação das transações conforme o filtro selecionado (em aberto vs. fechadas).</p>
+     *
+     * @since 1.0.0
+     */    
     private void jbBotaoTransacoes(){
         if(jRBEmAberto.isSelected() == true){
             jPTransacaoBotoes.setVisible(false);
@@ -513,7 +600,16 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             jChkBParcela.setVisible(true);
         }
     }
-    
+ 
+    /**
+     * <p><strong>EN:</strong> Clears all form fields and resets selections to their defaults.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo e ripristina le selezioni ai valori predefiniti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário e redefine as seleções para o padrão.</p>
+     *
+     * @since 1.0.0
+     */
     private void limpaCampos(){
         jFTFData.setText(null);
         jTFDescricao.setText(null);
@@ -524,7 +620,20 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         jCBDespesa.setSelectedIndex(0);
         jFTFFechamento.setText(null);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Validates required fields for a card transaction before saving or updating.  
+     * Shows feedback messages on validation failures.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi obbligatori di una transazione carta prima di salvare o aggiornare.  
+     * Mostra messaggi in caso di errori di validazione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios de um lançamento de cartão antes de salvar ou atualizar.  
+     * Exibe mensagens em caso de falhas de validação.</p>
+     *
+     * @return EN: true if all fields are valid, false otherwise | IT: true se tutti i campi sono validi, altrimenti false | PT-BR: true se todos os campos forem válidos, caso contrário false
+     * @since 1.0.0
+     */    
     private boolean validaCampos(){
         if(banco == null){
             JOptionPane.showMessageDialog(null, "Selecione o banco.", "Banco", JOptionPane.INFORMATION_MESSAGE);
@@ -567,11 +676,32 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         }   
         return true;
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Calculates and displays the current invoice total for the selected card.</p>
+     *
+     * <p><strong>IT:</strong> Calcola e mostra il totale corrente della fattura per la carta selezionata.</p>
+     *
+     * <p><strong>PT-BR:</strong> Calcula e exibe o total atual da fatura para o cartão selecionado.</p>
+     *
+     * @since 1.0.0
+     */    
     private void valorFatura(){
         jLVlFatura.setText("Valor Fatura: " + Utilidade.formatoValor.format(cartaolancu.calculaValorFatura(cartao.getCd_cartao())));        
     }
-    
+ 
+    /**
+     * <p><strong>EN:</strong> Creates and schedules installment records when the installment option is selected and quantity &gt; 1.  
+     * Generates the first installment and triggers the calculation for subsequent ones.</p>
+     *
+     * <p><strong>IT:</strong> Crea e pianifica le rate quando l'opzione rate è selezionata e la quantità è &gt; 1.  
+     * Genera la prima rata e avvia il calcolo delle successive.</p>
+     *
+     * <p><strong>PT-BR:</strong> Cria e agenda registros de parcelas quando a opção de parcelamento está marcada e a quantidade &gt; 1.  
+     * Gera a primeira parcela e aciona o cálculo das demais.</p>
+     *
+     * @since 1.0.0
+     */
     private void salvaParcela(){
         if(jChkBParcela.isSelected() == true && Integer.valueOf(jTFParcela.getText()) > 1){
             codigoParcela();
@@ -597,6 +727,15 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Determines the next installment code for the current user based on the last recorded installment.</p>
+     *
+     * <p><strong>IT:</strong> Determina il prossimo codice rata per l'utente corrente in base all'ultima rata registrata.</p>
+     *
+     * <p><strong>PT-BR:</strong> Define o próximo código de parcela do usuário atual com base na última parcela registrada.</p>
+     *
+     * @since 1.0.0
+     */
     private void codigoParcela(){
         cartaoparc.setCd_usuario(JPLogin.codloginuser);
         if((CartaoParcelamento)cartaoparcr.ultimoRegistro(cartaoparc.getCd_usuario()) == null){
@@ -606,7 +745,16 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             cartaoparc.setCd_parcela(cartaoparc.getCd_parcela() + 1);
         }
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Generates the remaining installments by incrementing the installment date month-by-month and persisting each record.</p>
+     *
+     * <p><strong>IT:</strong> Genera le rate rimanenti incrementando la data della rata mese per mese e salvando ogni record.</p>
+     *
+     * <p><strong>PT-BR:</strong> Gera as parcelas restantes incrementando a data da parcela mês a mês e persistindo cada registro.</p>
+     *
+     * @since 1.0.0
+     */    
     private void calculaParcela(){
         cartaoparc.setDt_parcela(cartaolanc.getDt_despesa());
         for(int nmp = 2; nmp <= cartaoparc.getNm_parcela(); nmp++){
@@ -620,7 +768,16 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Computes the next transaction ID (cd_cartaolanc) for the current user based on the latest record.</p>
+     *
+     * <p><strong>IT:</strong> Calcola il prossimo ID di transazione (cd_cartaolanc) per l'utente corrente in base all'ultimo record.</p>
+     *
+     * <p><strong>PT-BR:</strong> Calcula o próximo ID de lançamento (cd_cartaolanc) para o usuário atual com base no último registro.</p>
+     *
+     * @since 1.0.0
+     */    
     private void ultimoRegistro(){
         cartaolanc.setCd_usuario(JPLogin.codloginuser);
         if((CartaoLancamento)cartaolancr.ultimoRegistro(cartaolanc.getCd_usuario()) == null){
@@ -630,7 +787,19 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             cartaolanc.setCd_cartaolanc(cartaolanc.getCd_cartaolanc() + 1);
         }
     }
-        
+
+    /**
+     * <p><strong>EN:</strong> Creates and saves a new card transaction using the form data.  
+     * Sets installment quantity according to the installment checkbox state.</p>
+     *
+     * <p><strong>IT:</strong> Crea e salva una nuova transazione carta utilizzando i dati del modulo.  
+     * Imposta la quantità di rate in base allo stato della casella di spunta.</p>
+     *
+     * <p><strong>PT-BR:</strong> Cria e salva um novo lançamento de cartão com os dados do formulário.  
+     * Define a quantidade de parcelas conforme o estado da opção de parcelamento.</p>
+     *
+     * @since 1.0.0
+     */
     private void salvar(){
         ultimoRegistro();
         cartaolanc.setCartao(cartao);
@@ -648,7 +817,16 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         cartaolancr.inserir(cartaolanc);
         valorFatura();
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Updates an existing card transaction with the modified form data and refreshes the invoice total.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna una transazione carta esistente con i dati modificati del modulo e aggiorna il totale della fattura.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um lançamento de cartão existente com os dados alterados do formulário e atualiza o total da fatura.</p>
+     *
+     * @since 1.0.0
+     */    
     private void alterar(){
         cartaolanc.setCartao(cartao);
         cartaolanc.setDespesa(despesa);
@@ -661,7 +839,16 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         cartaolancr.alterar(cartaolanc);   
         valorFatura();
     }
-    
+ 
+    /**
+     * <p><strong>EN:</strong> Deletes the selected card transaction and refreshes the invoice total.</p>
+     *
+     * <p><strong>IT:</strong> Elimina la transazione carta selezionata e aggiorna il totale della fattura.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o lançamento de cartão selecionado e atualiza o total da fatura.</p>
+     *
+     * @since 1.0.0
+     */
     private void excluir(){
         cartaolanc.setCd_cartaolanc(cartaolanc.getCd_cartaolanc());
         cartaolanc.setCartao(cartaolanc.getCartao());

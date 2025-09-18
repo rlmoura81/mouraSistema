@@ -10,7 +10,20 @@ import javax.swing.JOptionPane;
 public class JIFProduto extends javax.swing.JInternalFrame {
     
     private static JIFProduto jifproduto;
-    
+
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the JIFProduto class.  
+     * If no instance exists, a new one is created and initialized.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton della classe JIFProduto.  
+     * Se non esiste alcuna istanza, ne viene creata e inizializzata una nuova.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton da classe JIFProduto.  
+     * Se não existir nenhuma instância, uma nova é criada e inicializada.</p>
+     *
+     * @return EN: singleton instance of JIFProduto | IT: istanza singleton di JIFProduto | PT-BR: instância singleton de JIFProduto
+     * @since 1.0.0
+     */    
     public static JIFProduto getInstancia(){
         if(jifproduto == null){
             jifproduto = new JIFProduto();
@@ -214,15 +227,43 @@ public class JIFProduto extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
+    /**
+     * <p><strong>EN:</strong> Applies formatting to the weight input field.</p>
+     *
+     * <p><strong>IT:</strong> Applica la formattazione al campo di input del peso.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica a formatação ao campo de entrada do peso.</p>
+     *
+     * @since 1.0.0
+     */   
     private void formataValor(){
         jFTFPeso.setFormatterFactory(Utilidade.formataValorCampoTres(ui));
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Populates the JTable with the list of products.</p>
+     *
+     * <p><strong>IT:</strong> Popola la JTable con l'elenco dei prodotti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche a JTable com a lista de produtos.</p>
+     *
+     * @since 1.0.0
+     */    
     private void tabelaProduto(){
         produtou.tabelaProduto(jTProduto);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Validates the form fields before saving or updating a product record.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi del modulo prima di salvare o aggiornare un record di prodotto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário antes de salvar ou atualizar um registro de produto.</p>
+     *
+     * @return EN: true if all fields are valid, false otherwise | IT: true se tutti i campi sono validi, false altrimenti | PT-BR: true se todos os campos forem válidos, false caso contrário
+     * @since 1.0.0
+     */    
     private boolean validaCampos(){
         if(jTFDescricao.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Campos em branco.", "Produto", JOptionPane.INFORMATION_MESSAGE);
@@ -236,26 +277,62 @@ public class JIFProduto extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Clears all product form fields.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo prodotto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário de produto.</p>
+     *
+     * @since 1.0.0
+     */    
     private void limpaCampos(){
         jTFDescricao.setText(null);
         jFTFPeso.setValue(null);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Saves a new product record to the database using the form data.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo record di prodotto nel database utilizzando i dati del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva um novo registro de produto no banco de dados utilizando os dados do formulário.</p>
+     *
+     * @since 1.0.0
+     */    
     private void salvar(){
         produto.setDs_produto(jTFDescricao.getText());
         produto.setNm_peso(Utilidade.converter(jFTFPeso.getText()));
         produto.setCd_usuario(JPLogin.codloginuser);
         produtor.inserir(produto);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Updates an existing product record in the database using the form data.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record di prodotto esistente nel database utilizzando i dati del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro de produto existente no banco de dados utilizando os dados do formulário.</p>
+     *
+     * @since 1.0.0
+     */    
     private void alterar(){
         produto.setDs_produto(jTFDescricao.getText());
         produto.setNm_peso(Utilidade.converter(jFTFPeso.getText()));
         produto.setCd_usuario(JPLogin.codloginuser);
         produtor.alterar(produto);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Deletes the current product record from the database.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il record corrente del prodotto dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o registro atual do produto no banco de dados.</p>
+     *
+     * @since 1.0.0
+     */    
     private void excluir(){
         produto.setCd_produto(produto.getCd_produto());
         produtor.excluir(produto);

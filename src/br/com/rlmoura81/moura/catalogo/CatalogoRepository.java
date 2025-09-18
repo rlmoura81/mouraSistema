@@ -12,14 +12,22 @@ import javax.swing.JOptionPane;
 
 public class CatalogoRepository implements IPadraoRepository{
 
-    String sql = "";
-    
-    ArrayList<Catalogo> catalogo = new ArrayList<>();
-    
+    String sql = "";    
+    ArrayList<Catalogo> catalogo = new ArrayList<>();    
     TipoMidiaRepository tmr = new TipoMidiaRepository();
     EditoraRepository er = new EditoraRepository();
     StatusRepository str = new StatusRepository();
 
+    /**
+     * <p><strong>EN:</strong> Inserts a new catalog record (Catalogo) into the database.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un nuovo record di catalogo (Catalogo) nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um novo registro de catálogo (Catalogo) no banco de dados.</p>
+     *
+     * @param o EN: Catalogo object to insert | IT: Oggetto Catalogo da inserire | PT-BR: Objeto Catalogo a ser inserido
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {        
         Catalogo c = (Catalogo) o;
@@ -45,6 +53,16 @@ public class CatalogoRepository implements IPadraoRepository{
         }        
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing catalog record (Catalogo) with the provided data.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record di catalogo (Catalogo) esistente con i dati forniti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro de catálogo (Catalogo) existente com os dados informados.</p>
+     *
+     * @param o EN: Catalogo object with updated values | IT: Oggetto Catalogo con valori aggiornati | PT-BR: Objeto Catalogo com valores atualizados
+     * @since 1.0.0
+     */
     @Override
     public void alterar(Object o) {        
         Catalogo c = (Catalogo) o;        
@@ -80,6 +98,16 @@ public class CatalogoRepository implements IPadraoRepository{
         }        
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes a catalog record (Catalogo) by its ID and user.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un record di catalogo (Catalogo) tramite il suo ID e utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um registro de catálogo (Catalogo) pelo seu ID e usuário.</p>
+     *
+     * @param o EN: Catalogo object containing identifiers for deletion | IT: Oggetto Catalogo con gli identificatori per l'eliminazione | PT-BR: Objeto Catalogo com os identificadores para exclusão
+     * @since 1.0.0
+     */
     @Override
     public void excluir(Object o) {
         Catalogo c = (Catalogo) o;
@@ -99,6 +127,16 @@ public class CatalogoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all catalog records (Catalogo) for the logged-in user, joining media type, publisher, and status.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutti i record di catalogo (Catalogo) per l'utente connesso, includendo tipo di media, editore e stato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todos os registros de catálogo (Catalogo) do usuário logado, incluindo tipo de mídia, editora e status.</p>
+     *
+     * @return EN: list of Catalogo objects | IT: elenco di oggetti Catalogo | PT-BR: lista de objetos Catalogo
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {
         catalogo.clear();
@@ -135,6 +173,17 @@ public class CatalogoRepository implements IPadraoRepository{
         } return catalogo;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves catalog records (Catalogo) filtered by a title fragment for the logged-in user.</p>
+     *
+     * <p><strong>IT:</strong> Recupera i record di catalogo (Catalogo) filtrati per una porzione del titolo per l'utente connesso.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera registros de catálogo (Catalogo) filtrados por trecho do título para o usuário logado.</p>
+     *
+     * @param ds_titulo EN: title fragment to search | IT: parte del titolo da cercare | PT-BR: trecho do título para pesquisa
+     * @return EN: list of Catalogo objects | IT: elenco di oggetti Catalogo | PT-BR: lista de objetos Catalogo
+     * @since 1.0.0
+     */
     public ArrayList getLista(String ds_titulo){
         catalogo.clear();
         try{
@@ -170,6 +219,17 @@ public class CatalogoRepository implements IPadraoRepository{
         } return catalogo;    
     }
     
+    /**
+     * <p><strong>EN:</strong> Gets a catalog record (Catalogo) by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un record di catalogo (Catalogo) tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém um registro de catálogo (Catalogo) pelo seu ID.</p>
+     *
+     * @param id EN: unique identifier of the catalog record | IT: identificatore univoco del record di catalogo | PT-BR: identificador único do registro de catálogo
+     * @return EN: Catalogo object if found, otherwise null | IT: Oggetto Catalogo se trovato, altrimenti null | PT-BR: Objeto Catalogo se encontrado, caso contrário null
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {       
         Catalogo c = null;        

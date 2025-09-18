@@ -17,6 +17,16 @@ public class JIFConta extends javax.swing.JInternalFrame {
     
     private static JIFConta jifconta;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFConta}.  
+     * If no instance exists, a new one is created with the title "Contas".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFConta}.  
+     * Se non esiste alcuna istanza, ne viene creata una nuova con il titolo "Contas".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância única de {@link JIFConta}.  
+     * Caso ainda não exista, uma nova é criada com o título "Contas".</p>
+     */
     public static JIFConta getInstancia(){
         if(jifconta == null){
             jifconta = new JIFConta();
@@ -265,6 +275,16 @@ public class JIFConta extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Validates the account form fields.  
+     * Ensures that bank, agency, account number, and account type are filled/selected.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi del modulo conto.  
+     * Verifica che banca, agenzia, numero di conto e tipo di conto siano compilati/selezionati.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário de conta.  
+     * Garante que banco, agência, número da conta e tipo de conta estejam preenchidos/selecionados.</p>
+     */
     private boolean validaCampo(){
         if(banco == null){
             JOptionPane.showMessageDialog(null, "Selecione o banco.", "Banco", JOptionPane.INFORMATION_MESSAGE);
@@ -289,6 +309,13 @@ public class JIFConta extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all account form fields, resetting selections and inputs.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo conto, resettando selezioni e input.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário de conta, redefinindo seleções e entradas.</p>
+     */
     private void limpaCampos(){
         jCBBanco.setSelectedIndex(0);
         jTFAgencia.setText(null);
@@ -296,17 +323,46 @@ public class JIFConta extends javax.swing.JInternalFrame {
         jCBTipoConta.setSelectedIndex(0);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads and displays the list of accounts in the table.</p>
+     *
+     * <p><strong>IT:</strong> Carica e visualizza l'elenco dei conti nella tabella.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega e exibe a lista de contas na tabela.</p>
+     */
     private void tabelaConta(){
         contau.tabelaConta(jTConta);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with the list of banks.</p>
+     *
+     * <p><strong>IT:</strong> Popola la casella combinata con l'elenco delle banche.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o combo box com a lista de bancos.</p>
+     */
     private void jcBanco(){
         bancou.jcBanco(jCBBanco);
     }
+    
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with the list of account types.</p>
+     *
+     * <p><strong>IT:</strong> Popola la casella combinata con l'elenco dei tipi di conto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o combo box com a lista de tipos de conta.</p>
+     */    
     private void jcTpconta(){
         tipocontau.jcTpconta(jCBTipoConta);
     }
-    
+   
+    /**
+     * <p><strong>EN:</strong> Saves a new account to the database using the form data.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo conto nel database utilizzando i dati del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva uma nova conta no banco de dados usando os dados do formulário.</p>
+     */
     private void salvar(){
         conta.setBanco(banco);
         conta.setNm_agencia(jTFAgencia.getText());
@@ -316,6 +372,13 @@ public class JIFConta extends javax.swing.JInternalFrame {
         contar.inserir(conta);
     }
     
+    /**
+     * <p><strong>EN:</strong> Initializes the account balance with zero and saves it to the database.</p>
+     *
+     * <p><strong>IT:</strong> Inizializza il saldo del conto con zero e lo salva nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Inicializa o saldo da conta com zero e salva no banco de dados.</p>
+     */
     private void salvarSaldo(){
         csaldo.setConta(conta);
         csaldo.setVl_saldo(Utilidade.converter("0,00"));
@@ -323,6 +386,13 @@ public class JIFConta extends javax.swing.JInternalFrame {
         csaldor.inserir(csaldo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing account with the modified form data.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un conto esistente con i dati modificati del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza uma conta existente com os dados modificados do formulário.</p>
+     */
     private void alterar(){
         conta.setBanco(conta.getBanco());
         conta.setNm_agencia(jTFAgencia.getText());
@@ -332,6 +402,13 @@ public class JIFConta extends javax.swing.JInternalFrame {
         contar.alterar(conta);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected account and its associated balance from the database.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il conto selezionato e il saldo associato dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui a conta selecionada e seu saldo associado do banco de dados.</p>
+     */
     private void excluir(){
         csaldor.excluir(csaldo);
         contar.excluir(conta);

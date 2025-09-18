@@ -10,6 +10,16 @@ public class JIFBanco extends javax.swing.JInternalFrame {
 
     private static JIFBanco jifbanco;
     
+    /**
+     * <p><strong>EN:</strong> Returns the instance of {@link JIFBanco}.  
+     * If it does not exist, a new instance is created and initialized with the title "Bancos".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza di {@link JIFBanco}.  
+     * Se non esiste, viene creata una nuova istanza e inizializzata con il titolo "Bancos".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância de {@link JIFBanco}.  
+     * Caso não exista, uma nova instância é criada e inicializada com o título "Bancos".</p>
+     */
     public static JIFBanco getInstancia(){
         if(jifbanco == null){
             jifbanco = new JIFBanco();
@@ -199,10 +209,30 @@ public class JIFBanco extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Loads the list of banks into the table component.  
+     * Calls the service method to populate {@code jTBanco} with registered banks.</p>
+     *
+     * <p><strong>IT:</strong> Carica l'elenco delle banche nella tabella.  
+     * Richiama il metodo di servizio per popolare {@code jTBanco} con le banche registrate.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega a lista de bancos na tabela.  
+     * Chama o método de serviço para preencher {@code jTBanco} com os bancos cadastrados.</p>
+     */
     private void tabelaBanco(){
         bancou.tabelaBanco(jTBanco);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the mandatory fields for the bank form.  
+     * Ensures that name and number fields are not empty before saving or updating.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi obbligatori del modulo della banca.  
+     * Garantisce che i campi nome e numero non siano vuoti prima di salvare o aggiornare.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios do formulário de banco.  
+     * Garante que os campos nome e número não estejam em branco antes de salvar ou alterar.</p>
+     */
     private boolean validaCampos(){
         if(jTFNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Campo em branco.", "Banco", JOptionPane.INFORMATION_MESSAGE);
@@ -217,11 +247,34 @@ public class JIFBanco extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all input fields from the bank form.  
+     * Resets the name and number fields to empty values.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input del modulo banca.  
+     * Reimposta i campi nome e numero ai valori vuoti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada do formulário de banco.  
+     * Reinicia os campos nome e número para valores vazios.</p>
+     */
     private void limpaCampos(){
         jTFNome.setText(null);
         jTFNumero.setText(null);
     }
         
+    /**
+     * <p><strong>EN:</strong> Saves a new bank record.  
+     * Captures the form data, sets the attributes in the {@code Banco} object,  
+     * and sends it to the repository for persistence.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo record di banca.  
+     * Acquisisce i dati del modulo, imposta gli attributi nell'oggetto {@code Banco}  
+     * e li invia al repository per la persistenza.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva um novo registro de banco.  
+     * Captura os dados do formulário, define os atributos no objeto {@code Banco}  
+     * e envia para o repositório para persistência.</p>
+     */
     private void salvar(){
         banco.setDs_banco(jTFNome.getText().toUpperCase());
         banco.setNm_banco(Integer.parseInt(jTFNumero.getText()));
@@ -229,6 +282,19 @@ public class JIFBanco extends javax.swing.JInternalFrame {
         bancor.inserir(banco);
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates the data of an existing bank.  
+     * Retrieves the values from the form and updates the bank object,  
+     * then calls the repository to persist the changes.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna i dati di una banca esistente.  
+     * Recupera i valori dal modulo e aggiorna l'oggetto banca,  
+     * quindi richiama il repository per salvare le modifiche.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza os dados de um banco existente.  
+     * Recupera os valores do formulário e atualiza o objeto banco,  
+     * em seguida chama o repositório para salvar as alterações.</p>
+     */
     private void alterar(){
         banco.setDs_banco(jTFNome.getText().toUpperCase());
         banco.setNm_banco(Integer.parseInt(jTFNumero.getText()));
@@ -236,6 +302,16 @@ public class JIFBanco extends javax.swing.JInternalFrame {
         bancor.alterar(banco);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the currently selected bank.  
+     * Uses the bank ID to remove the record from the repository and clears the form fields.</p>
+     *
+     * <p><strong>IT:</strong> Elimina la banca attualmente selezionata.  
+     * Utilizza l'ID della banca per rimuovere il record dal repository e pulisce i campi del modulo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o banco atualmente selecionado.  
+     * Utiliza o ID do banco para remover o registro do repositório e limpa os campos do formulário.</p>
+     */
     private void excluir(){
         banco.setCd_banco(banco.getCd_banco());
         bancor.excluir(banco);

@@ -12,6 +12,16 @@ public class ProdutoRepository implements IPadraoRepository{
 
     String sql = "";
     
+    /**
+     * <p><strong>EN:</strong> Inserts a product (Produto) into the database.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un prodotto (Produto) nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um produto (Produto) no banco de dados.</p>
+     *
+     * @param o EN: Product object to insert | IT: Oggetto Product da inserire | PT-BR: Objeto Produto a ser inserido
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {
         Produto p = (Produto) o;
@@ -31,6 +41,16 @@ public class ProdutoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing product (Produto) in the database.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un prodotto (Produto) esistente nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um produto (Produto) existente no banco de dados.</p>
+     *
+     * @param o EN: Product object with updated values | IT: Oggetto Product con valori aggiornati | PT-BR: Objeto Produto com valores atualizados
+     * @since 1.0.0
+     */
     @Override
     public void alterar(Object o) {
         Produto p = (Produto) o;
@@ -54,6 +74,16 @@ public class ProdutoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes a product (Produto) from the database by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un prodotto (Produto) dal database tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um produto (Produto) do banco de dados pelo seu ID.</p>
+     *
+     * @param o EN: Product object containing the identifier for deletion | IT: Oggetto Product contenente l'identificatore da eliminare | PT-BR: Objeto Produto contendo o identificador para exclusão
+     * @since 1.0.0
+     */
     @Override
     public void excluir(Object o) {
         Produto p = (Produto) o;
@@ -71,6 +101,16 @@ public class ProdutoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the list of all products from the database, ordered by name.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l'elenco di tutti i prodotti dal database, ordinati per nome.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a lista de todos os produtos do banco de dados, ordenados por nome.</p>
+     *
+     * @return EN: list of Product objects | IT: Elenco di oggetti Product | PT-BR: Lista de objetos Produto
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {
         ArrayList produto = new ArrayList();
@@ -96,6 +136,17 @@ public class ProdutoRepository implements IPadraoRepository{
         return produto;
     }
 
+    /**
+     * <p><strong>EN:</strong> Gets a product (Produto) from the database by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un prodotto (Produto) dal database tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém um produto (Produto) do banco de dados pelo seu ID.</p>
+     *
+     * @param id EN: unique identifier of the product | IT: Identificatore univoco del prodotto | PT-BR: Identificador único do produto
+     * @return EN: Product object if found, otherwise null | IT: Oggetto Product se trovato, altrimenti null | PT-BR: Objeto Produto se encontrado, caso contrário null
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {
         Produto produto = null;
@@ -105,8 +156,7 @@ public class ProdutoRepository implements IPadraoRepository{
                   "  WHERE cd_produto = ?";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            
+            ResultSet rs = ps.executeQuery();            
             if(rs.next()){
                 produto = new Produto(
                     rs.getInt("cd_produto"),

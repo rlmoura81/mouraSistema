@@ -11,6 +11,16 @@ public class PrestadorServicoRepository {
 
     String sql = "";
         
+    /**
+     * <p><strong>EN:</strong> Inserts a new Service Provider record into the database
+     * using the fields from the provided {@code PrestadorServico} object.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un nuovo record di Fornitore di Servizi nel database
+     * utilizzando i campi dell’oggetto {@code PrestadorServico} fornito.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um novo registro de Prestador de Serviço no banco de dados
+     * usando os campos do objeto {@code PrestadorServico} informado.</p>
+     */
     public void inserir(Object o){
         PrestadorServico presserv = (PrestadorServico) o;
         try{
@@ -30,6 +40,16 @@ public class PrestadorServicoRepository {
         }    
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing Service Provider record in the database
+     * matching the provided IDs, replacing its fields with those from the given object.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record esistente di Fornitore di Servizi nel database
+     * corrispondente agli ID forniti, sostituendo i campi con quelli dell’oggetto passato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro existente de Prestador de Serviço no banco de dados
+     * correspondente aos IDs informados, substituindo os campos pelos do objeto recebido.</p>
+     */
     public void alterar(Object o){
         PrestadorServico presserv = (PrestadorServico) o;
         try{
@@ -54,6 +74,16 @@ public class PrestadorServicoRepository {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes a Service Provider record from the database
+     * identified by the given provider and user IDs.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un record di Fornitore di Servizi dal database
+     * identificato dagli ID del fornitore e dell’utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um registro de Prestador de Serviço do banco de dados
+     * identificado pelos IDs do prestador e do usuário.</p>
+     */
     public void excluir(Object o){
         PrestadorServico presserv = (PrestadorServico) o;
         try{
@@ -72,6 +102,16 @@ public class PrestadorServicoRepository {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves the list of all Service Providers for the current user,
+     * ordered by provider name.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l’elenco di tutti i Fornitori di Servizi dell’utente corrente,
+     * ordinati per nome.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a lista de todos os Prestadores de Serviço do usuário atual,
+     * ordenada pelo nome do prestador.</p>
+     */
     public ArrayList getLista(){        
         ArrayList presservlista = new ArrayList();
         try{
@@ -99,6 +139,16 @@ public class PrestadorServicoRepository {
         return presservlista;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the list of Service Providers linked to a specific Module,
+     * filtered by the current user and ordered by provider name.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l’elenco dei Fornitori di Servizi collegati a uno specifico Modulo,
+     * filtrati per l’utente corrente e ordinati per nome.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a lista de Prestadores de Serviço vinculados a um Módulo específico,
+     * filtrados pelo usuário atual e ordenados pelo nome.</p>
+     */
     public ArrayList getLista(int cd_modulo){       
         ArrayList presservlista = new ArrayList();
         try{
@@ -130,6 +180,16 @@ public class PrestadorServicoRepository {
         return presservlista;
     }
         
+    /**
+     * <p><strong>EN:</strong> Fetches a single Service Provider by its identifier, returning
+     * a populated {@code PrestadorServico} instance when found.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un singolo Fornitore di Servizi tramite il suo identificatore,
+     * restituendo un’istanza {@code PrestadorServico} popolata se trovato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Busca um único Prestador de Serviço pelo seu identificador,
+     * retornando uma instância {@code PrestadorServico} preenchida quando encontrado.</p>
+     */
     public Object getById(int id){
         PrestadorServico p = null;
         try {

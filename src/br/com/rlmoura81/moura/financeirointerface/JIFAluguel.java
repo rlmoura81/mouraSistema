@@ -15,6 +15,18 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
     
     private static JIFAluguel jifaluguel;
     
+    /**
+     * <p><strong>EN:</strong> Returns a singleton instance of {@link JIFAluguel}.  
+     * If the instance does not exist, it is created, titled "Aluguel", and then returned.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce un'istanza singleton di {@link JIFAluguel}.  
+     * Se l'istanza non esiste, viene creata, titolata "Aluguel" e poi restituita.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna uma instância singleton de {@link JIFAluguel}.  
+     * Caso não exista, a instância é criada, recebe o título "Aluguel" e em seguida retornada.</p>
+     *
+     * @return the single instance of {@link JIFAluguel}
+     */
     public static JIFAluguel getInstancia(){
         if(jifaluguel == null){
             jifaluguel = new JIFAluguel();
@@ -312,28 +324,58 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Populates the property combo box with available properties.</p>
+     * <p><strong>IT:</strong> Popola la combo box degli immobili con le proprietà disponibili.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo box de imóveis com os disponíveis.</p>
+     */
     private void jcImovel(){
         imovelu.jcImovel(jCBImovel);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the real estate agency combo box using the service layer.</p>
+     * <p><strong>IT:</strong> Popola la combo box delle agenzie immobiliari utilizzando il livello di servizio.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo box de imobiliárias utilizando a camada de serviço.</p>
+     */
     private void jcImobiliaria(){
         presservu.jcPresserv(jCBImobiliaria, 4);
         
     }
     
+    /**
+    * <p><strong>EN:</strong> Applies numeric formatters to rental and administrative fee fields.</p>
+    * <p><strong>IT:</strong> Applica i formattatori numerici ai campi di affitto e tassa amministrativa.</p>
+    * <p><strong>PT-BR:</strong> Aplica formatadores numéricos nos campos de aluguel e taxa administrativa.</p>
+    */
     private void formataValor() {
         jFTFValorAlguel.setFormatterFactory(Utilidade.formataValorCampo(ui));
         jFTFTaxaAdm.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }  
     
+    /**
+     * <p><strong>EN:</strong> Formats the contract expiration date field.</p>
+     * <p><strong>IT:</strong> Format il campo della data di scadenza del contratto.</p>
+     * <p><strong>PT-BR:</strong> Formata o campo da data de vencimento do contrato.</p>
+     */
     private void formatarData(){
         util.formataDataCampo(jFTFVencContrato);    
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads and displays the rental records in the rental table.</p>
+     * <p><strong>IT:</strong> Carica e visualizza i record degli affitti nella tabella degli affitti.</p>
+     * <p><strong>PT-BR:</strong> Carrega e exibe os registros de aluguel na tabela de aluguéis.</p>
+     */
     private void tabelaAluguel(){
         aluguelu.tabelaAluguel(jTAluguel);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new rental record with the current form data.</p>
+     * <p><strong>IT:</strong> Salva un nuovo record di affitto con i dati correnti del modulo.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo registro de aluguel com os dados atuais do formulário.</p>
+     */
     private void salvar(){
         aluguel.setImovel(imovel);
         aluguel.setPresserv(presserv);
@@ -346,6 +388,11 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
         aluguelr.inserir(aluguel);
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing rental record with the current form data.</p>
+     * <p><strong>IT:</strong> Aggiorna un record di affitto esistente con i dati correnti del modulo.</p>
+     * <p><strong>PT-BR:</strong> Atualiza um registro de aluguel existente com os dados atuais do formulário.</p>
+     */
     private void alterar(){
         aluguel.setImovel(imovel);
         aluguel.setPresserv(presserv);
@@ -357,11 +404,23 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
         aluguelr.alterar(aluguel);        
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the currently selected rental record.</p>
+     * <p><strong>IT:</strong> Elimina il record di affitto attualmente selezionato.</p>
+     * <p><strong>PT-BR:</strong> Exclui o registro de aluguel atualmente selecionado.</p>
+     */
     private void excluir(){
         aluguel.setCd_aluguel(aluguel.getCd_aluguel());
         aluguelr.excluir(aluguel);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates required rental fields before saving or updating.</p>
+     * <p><strong>IT:</strong> Convalida i campi obbligatori dell'affitto prima di salvare o aggiornare.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios do aluguel antes de salvar ou atualizar.</p>
+     *
+     * @return true if all fields are valid; false otherwise
+     */
     private boolean validaCampos(){
         if(imovel == null){
             JOptionPane.showMessageDialog(null, "Selecione o imovel.", "Imovel", JOptionPane.INFORMATION_MESSAGE);
@@ -385,6 +444,11 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all fields in the rental form.</p>
+     * <p><strong>IT:</strong> Pulisce tutti i campi nel modulo di affitto.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário de aluguel.</p>
+     */
     private void limpaCampos(){
         jCBImovel.setSelectedIndex(0);
         jCBImobiliaria.setSelectedIndex(0);
@@ -396,6 +460,11 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
         jLVlLiquido.setText("Valor Líquido: ");
     }
     
+    /**
+     * <p><strong>EN:</strong> Calculates the net rental value after administrative fee deduction and updates the display label.</p>
+     * <p><strong>IT:</strong> Calcola il valore netto dell'affitto dopo la detrazione della tassa amministrativa e aggiorna l'etichetta di visualizzazione.</p>
+     * <p><strong>PT-BR:</strong> Calcula o valor líquido do aluguel após a taxa administrativa e atualiza o rótulo exibido.</p>
+     */
     private void calculaAlguelTx(){
         aluguel.setNm_vlaluguel(Utilidade.converter(jFTFValorAlguel.getText()));
         aluguel.setNm_vladm(Utilidade.converter(jFTFTaxaAdm.getText()));

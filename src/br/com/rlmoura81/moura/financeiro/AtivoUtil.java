@@ -9,19 +9,22 @@ import javax.swing.table.DefaultTableModel;
 
 public class AtivoUtil {
     
-    TipoAtivoRepository tpativor = new TipoAtivoRepository();
-    
+    TipoAtivoRepository tpativor = new TipoAtivoRepository();    
     Ativo ativo = new Ativo();
-    AtivoRepository ativor = new AtivoRepository();
-    
+    AtivoRepository ativor = new AtivoRepository();    
     AcaoProvento acaoprov = new AcaoProvento();
-    AcaoProventoRepository acaoprovr = new AcaoProventoRepository();
-    
+    AcaoProventoRepository acaoprovr = new AcaoProventoRepository();    
     FundoImobiliarioProvento fip = new FundoImobiliarioProvento();
-    FundoImobiliarioProventoRepository fipr = new FundoImobiliarioProventoRepository();
-    
+    FundoImobiliarioProventoRepository fipr = new FundoImobiliarioProventoRepository();    
     ArrayList lista = new ArrayList();
     
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with stock assets (Ações): adds a placeholder and all items from the repository.</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con le azioni: aggiunge un segnaposto e tutti gli elementi dal repository.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com ações: adiciona um placeholder e todos os itens do repositório.</p>
+     *
+     * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
+     */
     public void jcAcao(JComboBox o){
         ArrayList<Ativo> listaacao = ativor.getListaAcao();
         Ativo atvZero = new Ativo(0, null, "<Ação>", null, null, 0);
@@ -31,6 +34,13 @@ public class AtivoUtil {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with stock assets that currently have balance.</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con le azioni che hanno saldo disponibile.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com ações que possuem saldo.</p>
+     *
+     * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
+     */
     public void jcAcaoSaldo(JComboBox o){
         ArrayList<Ativo> listaacaosaldo = ativor.getListaAcaoSaldo();
         Ativo atvZero = new Ativo(0, null, "<Ação>", null, null, 0);
@@ -40,6 +50,14 @@ public class AtivoUtil {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with stocks filtered by corporate action type (provento).</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con azioni filtrate per tipo di provento.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com ações filtradas pelo tipo de provento.</p>
+     *
+     * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
+     * @param num EN: benefit type ID (provento) | IT: ID del tipo di provento | PT-BR: ID do tipo de provento
+     */
     public void jcAcaoProv(JComboBox o, int num){
         ArrayList<Ativo> listaativo = ativor.getListaAcaoProv(num);
         Ativo atvZero = new Ativo(0, null, "<Ação>", null, null, 0);
@@ -49,6 +67,14 @@ public class AtivoUtil {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with stocks that have balance and match the given corporate action type.</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con azioni con saldo che corrispondono al tipo di provento indicato.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com ações com saldo que correspondem ao tipo de provento informado.</p>
+     *
+     * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
+     * @param num EN: benefit type ID (provento) | IT: ID del tipo di provento | PT-BR: ID do tipo de provento
+     */
     public void jcAcaoSaldoTpProv(JComboBox o, int num){
         ArrayList<Ativo> listaacaosaldo = ativor.getListaAcaoSaldoTpProv(num);
         Ativo atvZero = new Ativo(0, null, "<Ação>", null, null, 0);
@@ -58,6 +84,13 @@ public class AtivoUtil {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with real estate funds (FII): adds a placeholder and all repository items.</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con i fondi immobiliari (FII): aggiunge un segnaposto e tutti gli elementi dal repository.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com FIIs: adiciona um placeholder e todos os itens do repositório.</p>
+     *
+     * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
+     */
     public void jcFundoImobiiario(JComboBox o){
         ArrayList<Ativo> listafi = ativor.getListaFII();
         Ativo atvZero = new Ativo(0, null, "<FII>", null, null, 0);
@@ -67,6 +100,13 @@ public class AtivoUtil {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with FIIs that currently have balance.</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con FII che hanno saldo disponibile.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com FIIs que possuem saldo.</p>
+     *
+     * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
+     */
     public void jcFundoImobiiarioSaldo(JComboBox o){
         ArrayList<Ativo> listafisalvo = ativor.getListaFIISaldo();
         Ativo atvZero = new Ativo(0, null, "<FII>", null, null, 0);
@@ -75,7 +115,15 @@ public class AtivoUtil {
             o.addItem(atv);
         }
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with FIIs filtered by benefit type (provento).</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con FII filtrati per tipo di provento.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com FIIs filtrados por tipo de provento.</p>
+     *
+     * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
+     * @param num EN: benefit type ID (provento) | IT: ID del tipo di provento | PT-BR: ID do tipo de provento
+     */
     public void jcFundoImobiiarioProv(JComboBox o, int num){
         ArrayList<Ativo> listafiprov = ativor.getListaFIIProv(num);
         Ativo atvZero = new Ativo(0, null, "<FII>", null, null, 0);
@@ -85,6 +133,14 @@ public class AtivoUtil {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with FIIs that have balance and match the given benefit type.</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con FII con saldo che corrispondono al tipo di provento indicato.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com FIIs com saldo que correspondem ao tipo de provento informado.</p>
+     *
+     * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
+     * @param num EN: benefit type ID (provento) | IT: ID del tipo di provento | PT-BR: ID do tipo de provento
+     */
     public void jcFundoImobiiarioSaldoTpProv(JComboBox o, int num){
         ArrayList<Ativo> listafisaldo = ativor.getListaFIISaldoTpProv(num);
         Ativo atvZero = new Ativo(0, null, "<FII>", null, null, 0);
@@ -94,6 +150,13 @@ public class AtivoUtil {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates a JComboBox with fixed-income asset types.</p>
+     * <p><strong>IT:</strong> Popola un JComboBox con i tipi di attivo a reddito fisso.</p>
+     * <p><strong>PT-BR:</strong> Preenche um JComboBox com tipos de ativos de renda fixa.</p>
+     *
+     * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
+     */    
     public void jcAtivoRendaFixa(JComboBox o){
         ArrayList<TipoAtivo> listaativorenda = tpativor.getListaTipoRendaFixa();
         TipoAtivo tpaZero = new TipoAtivo(0, "<Tipo de Ativo>");
@@ -102,6 +165,14 @@ public class AtivoUtil {
             o.addItem(tpa);
         }
     }
+    
+    /**
+     * <p><strong>EN:</strong> Fills a JTable with assets (columns: Ticker, Asset, CNPJ, Type) using repository data.</p>
+     * <p><strong>IT:</strong> Popola una JTable con gli attivi (colonne: Ticker, Attivo, CNPJ, Tipo) usando i dati del repository.</p>
+     * <p><strong>PT-BR:</strong> Preenche uma JTable com ativos (colunas: Sigla, Ativo, CNPJ, Tipo) usando dados do repositório.</p>
+     *
+     * @param o EN: target JTable | IT: JTable di destinazione | PT-BR: JTable de destino
+     */    
     public void tabelaAtivo(JTable o){
         String[] nomeColuna = {"Sigla", "Ativo", "CNPJ", "Tipo"};
         lista = ativor.getLista();
@@ -117,6 +188,16 @@ public class AtivoUtil {
         o.setModel(tAtivo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Fills a JTable with stock corporate actions (proventos).
+     * Columns: Stock, Payment Date, Benefit Value, Base Price Date, Base Price Value, Benefit Type.</p>
+     * <p><strong>IT:</strong> Popola una JTable con i proventi azionari.
+     * Colonne: Azione, Data Pagamento, Valore Provento, Data Prezzo Base, Valore Prezzo Base, Tipo Provento.</p>
+     * <p><strong>PT-BR:</strong> Preenche uma JTable com proventos de ações.
+     * Colunas: Ação, Data Pagamento, Valor Provento, Data Preço Base, Valor Preço Base, Tipo Provento.</p>
+     *
+     * @param o EN: target JTable | IT: JTable di destinazione | PT-BR: JTable de destino
+     */    
     public void tabelaAcaoProv(JTable o){
         String[] nomeColuna = {"Ação", "Data Pagamento", "Valor Provento", "Data Preço Base", "Valor Preço Base", "Provento"};
         lista = acaoprovr.getLista();
@@ -132,8 +213,18 @@ public class AtivoUtil {
         }        
         DefaultTableModel tAcaoprov = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tAcaoprov);
-    }
-        
+    }        
+    
+    /**
+     * <p><strong>EN:</strong> Fills a JTable with FII corporate actions (proventos).
+     * Columns: FII, Payment Date, Benefit Value, Base Price Date, Base Price Value.</p>
+     * <p><strong>IT:</strong> Popola una JTable con i proventi dei FII.
+     * Colonne: FII, Data Pagamento, Valore Provento, Data Prezzo Base, Valore Prezzo Base.</p>
+     * <p><strong>PT-BR:</strong> Preenche uma JTable com proventos de FIIs.
+     * Colunas: FII, Data Pagamento, Valor Provento, Data Preço Base, Valor Preço Base.</p>
+     *
+     * @param o EN: target JTable | IT: JTable di destinazione | PT-BR: JTable de destino
+     */
     public void tabelaFiProv(JTable o){
         String[] nomeColuna = {"FII", "Data Pagamento", "Valor Provento", "Data Preço Base", "Valor Preço Base"};
         lista = fipr.getLista();
@@ -150,6 +241,17 @@ public class AtivoUtil {
         o.setModel(tFiprov);
     }
 
+    /**
+     * <p><strong>EN:</strong> Returns the object mapped to the selected row in the JTable,
+     * or shows an information message if no row is selected.</p>
+     * <p><strong>IT:</strong> Restituisce l’oggetto mappato alla riga selezionata nella JTable,
+     * oppure mostra un messaggio informativo se nessuna riga è selezionata.</p>
+     * <p><strong>PT-BR:</strong> Retorna o objeto mapeado para a linha selecionada na JTable,
+     * ou exibe uma mensagem informativa se nenhuma linha estiver selecionada.</p>
+     *
+     * @param o EN: JTable to read selection from | IT: JTable da cui leggere la selezione | PT-BR: JTable da qual ler a seleção
+     * @return EN: selected item or null | IT: elemento selezionato o null | PT-BR: item selecionado ou null
+     */
     public Object getSelectObject(JTable o){
         Object selecionado = null;
         int linhaselecionada = o.getSelectedRow();

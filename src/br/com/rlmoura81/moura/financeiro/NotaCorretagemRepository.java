@@ -11,12 +11,22 @@ import javax.swing.JOptionPane;
 
 public class NotaCorretagemRepository implements IPadraoRepository{
     
-    String sql = "";
-    
-    ContaRepository contar = new ContaRepository();
-    
+    String sql = "";    
+    ContaRepository contar = new ContaRepository();    
     Utilidade util = new Utilidade();
 
+    /**
+     * <p><strong>EN:</strong> Inserts a brokerage note into the database.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce una nota di intermediazione nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere uma nota de corretagem no banco de dados.</p>
+     *
+     * @param o EN: object to insert (NotaCorretagem) | IT: oggetto da inserire (NotaCorretagem) | PT-BR: objeto a ser inserido (NotaCorretagem)
+     * @return EN: none | IT: nessuno | PT-BR: nenhum
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {
         NotaCorretagem nc = (NotaCorretagem) o;
@@ -46,6 +56,17 @@ public class NotaCorretagemRepository implements IPadraoRepository{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all brokerage notes for the logged-in user.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutte le note di intermediazione per l'utente connesso.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todas as notas de corretagem do usuário logado.</p>
+     *
+     * @return EN: list of brokerage notes (ArrayList&lt;NotaCorretagem&gt;) | IT: elenco di note di intermediazione (ArrayList&lt;NotaCorretagem&gt;) | PT-BR: lista de notas de corretagem (ArrayList&lt;NotaCorretagem&gt;)
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {
         ArrayList notac = new ArrayList();
@@ -75,6 +96,18 @@ public class NotaCorretagemRepository implements IPadraoRepository{
         return notac;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves brokerage notes for a specific account.</p>
+     *
+     * <p><strong>IT:</strong> Recupera le note di intermediazione per un conto specifico.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera as notas de corretagem de uma conta específica.</p>
+     *
+     * @param cd_conta EN: account ID to filter | IT: ID del conto per filtrare | PT-BR: ID da conta para filtrar
+     * @return EN: filtered list of brokerage notes (ArrayList&lt;NotaCorretagem&gt;) | IT: elenco filtrato di note (ArrayList&lt;NotaCorretagem&gt;) | PT-BR: lista filtrada de notas (ArrayList&lt;NotaCorretagem&gt;)
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     public ArrayList getLista(int cd_conta) {
         ArrayList notac = new ArrayList();
         try{
@@ -104,6 +137,18 @@ public class NotaCorretagemRepository implements IPadraoRepository{
         return notac;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a brokerage note by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera una nota di intermediazione tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera uma nota de corretagem pelo seu ID.</p>
+     *
+     * @param id EN: brokerage note ID to search | IT: ID della nota da cercare | PT-BR: ID da nota a pesquisar
+     * @return EN: brokerage note found or null (NotaCorretagem) | IT: nota trovata oppure null (NotaCorretagem) | PT-BR: nota encontrada ou null (NotaCorretagem)
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {
         NotaCorretagem notac = null;
@@ -131,6 +176,17 @@ public class NotaCorretagemRepository implements IPadraoRepository{
         return notac;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves the most recent brokerage note.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l'ultima nota di intermediazione inserita.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a nota de corretagem mais recente.</p>
+     *
+     * @return EN: latest brokerage note or null (NotaCorretagem) | IT: ultima nota oppure null (NotaCorretagem) | PT-BR: última nota ou null (NotaCorretagem)
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     public Object getByCodNota() {
         NotaCorretagem notac = null;
         try{

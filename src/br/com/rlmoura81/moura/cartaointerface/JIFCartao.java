@@ -16,6 +16,19 @@ public class JIFCartao extends javax.swing.JInternalFrame {
     
     private static JIFCartao jifcartao;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the JIFCartao internal frame.  
+     * If the instance does not exist, it is created and initialized with the title "Cartões".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton del frame interno JIFCartao.  
+     * Se l'istanza non esiste, viene creata e inizializzata con il titolo "Cartões".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton do frame interno JIFCartao.  
+     * Caso a instância não exista, ela é criada e inicializada com o título "Cartões".</p>
+     *
+     * @return EN: unique instance of JIFCartao | IT: istanza unica di JIFCartao | PT-BR: instância única de JIFCartao
+     * @since 1.0.0
+     */
     public static JIFCartao getInstancia(){
         if(jifcartao == null){
             jifcartao = new JIFCartao();
@@ -25,14 +38,11 @@ public class JIFCartao extends javax.swing.JInternalFrame {
     
     Cartao cartao = new Cartao();
     CartaoRepository cartaor = new CartaoRepository();
-    CartaoUtil cartaou = new CartaoUtil();
-    
+    CartaoUtil cartaou = new CartaoUtil();    
     CartaoBandeira cartaobandeira = null;
-    CartaoBandeiraUtil cartaobandeirau = new CartaoBandeiraUtil();
-    
+    CartaoBandeiraUtil cartaobandeirau = new CartaoBandeiraUtil();    
     Banco banco = null;
-    BancoUtil bancou = new BancoUtil();
-    
+    BancoUtil bancou = new BancoUtil();    
     Utilidade util = new Utilidade();
 
     public JIFCartao() {
@@ -272,19 +282,59 @@ public class JIFCartao extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Populates the card brand JComboBox using the utility class.</p>
+     *
+     * <p><strong>IT:</strong> Popola il JComboBox delle bandiere di carta utilizzando la classe di utilità.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o JComboBox das bandeiras do cartão utilizando a classe utilitária.</p>
+     *
+     * @since 1.0.0
+     */
     private void jcCartaBandeira(){
         cartaobandeirau.jcCartaBandeira(jCBBandeira);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Formats the card limit field and applies a numeric mask to the card number field.</p>
+     *
+     * <p><strong>IT:</strong> Formattta il campo del limite della carta e applica una maschera numerica al campo del numero della carta.</p>
+     *
+     * <p><strong>PT-BR:</strong> Formata o campo do limite do cartão e aplica uma máscara numérica ao campo do número do cartão.</p>
+     *
+     * @since 1.0.0
+     */    
     private void formataCampo(){
         jFTFLimite.setFormatterFactory(Utilidade.formataValorCampo(ui));
         cartaou.formataNumCartao(jFTFNumCartao);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Formats the card expiration date field with the proper date mask.</p>
+     *
+     * <p><strong>IT:</strong> Formattta il campo della data di scadenza della carta con la maschera corretta.</p>
+     *
+     * <p><strong>PT-BR:</strong> Formata o campo de validade do cartão com a máscara de data apropriada.</p>
+     *
+     * @since 1.0.0
+     */    
     private void formataData(){
         util.formataDataCampo(jFTFData);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Validates all required fields for a card before saving or updating.  
+     * Displays messages if any validation fails.</p>
+     *
+     * <p><strong>IT:</strong> Valida tutti i campi obbligatori di una carta prima di salvare o aggiornare.  
+     * Mostra messaggi se una validazione fallisce.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida todos os campos obrigatórios de um cartão antes de salvar ou atualizar.  
+     * Exibe mensagens caso alguma validação falhe.</p>
+     *
+     * @return EN: true if all fields are valid, false otherwise | IT: true se tutti i campi sono validi, altrimenti false | PT-BR: true se todos os campos forem válidos, caso contrário false
+     * @since 1.0.0
+     */    
     private boolean validaCampos(){
         if(banco == null){
             JOptionPane.showMessageDialog(null, "Selecione o banco.", "Banco", JOptionPane.INFORMATION_MESSAGE);
@@ -311,18 +361,46 @@ public class JIFCartao extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Clears all card input fields and resets JComboBox selections.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input della carta e reimposta le selezioni dei JComboBox.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada do cartão e reinicia as seleções dos JComboBox.</p>
+     *
+     * @since 1.0.0
+     */    
     private void limpaCampos(){
         jCBBandeira.setSelectedIndex(0);
         jFTFNumCartao.setText(null);
         jFTFLimite.setValue(null);
         jFTFData.setText(null);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Loads and displays the cards of a specific bank in a JTable.</p>
+     *
+     * <p><strong>IT:</strong> Carica e visualizza le carte di una banca specifica in una JTable.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega e exibe os cartões de um banco específico em uma JTable.</p>
+     *
+     * @param banco EN: bank identifier | IT: identificatore della banca | PT-BR: identificador do banco
+     * @since 1.0.0
+     */    
     private void tabelaCartao(int banco){
         cartaou.tabelaCartao(jTCartao, banco);
     }
-            
+
+    /**
+     * <p><strong>EN:</strong> Creates and saves a new card (Cartao) with the form data.</p>
+     *
+     * <p><strong>IT:</strong> Crea e salva una nuova carta (Cartao) con i dati del form.</p>
+     *
+     * <p><strong>PT-BR:</strong> Cria e salva um novo cartão (Cartao) com os dados do formulário.</p>
+     *
+     * @since 1.0.0
+     */
     private void salvar(){
         cartao.setBanco(banco);
         cartao.setCartaobandeira(cartaobandeira);
@@ -332,7 +410,16 @@ public class JIFCartao extends javax.swing.JInternalFrame {
         cartao.setCd_usuario(JPLogin.codloginuser);
         cartaor.inserir(cartao);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Updates an existing card (Cartao) with the modified form data.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna una carta (Cartao) esistente con i dati modificati del form.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um cartão (Cartao) existente com os dados alterados do formulário.</p>
+     *
+     * @since 1.0.0
+     */    
     private void alterar(){
         cartao.setBanco(banco);
         cartao.setCartaobandeira(cartaobandeira);
@@ -342,7 +429,16 @@ public class JIFCartao extends javax.swing.JInternalFrame {
         cartao.setCd_usuario(JPLogin.codloginuser);
         cartaor.alterar(cartao);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Deletes the selected card (Cartao) from the database.</p>
+     *
+     * <p><strong>IT:</strong> Elimina la carta (Cartao) selezionata dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o cartão (Cartao) selecionado do banco de dados.</p>
+     *
+     * @since 1.0.0
+     */    
     private void excluir(){
         cartao.setCd_cartao(cartao.getCd_cartao());
         cartaor.excluir(cartao);

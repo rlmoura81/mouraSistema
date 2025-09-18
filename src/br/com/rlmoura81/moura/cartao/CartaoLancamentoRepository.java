@@ -15,16 +15,22 @@ import javax.swing.JOptionPane;
 
 public class CartaoLancamentoRepository implements IPadraoRepository{
     
-    String sql = "";
-    
-    CartaoRepository cartaor = new CartaoRepository();
-    
-    DespesaRepository despesar = new DespesaRepository();
-    
-    CategoriaRepository categoriar = new CategoriaRepository();
-    
+    String sql = "";    
+    CartaoRepository cartaor = new CartaoRepository();    
+    DespesaRepository despesar = new DespesaRepository();    
+    CategoriaRepository categoriar = new CategoriaRepository();    
     Utilidade util = new Utilidade();
 
+    /**
+     * <p><strong>EN:</strong> Inserts a card transaction (CartaoLancamento) into the database.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce una transazione carta (CartaoLancamento) nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um lançamento de cartão (CartaoLancamento) no banco de dados.</p>
+     *
+     * @param o EN: CartaoLancamento object to insert | IT: Oggetto CartaoLancamento da inserire | PT-BR: Objeto CartaoLancamento a ser inserido
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {
         CartaoLancamento cl = (CartaoLancamento) o;
@@ -50,6 +56,16 @@ public class CartaoLancamentoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing card transaction (CartaoLancamento).</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna una transazione carta (CartaoLancamento) esistente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um lançamento de cartão (CartaoLancamento) existente.</p>
+     *
+     * @param o EN: CartaoLancamento object with updated values | IT: Oggetto CartaoLancamento con valori aggiornati | PT-BR: Objeto CartaoLancamento com valores atualizados
+     * @since 1.0.0
+     */
     @Override
     public void alterar(Object o) {
         CartaoLancamento cl = (CartaoLancamento) o;
@@ -83,6 +99,16 @@ public class CartaoLancamentoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes a card transaction (CartaoLancamento) by card, transaction ID, and user.</p>
+     *
+     * <p><strong>IT:</strong> Elimina una transazione carta (CartaoLancamento) per carta, ID transazione e utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um lançamento de cartão (CartaoLancamento) por cartão, ID do lançamento e usuário.</p>
+     *
+     * @param o EN: CartaoLancamento object containing identifiers for deletion | IT: Oggetto CartaoLancamento con gli identificatori per l'eliminazione | PT-BR: Objeto CartaoLancamento com identificadores para exclusão
+     * @since 1.0.0
+     */
     @Override
     public void excluir(Object o) {
         CartaoLancamento cl = (CartaoLancamento) o;
@@ -104,6 +130,16 @@ public class CartaoLancamentoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all card transactions (CartaoLancamento) for the logged-in user, ordered by expense date.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutte le transazioni carta (CartaoLancamento) per l'utente connesso, ordinate per data spesa.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todos os lançamentos de cartão (CartaoLancamento) do usuário logado, ordenados por data da despesa.</p>
+     *
+     * @return EN: list of CartaoLancamento objects | IT: elenco di oggetti CartaoLancamento | PT-BR: lista de objetos CartaoLancamento
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {
         ArrayList clanc = new ArrayList();
@@ -135,7 +171,18 @@ public class CartaoLancamentoRepository implements IPadraoRepository{
         }
         return clanc;
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Retrieves all card transactions (CartaoLancamento) for the specified card and logged-in user, ordered by date and description.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutte le transazioni carta (CartaoLancamento) per la carta indicata e l'utente connesso, ordinate per data e descrizione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera todos os lançamentos de cartão (CartaoLancamento) para o cartão informado e o usuário logado, ordenados por data e descrição.</p>
+     *
+     * @param cd_cartao EN: card identifier | IT: identificatore della carta | PT-BR: identificador do cartão
+     * @return EN: list of CartaoLancamento objects | IT: elenco di oggetti CartaoLancamento | PT-BR: lista de objetos CartaoLancamento
+     * @since 1.0.0
+     */    
     public ArrayList getLista(int cd_cartao) {
         ArrayList clanc = new ArrayList();
         try{
@@ -169,6 +216,17 @@ public class CartaoLancamentoRepository implements IPadraoRepository{
         return clanc;
     }
 
+    /**
+     * <p><strong>EN:</strong> Gets a card transaction (CartaoLancamento) by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera una transazione carta (CartaoLancamento) tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém um lançamento de cartão (CartaoLancamento) pelo seu ID.</p>
+     *
+     * @param id EN: unique identifier of the transaction | IT: identificatore univoco della transazione | PT-BR: identificador único do lançamento
+     * @return EN: CartaoLancamento object if found, otherwise null | IT: Oggetto CartaoLancamento se trovato, altrimenti null | PT-BR: Objeto CartaoLancamento se encontrado, caso contrário null
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {
         CartaoLancamento clanc = null;
@@ -198,7 +256,18 @@ public class CartaoLancamentoRepository implements IPadraoRepository{
         }
         return clanc;
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Retrieves the most recent card transaction (CartaoLancamento) for the given user, ordered by ID descending.</p>
+     *
+     * <p><strong>IT:</strong> Recupera la transazione carta (CartaoLancamento) più recente per l'utente indicato, ordinata per ID decrescente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera o lançamento de cartão (CartaoLancamento) mais recente para o usuário informado, ordenado por ID decrescente.</p>
+     *
+     * @param id EN: user identifier | IT: identificatore dell'utente | PT-BR: identificador do usuário
+     * @return EN: last CartaoLancamento object if found, otherwise null | IT: ultimo oggetto CartaoLancamento se trovato, altrimenti null | PT-BR: último objeto CartaoLancamento se encontrado, caso contrário null
+     * @since 1.0.0
+     */    
     public Object ultimoRegistro(int id) {
         CartaoLancamento clanc = null;
         try{
@@ -228,6 +297,5 @@ public class CartaoLancamentoRepository implements IPadraoRepository{
                     ex.getMessage(), "Cartão Lançamento", JOptionPane.ERROR_MESSAGE);
         }
         return clanc;
-    }
-    
+    }    
 }

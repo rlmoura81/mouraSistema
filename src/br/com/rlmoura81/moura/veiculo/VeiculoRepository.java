@@ -10,14 +10,24 @@ import javax.swing.JOptionPane;
 
 public class VeiculoRepository implements IPadraoRepository{
     
-    String sql = "";    
-    
-    ModeloRepository modelor = new ModeloRepository();
-    
-    CombustivelRepository combustivelr = new CombustivelRepository();
-    
+    String sql = "";       
+    ModeloRepository modelor = new ModeloRepository();    
+    CombustivelRepository combustivelr = new CombustivelRepository();    
     CoresRepository corr = new CoresRepository();
 
+    /**
+     * <p><strong>EN:</strong> Inserts a new <code>Veiculo</code> record into the database.
+     * Persists year of manufacture/model, RENAVAM, plate, power, fuel, color, model,
+     * and user ID; shows a success message or an error dialog on failure.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un nuovo record di <code>Veiculo</code> nel database.
+     * Salva anno di fabbricazione/modello, RENAVAM, targa, potenza, carburante, colore,
+     * modello e ID utente; mostra un messaggio di successo o un errore in caso di problemi.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um novo registro de <code>Veiculo</code> no banco.
+     * Grava ano de fabricação/modelo, RENAVAM, placa, potência, combustível, cor,
+     * modelo e ID do usuário; exibe mensagem de sucesso ou erro ao falhar.</p>
+     */
     @Override
     public void inserir(Object o) {
         Veiculo v = (Veiculo) o;
@@ -43,6 +53,19 @@ public class VeiculoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+    * <p><strong>EN:</strong> Updates an existing <code>Veiculo</code> record.
+    * Sets manufacture/model year, RENAVAM, plate, power, fuel, color, and model.
+    * Filters by vehicle ID and user ID; shows success or error feedback.</p>
+    *
+    * <p><strong>IT:</strong> Aggiorna un record esistente di <code>Veiculo</code>.
+    * Imposta anno fabbricazione/modello, RENAVAM, targa, potenza, carburante, colore e modello.
+    * Filtra per ID veicolo e ID utente; mostra conferma o errore.</p>
+    *
+    * <p><strong>PT-BR:</strong> Altera um registro existente de <code>Veiculo</code>.
+    * Atualiza ano fab./modelo, RENAVAM, placa, potência, combustível, cor e modelo.
+    * Filtra por ID do veículo e ID do usuário; exibe sucesso ou erro.</p>
+    */
     @Override
     public void alterar(Object o) {
         Veiculo v = (Veiculo) o;
@@ -78,6 +101,16 @@ public class VeiculoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes a <code>Veiculo</code> record from the database,
+     * using the vehicle ID and user ID as criteria; shows success or error dialogs.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un record di <code>Veiculo</code> dal database,
+     * utilizzando ID veicolo e ID utente come criteri; mostra conferma o errore.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um registro de <code>Veiculo</code> do banco,
+     * com base no ID do veículo e ID do usuário; exibe confirmação ou erro.</p>
+     */
     @Override
     public void excluir(Object o) {
         Veiculo v = (Veiculo) o;
@@ -97,6 +130,16 @@ public class VeiculoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all <code>Veiculo</code> records for the current user,
+     * ordered by license plate. Each item includes related fuel, color, and model objects.</p>
+     *
+     * <p><strong>IT:</strong> Recupera tutti i record <code>Veiculo</code> dell’utente corrente,
+     * ordinati per targa. Ogni elemento include carburante, colore e modello associati.</p>
+     *
+     * <p><strong>PT-BR:</strong> Busca todos os <code>Veiculo</code> do usuário atual,
+     * ordenados pela placa. Cada item inclui combustível, cor e modelo relacionados.</p>
+     */
     @Override
     public ArrayList getLista() {        
         ArrayList veiculo = new ArrayList();        
@@ -130,6 +173,16 @@ public class VeiculoRepository implements IPadraoRepository{
         return veiculo;
     }
 
+    /**
+     * <p><strong>EN:</strong> Fetches a single <code>Veiculo</code> by its ID,
+     * including linked fuel, color, and model entities; returns <code>null</code> if not found.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un singolo <code>Veiculo</code> per ID,
+     * includendo carburante, colore e modello associati; restituisce <code>null</code> se assente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém um <code>Veiculo</code> pelo seu ID,
+     * incluindo combustível, cor e modelo vinculados; retorna <code>null</code> se não existir.</p>
+     */
     @Override
     public Object getById(int id) {
         Veiculo v = null;        

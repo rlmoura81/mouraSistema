@@ -11,6 +11,16 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
     
     private static JIFUsuario jifusuario;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the User internal frame (JIFUsuario).  
+     * If it does not exist, it is created and its title is set to "Usuário".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton della finestra interna Utente (JIFUsuario).  
+     * Se non esiste, viene creata e il titolo viene impostato su "Usuário".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância única do internal frame de Usuário (JIFUsuario).  
+     * Caso não exista, ela é criada e seu título definido como "Usuário".</p>
+     */
     public static JIFUsuario getInstancia(){
         if (jifusuario == null){
             jifusuario = new JIFUsuario();
@@ -20,8 +30,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
 
     Usuario user = new Usuario();
     UsuarioRepository userr= new UsuarioRepository();
-    UsuarioUtil useru = new UsuarioUtil();
-    
+    UsuarioUtil useru = new UsuarioUtil();    
     PessoaFisica pessoa = null;
     PessoaFisicaUtil pessoau = new PessoaFisicaUtil();
         
@@ -255,6 +264,11 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Clears all fields of the User form, resetting the combo and text inputs.</p>
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo Utente, reimpostando la combo e i campi di testo.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário de Usuário, resetando a combo e os campos de texto.</p>
+     */
     private void limpaCampos(){
         jCBUsuario.setSelectedIndex(0);
         jTFLogin.setText(null);
@@ -262,6 +276,11 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         jPFConfrimar.setText(null);
     }
 
+    /**
+     * <p><strong>EN:</strong> Validates if the required fields are correctly filled: user, login, and password confirmation.</p>
+     * <p><strong>IT:</strong> Convalida se i campi obbligatori sono compilati correttamente: utente, login e conferma della password.</p>
+     * <p><strong>PT-BR:</strong> Valida se os campos obrigatórios foram preenchidos corretamente: usuário, login e confirmação da senha.</p>
+     */
     private boolean validaCampos(){        
         if (pessoa == null){
             JOptionPane.showMessageDialog(null, "Selecione o usuário", "Pessoa", JOptionPane.INFORMATION_MESSAGE);
@@ -288,14 +307,29 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads the list of Physical Persons into the User combo box.</p>
+     * <p><strong>IT:</strong> Carica l'elenco delle Persone Fisiche nella combo box di Utente.</p>
+     * <p><strong>PT-BR:</strong> Carrega a lista de Pessoas Físicas na combo box de Usuário.</p>
+     */
     private void jcPessoaFisica(){
         pessoau.jcPessoaFisica(jCBUsuario);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the user table with the data retrieved from the repository.</p>
+     * <p><strong>IT:</strong> Popola la tabella degli utenti con i dati recuperati dal repository.</p>
+     * <p><strong>PT-BR:</strong> Preenche a tabela de usuários com os dados recuperados do repositório.</p>
+     */
     private void tabelaUsuario()  {
         useru.tabelaUsuario(jTUsuario);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new user in the database with the provided login, password, and linked person.</p>
+     * <p><strong>IT:</strong> Salva un nuovo utente nel database con il login, la password e la persona associata.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo usuário no banco de dados com o login, senha e pessoa vinculada.</p>
+     */
     private void salvar(){
         user.setPessoa(pessoa);
         user.setDs_login(jTFLogin.getText());
@@ -304,6 +338,11 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         user = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates the selected user’s data in the database.</p>
+     * <p><strong>IT:</strong> Aggiorna i dati dell'utente selezionato nel database.</p>
+     * <p><strong>PT-BR:</strong> Atualiza os dados do usuário selecionado no banco de dados.</p>
+     */
     private void alterar(){
         user.setPessoa(pessoa);
         user.setDs_login(jTFLogin.getText());
@@ -312,6 +351,11 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         user = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected user from the database.</p>
+     * <p><strong>IT:</strong> Elimina l'utente selezionato dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui o usuário selecionado do banco de dados.</p>
+     */
     private void excluir(){
         user.setCd_usuario(user.getCd_usuario());
         userr.excluir(user);

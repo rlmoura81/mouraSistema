@@ -12,6 +12,19 @@ public class JIFPessoaFisica extends javax.swing.JInternalFrame {
     
     private static JIFPessoaFisica jifpessoafisica;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the {@code JIFPessoaFisica} 
+     * internal frame. If it does not exist, a new one is created and its title set to "Pessoa Física".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@code JIFPessoaFisica}. 
+     * Se non esiste, ne viene creata una nuova e il titolo viene impostato su "Pessoa Física".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância única de {@code JIFPessoaFisica}. 
+     * Se não existir, cria uma nova e define o título como "Pessoa Física".</p>
+     *
+     * @return EN: Unique instance of {@code JIFPessoaFisica}.  
+     *         IT/PT-BR: Instância única de {@code JIFPessoaFisica}.
+     */
     public static JIFPessoaFisica getInstancia(){
         if (jifpessoafisica == null){
             jifpessoafisica = new JIFPessoaFisica();
@@ -19,17 +32,15 @@ public class JIFPessoaFisica extends javax.swing.JInternalFrame {
         } return jifpessoafisica;
     }
 
-    PessoaFisica pessoafisica = new PessoaFisica();
-    PessoaFisicaRepository pessoafisicar = new PessoaFisicaRepository();
-    PessoaFisicaUtil pessoafisicau = new PessoaFisicaUtil();
-    
-    Cidade cidade = null;
-    CidadeUtil cidadeu = new CidadeUtil();
-        
-    Utilidade util = new Utilidade();
-    
     public static int codpessoafisica;
     
+    PessoaFisica pessoafisica = new PessoaFisica();
+    PessoaFisicaRepository pessoafisicar = new PessoaFisicaRepository();
+    PessoaFisicaUtil pessoafisicau = new PessoaFisicaUtil();    
+    Cidade cidade = null;
+    CidadeUtil cidadeu = new CidadeUtil();        
+    Utilidade util = new Utilidade();
+        
     public JIFPessoaFisica() {
         initComponents();
         
@@ -305,6 +316,16 @@ public class JIFPessoaFisica extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Clears all input fields of the "Pessoa Física" form 
+     * and resets focus to the name field.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo "Pessoa Física" 
+     * e reimposta il focus sul campo nome.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário "Pessoa Física" 
+     * e reposiciona o foco no campo nome.</p>
+     */
     private void limpaCampos(){
         jTFNome.setText(null);
         jFTFDtNasc.setText(null);
@@ -314,23 +335,50 @@ public class JIFPessoaFisica extends javax.swing.JInternalFrame {
         jTFRg.setText(null);
         jTFNome.requestFocus();
     }
-                
+            
+    /**
+     * <p><strong>EN:</strong> Applies a date formatter to the date of birth field.</p>
+     *
+     * <p><strong>IT:</strong> Applica un formattatore di data al campo della data di nascita.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica um formatador de data ao campo de data de nascimento.</p>
+     */    
     private void formatarData() {
         util.formataDataCampo(jFTFDtNasc);
     }
     
+    /**
+     * <p><strong>EN:</strong> Formats the document field to accept CPF input.</p>
+     * <p><strong>IT:</strong> Format il campo documento per accettare l'inserimento del CPF.</p>
+     * <p><strong>PT-BR:</strong> Formata o campo de documento para aceitar a entrada de CPF.</p>
+     */
     private void formataCampo(){
         util.formataDocumento(jFTFDocumento, 1);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads and fills the City combo box with available records.</p>
+     * <p><strong>IT:</strong> Carica e popola la casella combinata delle Città con i record disponibili.</p>
+     * <p><strong>PT-BR:</strong> Carrega e preenche o combo box de Cidade com os registros disponíveis.</p>
+     */
     private void jcCidade(){
         cidadeu.jcCidade(jCBCidadenatal);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the Person table with the list of registered individuals.</p>
+     * <p><strong>IT:</strong> Popola la tabella delle Persone con l'elenco degli individui registrati.</p>
+     * <p><strong>PT-BR:</strong> Preenche a tabela de Pessoas Físicas com a lista de indivíduos cadastrados.</p>
+     */
     private void tabelaPessoaFisica(){
         pessoafisicau.tabelaPessoaFisica(jTPessoaFisica);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates if all required fields are filled correctly (Name, Date of Birth, and City).</p>
+     * <p><strong>IT:</strong> Convalida se tutti i campi obbligatori sono compilati correttamente (Nome, Data di nascita e Città).</p>
+     * <p><strong>PT-BR:</strong> Valida se todos os campos obrigatórios estão preenchidos corretamente (Nome, Data de Nascimento e Cidade).</p>
+     */
     private boolean validaCampos(){
         if (jTFNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Nome obrigatorio.", "Pessoa Física", JOptionPane.INFORMATION_MESSAGE);
@@ -349,6 +397,11 @@ public class JIFPessoaFisica extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new Person record with the form data into the database.</p>
+     * <p><strong>IT:</strong> Salva un nuovo record di Persona con i dati del modulo nel database.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo registro de Pessoa Física com os dados do formulário no banco de dados.</p>
+     */
     private void salvar(){
         pessoafisica.setDs_Nome(jTFNome.getText());
         pessoafisica.setNm_Cpf(Utilidade.retiraMascaraDocumento(jFTFDocumento.getText()));
@@ -360,6 +413,11 @@ public class JIFPessoaFisica extends javax.swing.JInternalFrame {
         pessoafisica = null;
     }
    
+    /**
+     * <p><strong>EN:</strong> Updates the selected Person record with the new data provided in the form.</p>
+     * <p><strong>IT:</strong> Aggiorna il record della Persona selezionata con i nuovi dati forniti nel modulo.</p>
+     * <p><strong>PT-BR:</strong> Atualiza o registro da Pessoa Física selecionada com os novos dados fornecidos no formulário.</p>
+     */
     private void alterar(){
         pessoafisica.setDs_Nome(jTFNome.getText());
         pessoafisica.setDt_Nascimento(util.recebeData(jFTFDtNasc.getText()));
@@ -371,6 +429,11 @@ public class JIFPessoaFisica extends javax.swing.JInternalFrame {
         pessoafisica = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected Person record from the database.</p>
+     * <p><strong>IT:</strong> Elimina il record della Persona selezionata dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui o registro da Pessoa Física selecionada do banco de dados.</p>
+     */
     private void excluir(){
         pessoafisica.setCd_Pessoa(pessoafisica.getCd_Pessoa());
         pessoafisicar.excluir(pessoafisica);        

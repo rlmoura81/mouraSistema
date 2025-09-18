@@ -12,6 +12,16 @@ public class JIFCategoria extends javax.swing.JInternalFrame {
     
     private static JIFCategoria jifcategoria;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the <code>JIFCategoria</code> window.
+     * If it does not exist, creates a new instance, sets the title to "Categorias" and returns it.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton della finestra <code>JIFCategoria</code>.
+     * Se non esiste, ne crea una nuova, imposta il titolo su "Categorias" e la restituisce.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância única da janela <code>JIFCategoria</code>.
+     * Caso ainda não exista, cria uma nova, define o título como "Categorias" e a retorna.</p>
+     */
     public static JIFCategoria getInstancia(){
         if (jifcategoria == null){
             jifcategoria = new JIFCategoria();
@@ -201,12 +211,32 @@ public class JIFCategoria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Clears the input fields in the Category form.  
+     * Resets the text field, combo box, and sets the focus back to the text field.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce i campi di input nel modulo Categoria.  
+     * Reimposta il campo di testo, la combo box e riporta il focus al campo di testo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa os campos de entrada do formulário de Categoria.  
+     * Reseta o campo de texto, a combo box e retorna o foco para o campo de texto.</p>
+     */
     private void limpaCampos(){
         jTFCategoria.setText(null);
         jCBGrupo.setSelectedIndex(0);
         jTFCategoria.requestFocus();
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the Category form fields.  
+     * Ensures the category name is not empty; shows a warning message if validation fails.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi del modulo Categoria.  
+     * Controlla che il nome della categoria non sia vuoto; mostra un messaggio di avviso se la validazione fallisce.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário de Categoria.  
+     * Garante que o nome da categoria não esteja vazio; exibe uma mensagem de aviso se a validação falhar.</p>
+     */
     public boolean validaCampos(){
         if (jTFCategoria.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Campo em branco.", "Categoria", JOptionPane.INFORMATION_MESSAGE);
@@ -216,10 +246,30 @@ public class JIFCategoria extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads and displays the Category table in the interface.  
+     * Uses <code>tabelaCategoria</code> to refresh the data grid with all registered categories.</p>
+     *
+     * <p><strong>IT:</strong> Carica e visualizza la tabella Categoria nell'interfaccia.  
+     * Utilizza <code>tabelaCategoria</code> per aggiornare la griglia con tutte le categorie registrate.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega e exibe a tabela de Categorias na interface.  
+     * Usa <code>tabelaCategoria</code> para atualizar a grade com todas as categorias cadastradas.</p>
+     */
     private void tabelaCategoria() {
         categoriau.tabelaCategoria(jTCategoria);
     }    
     
+    /**
+     * <p><strong>EN:</strong> Saves a new Category record into the database.  
+     * Sets description, user code, and linked group before inserting.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo record di Categoria nel database.  
+     * Imposta descrizione, codice utente e gruppo associato prima dell'inserimento.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva um novo registro de Categoria no banco de dados.  
+     * Define a descrição, o código do usuário e o grupo vinculado antes de inserir.</p>
+     */
     private void salvar(){
         categoria.setDs_Categoria(jTFCategoria.getText());
         categoria.setCd_usuario(JPLogin.codloginuser);
@@ -228,6 +278,16 @@ public class JIFCategoria extends javax.swing.JInternalFrame {
         categoria = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing Category record in the database.  
+     * Applies new values for description, user code, and linked group.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record esistente di Categoria nel database.  
+     * Applica nuovi valori per descrizione, codice utente e gruppo associato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza um registro existente de Categoria no banco de dados.  
+     * Aplica novos valores de descrição, código do usuário e grupo vinculado.</p>
+     */
     private void alterar(){
         categoria.setDs_Categoria(jTFCategoria.getText());
         categoria.setGrupo(grupo);
@@ -236,6 +296,16 @@ public class JIFCategoria extends javax.swing.JInternalFrame {
         categoria = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the currently selected Category from the database.  
+     * Uses the category’s code as reference for removal.</p>
+     *
+     * <p><strong>IT:</strong> Elimina la Categoria attualmente selezionata dal database.  
+     * Utilizza il codice della categoria come riferimento per la rimozione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui a Categoria atualmente selecionada do banco de dados.  
+     * Usa o código da categoria como referência para a remoção.</p>
+     */
     private void excluir(){
         categoria.setCd_Categoria(categoria.getCd_Categoria());
         categoriar.excluir(categoria);

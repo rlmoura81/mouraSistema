@@ -10,10 +10,16 @@ import javax.swing.JOptionPane;
 
 public class AtivoSaldoRepository implements IPadraoRepository{
 
-    String sql = "";
-    
+    String sql = "";    
     AtivoRepository ativor = new AtivoRepository();    
     
+    /**
+     * <p><strong>EN:</strong> Inserts a new asset balance (AtivoSaldo) into the database.</p>
+     * <p><strong>IT:</strong> Inserisce un nuovo saldo attivo (AtivoSaldo) nel database.</p>
+     * <p><strong>PT-BR:</strong> Insere um novo saldo de ativo (AtivoSaldo) no banco de dados.</p>
+     *
+     * @param o EN: AtivoSaldo instance to insert | IT: Istanza di AtivoSaldo da inserire | PT-BR: Instância de AtivoSaldo a inserir
+     */
     @Override
     public void inserir(Object o) {
         AtivoSaldo asaldo = (AtivoSaldo) o;
@@ -32,6 +38,13 @@ public class AtivoSaldoRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates the quantity of an existing asset balance (AtivoSaldo) identified by asset and user.</p>
+     * <p><strong>IT:</strong> Aggiorna la quantità di un saldo attivo (AtivoSaldo) esistente, identificato da attivo e utente.</p>
+     * <p><strong>PT-BR:</strong> Atualiza a quantidade de um saldo de ativo (AtivoSaldo) existente, identificado por ativo e usuário.</p>
+     *
+     * @param o EN: AtivoSaldo instance with updated data | IT: Istanza di AtivoSaldo con dati aggiornati | PT-BR: Instância de AtivoSaldo com dados atualizados
+     */
     @Override
     public void alterar(Object o) {
         AtivoSaldo asaldo = (AtivoSaldo) o;
@@ -57,6 +70,13 @@ public class AtivoSaldoRepository implements IPadraoRepository{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves all asset balances (AtivoSaldo) for the logged-in user.</p>
+     * <p><strong>IT:</strong> Recupera tutti i saldi attivi (AtivoSaldo) dell’utente connesso.</p>
+     * <p><strong>PT-BR:</strong> Recupera todos os saldos de ativos (AtivoSaldo) do usuário logado.</p>
+     *
+     * @return EN: List of AtivoSaldo objects | IT: Elenco di oggetti AtivoSaldo | PT-BR: Lista de objetos AtivoSaldo
+     */
     @Override
     public ArrayList getLista() {
         ArrayList asaldo = new ArrayList();
@@ -82,6 +102,14 @@ public class AtivoSaldoRepository implements IPadraoRepository{
         return asaldo;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves asset balances (AtivoSaldo) filtered by asset type.</p>
+     * <p><strong>IT:</strong> Recupera i saldi attivi (AtivoSaldo) filtrati per tipo di attivo.</p>
+     * <p><strong>PT-BR:</strong> Recupera saldos de ativos (AtivoSaldo) filtrados por tipo de ativo.</p>
+     *
+     * @param cd_tpativo EN: asset type ID filter | IT: ID del tipo di attivo | PT-BR: ID do tipo de ativo
+     * @return EN: List of AtivoSaldo objects | IT: Elenco di oggetti AtivoSaldo | PT-BR: Lista de objetos AtivoSaldo
+     */
     public ArrayList getLista(int cd_tpativo) {
         ArrayList asaldo = new ArrayList();
         try{
@@ -108,7 +136,15 @@ public class AtivoSaldoRepository implements IPadraoRepository{
         }
         return asaldo;
     }
-            
+         
+    /**
+     * <p><strong>EN:</strong> Retrieves a specific asset balance (AtivoSaldo) by asset ID.</p>
+     * <p><strong>IT:</strong> Recupera un saldo attivo (AtivoSaldo) specifico tramite l’ID dell’attivo.</p>
+     * <p><strong>PT-BR:</strong> Recupera um saldo de ativo (AtivoSaldo) específico pelo ID do ativo.</p>
+     *
+     * @param id EN: asset ID | IT: ID dell’attivo | PT-BR: ID do ativo
+     * @return EN: AtivoSaldo object if found, otherwise null | IT: Oggetto AtivoSaldo se trovato, altrimenti null | PT-BR: Objeto AtivoSaldo se encontrado, caso contrário null
+     */
     @Override
     public Object getById(int id) {
         AtivoSaldo asaldo = null;

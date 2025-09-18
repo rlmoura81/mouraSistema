@@ -11,6 +11,17 @@ public class IndiceRepository{
     
     String sql = "";
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the complete list of indices from the database.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l'elenco completo degli indici dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a lista completa de índices do banco de dados.</p>
+     *
+     * @return EN: list of indices | IT: elenco degli indici | PT-BR: lista de índices
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer um erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     public ArrayList getLista() {
         ArrayList indice = new ArrayList();
         try{
@@ -32,6 +43,18 @@ public class IndiceRepository{
         return indice;
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves an index record by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un record di indice tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera um registro de índice pelo seu ID.</p>
+     *
+     * @param id EN: index identifier | IT: identificatore dell'indice | PT-BR: identificador do índice
+     * @return EN: index object matching the given ID | IT: oggetto indice corrispondente all'ID fornito | PT-BR: objeto índice correspondente ao ID informado
+     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer um erro de acesso ao banco de dados
+     * @since 1.0.0
+     */
     public Object getById(int id) {
         Indice indice = null;
         try{

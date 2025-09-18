@@ -2,13 +2,10 @@ package br.com.rlmoura81.moura.utilidade;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.Format;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
@@ -17,11 +14,18 @@ import javax.swing.text.NumberFormatter;
 
 public class Utilidade {
     
-    //###DATA E CALENDARIO###
-    //Data Formato
+    /**
+     * <p><strong>EN:</strong> Default date format used in the system (dd/MM/yyyy).</p>
+     * <p><strong>IT:</strong> Formato di data predefinito usato nel sistema (dd/MM/yyyy).</p>
+     * <p><strong>PT-BR:</strong> Formato de data padrão usado no sistema (dd/MM/yyyy).</p>
+     */
     public static SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
     
-    //Data Formato Campo
+    /**
+     * <p><strong>EN:</strong> Applies a date mask (dd/MM/yyyy) to a formatted text field.</p>
+     * <p><strong>IT:</strong> Applica una maschera data (dd/MM/yyyy) a un campo di testo formattato.</p>
+     * <p><strong>PT-BR:</strong> Aplica uma máscara de data (dd/MM/yyyy) a um campo de texto formatado.</p>
+     */
     public void formataDataCampo(Object o){
         try{
             MaskFormatter mascData = new MaskFormatter("##/##/####");
@@ -31,8 +35,12 @@ public class Utilidade {
                                           "Erro de sistema", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    //Data Valida Formato Campo
+
+    /**
+     * <p><strong>EN:</strong> Validates if the date field is filled. Returns false if empty.</p>
+     * <p><strong>IT:</strong> Verifica se il campo data è compilato. Restituisce false se vuoto.</p>
+     * <p><strong>PT-BR:</strong> Valida se o campo de data está preenchido. Retorna falso se vazio.</p>
+     */
     public boolean validaDataCampo(String campodata){
         if(campodata.equals("  /  /    ")){
             JOptionPane.showMessageDialog(null, "Data em branco.", "Data", JOptionPane.INFORMATION_MESSAGE);
@@ -41,7 +49,11 @@ public class Utilidade {
         return true;
     }
     
-    //Calendario
+    /**
+     * <p><strong>EN:</strong> Converts a string in dd/MM/yyyy format to a Calendar object.</p>
+     * <p><strong>IT:</strong> Converte una stringa in formato dd/MM/yyyy in un oggetto Calendar.</p>
+     * <p><strong>PT-BR:</strong> Converte uma string no formato dd/MM/yyyy para um objeto Calendar.</p>
+     */
     public Calendar recebeData(String data){                  
         Calendar cal = Calendar.getInstance();
         try {
@@ -53,12 +65,21 @@ public class Utilidade {
         return cal;
     }
 
-    //Concatenar Data
+    /**
+     * <p><strong>EN:</strong> Concatenates a given day with the current month and year.</p>
+     * <p><strong>IT:</strong> Concatena un giorno specificato con il mese e l’anno corrente.</p>
+     * <p><strong>PT-BR:</strong> Concatena um dia informado com o mês e ano atuais.</p>
+     */
     public Object concatenaData(Object data){                  
         data = data+"/"+(Calendar.getInstance().get(Calendar.MONTH+2)+"/"+Calendar.getInstance().get(Calendar.YEAR));
         return data;
     }
     
+    /**
+     * <p><strong>EN:</strong> Returns the first day of the current month as a string.</p>
+     * <p><strong>IT:</strong> Restituisce il primo giorno del mese corrente come stringa.</p>
+     * <p><strong>PT-BR:</strong> Retorna o primeiro dia do mês atual em formato string.</p>
+     */
     public Object recebePrimeiroDiaMes(Object data){
         data = (Calendar.getInstance().getActualMinimum(Calendar.DAY_OF_MONTH))+
                 "/"+(Calendar.getInstance().get(Calendar.MONTH+2)+
@@ -66,6 +87,11 @@ public class Utilidade {
         return data;
     }
     
+    /**
+     * <p><strong>EN:</strong> Returns the last day of the current month as a string.</p>
+     * <p><strong>IT:</strong> Restituisce l’ultimo giorno del mese corrente come stringa.</p>
+     * <p><strong>PT-BR:</strong> Retorna o último dia do mês atual em formato string.</p>
+     */
     public Object recebeUltimoDiaMes(Object data){
         data = (Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH))+
                 "/"+(Calendar.getInstance().get(Calendar.MONTH+2)+
@@ -73,13 +99,25 @@ public class Utilidade {
         return data;
     }
     
-    //###VALOR MONETARIO E FORMATO DE VALORES###
-    //Valor Monetario Formato
+    /**
+     * <p><strong>EN:</strong> Default currency format with two decimal places.</p>
+     * <p><strong>IT:</strong> Formato monetario predefinito con due cifre decimali.</p>
+     * <p><strong>PT-BR:</strong> Formato monetário padrão com duas casas decimais.</p>
+     */
     public static DecimalFormat formatoValor = new DecimalFormat("###,###,##0.00");  
-    //Valor Monetario Formato com tres casa decimais
+
+    /**
+     * <p><strong>EN:</strong> Currency format with three decimal places.</p>
+     * <p><strong>IT:</strong> Formato monetario con tre cifre decimali.</p>
+     * <p><strong>PT-BR:</strong> Formato monetário com três casas decimais.</p>
+     */
     public static DecimalFormat formatoValorTres = new DecimalFormat("###,###,###0.000");  
 
-    //Valor Formato Campo
+    /**
+     * <p><strong>EN:</strong> Creates a formatter for numeric fields with two decimal places.</p>
+     * <p><strong>IT:</strong> Crea un formattatore per campi numerici con due cifre decimali.</p>
+     * <p><strong>PT-BR:</strong> Cria um formatador para campos numéricos com duas casas decimais.</p>
+     */
     public static DefaultFormatterFactory formataValorCampo(Object o){
         DecimalFormat decimal = new DecimalFormat("###,###,##0.00");
         NumberFormatter numFormatado = new NumberFormatter(decimal);
@@ -89,7 +127,11 @@ public class Utilidade {
         return dfFactory;
     }
         
-    //Valor Formato Campo com tres digitos
+    /**
+     * <p><strong>EN:</strong> Creates a formatter for numeric fields with three decimal places.</p>
+     * <p><strong>IT:</strong> Crea un formattatore per campi numerici con tre cifre decimali.</p>
+     * <p><strong>PT-BR:</strong> Cria um formatador para campos numéricos com três casas decimais.</p>
+     */
     public static DefaultFormatterFactory formataValorCampoTres(Object o){
         DecimalFormat decimal = new DecimalFormat("###,###,###0.000");
         NumberFormatter numFormatado = new NumberFormatter(decimal);
@@ -99,7 +141,11 @@ public class Utilidade {
         return dfFactory;
     }
 
-    //Converte Numero Decimal
+    /**
+     * <p><strong>EN:</strong> Converts a numeric string into a BigDecimal value.</p>
+     * <p><strong>IT:</strong> Converte una stringa numerica in un valore BigDecimal.</p>
+     * <p><strong>PT-BR:</strong> Converte uma string numérica em um valor BigDecimal.</p>
+     */
     public static BigDecimal converter(String numero){
         Double n;
         BigDecimal numeroReal = null;
@@ -113,8 +159,11 @@ public class Utilidade {
         return numeroReal;
     }
 
-    //###DOCUMENTO - CPF/CNPJ###
-    //Valor Formato Documento CPF/CNPJ
+    /**
+     * <p><strong>EN:</strong> Applies a mask formatter for CPF (11 digits) or CNPJ (14 digits).</p>
+     * <p><strong>IT:</strong> Applica un formattatore di maschere per CPF (11 cifre) o CNPJ (14 cifre).</p>
+     * <p><strong>PT-BR:</strong> Aplica máscara de formatação para CPF (11 dígitos) ou CNPJ (14 dígitos).</p>
+     */
     public void formataDocumento(Object o, int num){
         if (num == 11){
             try {
@@ -138,7 +187,11 @@ public class Utilidade {
         }
     }
     
-    //Retorna o documento formatado.
+    /**
+     * <p><strong>EN:</strong> Returns the CPF or CNPJ formatted as a string with punctuation.</p>
+     * <p><strong>IT:</strong> Restituisce il CPF o CNPJ formattato come stringa con punteggiatura.</p>
+     * <p><strong>PT-BR:</strong> Retorna o CPF ou CNPJ formatado como string com pontuação.</p>
+     */
     public static String retornaDocumentoFormatado(Object o, int num){
         String retornaDocumentoFormatado = (String) o;        
         if (num == 11){
@@ -150,13 +203,21 @@ public class Utilidade {
         return retornaDocumentoFormatado;
     }    
     
-    //Documento - retira a mascara 
+    /**
+     * <p><strong>EN:</strong> Removes CPF or CNPJ mask (punctuation) and returns raw digits.</p>
+     * <p><strong>IT:</strong> Rimuove la maschera del CPF o CNPJ (punteggiatura) e restituisce solo le cifre.</p>
+     * <p><strong>PT-BR:</strong> Remove a máscara de CPF ou CNPJ (pontuação) e retorna apenas os dígitos.</p>
+     */
     public static String retiraMascaraDocumento(String numDoc){
         String numConv = numDoc.replace(".", "").replace("-", "").replace("/", "");
         return numConv;
     }
     
-    //Documento Valida Formato Campo
+    /**
+     * <p><strong>EN:</strong> Validates if CPF or CNPJ field is not empty.</p>
+     * <p><strong>IT:</strong> Verifica se i campi CPF o CNPJ non sono vuoti.</p>
+     * <p><strong>PT-BR:</strong> Valida se os campos de CPF ou CNPJ não estão em branco.</p>
+     */
     public boolean validaDocumentoCampo(String campodoc){
         if(campodoc.equals("   .   .   -  ")){
             JOptionPane.showMessageDialog(null, "CPF em branco.");
@@ -169,8 +230,11 @@ public class Utilidade {
         return true;
     }
     
-    //###TELEFONE###
-    //Telefone Formato
+    /**
+     * <p><strong>EN:</strong> Applies a phone mask (format: (##)#####-####) to a text field.</p>
+     * <p><strong>IT:</strong> Applica una maschera telefonica (formato: (##)#####-####) a un campo di testo.</p>
+     * <p><strong>PT-BR:</strong> Aplica máscara de telefone (formato: (##)#####-####) em um campo de texto.</p>
+     */
     public void formataTelefone(Object o){
         try {
                 MaskFormatter mascDoc = new MaskFormatter("(##)#####-####");
@@ -180,7 +244,12 @@ public class Utilidade {
                                               "Erro de sistema", JOptionPane.ERROR_MESSAGE);
             }
         }
-    //Telefone Converte - retira a mascara 
+    
+    /**
+     * <p><strong>EN:</strong> Removes the mask from a phone number string and returns only digits.</p>
+     * <p><strong>IT:</strong> Rimuove la maschera da una stringa di numero di telefono e restituisce solo le cifre.</p>
+     * <p><strong>PT-BR:</strong> Remove a máscara de um número de telefone e retorna apenas os dígitos.</p>
+     */
     public static String converterTelefone(String numTel){
         String numConv = numTel.replace("(", "").replace(")", "").replace("-", "");
         return numConv;

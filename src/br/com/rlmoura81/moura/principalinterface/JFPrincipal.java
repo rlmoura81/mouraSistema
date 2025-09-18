@@ -654,6 +654,22 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
     }
       
+    /**
+     * <p><strong>EN:</strong> Validates and adjusts the Oracle session’s 
+     * NLS_DATE_FORMAT parameter.  
+     * If the current format is different from <code>DD/MM/RR</code>, 
+     * updates the session to use <code>dd/MM/yyyy</code>.</p>
+     *
+     * <p><strong>IT:</strong> Verifica e aggiorna il parametro 
+     * NLS_DATE_FORMAT della sessione Oracle.  
+     * Se il formato attuale è diverso da <code>DD/MM/RR</code>, 
+     * imposta la sessione su <code>dd/MM/yyyy</code>.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida e ajusta o parâmetro 
+     * NLS_DATE_FORMAT da sessão Oracle.  
+     * Se o formato atual for diferente de <code>DD/MM/RR</code>, 
+     * altera a sessão para <code>dd/MM/yyyy</code>.</p>
+     */
     private void nlsDateFormat(){
         String sql;
         String nlsDateFormat = null;

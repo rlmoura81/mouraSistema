@@ -17,6 +17,19 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
     
     private static JIFHistorico jifhistorico;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the JIFHistorico class.  
+     * If no instance exists, a new one is created and initialized.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton della classe JIFHistorico.  
+     * Se non esiste alcuna istanza, ne viene creata e inizializzata una nuova.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton da classe JIFHistorico.  
+     * Se não existir nenhuma instância, uma nova é criada e inicializada.</p>
+     *
+     * @return EN: singleton instance of JIFHistorico | IT: istanza singleton di JIFHistorico | PT-BR: instância singleton de JIFHistorico
+     * @since 1.0.0
+     */    
     public static JIFHistorico getInstancia(){
         if(jifhistorico == null){
             jifhistorico = new JIFHistorico();
@@ -26,17 +39,13 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
     
     Historico historico = null;
     HistoricoRepository historicor = new HistoricoRepository();
-    HistoricoUtil historicou = new HistoricoUtil();
-    
+    HistoricoUtil historicou = new HistoricoUtil();    
     Animal animal = null;
-    AnimalUtil animalu = new AnimalUtil();
-    
+    AnimalUtil animalu = new AnimalUtil();    
     PrestadorServico presserv = new PrestadorServico();
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();
-    
+    PrestadorServicoUtil presservu = new PrestadorServicoUtil();    
     Tipo tipo = new Tipo();
-    TipoUtil tipou = new TipoUtil();
-    
+    TipoUtil tipou = new TipoUtil();    
     Utilidade util = new Utilidade();
 
     public JIFHistorico() {
@@ -276,20 +285,56 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Populates the JComboBoxes with animals, service providers, and types for the history form.</p>
+     *
+     * <p><strong>IT:</strong> Popola i JComboBox con animali, fornitori di servizi e tipi per il modulo dello storico.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche os JComboBox com animais, prestadores de serviço e tipos para o formulário de histórico.</p>
+     *
+     * @since 1.0.0
+     */
     private void jcHistorico(){
         animalu.jcAnimal(jCBAnimal);
         presservu.jcPresserv(jCBPresserv, 2);
         tipou.jcTipo(jCBTipo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the JTable with the history records of the selected animal.</p>
+     *
+     * <p><strong>IT:</strong> Popola la JTable con i record dello storico dell'animale selezionato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche a JTable com os registros de histórico do animal selecionado.</p>
+     *
+     * @since 1.0.0
+     */
     private void tabelaHistorico(){
         historicou.tabelaHistorico(jTHistorico, animal.getCd_animal());
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies formatting to the date field in the history form.</p>
+     *
+     * <p><strong>IT:</strong> Applica la formattazione al campo data nel modulo dello storico.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica a formatação ao campo de data no formulário de histórico.</p>
+     *
+     * @since 1.0.0
+     */    
     private void formataData(){
         util.formataDataCampo(jFTFDataHistorico);
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Clears all input fields in the history form.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input nel modulo dello storico.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada no formulário de histórico.</p>
+     *
+     * @since 1.0.0
+     */    
     private void limpaCampos(){
         jCBPresserv.setSelectedIndex(0);
         jCBTipo.setSelectedIndex(0);
@@ -297,6 +342,16 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
         jTFDescricao.setText(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the input fields in the history form before saving or updating a record.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi di input nel modulo dello storico prima di salvare o aggiornare un record.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos de entrada no formulário de histórico antes de salvar ou atualizar um registro.</p>
+     *
+     * @return EN: true if all fields are valid, false otherwise | IT: true se tutti i campi sono validi, false altrimenti | PT-BR: true se todos os campos forem válidos, false caso contrário
+     * @since 1.0.0
+     */    
     private boolean validaCampos(){
         if(animal == null){
             JOptionPane.showMessageDialog(null, "Selecione o animal.", "Animal", JOptionPane.INFORMATION_MESSAGE);
@@ -314,7 +369,19 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Saves or updates a history record (Historico) based on the current form data.  
+     * If no history exists, a new record is created; otherwise, the existing record is updated.</p>
+     *
+     * <p><strong>IT:</strong> Salva o aggiorna un record di storico (Historico) in base ai dati attuali del modulo.  
+     * Se non esiste uno storico, viene creato un nuovo record; altrimenti, il record esistente viene aggiornato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva ou atualiza um registro de histórico (Historico) com base nos dados atuais do formulário.  
+     * Se não houver histórico, um novo registro é criado; caso contrário, o registro existente é atualizado.</p>
+     *
+     * @since 1.0.0
+     */    
     private void salvar(){
         if(historico == null){
             historico = new Historico();

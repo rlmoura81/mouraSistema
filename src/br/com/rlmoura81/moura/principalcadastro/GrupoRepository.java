@@ -13,6 +13,16 @@ public class GrupoRepository{
 
     String sql = "";
     
+    /**
+     * <p><strong>EN:</strong> Inserts a new Group into the database.
+     * Uses the sequence <code>sq_grupo</code> to generate the identifier.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce un nuovo Gruppo nel database.
+     * Utilizza la sequenza <code>sq_grupo</code> per generare l’identificativo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um novo Grupo no banco de dados.
+     * Usa a sequência <code>sq_grupo</code> para gerar o identificador.</p>
+     */
     public void inserir(Object o){
         Grupo g = (Grupo) o;
         try{
@@ -30,6 +40,16 @@ public class GrupoRepository{
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing Group’s data in the database
+     * (name and user reference).</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna i dati di un Gruppo esistente nel database
+     * (nome e riferimento utente).</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza os dados de um Grupo existente no banco de dados
+     * (nome e referência do usuário).</p>
+     */
     public void aterar(Object o){
         Grupo g = (Grupo) o;
         try{
@@ -50,6 +70,16 @@ public class GrupoRepository{
         }    
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes a Group from the database 
+     * using its ID and user reference.</p>
+     *
+     * <p><strong>IT:</strong> Elimina un Gruppo dal database 
+     * utilizzando il suo ID e il riferimento utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um Grupo do banco de dados 
+     * utilizando seu ID e referência do usuário.</p>
+     */
     public void excluir(Object o){
         Grupo g = (Grupo) o;
         try{
@@ -68,6 +98,16 @@ public class GrupoRepository{
         }        
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves a list of Groups registered for the logged user.
+     * The results are ordered by group description.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un elenco di Gruppi registrati per l’utente loggato.
+     * I risultati sono ordinati per descrizione del gruppo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a lista de Grupos cadastrados para o usuário logado.
+     * Os resultados são ordenados pela descrição do grupo.</p>
+     */
     public ArrayList getLista(){        
         ArrayList grupo = new ArrayList();        
         try{
@@ -93,6 +133,13 @@ public class GrupoRepository{
         return grupo;
     }
     
+    /**
+     * <p><strong>EN:</strong> Retrieves a Group object from the database by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un oggetto Gruppo dal database tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera um objeto Grupo no banco de dados através do seu ID.</p>
+     */
     public Object getById(int id){
         Grupo g = null;
         try {

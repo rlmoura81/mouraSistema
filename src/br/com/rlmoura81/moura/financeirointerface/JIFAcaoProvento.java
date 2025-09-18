@@ -14,6 +14,20 @@ public class JIFAcaoProvento extends javax.swing.JInternalFrame {
     
     private static JIFAcaoProvento jifacaoprov;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of the JIFAcaoProvento window.
+     * If it does not exist yet, it creates a new one and sets its title to "Ação Renda".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton della finestra JIFAcaoProvento.
+     * Se non esiste ancora, ne crea una nuova e imposta il titolo su "Ação Renda".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância singleton da janela JIFAcaoProvento.
+     * Caso ainda não exista, cria uma nova e define o título como "Ação Renda".</p>
+     *
+     * @return EN: Instance of JIFAcaoProvento |
+     *         IT: Istanza di JIFAcaoProvento |
+     *         PT-BR: Instância de JIFAcaoProvento
+     */
     public static JIFAcaoProvento getInstancia(){
         if(jifacaoprov == null){
             jifacaoprov = new JIFAcaoProvento();
@@ -284,25 +298,76 @@ public class JIFAcaoProvento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Initializes the combo box with the available stocks.  
+     * Delegates the population of the {@link JComboBox} to the helper class.</p>
+     *
+     * <p><strong>IT:</strong> Inizializza la combo box con le azioni disponibili.  
+     * Delega il popolamento della {@link JComboBox} alla classe di supporto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Inicializa o combo box com as ações disponíveis.  
+     * A responsabilidade de preencher o {@link JComboBox} é delegada à classe auxiliar.</p>
+     */
     private void jcAcao(){
         ativou.jcAcao(jCBAtivo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Initializes the combo box with the available income types (Proventos).  
+     * Uses a helper to populate the {@link JComboBox} with options.</p>
+     *
+     * <p><strong>IT:</strong> Inizializza la combo box con i tipi di provento disponibili.  
+     * Utilizza un helper per popolare la {@link JComboBox} con le opzioni.</p>
+     *
+     * <p><strong>PT-BR:</strong> Inicializa o combo box com os tipos de provento disponíveis.  
+     * Usa um helper para preencher o {@link JComboBox} com as opções.</p>
+     */
     private void jcTpProvento(){
         tpproventou.jcTpProvento(jCBTpProvento);
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies numeric formatters to the value fields.  
+     * Ensures correct formatting for monetary inputs.</p>
+     *
+     * <p><strong>IT:</strong> Applica i formattatori numerici ai campi valore.  
+     * Garantisce la corretta formattazione degli input monetari.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica formatadores numéricos aos campos de valor.  
+     * Garante a formatação correta para entradas monetárias.</p>
+     */
     private void formataValor() {        
         jFTFRendimentoPago.setFormatterFactory(Utilidade.formataValorCampo(ui));
         jFTFPrecoDtBase.setFormatterFactory(Utilidade.formataValorCampo(ui));
     } 
     
+    /**
+     * <p><strong>EN:</strong> Applies date formatting rules to the date fields.  
+     * Ensures that date inputs follow the correct format.</p>
+     *
+     * <p><strong>IT:</strong> Applica le regole di formattazione della data ai campi data.  
+     * Garantisce che gli input di data seguano il formato corretto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica as regras de formatação de data nos campos de data.  
+     * Garante que as entradas de data sigam o formato correto.</p>
+     */
     private void formatarData(){
         util.formataDataCampo(jFTFDtPagamento);
         util.formataDataCampo(jFTFDtPrecoBase);
     } 
    
-    
+    /**
+     * <p><strong>EN:</strong> Validates all form fields before saving.  
+     * Displays messages if any required field is invalid.</p>
+     *
+     * <p><strong>IT:</strong> Valida tutti i campi del modulo prima di salvare.  
+     * Mostra messaggi se un campo richiesto non è valido.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida todos os campos do formulário antes de salvar.  
+     * Exibe mensagens se algum campo obrigatório estiver inválido.</p>
+     *
+     * @return {@code true} if all fields are valid, otherwise {@code false}.
+     */
     private boolean validaCampos(){        
         if(ativo == null){
             JOptionPane.showMessageDialog(null, "Selecione a Ação.", "Ação", JOptionPane.INFORMATION_MESSAGE);
@@ -337,6 +402,16 @@ public class JIFAcaoProvento extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all input fields in the form.  
+     * Resets combo boxes and formatted text fields.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo.  
+     * Reimposta le combo box e i campi formattati.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário.  
+     * Redefine os combos e os campos formatados.</p>
+     */
     private void limpaCampos(){
         jCBAtivo.setSelectedIndex(0);
         jCBTpProvento.setSelectedIndex(0);
@@ -346,10 +421,30 @@ public class JIFAcaoProvento extends javax.swing.JInternalFrame {
         jFTFDtPrecoBase.setText(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads and displays the stock income data in the table.  
+     * Delegates the table filling to the helper class.</p>
+     *
+     * <p><strong>IT:</strong> Carica e visualizza i proventi azionari nella tabella.  
+     * Delega il riempimento della tabella alla classe di supporto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega e exibe os proventos da ação na tabela.  
+     * A responsabilidade de preencher a tabela é delegada à classe auxiliar.</p>
+     */
     private void tabelaAcaoProv(){
         ativou.tabelaAcaoProv(jTAcaoProv);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves the stock income record into the database.  
+     * Collects form values, converts them, and persists the object.</p>
+     *
+     * <p><strong>IT:</strong> Salva il record del provento azionario nel database.  
+     * Raccoglie i valori del modulo, li converte e persiste l'oggetto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva o registro de provento da ação no banco de dados.  
+     * Coleta os valores do formulário, converte-os e persiste o objeto.</p>
+     */
     private void salvar(){
         acaoprov.setAtivo(ativo);
         acaoprov.setVl_provento(Utilidade.converter(jFTFRendimentoPago.getText()));
@@ -361,6 +456,16 @@ public class JIFAcaoProvento extends javax.swing.JInternalFrame {
         acaoprovr.inserir(acaoprov);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected stock income record from the database.  
+     * Uses the current record ID to perform the removal.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il record selezionato dei proventi azionari dal database.  
+     * Utilizza l'ID del record corrente per eseguire la rimozione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o registro de provento da ação selecionado do banco de dados.  
+     * Usa o ID do registro atual para executar a exclusão.</p>
+     */
     private void excluir(){
         acaoprov.setCd_acaoprov(acaoprov.getCd_acaoprov());
         acaoprovr.excluir(acaoprov);

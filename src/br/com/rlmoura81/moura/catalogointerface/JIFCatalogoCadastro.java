@@ -14,8 +14,7 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
     
     Catalogo catalogo = null;
     CatalogoRepository catalogor = new CatalogoRepository();
-    CatalogoUtil catalogou = new CatalogoUtil();
-        
+    CatalogoUtil catalogou = new CatalogoUtil();        
     TipoMidia tipomidia = null;
     Editora editora = null;
     Status status = null;
@@ -264,13 +263,35 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * <p><strong>EN:</strong> Initializes the catalog screen combo boxes 
+     * by loading types of media, publishers, and statuses into their respective components.</p>
+     *
+     * <p><strong>IT:</strong> Inizializza le combo box della schermata catalogo 
+     * caricando tipi di media, editori e stati nei rispettivi componenti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Inicializa os combos da tela de catálogo 
+     * carregando tipos de mídia, editoras e status em seus respectivos componentes.</p>
+     */
     private void jcCatalogo(){
         catalogou.jcTipoMidia(jCBTipoMidia);
         catalogou.jcEditora(jCBEditora);
         catalogou.jcStatus(jCBStatus);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the fields of the catalog form.  
+     * Ensures mandatory fields are filled, numeric fields contain valid numbers, and required selections are made.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi del modulo catalogo.  
+     * Garantisce che i campi obbligatori siano compilati, che i campi numerici contengano numeri validi 
+     * e che le selezioni richieste siano effettuate.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário de catálogo.  
+     * Garante que os campos obrigatórios estejam preenchidos, os campos numéricos contenham números válidos 
+     * e as seleções obrigatórias sejam feitas.</p>
+     */
     private boolean validaCampos(){
         if(tipomidia == null){
             JOptionPane.showMessageDialog(null, "Selecione a midia.", "Midia", JOptionPane.INFORMATION_MESSAGE);
@@ -321,7 +342,17 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
         
         return true;
     }
-    
+
+    /**
+     * <p><strong>EN:</strong> Clears all fields in the catalog form, 
+     * resetting combo boxes, text fields, and text areas to their default state.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo catalogo, 
+     * reimpostando combo box, campi di testo e aree di testo allo stato predefinito.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário de catálogo, 
+     * redefinindo combos, campos de texto e áreas de texto para o estado padrão.</p>
+     */    
     private void limpaCampos(){
         jCBTipoMidia.setSelectedIndex(0);
         jCBEditora.setSelectedIndex(0);
@@ -332,7 +363,17 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
         jTAObservacao.setText(null);
         jCBStatus.setSelectedIndex(0);
     }
-        
+    
+    /**
+     * <p><strong>EN:</strong> Saves the catalog entry.  
+     * If the catalog object is new, it is inserted; otherwise, it is updated with the provided data.</p>
+     *
+     * <p><strong>IT:</strong> Salva la voce del catalogo.  
+     * Se l'oggetto catalogo è nuovo, viene inserito; altrimenti viene aggiornato con i dati forniti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva o registro do catálogo.  
+     * Se o objeto catálogo for novo, ele é inserido; caso contrário, é atualizado com os dados informados.</p>
+     */    
     public void salvar(){        
         if(catalogo == null){
             catalogo = new Catalogo();
@@ -360,6 +401,16 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Opens the main {@link JIFCatalogo} screen, 
+     * maximizes it, adds it to the parent container, and closes the current window.</p>
+     *
+     * <p><strong>IT:</strong> Apre la finestra principale {@link JIFCatalogo}, 
+     * la massimizza, la aggiunge al contenitore padre e chiude la finestra corrente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Abre a tela principal {@link JIFCatalogo}, 
+     * maximiza, adiciona ao contêiner pai e fecha a janela atual.</p>
+     */
     private void telaCatalogo(){
         try {
             JIFCatalogo telacatalogo = new JIFCatalogo();

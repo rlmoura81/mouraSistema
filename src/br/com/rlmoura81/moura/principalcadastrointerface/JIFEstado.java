@@ -9,6 +9,16 @@ public class JIFEstado extends javax.swing.JInternalFrame {
 
     private static JIFEstado jifestado;
     
+    /**
+     * <p><strong>EN:</strong> Returns a singleton instance of the JIFEstado window.  
+     * If the instance does not exist, it creates one and sets its title to "Estados".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce un'istanza singleton della finestra JIFEstado.  
+     * Se l'istanza non esiste, ne crea una e imposta il titolo su "Estados".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna uma instância singleton da janela JIFEstado.  
+     * Se a instância não existir, cria uma e define o título como "Estados".</p>
+     */
     public static JIFEstado getInstancia(){
         if (jifestado == null){
             jifestado = new JIFEstado();
@@ -194,12 +204,35 @@ public class JIFEstado extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
         
+    /**
+     * <p><strong>EN:</strong> Clears all fields in the State form.  
+     * Resets text fields and sets focus back to the State field.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo Stato.  
+     * Reimposta i campi di testo e riporta il focus sul campo Stato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário de Estado.  
+     * Redefine os campos de texto e retorna o foco para o campo Estado.</p>
+     */
     private void limpaCampos(){
         jTFEstado.setText(null);
         jTFSigla.setText(null);
         jTFEstado.requestFocus();
     }
 
+    /**
+     * <p><strong>EN:</strong> Validates the State form fields.  
+     * Ensures that the State and Abbreviation fields are filled correctly  
+     * and that the abbreviation does not exceed 2 characters.</p>
+     *
+     * <p><strong>IT:</strong> Valida i campi del modulo Stato.  
+     * Verifica che i campi Stato e Sigla siano compilati correttamente  
+     * e che la sigla non superi i 2 caratteri.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário de Estado.  
+     * Garante que os campos Estado e Sigla estejam preenchidos corretamente  
+     * e que a sigla não ultrapasse 2 caracteres.</p>
+     */
     private boolean validaCampos(){
         if(jTFEstado.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Campo em branco.", "Estado", JOptionPane.INFORMATION_MESSAGE);
@@ -219,6 +252,16 @@ public class JIFEstado extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new State record.  
+     * Sets the State description and abbreviation, then inserts it into the database.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo record di Stato.  
+     * Imposta la descrizione e la sigla dello Stato, quindi lo inserisce nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva um novo registro de Estado.  
+     * Define a descrição e a sigla do Estado e insere no banco de dados.</p>
+     */
     private void salvar(){
         estado.setDs_estado(jTFEstado.getText());
         estado.setDs_siglaEstado(jTFSigla.getText());
@@ -226,6 +269,16 @@ public class JIFEstado extends javax.swing.JInternalFrame {
         estado = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing State record.  
+     * Modifies the description and abbreviation, then updates it in the database.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un record esistente di Stato.  
+     * Modifica la descrizione e la sigla, quindi lo aggiorna nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Altera um registro existente de Estado.  
+     * Atualiza a descrição e a sigla no banco de dados.</p>
+     */
     private void alterar(){
             estado.setDs_estado(jTFEstado.getText());
             estado.setDs_siglaEstado(jTFSigla.getText());
@@ -233,6 +286,16 @@ public class JIFEstado extends javax.swing.JInternalFrame {
             estado = null;
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes the selected State record from the database.  
+     * Uses the State code as a reference to perform the removal.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il record di Stato selezionato dal database.  
+     * Utilizza il codice dello Stato come riferimento per la rimozione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o registro de Estado selecionado do banco de dados.  
+     * Usa o código do Estado como referência para realizar a exclusão.</p>
+     */
     private void excluir(){
         estado.setCd_estado(estado.getCd_estado());
         estador.excluir(estado);

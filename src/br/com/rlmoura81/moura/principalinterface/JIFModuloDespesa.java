@@ -23,6 +23,36 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
     
     private static JIFModuloDespesa jifmodulodespesa;
     
+    /**
+     * <p><strong>EN:</strong> Returns a singleton instance of 
+     * {@code JIFModuloDespesa} depending on the type of the object 
+     * passed as parameter.  
+     * If the object is an {@code Animal}, initializes the frame with 
+     * the title "Despesas - Animal".  
+     * If the object is a {@code Veiculo}, initializes with 
+     * "Despesas - Veículo".  
+     * If the object is an {@code Imovel}, initializes with 
+     * "Despesas - Imóvel".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce un'istanza singleton di 
+     * {@code JIFModuloDespesa} in base al tipo di oggetto passato come parametro.  
+     * Se l'oggetto è un {@code Animal}, inizializza il frame con il titolo 
+     * "Despesas - Animal".  
+     * Se l'oggetto è un {@code Veiculo}, inizializza con 
+     * "Despesas - Veículo".  
+     * Se l'oggetto è un {@code Imovel}, inizializza con 
+     * "Despesas - Imóvel".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna uma instância singleton de 
+     * {@code JIFModuloDespesa} de acordo com o tipo do objeto 
+     * passado como parâmetro.  
+     * Se o objeto for um {@code Animal}, inicializa o frame com o título 
+     * "Despesas - Animal".  
+     * Se o objeto for um {@code Veiculo}, inicializa com 
+     * "Despesas - Veículo".  
+     * Se o objeto for um {@code Imovel}, inicializa com 
+     * "Despesas - Imóvel".</p>
+     */
     public static JIFModuloDespesa getInstancia(Object o){      
         Animal a = new Animal();        
         if(jifmodulodespesa == null | o.getClass().equals(a.getClass())){
@@ -43,31 +73,21 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
     }
     
     Animal animal = new Animal();
-    AnimalUtil animalu = new AnimalUtil();
-    
-    AnimalDespesa animald = new AnimalDespesa();
-    
+    AnimalUtil animalu = new AnimalUtil();    
+    AnimalDespesa animald = new AnimalDespesa();    
     Produto produto = new Produto();
     ProdutoUtil produtou = new ProdutoUtil();
-
     Veiculo veiculo = new Veiculo();
-    VeiculoUtil veiculou = new VeiculoUtil();
-    
-    VeiculoDespesa veiculod = new VeiculoDespesa();
-    
+    VeiculoUtil veiculou = new VeiculoUtil();    
+    VeiculoDespesa veiculod = new VeiculoDespesa();    
     Imovel imovel = new Imovel();
-    ImovelUtil imovelu = new ImovelUtil();
-    
-    ImovelDespesa imoveld = new ImovelDespesa();
-    
+    ImovelUtil imovelu = new ImovelUtil();    
+    ImovelDespesa imoveld = new ImovelDespesa();    
     PrestadorServico presserv = new PrestadorServico();
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();
-    
+    PrestadorServicoUtil presservu = new PrestadorServicoUtil();    
     ModuloDespesaRepository modulodr = new ModuloDespesaRepository();
-    ModuloDespesaUtil modulodu = new ModuloDespesaUtil();
-    
+    ModuloDespesaUtil modulodu = new ModuloDespesaUtil();    
     Utilidade util = new Utilidade();
-
     Object obj = null;
     
     public JIFModuloDespesa(Object o) {
@@ -420,32 +440,72 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Disables edit-related buttons (Alter/Exclude).</p>
+     * <p><strong>IT:</strong> Disabilita i pulsanti di modifica (Modifica/Elimina).</p>
+     * <p><strong>PT-BR:</strong> Desativa os botões de edição (Alterar/Excluir).</p>
+     */
     private void desativaBotoes(){
         jBAlterar.setEnabled(false);
         jBExcluir.setEnabled(false);
     }
     
+    /**
+     * <p><strong>EN:</strong> Enables edit-related buttons (Alter/Exclude).</p>
+     * <p><strong>IT:</strong> Abilita i pulsanti di modifica (Modifica/Elimina).</p>
+     * <p><strong>PT-BR:</strong> Ativa os botões de edição (Alterar/Excluir).</p>
+     */
     private void ativaBotoes(){
         jBAlterar.setEnabled(true);
         jBExcluir.setEnabled(true);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with Animal items.</p>
+     * <p><strong>IT:</strong> Popola la combo box con gli elementi Animale.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo com os itens de Animal.</p>
+     */
     private void jcAnimal(){
         animalu.jcAnimal(jCBModuloDespesa);
     }
-        
+      
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with Vehicle items.</p>
+     * <p><strong>IT:</strong> Popola la combo box con gli elementi Veicolo.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo com os itens de Veículo.</p>
+     */
     private void jcVeiculo(){
         veiculou.jcVeiculo(jCBModuloDespesa);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the combo box with Property items.</p>
+     * <p><strong>IT:</strong> Popola la combo box con gli elementi Immobile.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo com os itens de Imóvel.</p>
+     */
     private void jcImovel(){
         imovelu.jcImovel(jCBModuloDespesa);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads service providers into the combo box, filtered by module.</p>
+     * <p><strong>IT:</strong> Carica i fornitori nella combo box filtrati per modulo.</p>
+     * <p><strong>PT-BR:</strong> Carrega prestadores no combo, filtrando pelo módulo.</p>
+     * @param num EN: Module identifier. IT/PT-BR: Identificador do módulo.
+     */
     private void jcPresserv(int num){
         presservu.jcPresserv(jCBPresserv, num);
     }
     
+    /**
+     * <p><strong>EN:</strong> Fills the expenses table based on the selected module object 
+     * (Animal, Vehicle, or Property). Also computes the monthly total if an item is selected.</p>
+     * <p><strong>IT:</strong> Compila la tabella delle spese in base all’oggetto selezionato 
+     * (Animale, Veicolo o Immobile). Calcola anche il totale mensile se c’è un elemento selezionato.</p>
+     * <p><strong>PT-BR:</strong> Preenche a tabela de despesas conforme o objeto selecionado 
+     * (Animal, Veículo ou Imóvel). Também calcula o total do mês se houver seleção.</p>
+     * @param o EN: The domain object (Animal/Vehicle/Property). IT/PT-BR: Objeto domínio (Animal/Veículo/Imóvel).
+     */
     private void tabelaDespesa(Object o){
         if(o.getClass().equals(animal.getClass())){
             modulodu.tabelaDespesaAnimal(jTDespesa, animal);              
@@ -461,16 +521,32 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies numeric currency formatting to value fields.</p>
+     * <p><strong>IT:</strong> Applica la formattazione numerica/valuta ai campi di valore.</p>
+     * <p><strong>PT-BR:</strong> Aplica formatação monetária aos campos de valor.</p>
+     */
     private void formataValor(){
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies date masks/formatting to date fields (transaction, start, end).</p>
+     * <p><strong>IT:</strong> Applica maschere/formattazione alle date (transazione, inizio, fine).</p>
+     * <p><strong>PT-BR:</strong> Aplica máscaras/formatação nas datas (transação, início, fim).</p>
+     */
     private void formataData(){
         util.formataDataCampo(jFTFData);
         util.formataDataCampo(jFTFDataInicial);
         util.formataDataCampo(jFTFDataFinal);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates required fields: date, value, and description.</p>
+     * <p><strong>IT:</strong> Valida i campi obbligatori: data, valore e descrizione.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios: data, valor e descrição.</p>
+     * @return EN: {@code true} if valid; otherwise {@code false}. IT/PT-BR: {@code true} se válido; caso contrário {@code false}.
+     */
     private boolean validaCampos(){
         if(util.validaDataCampo(jFTFData.getText()) == false){
             jFTFData.requestFocus();
@@ -489,6 +565,11 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears input fields and resets UI widgets to their defaults.</p>
+     * <p><strong>IT:</strong> Pulisce i campi di input e ripristina i widget ai valori predefiniti.</p>
+     * <p><strong>PT-BR:</strong> Limpa os campos e restaura os controles para o padrão.</p>
+     */
     private void limpaCampos(){
         jCBPresserv.setSelectedIndex(0);
         jTFNota.setText(null);
@@ -502,6 +583,14 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Persists a new expense for the selected module 
+     * (Animal, Vehicle, or Property) using current form data.</p>
+     * <p><strong>IT:</strong> Salva una nuova spesa per il modulo selezionato 
+     * (Animale, Veicolo o Immobile) usando i dati del form.</p>
+     * <p><strong>PT-BR:</strong> Salva uma nova despesa para o módulo selecionado 
+     * (Animal, Veículo ou Imóvel) com os dados do formulário.</p>
+     */
     private void salvar(){
         if(obj.getClass().equals(animal.getClass())){
             animald.setAnimal(animal);
@@ -539,6 +628,11 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates the selected expense for the current module with form data.</p>
+     * <p><strong>IT:</strong> Aggiorna la spesa selezionata per il modulo corrente con i dati del form.</p>
+     * <p><strong>PT-BR:</strong> Altera a despesa selecionada do módulo atual com os dados do formulário.</p>
+     */
     private void alterar(){
         if(obj.getClass().equals(animal.getClass())){
             animald.setAnimal(animal);
@@ -576,6 +670,11 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }        
     }
     
+    /**
+     * <p><strong>EN:</strong> Removes the selected expense entry for the current module.</p>
+     * <p><strong>IT:</strong> Rimuove la spesa selezionata per il modulo corrente.</p>
+     * <p><strong>PT-BR:</strong> Exclui a despesa selecionada do módulo atual.</p>
+     */
     private void excluir(){
         if(obj.getClass().equals(animal.getClass())){
             animald.setCd_despesa(animald.getCd_despesa());
@@ -597,6 +696,11 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }         
     }
     
+    /**
+     * <p><strong>EN:</strong> Calculates line total (value × quantity) and updates the UI label.</p>
+     * <p><strong>IT:</strong> Calcola il totale della riga (valore × quantità) e aggiorna l’etichetta UI.</p>
+     * <p><strong>PT-BR:</strong> Calcula o total da linha (valor × quantidade) e atualiza o rótulo na UI.</p>
+     */
     private void calculaValor(){
         BigDecimal valor = Utilidade.converter(jFTFValor.getText());
         BigDecimal qtde = Utilidade.converter(jTFQtde.getText());
@@ -604,6 +708,15 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         jLNotaTotal.setText("Total: " + Utilidade.formatoValor.format(total));
     }
     
+    /**
+     * <p><strong>EN:</strong> Computes and displays the current-month total expenses 
+     * for the given domain object (Animal/Vehicle/Property).</p>
+     * <p><strong>IT:</strong> Calcola e mostra il totale del mese corrente per l’oggetto 
+     * dominio (Animale/Veicolo/Immobile).</p>
+     * <p><strong>PT-BR:</strong> Calcula e exibe o total do mês atual para o objeto 
+     * (Animal/Veículo/Imóvel).</p>
+     * @param o EN: The domain object to aggregate. IT/PT-BR: Objeto domínio para agregação.
+     */
     private void calculaTotalMes(Object o){
         if(o.getClass().equals(animal.getClass())){
             jLTotal.setText("Total mês: " + Utilidade.formatoValor.format(modulodu.calculaDespesaTotalAni(animal)));            
@@ -616,6 +729,17 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }
     } 
     
+    /**
+     * <p><strong>EN:</strong> Computes and displays the total expenses for the given domain object 
+     * within the provided date range.</p>
+     * <p><strong>IT:</strong> Calcola e mostra il totale delle spese per l’oggetto dominio 
+     * nell’intervallo di date fornito.</p>
+     * <p><strong>PT-BR:</strong> Calcula e exibe o total de despesas para o objeto 
+     * no intervalo de datas informado.</p>
+     * @param o EN: The domain object (Animal/Vehicle/Property). IT/PT-BR: Objeto domínio.
+     * @param dt_inicio EN: Start date (dd/MM/yyyy). IT/PT-BR: Data inicial (dd/MM/yyyy).
+     * @param dt_final  EN: End date (dd/MM/yyyy). IT/PT-BR: Data final (dd/MM/yyyy).
+     */
     private void calculaTotalMes(Object o,String dt_inicio, String dt_final){
         if(o.getClass().equals(animal.getClass())){
             jLTotal.setText("Total mês: " + Utilidade.formatoValor.format(modulodu.calculaDespesaTotalAni(animal, dt_inicio, dt_final)));            

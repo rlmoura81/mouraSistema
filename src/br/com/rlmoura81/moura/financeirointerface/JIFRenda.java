@@ -28,6 +28,16 @@ public class JIFRenda extends javax.swing.JInternalFrame {
     
     private static JIFRenda jifcredito;
     
+    /**
+     * <p><strong>EN:</strong> Returns a singleton instance of {@link JIFRenda}.  
+     * If no instance exists, creates a new one and sets the title to "Crédito".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce un'istanza singleton di {@link JIFRenda}.  
+     * Se non esiste alcuna istanza, ne crea una nuova e imposta il titolo su "Crédito".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna uma instância única de {@link JIFRenda}.  
+     * Caso não exista, cria uma nova e define o título como "Crédito".</p>
+     */
     public static JIFRenda getInstancia(){
         if(jifcredito == null){
             jifcredito = new JIFRenda();
@@ -387,23 +397,57 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
             
+    /**
+     * <p><strong>EN:</strong> Formats the rental date field using the application's date mask.</p>
+     * <p><strong>IT:</strong> Formatta il campo della data di locazione usando la maschera di data dell’applicazione.</p>
+     * <p><strong>PT-BR:</strong> Formata o campo de data de aluguel usando a máscara de data da aplicação.</p>
+     */
     private void formatarData(){
         util.formataDataCampo(jFTFData);
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies currency formatters to the discount and value fields.</p>
+     * <p><strong>IT:</strong> Applica i formattatori di valuta ai campi di sconto e valore.</p>
+     * <p><strong>PT-BR:</strong> Aplica formatadores monetários aos campos de desconto e valor.</p>
+     */
     private void formataValor(){
         jFTFDescontoAluguel.setFormatterFactory(Utilidade.formataValorCampo(ui));
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the rental combo box {@code jCBAluguel} with available rentals.</p>
+     *
+     * <p><strong>IT:</strong> Popola la combo {@code jCBAluguel} con gli affitti disponibili.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o combo {@code jCBAluguel} com os aluguéis disponíveis.</p>
+     */
     private void jcAluguel(){
         aluguelu.jcAluguel(jCBAluguel);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the asset type combo {@code jCBTpAtivo} with Stock/FII options.</p>
+     *
+     * <p><strong>IT:</strong> Popola la combo del tipo di attivo {@code jCBTpAtivo} con le opzioni Azione/FII.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o combo de tipo de ativo {@code jCBTpAtivo} com opções Ação/FII.</p>
+     */
     private void jcTpAtivo(){
         tpativou.jcTipoAtivoAcaoFii(jCBTpAtivo);
     }
 
+    /**
+     * <p><strong>EN:</strong> Reloads the income type combo {@code jCBTpProvento} according to the selected asset type  
+     * (stocks or REITs).</p>
+     *
+     * <p><strong>IT:</strong> Ricarica la combo del tipo di provento {@code jCBTpProvento} in base al tipo di attivo selezionato  
+     * (azioni o FII).</p>
+     *
+     * <p><strong>PT-BR:</strong> Recarrega o combo de tipo de provento {@code jCBTpProvento} conforme o tipo de ativo selecionado  
+     * (ação ou FII).</p>
+     */
     private void  jcTpProvento(){
         jCBTpProvento.removeAllItems();
         if(tpativo.getCd_tpativo() == 1){
@@ -414,6 +458,16 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the asset combo {@code jCBAtivo} filtered by the selected asset type and income type,  
+     * showing only assets with balance for that provento.</p>
+     *
+     * <p><strong>IT:</strong> Popola la combo degli attivi {@code jCBAtivo} filtrando per tipo di attivo e tipo di provento,  
+     * mostrando solo gli attivi con saldo per quel provento.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o combo de ativos {@code jCBAtivo} filtrando por tipo de ativo e tipo de provento,  
+     * exibindo apenas ativos com saldo para esse provento.</p>
+     */
     private void jcAtivo(){
         jCBAtivo.removeAllItems();
         if(tpativo != null && tpprov != null && tpativo.getCd_tpativo() == 1){
@@ -424,28 +478,66 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Loads the income table {@code jTRenda} with the current data set.</p>
+     *
+     * <p><strong>IT:</strong> Carica la tabella delle entrate {@code jTRenda} con i dati correnti.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega a tabela de rendas {@code jTRenda} com os dados atuais.</p>
+     */
     private void tabelaRenda(){
         rendau.tabelaRenda(jTRenda);
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears generic income input fields: date, description, and amount.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce i campi di input generici delle entrate: data, descrizione e valore.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa os campos de entrada de renda: data, descrição e valor.</p>
+     */
     private void limpaCampos(){
         jFTFData.setText(null);
         jTFDescricao.setText(null);
         jFTFValor.setValue(null);
     }
 
+    /**
+     * <p><strong>EN:</strong> Resets rental-related fields: selects the first rental, clears label and discount value.</p>
+     *
+     * <p><strong>IT:</strong> Reimposta i campi relativi all'affitto: seleziona il primo, pulisce l'etichetta e lo sconto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Reseta os campos de aluguel: seleciona o primeiro, limpa o rótulo e o valor do desconto.</p>
+     */
     private void limpaCamposAluguel(){
         jCBAluguel.setSelectedIndex(0);
         jLValorAluguel.setText("Valor:");
         jFTFDescontoAluguel.setValue(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears asset-related combos and resets the asset-type selection to the first option.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce le combo relative agli attivi e reimposta il tipo di attivo alla prima opzione.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa os combos relacionados ao ativo e volta o tipo de ativo para a primeira opção.</p>
+     */
     private void limpaCamposAtivo(){        
         jCBAtivo.removeAllItems();  
         jCBTpProvento.removeAllItems(); 
         jCBTpAtivo.setSelectedIndex(0);
     }
         
+    /**
+     * <p><strong>EN:</strong> Validates rental selection. Shows a message and focuses {@code jCBAluguel} if none is selected.  
+     * Returns {@code true} when valid, otherwise {@code false}.</p>
+     *
+     * <p><strong>IT:</strong> Valida la selezione dell'affitto. Mostra un messaggio e focalizza {@code jCBAluguel} se non selezionato.  
+     * Restituisce {@code true} se valido, altrimenti {@code false}.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida a seleção de aluguel. Exibe mensagem e foca em {@code jCBAluguel} se não houver seleção.  
+     * Retorna {@code true} quando válido; caso contrário, {@code false}.</p>
+     */
     private boolean validaAluguel(){
         if(aluguel == null){
             JOptionPane.showMessageDialog(null, "Selecione o aluguel.", "Aluguel", JOptionPane.INFORMATION_MESSAGE);
@@ -455,6 +547,16 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates asset inputs (asset type, asset, and income type).  
+     * Shows messages and focuses the respective field when missing. Returns {@code true} if valid.</p>
+     *
+     * <p><strong>IT:</strong> Valida gli input dell'attivo (tipo di attivo, attivo e tipo di provento).  
+     * Mostra messaggi e focalizza il campo mancante. Restituisce {@code true} se valido.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os dados do ativo (tipo, ativo e tipo de provento).  
+     * Exibe mensagens e foca o campo faltante. Retorna {@code true} se válido.</p>
+     */
     private boolean validaAtivo(){
         if(tpativo == null){
             JOptionPane.showMessageDialog(null, "Selecione o tipo de ativo.", "Tipo de ativo", JOptionPane.INFORMATION_MESSAGE);
@@ -474,6 +576,16 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Toggles visibility of the income input panel and action buttons based on the selected tab  
+     * in {@code jTPRenda}.</p>
+     *
+     * <p><strong>IT:</strong> Mostra/nasconde il pannello di input delle entrate e i pulsanti in base alla scheda selezionata  
+     * in {@code jTPRenda}.</p>
+     *
+     * <p><strong>PT-BR:</strong> Alterna a visibilidade do painel de entrada de renda e dos botões conforme a aba selecionada  
+     * em {@code jTPRenda}.</p>
+     */
     private void camposRenda(){
         if(jTPRenda.getSelectedIndex() == 0){
             jLData.setVisible(false);
@@ -502,6 +614,13 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Manages visibility of asset and income-type combos according to the selected asset type.</p>
+     *
+     * <p><strong>IT:</strong> Gestisce la visibilità delle combo di attivo e tipo di provento in base al tipo di attivo selezionato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Controla a visibilidade dos combos de ativo e tipo de provento conforme o tipo de ativo escolhido.</p>
+     */
     private void camposAtivo(){
         if(jCBTpAtivo.getSelectedIndex() == 0){
             jCBAtivo.removeAllItems();
@@ -514,6 +633,16 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Builds and persists an income record using current inputs (tab-defined type, date, description, amount)  
+     * and the logged user.</p>
+     *
+     * <p><strong>IT:</strong> Crea e salva un record di entrata con i dati correnti (tipo definito dalla scheda, data, descrizione, valore)  
+     * e l'utente loggato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Monta e salva um registro de renda com os dados atuais (tipo definido pela aba, data, descrição, valor)  
+     * e o usuário logado.</p>
+     */
     private void salvar(){
         if(jTPRenda.getSelectedIndex() == 1){
             tprenda.setCd_tprenda(1);
@@ -529,6 +658,13 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         rendar.inserir(renda);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the currently selected income record after setting its identifier.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il record di entrata selezionato dopo aver impostato il suo identificatore.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o registro de renda selecionado após definir seu identificador.</p>
+     */
     private void excluir(){
         renda.setCd_renda(renda.getCd_renda());
         rendar.excluir(renda);

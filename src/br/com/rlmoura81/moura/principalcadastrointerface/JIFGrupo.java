@@ -10,6 +10,16 @@ public class JIFGrupo extends javax.swing.JInternalFrame {
     
     private static JIFGrupo jifgrupo;
     
+    /**
+     * <p><strong>EN:</strong> Provides a singleton instance of the Group window.  
+     * If no instance exists, it creates a new one and sets its title to "Group".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce un’istanza singleton della finestra Gruppo.  
+     * Se non esiste alcuna istanza, ne crea una nuova e imposta il titolo su "Gruppo".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna uma instância única da janela Grupo.  
+     * Caso ainda não exista, cria uma nova e define o título como "Grupo".</p>
+     */
     public static JIFGrupo getInstancia(){
         if (jifgrupo == null){
             jifgrupo = new JIFGrupo();
@@ -182,11 +192,31 @@ public class JIFGrupo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Clears all fields of the Group form.  
+     * Resets the input and places focus back on the text field.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo Gruppo.  
+     * Reimposta l’input e riporta il focus sul campo di testo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário de Grupo.  
+     * Restaura o campo vazio e retorna o foco para o campo de texto.</p>
+     */
     private void limpaCampos(){
         jTFGrupo.setText(null);
         jTFGrupo.requestFocus();
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates Group form fields.  
+     * Ensures that the text field is not empty before proceeding.</p>
+     *
+     * <p><strong>IT:</strong> Valida i campi del modulo Gruppo.  
+     * Verifica che il campo di testo non sia vuoto prima di procedere.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário de Grupo.  
+     * Garante que o campo de texto não esteja vazio antes de continuar.</p>
+     */
     public boolean validaCampos(){
         if (jTFGrupo.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Campo em branco.", "Grupo", JOptionPane.INFORMATION_MESSAGE);
@@ -196,10 +226,30 @@ public class JIFGrupo extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads and displays the list of Groups in the table.  
+     * Delegates rendering to the Group utility class.</p>
+     *
+     * <p><strong>IT:</strong> Carica e mostra l’elenco dei Gruppi nella tabella.  
+     * Delega il rendering alla classe di utilità Gruppo.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega e exibe a lista de Grupos na tabela.  
+     * Delega a renderização para a classe utilitária de Grupo.</p>
+     */
     private void tabelaCategoria() {
         grupou.tabelaGrupo(jTGrupo);
     }    
     
+    /**
+     * <p><strong>EN:</strong> Saves a new Group in the database.  
+     * Captures data from the form, associates the current user, and persists the record.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo Gruppo nel database.  
+     * Recupera i dati dal modulo, associa l’utente corrente e registra il record.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva um novo Grupo no banco de dados.  
+     * Captura os dados do formulário, associa ao usuário atual e persiste o registro.</p>
+     */
     private void salvar(){
         grupo.setDs_grupo(jTFGrupo.getText());
         grupo.setCd_usuario(JPLogin.codloginuser);
@@ -207,6 +257,16 @@ public class JIFGrupo extends javax.swing.JInternalFrame {
         grupo = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing Group in the database.  
+     * Applies the new field values and saves the changes.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna un Gruppo esistente nel database.  
+     * Applica i nuovi valori dei campi e salva le modifiche.</p>
+     *
+     * <p><strong>PT-BR:</strong> Altera um Grupo existente no banco de dados.  
+     * Aplica os novos valores dos campos e salva as alterações.</p>
+     */
     private void alterar(){
         grupo.setDs_grupo(jTFGrupo.getText());
         grupo.setCd_usuario(JPLogin.codloginuser);
@@ -214,6 +274,16 @@ public class JIFGrupo extends javax.swing.JInternalFrame {
         grupo = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected Group from the database.  
+     * Uses the current Group identifier to remove the record permanently.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il Gruppo selezionato dal database.  
+     * Utilizza l’identificatore del Gruppo corrente per rimuovere definitivamente il record.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o Grupo selecionado do banco de dados.  
+     * Usa o identificador do Grupo atual para remover o registro de forma permanente.</p>
+     */
     private void excluir(){
         grupo.setCd_grupo(grupo.getCd_grupo());
         grupor.excluir(grupo);

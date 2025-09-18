@@ -13,6 +13,16 @@ public class JIFMoedaValor extends javax.swing.JInternalFrame {
     
     private static JIFMoedaValor jifmoeda;
     
+    /**
+     * <p><strong>EN:</strong> Returns an instance of {@link JIFMoedaValor}.  
+     * If no instance exists, a new one is created with the title "Moeda - cotação".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce un'istanza di {@link JIFMoedaValor}.  
+     * Se non esiste alcuna istanza, ne viene creata una nuova con il titolo "Moeda - cotação".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna uma instância de {@link JIFMoedaValor}.  
+     * Se nenhuma instância existir, uma nova será criada com o título "Moeda - cotação".</p>
+     */
     public static JIFMoedaValor getInstancia(){
         if(jifmoeda == null){
             jifmoeda = new JIFMoedaValor();
@@ -252,22 +262,50 @@ public class JIFMoedaValor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Formats the date input field using the utility class.</p>
+     * <p><strong>IT:</strong> Format il campo della data utilizzando la classe di utilità.</p>
+     * <p><strong>PT-BR:</strong> Formata o campo de data utilizando a classe de utilidade.</p>
+     */
     private void formataData(){
         util.formataDataCampo(jFTFData);
     }
     
+    /**
+     * <p><strong>EN:</strong> Formats the value input field to accept numbers with three decimal places.</p>
+     * <p><strong>IT:</strong> Format il campo di inserimento del valore per accettare numeri con tre decimali.</p>
+     * <p><strong>PT-BR:</strong> Formata o campo de valor para aceitar números com três casas decimais.</p>
+     */
     private void formataCampo(){
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampoTres(ui));
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads the list of currencies into the combo box.</p>
+     * <p><strong>IT:</strong> Carica l'elenco delle valute nella combo box.</p>
+     * <p><strong>PT-BR:</strong> Carrega a lista de moedas no combo box.</p>
+     */
     private void jcMoeda(){
         moedau.jcMoeda(jCBMoeda);
     }
     
+    /**
+     * <p><strong>EN:</strong> Populates the table with the currency quotations.</p>
+     * <p><strong>IT:</strong> Popola la tabella con le quotazioni delle valute.</p>
+     * <p><strong>PT-BR:</strong> Preenche a tabela com as cotações das moedas.</p>
+     */
     private void tabelaCotacao(){
         moedavaloru.tabelaIndiceValor(jTMoedaValor);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the input fields before saving or updating a record.  
+     * Ensures that currency, date, and value are correctly informed.</p>
+     * <p><strong>IT:</strong> Convalida i campi di input prima di salvare o aggiornare un record.  
+     * Garantisce che valuta, data e valore siano correttamente informati.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos antes de salvar ou atualizar um registro.  
+     * Garante que moeda, data e valor estejam corretamente informados.</p>
+     */
     private boolean validaCampos(){
         if(moeda == null){
             JOptionPane.showMessageDialog(null, "Selecione a moeda.", "Moeda", JOptionPane.INFORMATION_MESSAGE);
@@ -286,12 +324,22 @@ public class JIFMoedaValor extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears the form fields, resetting currency, date, and value.</p>
+     * <p><strong>IT:</strong> Pulisce i campi del modulo, reimpostando valuta, data e valore.</p>
+     * <p><strong>PT-BR:</strong> Limpa os campos do formulário, resetando moeda, data e valor.</p>
+     */
     private void limpaCampos(){
         jCBMoeda.setSelectedIndex(0);
         jFTFData.setText(null);
         jFTFValor.setValue(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new currency quotation to the database.</p>
+     * <p><strong>IT:</strong> Salva una nuova quotazione di valuta nel database.</p>
+     * <p><strong>PT-BR:</strong> Salva uma nova cotação de moeda no banco de dados.</p>
+     */
     private void salvar(){
         moedavalor.setMoeda(moeda);
         moedavalor.setDt_valor(util.recebeData(jFTFData.getText()));
@@ -300,6 +348,11 @@ public class JIFMoedaValor extends javax.swing.JInternalFrame {
         moedavalorr.inserir(moedavalor);
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates an existing currency quotation in the database.</p>
+     * <p><strong>IT:</strong> Aggiorna una quotazione di valuta esistente nel database.</p>
+     * <p><strong>PT-BR:</strong> Atualiza uma cotação de moeda existente no banco de dados.</p>
+     */
     private void alterar(){
         moedavalor.setMoeda(moeda);
         moedavalor.setDt_valor(util.recebeData(jFTFData.getText()));
@@ -308,6 +361,11 @@ public class JIFMoedaValor extends javax.swing.JInternalFrame {
         moedavalorr.alterar(moedavalor);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected currency quotation from the database.</p>
+     * <p><strong>IT:</strong> Elimina la quotazione di valuta selezionata dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui a cotação de moeda selecionada do banco de dados.</p>
+     */
     private void excluir(){
         moedavalor.setCd_moedavl(moedavalor.getCd_moedavl());
         moedavalorr.excluir(moedavalor);

@@ -11,6 +11,16 @@ public class TipoRepository{
     
     String sql = "";
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the list of types (Tipo) from the database.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l'elenco dei tipi (Tipo) dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a lista de tipos (Tipo) do banco de dados.</p>
+     *
+     * @return EN: list of Tipo objects | IT: elenco di oggetti Tipo | PT-BR: lista de objetos Tipo
+     * @since 1.0.0
+     */
     public ArrayList getLista() {
         ArrayList tipo = new ArrayList();
         try{
@@ -31,7 +41,18 @@ public class TipoRepository{
         }
         return tipo;
     }
-
+    
+    /**
+     * <p><strong>EN:</strong> Gets a type (Tipo) from the database by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera un tipo (Tipo) dal database tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém um tipo (Tipo) do banco de dados pelo seu ID.</p>
+     *
+     * @param id EN: unique identifier of the type | IT: identificatore univoco del tipo | PT-BR: identificador único do tipo
+     * @return EN: Tipo object if found, otherwise null | IT: oggetto Tipo se trovato, altrimenti null | PT-BR: objeto Tipo se encontrado, caso contrário null
+     * @since 1.0.0
+     */
     public Object getById(int id) {
         Tipo t = null;
         try{

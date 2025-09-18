@@ -12,6 +12,16 @@ public class JIFModelo extends javax.swing.JInternalFrame {
     
     private static JIFModelo jifmodelo;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of <code>JIFModelo</code>.
+     * If no instance exists, it creates a new one and sets the window title to “Modelo de veiculos”.</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di <code>JIFModelo</code>.
+     * Se non esiste, ne crea una nuova e imposta il titolo della finestra su “Modelo de veiculos”.</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância única de <code>JIFModelo</code>.
+     * Se não existir, cria uma nova e define o título da janela como “Modelo de veículos”.</p>
+     */
     public static JIFModelo getInstancia(){
         if(jifmodelo == null){
             jifmodelo = new JIFModelo();
@@ -20,8 +30,7 @@ public class JIFModelo extends javax.swing.JInternalFrame {
     }
     
     Marca marca = null;
-    MarcaUtil marcau = new MarcaUtil();
-    
+    MarcaUtil marcau = new MarcaUtil();    
     Modelo modelo = new Modelo();
     ModeloRepository modelor = new ModeloRepository();
     ModeloUtil modelou = new ModeloUtil();
@@ -196,19 +205,39 @@ public class JIFModelo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Loads the list of brands into the brand combo box.</p>
+     * <p><strong>IT:</strong> Carica l'elenco delle marche nella combo box delle marche.</p>
+     * <p><strong>PT-BR:</strong> Carrega a lista de marcas no combo box de marcas.</p>
+     */
     private void jcMarca(){
         marcau.jcMarca(jCBMarca);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads all registered models into the model table.</p>
+     * <p><strong>IT:</strong> Carica tutti i modelli registrati nella tabella dei modelli.</p>
+     * <p><strong>PT-BR:</strong> Carrega todos os modelos cadastrados na tabela de modelos.</p>
+     */
     private void tabelaModelo(){
         modelou.tabelaModelo(jTModelo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all input fields and resets the brand combo box.</p>
+     * <p><strong>IT:</strong> Pulisce tutti i campi di input e reimposta la combo box delle marche.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos de entrada e redefine o combo box da marca.</p>
+     */
     private void limpaCampos(){
         jCBMarca.setSelectedIndex(0);
         jTFModelo.setText(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates the fields to ensure the brand and model name are filled in.</p>
+     * <p><strong>IT:</strong> Valida i campi per garantire che la marca e il nome del modello siano compilati.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos para garantir que a marca e o nome do modelo estejam preenchidos.</p>
+     */
     private boolean validaCampos(){
         if(marca == null){
             JOptionPane.showMessageDialog(null, "Selecione a marca do veiculo.", "Marca", JOptionPane.INFORMATION_MESSAGE);
@@ -223,6 +252,11 @@ public class JIFModelo extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new vehicle model linked to the selected brand and current user.</p>
+     * <p><strong>IT:</strong> Salva un nuovo modello di veicolo collegato alla marca selezionata e all'utente corrente.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo modelo de veículo vinculado à marca selecionada e ao usuário atual.</p>
+     */
     private void salvar(){
         modelo.setMarca(marca);
         modelo.setDs_modelo(jTFModelo.getText());
@@ -231,6 +265,11 @@ public class JIFModelo extends javax.swing.JInternalFrame {
         modelo = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Updates the information of the selected vehicle model.</p>
+     * <p><strong>IT:</strong> Aggiorna le informazioni del modello di veicolo selezionato.</p>
+     * <p><strong>PT-BR:</strong> Atualiza as informações do modelo de veículo selecionado.</p>
+     */
     private void alterar(){
         modelo.setMarca(marca);
         modelo.setDs_modelo(jTFModelo.getText());
@@ -239,6 +278,11 @@ public class JIFModelo extends javax.swing.JInternalFrame {
         modelo = null;
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected vehicle model from the database.</p>
+     * <p><strong>IT:</strong> Elimina il modello di veicolo selezionato dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui o modelo de veículo selecionado do banco de dados.</p>
+     */
     private void excluir(){
         modelo.setCd_modelo(modelo.getCd_modelo());
         modelor.excluir(modelo);

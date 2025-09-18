@@ -14,6 +14,16 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
     
     private static JIFAssinatura jifassinatura;
     
+    /**
+     * <p><strong>EN:</strong> Returns the single instance of {@code JIFAssinatura}.
+     * If it does not exist yet, creates it and sets the window title to "Assinaturas".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l’unica istanza di {@code JIFAssinatura}.
+     * Se non esiste ancora, la crea e imposta il titolo della finestra su "Assinaturas".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância única de {@code JIFAssinatura}.
+     * Caso ainda não exista, cria e define o título da janela como "Assinaturas".</p>
+     */
     public static JIFAssinatura getInstancia(){
         if(jifassinatura == null){
             jifassinatura = new JIFAssinatura();
@@ -23,11 +33,9 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
     
     Assinatura assinatura = null;
     AssinaturaRepository assinaturar = new AssinaturaRepository();
-    AssinaturaUtil assinaturau = new AssinaturaUtil();
-    
+    AssinaturaUtil assinaturau = new AssinaturaUtil();    
     PrestadorServico presserv = new PrestadorServico();
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();
-    
+    PrestadorServicoUtil presservu = new PrestadorServicoUtil();    
     Utilidade util = new Utilidade();
 
     public JIFAssinatura() {
@@ -301,22 +309,72 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Populates the provider combo box with the list of service providers.
+     * Inserts a default “&lt;Prestador&gt;” option and then adds all retrieved providers.</p>
+     *
+     * <p><strong>IT:</strong> Popola la combo dei prestatori di servizi con l’elenco disponibile.
+     * Inserisce l’opzione predefinita “&lt;Prestador&gt;” e poi aggiunge tutti i prestatori recuperati.</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche o combo de prestadores com a lista de prestadores de serviço.
+     * Insere a opção padrão “&lt;Prestador&gt;” e em seguida adiciona todos os prestadores obtidos.</p>
+     */
     private void jcPresserv(){
         presservu.jcPresserv(jCBPresserv);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads the subscriptions table with the current list of records,
+     * applying the view’s table model.</p>
+     *
+     * <p><strong>IT:</strong> Carica la tabella delle sottoscrizioni con l’elenco corrente dei record,
+     * applicando il modello della tabella della vista.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega a tabela de assinaturas com a lista atual de registros,
+     * aplicando o modelo de tabela da tela.</p>
+     */
     private void tabelaAssinatura(){
         assinaturau.tabelaAssinatura(jTAssinartura);
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies a currency formatter to the value field,
+     * enforcing monetary input formatting.</p>
+     *
+     * <p><strong>IT:</strong> Applica un formattatore di valuta al campo valore,
+     * garantendo la formattazione monetaria dell’input.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica um formatador monetário ao campo de valor,
+     * garantindo a formatação de moeda na digitação.</p>
+     */
     private void formataValor(){
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(jFTFValor));
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies a date mask/formatter to the validity date field,
+     * standardizing the date input.</p>
+     *
+     * <p><strong>IT:</strong> Applica una maschera/format di data al campo di validità,
+     * standardizzando l’inserimento della data.</p>
+     *
+     * <p><strong>PT-BR:</strong> Aplica máscara/formatador de data ao campo de validade,
+     * padronizando a digitação da data.</p>
+     */
     private void formataData(){
         util.formataDataCampo(jFTFDtValidade);
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears the form fields and resets selections:
+     * provider to first option, clears service, login, password, value, plan type and validity date.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce i campi del form e reimposta le selezioni:
+     * prestatore alla prima opzione, pulisce servizio, login, password, valore, tipo di piano e data di validità.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa os campos do formulário e reinicia seleções:
+     * prestador na primeira opção, limpa serviço, login, senha, valor, tipo de plano e data de validade.</p>
+     */
     private void limpaCampos(){
         jCBPresserv.setSelectedIndex(0);
         jTFServico.setText(null);
@@ -327,6 +385,16 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         jFTFDtValidade.setText(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Validates required fields before saving.
+     * Ensures “Service” and “Login” are not empty; focuses the invalid field and shows a message.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi obbligatori prima del salvataggio.
+     * Verifica che “Servizio” e “Login” non siano vuoti; mette a fuoco il campo non valido e mostra un messaggio.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos obrigatórios antes de salvar.
+     * Garante que “Serviço” e “Login” não estejam vazios; foca o campo inválido e exibe mensagem.</p>
+     */
     private boolean validaCampos(){
         if(jTFServico.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Campo em branco.", "Assinatura", JOptionPane.INFORMATION_MESSAGE);
@@ -341,6 +409,19 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Persists the subscription:
+     * if it’s a new record, creates it with provider, service, login, password, value (defaults to 0.00 if blank),
+     * plan (monthly or annual), validity date (uses today if invalid), and user; otherwise updates the existing record.</p>
+     *
+     * <p><strong>IT:</strong> Salva la sottoscrizione:
+     * se è un nuovo record, lo crea con prestatore, servizio, login, password, valore (0,00 se vuoto),
+     * piano (mensile o annuale), data di validità (oggi se non valida) e utente; altrimenti aggiorna il record esistente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva a assinatura:
+     * se for novo registro, cria com prestador, serviço, login, senha, valor (0,00 se em branco),
+     * plano (mensal ou anual), data de validade (hoje se inválida) e usuário; caso contrário, atualiza o registro existente.</p>
+     */
     private void salvar(){
         if(jFTFValor.getText().isEmpty()){
             jFTFValor.setText("0,00");
@@ -384,6 +465,16 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         }
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected subscription using its identifier and user code,
+     * then clears the in-memory reference.</p>
+     *
+     * <p><strong>IT:</strong> Elimina la sottoscrizione selezionata usando il suo identificatore e il codice utente,
+     * quindi azzera il riferimento in memoria.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui a assinatura selecionada usando seu identificador e o código do usuário,
+     * em seguida limpa a referência em memória.</p>
+     */
     private void excluir(){
         assinatura.setCd_assinatura(assinatura.getCd_assinatura());
         assinatura.setCd_usuario(JPLogin.codloginuser);

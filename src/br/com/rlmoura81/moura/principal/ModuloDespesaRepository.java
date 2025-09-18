@@ -24,23 +24,33 @@ import javax.swing.JOptionPane;
 
 public class ModuloDespesaRepository{
 
-    String sql = "";
-    
+    String sql = "";    
     AnimalDespesa animald = new AnimalDespesa();
-    AnimalRepository animalr = new AnimalRepository();
-    
+    AnimalRepository animalr = new AnimalRepository();    
     VeiculoDespesa veiculod = new VeiculoDespesa();
-    VeiculoRepository veiculor = new VeiculoRepository();
-    
+    VeiculoRepository veiculor = new VeiculoRepository();    
     ImovelDespesa imoveld = new ImovelDespesa();
-    ImovelRepository imovelr = new ImovelRepository();
-    
-    PrestadorServicoRepository psr = new PrestadorServicoRepository();
-    
-    ProdutoRepository produtor = new ProdutoRepository();
-    
+    ImovelRepository imovelr = new ImovelRepository();    
+    PrestadorServicoRepository psr = new PrestadorServicoRepository();    
+    ProdutoRepository produtor = new ProdutoRepository();    
     Utilidade util = new Utilidade();
     
+    /**
+     * <p><strong>EN:</strong> Inserts an expense record for Animal, Vehicle, or Property.
+     * Detects the object type at runtime and writes into the corresponding table
+     * (<code>animdesp</code>, <code>veicdesp</code>, or <code>imovdesp</code>), formatting dates
+     * and binding all required fields.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce una spesa per Animale, Veicolo o Immobile.
+     * Rileva il tipo a runtime e scrive nella tabella corrispondente
+     * (<code>animdesp</code>, <code>veicdesp</code> o <code>imovdesp</code>), formattando le date
+     * e impostando i parametri necessari.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere um registro de despesa para Animal, Veículo ou Imóvel.
+     * Identifica o tipo em tempo de execução e grava na tabela correspondente
+     * (<code>animdesp</code>, <code>veicdesp</code> ou <code>imovdesp</code>), formatando datas
+     * e vinculando todos os campos exigidos.</p>
+     */
     public void inserir(Object o) {
         if(o.getClass().equals(animald.getClass())){
             AnimalDespesa ad = (AnimalDespesa) o;
@@ -111,6 +121,19 @@ public class ModuloDespesaRepository{
         }        
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an expense for the given domain type (Animal, Vehicle, Property).
+     * Applies changes to the appropriate table and row, using composite keys (entity id + user id)
+     * where applicable.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna una spesa per il tipo di dominio indicato (Animale, Veicolo, Immobile).
+     * Applica le modifiche alla tabella corretta usando chiavi composte (id entità + id utente)
+     * quando necessario.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza uma despesa para o tipo informado (Animal, Veículo, Imóvel).
+     * Aplica as alterações na tabela correta, utilizando chaves compostas (id da entidade + id do usuário)
+     * quando aplicável.</p>
+     */
     public void alterar(Object o) {
         if(o.getClass().equals(animald.getClass())){
             AnimalDespesa ad = (AnimalDespesa) o;
@@ -209,6 +232,19 @@ public class ModuloDespesaRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Deletes an expense entry for Animal, Vehicle, or Property.
+     * Removes the row from the corresponding table using the entity id and user id to target
+     * the exact record.</p>
+     *
+     * <p><strong>IT:</strong> Elimina una voce di spesa per Animale, Veicolo o Immobile.
+     * Rimuove la riga dalla tabella corrispondente usando id entità e id utente per individuare
+     * il record esatto.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui um lançamento de despesa de Animal, Veículo ou Imóvel.
+     * Remove a linha da tabela correspondente usando o id da entidade e o id do usuário
+     * para localizar o registro.</p>
+     */
     public void excluir(Object o) {
         if(o.getClass().equals(animald.getClass())){
             AnimalDespesa ad = (AnimalDespesa) o;
@@ -269,6 +305,16 @@ public class ModuloDespesaRepository{
         } 
     }
 
+    /**
+     * <p><strong>EN:</strong> Lists Animal expenses for the current month.
+     * Filters by the provided Animal and current month period, ordering by expense date.</p>
+     *
+     * <p><strong>IT:</strong> Elenca le spese dell’Animale per il mese corrente.
+     * Filtra per l’Animale fornito e per il periodo del mese corrente, ordinando per data.</p>
+     *
+     * <p><strong>PT-BR:</strong> Lista as despesas do Animal no mês atual.
+     * Filtra pelo Animal informado e pelo período do mês corrente, ordenando por data.</p>
+     */
     public ArrayList getListaAnimalDespesa(Animal a) {
         ArrayList animalistad = new ArrayList();
             try{
@@ -304,6 +350,16 @@ public class ModuloDespesaRepository{
         return animalistad;
     }
 
+    /**
+     * <p><strong>EN:</strong> Lists Animal expenses within a custom date range.
+     * Uses start/end dates (strings) to constrain results for the given Animal.</p>
+     *
+     * <p><strong>IT:</strong> Elenca le spese dell’Animale in un intervallo di date personalizzato.
+     * Usa date di inizio/fine (stringhe) per limitare i risultati per l’Animale indicato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Lista despesas do Animal em um intervalo de datas.
+     * Utiliza datas inicial/final (strings) para limitar os resultados do Animal informado.</p>
+     */
     public ArrayList getListaAnimalDespesa(Animal a, String dt_inicio, String dt_final) {
         ArrayList animalistad = new ArrayList();
             try{
@@ -341,6 +397,16 @@ public class ModuloDespesaRepository{
         return animalistad;
     }
         
+    /**
+     * <p><strong>EN:</strong> Gets a single Animal expense by its id.
+     * Returns the hydrated domain object with related Animal, Product and Provider.</p>
+     *
+     * <p><strong>IT:</strong> Recupera una singola spesa dell’Animale per id.
+     * Restituisce l’oggetto con riferimenti ad Animale, Prodotto e Prestador de Serviço.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém uma despesa de Animal pelo id.
+     * Retorna o objeto completo com Animal, Produto e Prestador vinculados.</p>
+     */
     public Object getByIdAnimalDespesa(int id) {
         AnimalDespesa animalistad = null;
             try{
@@ -371,6 +437,16 @@ public class ModuloDespesaRepository{
         return animalistad;
     }
 
+    /**
+     * <p><strong>EN:</strong> Lists Vehicle expenses for the current month.
+     * Filters by the provided Vehicle and current month, ordering by date.</p>
+     *
+     * <p><strong>IT:</strong> Elenca le spese del Veicolo per il mese corrente.
+     * Filtra per Veicolo e mese corrente, ordinando per data.</p>
+     *
+     * <p><strong>PT-BR:</strong> Lista as despesas do Veículo no mês atual.
+     * Filtra pelo Veículo e mês corrente, ordenando por data.</p>
+     */
     public ArrayList getListaVeiculoDespesa(Veiculo v) {
         ArrayList veiculolistad = new ArrayList();
             try{
@@ -405,6 +481,16 @@ public class ModuloDespesaRepository{
         return veiculolistad;
     }
 
+    /**
+     * <p><strong>EN:</strong> Lists Vehicle expenses within a custom date range.
+     * Applies the provided start/end dates to the selected Vehicle.</p>
+     *
+     * <p><strong>IT:</strong> Elenca le spese del Veicolo in un intervallo di date personalizzato.
+     * Applica le date di inizio/fine al Veicolo selezionato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Lista despesas do Veículo em intervalo de datas.
+     * Aplica as datas inicial/final ao Veículo selecionado.</p>
+     */
     public ArrayList getListaVeiculoDespesa(Veiculo v, String dt_inicio, String dt_final) {
         ArrayList veiculolistad = new ArrayList();
             try{
@@ -441,6 +527,16 @@ public class ModuloDespesaRepository{
         return veiculolistad;
     }
         
+    /**
+     * <p><strong>EN:</strong> Gets a single Vehicle expense by id.
+     * Returns the populated expense including Vehicle and Provider references.</p>
+     *
+     * <p><strong>IT:</strong> Recupera una singola spesa del Veicolo per id.
+     * Restituisce la spesa con riferimenti a Veicolo e Prestador.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém uma despesa de Veículo pelo id.
+     * Retorna o registro com Veículo e Prestador associados.</p>
+     */
     public Object getByIdVeiculoDespesa(int id) {
         VeiculoDespesa veiculolistad = null;
             try{
@@ -470,6 +566,16 @@ public class ModuloDespesaRepository{
         return veiculolistad;
     }    
     
+    /**
+     * <p><strong>EN:</strong> Lists Property (Real Estate) expenses.
+     * Filters by the given Property and current user, ordering by date.</p>
+     *
+     * <p><strong>IT:</strong> Elenca le spese dell’Immobile.
+     * Filtra per l’Immobile indicato e utente corrente, ordinando per data.</p>
+     *
+     * <p><strong>PT-BR:</strong> Lista as despesas do Imóvel.
+     * Filtra pelo Imóvel informado e usuário atual, ordenando por data.</p>
+     */
     public ArrayList getListaImovelDespesa(Imovel i) {
         ArrayList imovellistad = new ArrayList();
             try{
@@ -503,6 +609,16 @@ public class ModuloDespesaRepository{
         return imovellistad;
     }
     
+    /**
+     * <p><strong>EN:</strong> Lists Property expenses within a custom date range.
+     * Uses start/end date strings to constrain results for the specified Property.</p>
+     *
+     * <p><strong>IT:</strong> Elenca le spese dell’Immobile in un intervallo di date.
+     * Usa stringhe di inizio/fine per limitare i risultati dell’Immobile selezionato.</p>
+     *
+     * <p><strong>PT-BR:</strong> Lista despesas do Imóvel por intervalo de datas.
+     * Utiliza datas inicial/final (strings) para limitar os resultados do Imóvel.</p>
+     */
     public ArrayList getListaImovelDespesa(Imovel i, String dt_inicio, String dt_final) {
         ArrayList imovellistad = new ArrayList();
             try{
@@ -539,6 +655,16 @@ public class ModuloDespesaRepository{
         return imovellistad;
     }
     
+    /**
+     * <p><strong>EN:</strong> Gets a single Property expense by id.
+     * Returns the expense with linked Property and Provider entities.</p>
+     *
+     * <p><strong>IT:</strong> Recupera una spesa dell’Immobile per id.
+     * Restituisce la spesa con entità Immobile e Prestador collegate.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém uma despesa de Imóvel pelo id.
+     * Retorna a despesa com Imóvel e Prestador relacionados.</p>
+     */
     public Object getByIdImovelDespesa(int id) {
         ImovelDespesa idespesa = null;
             try{
@@ -568,6 +694,19 @@ public class ModuloDespesaRepository{
         return idespesa;
     }
     
+    /**
+     * <p><strong>EN:</strong> Sums total expenses (value × quantity) for the current month
+     * over a domain type (Animal, Vehicle, or Property). Selects the proper table based on
+     * the runtime class and returns zero when no results are found.</p>
+     *
+     * <p><strong>IT:</strong> Somma le spese totali (valore × quantità) del mese corrente
+     * per un tipo di dominio (Animale, Veicolo o Immobile). Sceglie la tabella in base al tipo
+     * a runtime e restituisce zero se non ci sono risultati.</p>
+     *
+     * <p><strong>PT-BR:</strong> Soma as despesas totais (valor × quantidade) do mês corrente
+     * para um tipo (Animal, Veículo ou Imóvel). Seleciona a tabela conforme o tipo em execução
+     * e retorna zero quando não houver resultados.</p>
+     */
     public BigDecimal somaDespesa(Object o) {
         BigDecimal mdespesa = null;
             try{

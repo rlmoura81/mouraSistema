@@ -14,6 +14,16 @@ public class JIFIndiceValor extends javax.swing.JInternalFrame {
     
     private static JIFIndiceValor jifindice;
     
+    /**
+     * <p><strong>EN:</strong> Returns the singleton instance of {@link JIFIndiceValor}.  
+     * If no instance exists, a new one is created and initialized with the title "Índice - valores".</p>
+     *
+     * <p><strong>IT:</strong> Restituisce l'istanza singleton di {@link JIFIndiceValor}.  
+     * Se non esiste alcuna istanza, ne viene creata una nuova con il titolo "Índice - valores".</p>
+     *
+     * <p><strong>PT-BR:</strong> Retorna a instância única de {@link JIFIndiceValor}.  
+     * Caso não exista, uma nova é criada e inicializada com o título "Índice - valores".</p>
+     */
     public static JIFIndiceValor getInstancia(){
         if(jifindice == null){
             jifindice = new JIFIndiceValor();
@@ -281,22 +291,47 @@ public class JIFIndiceValor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * <p><strong>EN:</strong> Loads index options into the {@link JComboBox} component.</p>
+     * <p><strong>IT:</strong> Carica le opzioni dell’indice nel componente {@link JComboBox}.</p>
+     * <p><strong>PT-BR:</strong> Carrega as opções de índice no componente {@link JComboBox}.</p>
+     */
     private void jcIndice(){
         indiceu.jcIndice(jCBIndice);
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies date formatting to the date input field.</p>
+     * <p><strong>IT:</strong> Applica la formattazione della data al campo di input della data.</p>
+     * <p><strong>PT-BR:</strong> Aplica a formatação de data no campo de entrada.</p>
+     */
     private void formataData(){
         util.formataDataCampo(jFTFData);
     }
     
+    /**
+     * <p><strong>EN:</strong> Applies numeric formatting to the value input field.</p>
+     * <p><strong>IT:</strong> Applica la formattazione numerica al campo di input del valore.</p>
+     * <p><strong>PT-BR:</strong> Aplica a formatação numérica no campo de valor.</p>
+     */
     private void formataValor(){        
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }
         
+    /**
+     * <p><strong>EN:</strong> Populates the table with index values related to the selected index.</p>
+     * <p><strong>IT:</strong> Popola la tabella con i valori dell’indice relativi all’indice selezionato.</p>
+     * <p><strong>PT-BR:</strong> Preenche a tabela com os valores do índice relacionado ao índice selecionado.</p>
+     */
     private void tabelaIndiceValor(){
         indicevaloru.tabelaIndiceValor(jTIndiceValor, indice.getCd_indice());
     }
         
+    /**
+     * <p><strong>EN:</strong> Validates form fields before saving or updating index values.</p>
+     * <p><strong>IT:</strong> Valida i campi del modulo prima di salvare o aggiornare i valori dell’indice.</p>
+     * <p><strong>PT-BR:</strong> Valida os campos do formulário antes de salvar ou atualizar os valores do índice.</p>
+     */
     private boolean validaCampos(){
         if(indice == null){
             JOptionPane.showMessageDialog(null, "Selecione o Índice.", "Índice", JOptionPane.INFORMATION_MESSAGE);
@@ -319,6 +354,11 @@ public class JIFIndiceValor extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all form fields and resets labels to their default state.</p>
+     * <p><strong>IT:</strong> Pulisce tutti i campi del modulo e reimposta le etichette allo stato predefinito.</p>
+     * <p><strong>PT-BR:</strong> Limpa todos os campos do formulário e redefine os rótulos para o estado padrão.</p>
+     */
     private void limpaCampos(){
         jFTFData.setText(null);
         jFTFValor.setValue(null);
@@ -327,6 +367,11 @@ public class JIFIndiceValor extends javax.swing.JInternalFrame {
         jLAno.setText("Ano:");
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new index value with the current form data into the database.</p>
+     * <p><strong>IT:</strong> Salva un nuovo valore di indice con i dati correnti del modulo nel database.</p>
+     * <p><strong>PT-BR:</strong> Salva um novo valor de índice com os dados atuais do formulário no banco de dados.</p>
+     */
     private void salvar(){
         indicevalor.setIndice(indice);
         indicevalor.setDt_vlatualizado(util.recebeData(jFTFData.getText()));
@@ -335,11 +380,21 @@ public class JIFIndiceValor extends javax.swing.JInternalFrame {
         indicevalorr.inserir(indicevalor);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected index value from the database.</p>
+     * <p><strong>IT:</strong> Elimina il valore dell’indice selezionato dal database.</p>
+     * <p><strong>PT-BR:</strong> Exclui o valor do índice selecionado do banco de dados.</p>
+     */
     private void excluir(){
         indicevalor.setCd_indicevl(indicevalor.getCd_indicevl());
         indicevalorr.excluir(indicevalor);
     }
     
+    /**
+     * <p><strong>EN:</strong> Performs the calculation of averages (monthly/yearly) and updates the UI labels.</p>
+     * <p><strong>IT:</strong> Esegue il calcolo delle medie (mensili/annuali) e aggiorna le etichette dell’interfaccia.</p>
+     * <p><strong>PT-BR:</strong> Realiza o cálculo das médias (mensal/anual) e atualiza os rótulos da interface.</p>
+     */
     private void calculoMedia(){
         indicevalor.setVl_mes(Utilidade.converter(jFTFValor.getText()));
         if(jRBMes.isSelected() == true){

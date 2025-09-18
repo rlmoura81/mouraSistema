@@ -10,10 +10,19 @@ import javax.swing.JOptionPane;
 
 public class RacaRepository implements IPadraoRepository{
 
-    String sql = "";
-    
+    String sql = "";    
     EspecieRepository especier = new EspecieRepository();
 
+    /**
+     * <p><strong>EN:</strong> Inserts a breed (Raca) into the database.</p>
+     *
+     * <p><strong>IT:</strong> Inserisce una razza (Raca) nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Insere uma raça (Raca) no banco de dados.</p>
+     *
+     * @param o EN: Raca object to insert | IT: Oggetto Raca da inserire | PT-BR: Objeto Raca a ser inserido
+     * @since 1.0.0
+     */
     @Override
     public void inserir(Object o) {        
         Raca r = (Raca) o;        
@@ -33,6 +42,16 @@ public class RacaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Updates an existing breed (Raca) in the database.</p>
+     *
+     * <p><strong>IT:</strong> Aggiorna una razza (Raca) esistente nel database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Atualiza uma raça (Raca) existente no banco de dados.</p>
+     *
+     * @param o EN: Raca object with updated values | IT: Oggetto Raca con valori aggiornati | PT-BR: Objeto Raca com valores atualizados
+     * @since 1.0.0
+     */
     @Override
     public void alterar(Object o) {        
         Raca r = (Raca) o;        
@@ -55,7 +74,17 @@ public class RacaRepository implements IPadraoRepository{
                     ex.getMessage(), "Raça", JOptionPane.ERROR);
         }
     }
-                
+
+    /**
+     * <p><strong>EN:</strong> Deletes a breed (Raca) from the database by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Elimina una razza (Raca) dal database tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui uma raça (Raca) do banco de dados pelo seu ID.</p>
+     *
+     * @param o EN: Raca object containing the identifier for deletion | IT: Oggetto Raca contenente l'identificatore da eliminare | PT-BR: Objeto Raca contendo o identificador para exclusão
+     * @since 1.0.0
+     */
     @Override
     public void excluir(Object o) {        
         Raca r = (Raca) o;         
@@ -72,6 +101,16 @@ public class RacaRepository implements IPadraoRepository{
         }
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the list of breeds (Raca) from the database, ordered by name.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l'elenco delle razze (Raca) dal database, ordinate per nome.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera a lista de raças (Raca) do banco de dados, ordenadas por nome.</p>
+     *
+     * @return EN: list of Raca objects | IT: Elenco di oggetti Raca | PT-BR: Lista de objetos Raca
+     * @since 1.0.0
+     */
     @Override
     public ArrayList getLista() {        
         ArrayList racas = new ArrayList();        
@@ -97,6 +136,17 @@ public class RacaRepository implements IPadraoRepository{
         return racas;
     }
 
+    /**
+     * <p><strong>EN:</strong> Gets a breed (Raca) from the database by its ID.</p>
+     *
+     * <p><strong>IT:</strong> Recupera una razza (Raca) dal database tramite il suo ID.</p>
+     *
+     * <p><strong>PT-BR:</strong> Obtém uma raça (Raca) do banco de dados pelo seu ID.</p>
+     *
+     * @param id EN: unique identifier of the breed | IT: Identificatore univoco della razza | PT-BR: Identificador único da raça
+     * @return EN: Raca object if found, otherwise null | IT: Oggetto Raca se trovato, altrimenti null | PT-BR: Objeto Raca se encontrado, caso contrário null
+     * @since 1.0.0
+     */
     @Override
     public Object getById(int id) {        
         Raca r = null;        
@@ -121,6 +171,5 @@ public class RacaRepository implements IPadraoRepository{
             ex.getMessage(), "Raça", JOptionPane.ERROR_MESSAGE);
         }
         return r;
-    }
-    
+    }    
 }

@@ -9,10 +9,19 @@ import javax.swing.table.DefaultTableModel;
 public class MoedaValorUtil {
     
     MoedaValor moedavalor = new MoedaValor();
-    MoedaValorRepository moedavalorr = new MoedaValorRepository();
-    
+    MoedaValorRepository moedavalorr = new MoedaValorRepository();    
     ArrayList lista = new ArrayList();
 
+    /**
+     * <p><strong>EN:</strong> Fills a JTable with currency value records (currency, value, and date).</p>
+     *
+     * <p><strong>IT:</strong> Compila una JTable con i record dei valori delle valute (valuta, valore e data).</p>
+     *
+     * <p><strong>PT-BR:</strong> Preenche uma JTable com registros de valores de moedas (moeda, valor e data).</p>
+     *
+     * @param o EN: JTable to populate | IT: JTable da popolare | PT-BR: JTable a ser preenchida
+     * @since 1.0.0
+     */
     public void tabelaIndiceValor(JTable o){
         String[] nomeColuna = {"Moeda", "Valor", "Data"};
         lista = moedavalorr.getLista();
@@ -28,6 +37,17 @@ public class MoedaValorUtil {
         o.setModel(tIndiceValor);
     }
 
+    /**
+     * <p><strong>EN:</strong> Retrieves the selected object from the JTable.</p>
+     *
+     * <p><strong>IT:</strong> Recupera l'oggetto selezionato dalla JTable.</p>
+     *
+     * <p><strong>PT-BR:</strong> Recupera o objeto selecionado da JTable.</p>
+     *
+     * @param o EN: JTable with selectable rows | IT: JTable con righe selezionabili | PT-BR: JTable com linhas selecionáveis
+     * @return EN: selected object or null if none is selected | IT: oggetto selezionato o null se nessuno è selezionato | PT-BR: objeto selecionado ou null se nenhum for selecionado
+     * @since 1.0.0
+     */
     public Object getSelectObject(JTable o){
         Object selecionado = null;
         int linhaselecionada = o.getSelectedRow();

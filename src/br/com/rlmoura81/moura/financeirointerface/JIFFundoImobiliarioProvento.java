@@ -13,6 +13,16 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
     
     private static JIFFundoImobiliarioProvento jiffiiprov;
     
+    /**
+     * <p><strong>EN:</strong> Opens the {@link JIFFundoImobiliarioProvento} screen for real estate fund income.  
+     * Creates a new instance if none exists, sets the title, and returns the reference.</p>
+     *
+     * <p><strong>IT:</strong> Apre la finestra {@link JIFFundoImobiliarioProvento} per i proventi di fondi immobiliari.  
+     * Crea una nuova istanza se non esiste, imposta il titolo e restituisce il riferimento.</p>
+     *
+     * <p><strong>PT-BR:</strong> Abre a tela {@link JIFFundoImobiliarioProvento} para proventos de fundos imobiliários.  
+     * Cria uma nova instância se não existir, define o título e retorna a referência.</p>
+     */
     public static JIFFundoImobiliarioProvento getInstancia(){
         if(jiffiiprov == null){
             jiffiiprov = new JIFFundoImobiliarioProvento();
@@ -266,20 +276,60 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * <p><strong>EN:</strong> Loads the real estate fund (FII) list into the combo box.  
+     * Calls the utility method to populate {@code jCBAtivo} with available options.</p>
+     *
+     * <p><strong>IT:</strong> Carica l'elenco dei fondi immobiliari (FII) nella combo box.  
+     * Richiama il metodo di utilità per popolare {@code jCBAtivo} con le opzioni disponibili.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega a lista de fundos imobiliários (FII) no combo box.  
+     * Chama o método utilitário para preencher {@code jCBAtivo} com as opções disponíveis.</p>
+     */
     private void jcFundoImobiiario(){
         ativou.jcFundoImobiiario(jCBAtivo);
     }
     
+    /**
+     * <p><strong>EN:</strong> Formats the numeric fields to accept monetary values.  
+     * Applies masks and format rules to {@code jFTFRendimentoPago} and {@code jFTFPrecoDtBase}.</p>
+     *
+     * <p><strong>IT:</strong> Formattta i campi numerici per accettare valori monetari.  
+     * Applica maschere e regole di formato a {@code jFTFRendimentoPago} e {@code jFTFPrecoDtBase}.</p>
+     *
+     * <p><strong>PT-BR:</strong> Formata os campos numéricos para aceitar valores monetários.  
+     * Aplica máscaras e regras de formatação em {@code jFTFRendimentoPago} e {@code jFTFPrecoDtBase}.</p>
+     */
     private void formataValor() {        
         jFTFRendimentoPago.setFormatterFactory(Utilidade.formataValorCampo(ui));
         jFTFPrecoDtBase.setFormatterFactory(Utilidade.formataValorCampo(ui));
     }  
 
+    /**
+     * <p><strong>EN:</strong> Formats the date fields to ensure valid date input.  
+     * Configures {@code jFTFDtPagamento} and {@code jFTFDtPrecoBase} with date masks.</p>
+     *
+     * <p><strong>IT:</strong> Formattta i campi data per garantire un input valido.  
+     * Configura {@code jFTFDtPagamento} e {@code jFTFDtPrecoBase} con maschere di data.</p>
+     *
+     * <p><strong>PT-BR:</strong> Formata os campos de data para garantir entradas válidas.  
+     * Configura {@code jFTFDtPagamento} e {@code jFTFDtPrecoBase} com máscaras de data.</p>
+     */
     private void formatarData(){
         util.formataDataCampo(jFTFDtPagamento);
         util.formataDataCampo(jFTFDtPrecoBase);
     } 
 
+    /**
+     * <p><strong>EN:</strong> Validates the fields before saving a real estate fund income record.  
+     * Ensures that the fund, payment value, base price, and dates are properly filled in.</p>
+     *
+     * <p><strong>IT:</strong> Convalida i campi prima di salvare un record di provento immobiliare.  
+     * Verifica che il fondo, l'importo del pagamento, il prezzo base e le date siano compilati correttamente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Valida os campos antes de salvar um provento de fundo imobiliário.  
+     * Garante que o fundo, valor de pagamento, preço base e datas estejam corretamente preenchidos.</p>
+     */
     private boolean validaCampos(){        
         if(ativo == null){
             JOptionPane.showMessageDialog(null, "Selecione o FII.", "Fundo Investimento Imobiliário", JOptionPane.INFORMATION_MESSAGE);
@@ -307,6 +357,16 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
         return true;
     }
     
+    /**
+     * <p><strong>EN:</strong> Clears all fields on the FII income screen.  
+     * Resets combo box selections and input fields to their default state.</p>
+     *
+     * <p><strong>IT:</strong> Pulisce tutti i campi nella schermata dei proventi FII.  
+     * Reimposta le selezioni delle combo box e i campi di input allo stato predefinito.</p>
+     *
+     * <p><strong>PT-BR:</strong> Limpa todos os campos da tela de provento FII.  
+     * Reseta as seleções das combo box e os campos de entrada para o estado padrão.</p>
+     */
     private void limpaCampos(){
         jCBAtivo.setSelectedIndex(0);
         jFTFRendimentoPago.setValue(null);
@@ -315,10 +375,30 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
         jFTFDtPrecoBase.setText(null);
     }
     
+    /**
+     * <p><strong>EN:</strong> Loads the table of FII incomes.  
+     * Retrieves the registered records and displays them in {@code jTFiProv}.</p>
+     *
+     * <p><strong>IT:</strong> Carica la tabella dei proventi FII.  
+     * Recupera i record registrati e li visualizza in {@code jTFiProv}.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega a tabela de proventos FII.  
+     * Recupera os registros cadastrados e exibe em {@code jTFiProv}.</p>
+     */
     private void tabelaFiProv(){
         ativou.tabelaFiProv(jTFiProv);
     }
     
+    /**
+     * <p><strong>EN:</strong> Saves a new FII income record.  
+     * Sets the selected fund, income value, base price, and dates, then persists the record.</p>
+     *
+     * <p><strong>IT:</strong> Salva un nuovo record di provento FII.  
+     * Imposta il fondo selezionato, l'importo, il prezzo base e le date, quindi registra il record.</p>
+     *
+     * <p><strong>PT-BR:</strong> Salva um novo registro de provento FII.  
+     * Define o fundo selecionado, valor do rendimento, preço base e datas, e então persiste o registro.</p>
+     */
     private void salvar(){
         fiprovento.setAtivo(ativo);
         fiprovento.setVl_provento(Utilidade.converter(jFTFRendimentoPago.getText()));
@@ -330,6 +410,16 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
         fiproventor.inserir(fiprovento);
     }
     
+    /**
+     * <p><strong>EN:</strong> Deletes the selected FII income record.  
+     * Uses the current {@code fiprovento} object and removes it from the database.</p>
+     *
+     * <p><strong>IT:</strong> Elimina il record di provento FII selezionato.  
+     * Utilizza l'oggetto {@code fiprovento} corrente e lo rimuove dal database.</p>
+     *
+     * <p><strong>PT-BR:</strong> Exclui o registro de provento FII selecionado.  
+     * Usa o objeto {@code fiprovento} atual e remove do banco de dados.</p>
+     */
     private void excluir(){
         fiprovento.setCd_fdimprov(fiprovento.getCd_fdimprov());
         fiproventor.excluir(fiprovento);
