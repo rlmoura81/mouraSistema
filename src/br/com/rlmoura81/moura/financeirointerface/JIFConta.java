@@ -41,7 +41,7 @@ public class JIFConta extends javax.swing.JInternalFrame {
     ContaSaldo csaldo = new ContaSaldo();
     ContaSaldoRepository csaldor = new ContaSaldoRepository();
     
-    Banco banco = null;
+    Banco banco = new Banco();
     BancoUtil bancou = new BancoUtil();
     
     TipoConta tipoconta = null;
@@ -49,8 +49,7 @@ public class JIFConta extends javax.swing.JInternalFrame {
     
     public JIFConta() {
         initComponents();
-        
-        banco = null;
+
         jcTpconta();
         jcBanco();
         tabelaConta();
@@ -394,7 +393,7 @@ public class JIFConta extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Atualiza uma conta existente com os dados modificados do formulário.</p>
      */
     private void alterar(){
-        conta.setBanco(conta.getBanco());
+        conta.setBanco(banco);
         conta.setNm_agencia(jTFAgencia.getText());
         conta.setNm_conta(jTFNumeroConta.getText());
         conta.setTpconta(tipoconta);
@@ -430,7 +429,7 @@ public class JIFConta extends javax.swing.JInternalFrame {
 
     private void jTContaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTContaMouseClicked
         conta = (Conta)contau.getSelectedObject(jTConta);
-        jCBBanco.setSelectedItem(conta.getBanco());
+        jCBBanco.getModel().setSelectedItem(conta.getBanco());
         jTFAgencia.setText(conta.getNm_agencia());
         jTFNumeroConta.setText(conta.getNm_conta());
         jCBTipoConta.getModel().setSelectedItem(conta.getTpconta());

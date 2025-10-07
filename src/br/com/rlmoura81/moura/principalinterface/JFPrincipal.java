@@ -94,6 +94,9 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMCartoes = new javax.swing.JMenu();
         jMICartoesCad = new javax.swing.JMenuItem();
         jMICartoesLanc = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMICreditoCad = new javax.swing.JMenuItem();
         jMDespesa = new javax.swing.JMenu();
@@ -331,6 +334,16 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMCartoes.add(jMICartoesLanc);
 
         jMFinanceiro.add(jMCartoes);
+
+        jMenu3.setText("Salario");
+
+        jMenuItem2.setText("Empregador");
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem3.setText("Salario");
+        jMenu3.add(jMenuItem3);
+
+        jMFinanceiro.add(jMenu3);
 
         jMenu1.setText("Renda");
 
@@ -973,7 +986,10 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMVeiculo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 
 }
