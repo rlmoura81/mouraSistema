@@ -33,6 +33,7 @@ import br.com.rlmoura81.moura.financeirointerface.JIFFundoInvestimento;
 import br.com.rlmoura81.moura.financeirointerface.JIFFundoInvestimentoAplicacao;
 import br.com.rlmoura81.moura.financeirointerface.JIFMoedaValor;
 import br.com.rlmoura81.moura.financeirointerface.JIFMovimentoCaixaFuturo;
+import br.com.rlmoura81.moura.financeirointerface.JIFSalario;
 import br.com.rlmoura81.moura.imovel.Imovel;
 import br.com.rlmoura81.moura.principalcadastrointerface.JIFAssinatura;
 import br.com.rlmoura81.moura.principalcadastrointerface.JIFGrupo;
@@ -341,6 +342,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem2);
 
         jMenuItem3.setText("Salario");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
 
         jMFinanceiro.add(jMenu3);
@@ -912,6 +918,10 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void jMIResumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIResumoActionPerformed
         gerenciainterface.abrirInterface(JIFResumo.getInstancia());
     }//GEN-LAST:event_jMIResumoActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        gerenciainterface.abrirInterface(JIFSalario.getInstancia());
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar JMBPrincipal;

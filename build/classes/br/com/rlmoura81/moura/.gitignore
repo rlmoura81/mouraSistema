@@ -1,0 +1,20 @@
+# Ignorar arquivos de build e diretórios do NetBeans
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+nbproject/private/
+*.class
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos com dados sensíveis
+src/br/com/rlmoura81/moura/Conexao.java
+src/br/com/rlmoura81/moura/ConexaoPersistencia.java
+
+# Logs e temporários
+*.log
+*.tmp
