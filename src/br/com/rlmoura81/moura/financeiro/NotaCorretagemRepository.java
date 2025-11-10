@@ -41,7 +41,7 @@ public class NotaCorretagemRepository implements IPadraoRepository{
             ps.execute();
             ps.close();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao inserir:\n" +
+            JOptionPane.showMessageDialog(null, "Erro ao inserir Nota de Corretagem:\n" +
                     ex.getMessage());
         }
     }

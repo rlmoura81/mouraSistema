@@ -33,7 +33,7 @@ public class HistoricoUtil {
             dadosArray[i][0] = Utilidade.formatoData.format(historico.getDt_historico().getTime());
             dadosArray[i][1] = historico.getDs_historico();
             dadosArray[i][2] = historico.getTipo();
-            dadosArray[i][3] = historico.getPresserv();
+            dadosArray[i][3] = historico.getEmpresa();
         }
         DefaultTableModel tHistorico = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tHistorico);

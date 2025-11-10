@@ -47,13 +47,21 @@ public class CartaoParcelamento extends CartaoLancamento{
         this.dt_parcela = dt_parcela;
         this.nm_parcelapag = nm_parcelapag;
     }
-        
+
+    public CartaoParcelamento(int cd_parcela, String ds_despesa){
+        this.cd_parcela = cd_parcela;
+        this.ds_despesa = ds_despesa;
+    }
+    
     public CartaoParcelamento() {
     }
 
     @Override
-    public String toString() {
+    /*public String toString() {
         return "CartaoParcelamento{" + "cd_parcela=" + cd_parcela + ", dt_parcela=" + dt_parcela + ", nm_parcelapag=" + nm_parcelapag + '}';
+    }*/
+
+    public String toString() {
+        return ds_despesa;
     }
-        
 }

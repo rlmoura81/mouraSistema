@@ -46,37 +46,4 @@ public class Estado {
     public String toString() {
         return ds_SiglaEstado;
     }     
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.cd_Estado);
-        hash = 89 * hash + Objects.hashCode(this.ds_Estado);
-        hash = 89 * hash + Objects.hashCode(this.ds_SiglaEstado);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Estado other = (Estado) obj;
-        if (!Objects.equals(this.ds_Estado, other.ds_Estado)) {
-            return false;
-        }
-        if (!Objects.equals(this.ds_SiglaEstado, other.ds_SiglaEstado)) {
-            return false;
-        }
-        if (!Objects.equals(this.cd_Estado, other.cd_Estado)) {
-            return false;
-        }
-        return true;
-    }
 }

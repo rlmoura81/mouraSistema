@@ -3,7 +3,6 @@ package br.com.rlmoura81.moura.cartao;
 import br.com.rlmoura81.moura.financeiro.Banco;
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Objects;
 
 public class Cartao {
     
@@ -86,56 +85,6 @@ public class Cartao {
 
     @Override
     public String toString() {
-        return nm_cartao;
+        return "Cartao{" + "cd_cartao=" + cd_cartao + ", nm_cartao=" + nm_cartao + ", nm_limite=" + nm_limite + ", dt_vencimento=" + dt_vencimento + ", cartaobandeira=" + cartaobandeira + ", banco=" + banco + ", cd_usuario=" + cd_usuario + '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + this.cd_cartao;
-        hash = 17 * hash + Objects.hashCode(this.nm_cartao);
-        hash = 17 * hash + Objects.hashCode(this.nm_limite);
-        hash = 17 * hash + Objects.hashCode(this.dt_vencimento);
-        hash = 17 * hash + Objects.hashCode(this.cartaobandeira);
-        hash = 17 * hash + Objects.hashCode(this.banco);
-        hash = 17 * hash + this.cd_usuario;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cartao other = (Cartao) obj;
-        if (this.cd_cartao != other.cd_cartao) {
-            return false;
-        }
-        if (this.cd_usuario != other.cd_usuario) {
-            return false;
-        }
-        if (!Objects.equals(this.nm_cartao, other.nm_cartao)) {
-            return false;
-        }
-        if (!Objects.equals(this.nm_limite, other.nm_limite)) {
-            return false;
-        }
-        if (!Objects.equals(this.dt_vencimento, other.dt_vencimento)) {
-            return false;
-        }
-        if (!Objects.equals(this.cartaobandeira, other.cartaobandeira)) {
-            return false;
-        }
-        if (!Objects.equals(this.banco, other.banco)) {
-            return false;
-        }
-        return true;
-    }
-  
 }

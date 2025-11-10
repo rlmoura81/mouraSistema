@@ -89,7 +89,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jCBModuloDespesa" min="-2" pref="200" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jCBPresserv" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="jCBEmpresa" min="-2" pref="250" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jCBProduto" min="-2" pref="250" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -102,7 +102,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jCBModuloDespesa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCBPresserv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCBEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jCBProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -124,17 +124,17 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jCBPresserv">
+        <Component class="javax.swing.JComboBox" name="jCBEmpresa">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBPresservActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBEmpresaActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Empresa&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="jCBProduto">

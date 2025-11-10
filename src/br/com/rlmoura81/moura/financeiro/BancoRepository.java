@@ -106,8 +106,8 @@ public class BancoRepository implements IPadraoRepository{
      * @return EN: list of bank entities | IT: elenco di entità banca | PT-BR: lista de entidades banco
      */
     @Override
-    public ArrayList getLista() {
-        ArrayList bancos = new ArrayList();
+    public ArrayList<Banco> getLista() {
+        ArrayList<Banco> banco = new ArrayList();
         try{
             sql = "SELECT cd_banco, ds_banco, nm_banco, cd_usuario" +
                   "  FROM banco" +
@@ -120,14 +120,14 @@ public class BancoRepository implements IPadraoRepository{
                         rs.getString("ds_banco"),
                         rs.getInt("nm_banco"),
                         rs.getInt("cd_usuario"));
-                        bancos.add(b);
+                        banco.add(b);
             }
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de bancos:\n" + 
                     ex.getMessage(), "Banco", JOptionPane.ERROR_MESSAGE);
         }
-        return bancos;
+        return banco;
     }
 
     /**

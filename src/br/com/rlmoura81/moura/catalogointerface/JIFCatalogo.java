@@ -252,7 +252,6 @@ public class JIFCatalogo extends javax.swing.JInternalFrame {
             jTFPesquisar.requestFocus();
             catalogou.tabelaCatalogo(jTCatalogo);
         }else{
-            jTFPesquisar.setText(null);
             catalogou.tabelaCatalogo(jTCatalogo, jTFPesquisar.getText());
         }
     }//GEN-LAST:event_jBPesquisarActionPerformed

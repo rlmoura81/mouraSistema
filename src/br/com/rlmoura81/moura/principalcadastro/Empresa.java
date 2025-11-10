@@ -1,26 +1,27 @@
 package br.com.rlmoura81.moura.principalcadastro;
 
-public class PrestadorServico {
-    private int cd_presserv;
-    private String ds_presserv;
+public class Empresa {
+    private int cd_empresa;
+    private String ds_empresa;
     private String ds_razaosocial;
     private String nm_documento;
+    private TipoEmpresa tpEmpresa;
     private int cd_usuario;
 
-    public int getCd_presserv() {
-        return cd_presserv;
+    public int getCd_empresa() {
+        return cd_empresa;
     }
 
-    public void setCd_presserv(int cd_presserv) {
-        this.cd_presserv = cd_presserv;
+    public void setCd_empresa(int cd_empresa) {
+        this.cd_empresa = cd_empresa;
     }
 
-    public String getDs_presserv() {
-        return ds_presserv;
+    public String getDs_empresa() {
+        return ds_empresa;
     }
 
-    public void setDs_presserv(String ds_presserv) {
-        this.ds_presserv = ds_presserv;
+    public void setDs_empresa(String ds_empresa) {
+        this.ds_empresa = ds_empresa;
     }
 
     public String getDs_razaosocial() {
@@ -39,6 +40,14 @@ public class PrestadorServico {
         this.nm_documento = nm_documento;
     }
 
+    public TipoEmpresa getTpEmpresa() {
+        return tpEmpresa;
+    }
+
+    public void setTpEmpresa(TipoEmpresa tpEmpresa) {
+        this.tpEmpresa = tpEmpresa;
+    }
+
     public int getCd_usuario() {
         return cd_usuario;
     }
@@ -47,19 +56,22 @@ public class PrestadorServico {
         this.cd_usuario = cd_usuario;
     }
 
-    public PrestadorServico(int cd_presserv, String ds_presserv, String ds_razaosocial, String nm_documento, int cd_usuario) {
-        this.cd_presserv = cd_presserv;
-        this.ds_presserv = ds_presserv;
+    public Empresa(int cd_empresa, String ds_empresa, String ds_razaosocial, String nm_documento, TipoEmpresa tpEmpresa, int cd_usuario) {
+        this.cd_empresa = cd_empresa;
+        this.ds_empresa = ds_empresa;
         this.ds_razaosocial = ds_razaosocial;
         this.nm_documento = nm_documento;
+        this.tpEmpresa = tpEmpresa;
         this.cd_usuario = cd_usuario;
     }
 
-    public PrestadorServico() {
+    public Empresa() {
     }
-    
+
     @Override
     public String toString() {
-        return ds_presserv;
+        return ds_empresa;
     }
+
+
 }

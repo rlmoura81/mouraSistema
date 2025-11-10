@@ -167,5 +167,30 @@ public class AtivoSaldoRepository implements IPadraoRepository{
                     ex.getMessage(), "Ativo Saldo", JOptionPane.ERROR_MESSAGE);
         }
         return asaldo;
+    }
+    
+    public Object getById(int id, int cd_usuario) {
+        AtivoSaldo asaldo = null;
+        try{
+            sql = "SELECT cd_ativo, nm_qtde, cd_usuario" +
+                  "  FROM ativosaldo" +
+                  " WHERE cd_ativo = ?" +
+                  "   AND cd_usuario = ?"  ;
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setInt(2, cd_usuario);
+            ResultSet rs = ps.executeQuery();            
+            if(rs.next()){
+                asaldo = new AtivoSaldo(
+                        (Ativo)ativor.getById(rs.getInt("cd_ativo")),
+                        rs.getInt("nm_qtde"),
+                        rs.getInt("cd_usuario"));
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro de getById em Ativos Saldo:\n" +
+                    ex.getMessage(), "Ativo Saldo", JOptionPane.ERROR_MESSAGE);
+        }
+        return asaldo;
     }    
 }

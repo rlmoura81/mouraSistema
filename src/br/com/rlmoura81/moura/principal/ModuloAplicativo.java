@@ -1,12 +1,12 @@
 package br.com.rlmoura81.moura.principal;
 
 import br.com.rlmoura81.moura.principalcadastro.Categoria;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
 
 public class ModuloAplicativo{
     
     private Modulo modulo;
-    private PrestadorServico presserv;
+    private Empresa empresa;
     private Categoria categoria;
     private int cd_usuario;
 
@@ -18,12 +18,12 @@ public class ModuloAplicativo{
         this.modulo = modulo;
     }
 
-    public PrestadorServico getPresserv() {
-        return presserv;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setPresserv(PrestadorServico presserv) {
-        this.presserv = presserv;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public Categoria getCategoria() {
@@ -42,9 +42,9 @@ public class ModuloAplicativo{
         this.cd_usuario = cd_usuario;
     }
 
-    public ModuloAplicativo(Modulo modulo, PrestadorServico presserv, int cd_usuario) {
+    public ModuloAplicativo(Modulo modulo, Empresa empresa, int cd_usuario) {
         this.modulo = modulo;
-        this.presserv = presserv;
+        this.empresa = empresa;
         this.cd_usuario = cd_usuario;
     }
 
@@ -59,7 +59,7 @@ public class ModuloAplicativo{
 
     @Override
     public String toString() {
-        return "ModuloAplicativo{" + "modulo=" + modulo + ", presserv=" + presserv + ", categoria=" + categoria + ", cd_usuario=" + cd_usuario + '}';
+        return "ModuloAplicativo{" + "modulo=" + modulo + ", empresa=" + empresa + ", categoria=" + categoria + ", cd_usuario=" + cd_usuario + '}';
     }
 
 

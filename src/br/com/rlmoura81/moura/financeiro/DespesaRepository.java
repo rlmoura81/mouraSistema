@@ -3,8 +3,8 @@
 import br.com.rlmoura81.moura.principal.IPadraoRepository;
 import br.com.rlmoura81.moura.principalcadastro.Categoria;
 import br.com.rlmoura81.moura.principalcadastro.CategoriaRepository;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoRepository;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaRepository;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ public class DespesaRepository implements IPadraoRepository {
     
     String sql = "";    
     CategoriaRepository categoriar = new CategoriaRepository();    
-    PrestadorServicoRepository presservr = new PrestadorServicoRepository();
+    EmpresaRepository empresar = new EmpresaRepository();
 
     /**
      * <p><strong>EN:</strong> Inserts a new expense record into the database using the data from the provided object.</p>
@@ -29,13 +29,13 @@ public class DespesaRepository implements IPadraoRepository {
     public void inserir(Object o) {
         Despesa d = (Despesa) o;
         try{
-            sql = "INSERT INTO despesa (cd_despesa, ds_despesa, nm_valor, cd_categoria, cd_presserv, cd_usuario)"
+            sql = "INSERT INTO despesa (cd_despesa, ds_despesa, nm_valor, cd_categoria, cd_empresa, cd_usuario)"
                 + "     VALUES (sq_despesa.nextval, ?, ?, ?, ?, ?)";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, d.getDs_despesa());
             ps.setBigDecimal(2, d.getNm_valor());
             ps.setInt(3, d.getCategoria().getCd_Categoria());
-            ps.setInt(4, d.getPresserv().getCd_presserv());
+            ps.setInt(4, d.getEmpresa().getCd_empresa());
             ps.setInt(5, d.getCd_usuario());
             ps.execute();
             ps.close();
@@ -61,14 +61,14 @@ public class DespesaRepository implements IPadraoRepository {
                   "   SET ds_despesa = ?, " +
                   "       nm_valor = ?, " +
                   "       cd_categoria = ?, " +
-                  "       cd_presserv = ? " +
+                  "       cd_empresa = ? " +
                   " WHERE cd_despesa = ? " +
                   "   AND cd_usuario = ?";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, d.getDs_despesa());
             ps.setBigDecimal(2, d.getNm_valor());
             ps.setInt(3, d.getCategoria().getCd_Categoria());
-            ps.setInt(4, d.getPresserv().getCd_presserv());
+            ps.setInt(4, d.getEmpresa().getCd_empresa());
             ps.setInt(5, d.getCd_despesa());
             ps.setInt(6, d.getCd_usuario());
             ps.execute();
@@ -117,9 +117,9 @@ public class DespesaRepository implements IPadraoRepository {
     public ArrayList getLista() {
         ArrayList despesas = new ArrayList();
         try{
-            sql = "SELECT cd_despesa, ds_despesa, nm_valor, cd_categoria, cd_presserv, cd_usuario" +
+            sql = "SELECT cd_despesa, ds_despesa, nm_valor, cd_categoria, cd_empresa, cd_usuario" +
                   "  FROM despesa" +
-                  " WHERE cd_usuario = ? " +
+                  " WHERE cd_usuario = ?" +
                   " ORDER BY ds_despesa";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, JPLogin.codloginuser);
@@ -130,7 +130,7 @@ public class DespesaRepository implements IPadraoRepository {
                     rs.getString("ds_despesa"),
                     rs.getBigDecimal("nm_valor"),
                     (Categoria)categoriar.getById(rs.getInt("cd_categoria")),
-                    (PrestadorServico)presservr.getById(rs.getInt("cd_presserv")),
+                    (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
                     despesas.add(d);
             }
@@ -153,7 +153,7 @@ public class DespesaRepository implements IPadraoRepository {
     public ArrayList getLista(int grupo) {
         ArrayList despesas = new ArrayList();
         try{
-            sql = "SELECT cd_despesa, ds_despesa, nm_valor, categoria.cd_categoria, cd_presserv, despesa.cd_usuario" +
+            sql = "SELECT cd_despesa, ds_despesa, nm_valor, categoria.cd_categoria, cd_empresa, despesa.cd_usuario" +
                   "  FROM despesa, grupo, categoria" +
                   " WHERE categoria.cd_grupo = grupo.cd_grupo" +
                   "   AND grupo.cd_grupo = ?" +
@@ -170,7 +170,7 @@ public class DespesaRepository implements IPadraoRepository {
                     rs.getString("ds_despesa"),
                     rs.getBigDecimal("nm_valor"),
                     (Categoria)categoriar.getById(rs.getInt("cd_categoria")),
-                    (PrestadorServico)presservr.getById(rs.getInt("cd_presserv")),
+                    (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
                     despesas.add(d);
             }
@@ -192,25 +192,21 @@ public class DespesaRepository implements IPadraoRepository {
      */
     @Override
     public Object getById(int id) {
-        Despesa d = null;
+        Despesa despesa = null;
         try{
-            sql = "SELECT cd_despesa, ds_despesa, nm_valor, cd_categoria, cd_presserv, cd_usuario" +
+            sql = "SELECT cd_despesa, ds_despesa, nm_valor, cd_categoria, cd_empresa, cd_usuario" +
                   "  FROM despesa" +
                   " WHERE cd_despesa = ?";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                Categoria categoria = new Categoria();
-                categoria.setCd_Categoria(rs.getInt("cd_categoria"));                
-                PrestadorServico presserv = new PrestadorServico();
-                presserv.setCd_presserv(rs.getInt("cd_presserv"));                
-                d = new Despesa(
+            if(rs.next()){            
+                despesa = new Despesa(
                     rs.getInt("cd_despesa"),
                     rs.getString("ds_despesa"),
                     rs.getBigDecimal("nm_valor"),
-                    categoria,
-                    presserv,
+                    (Categoria)categoriar.getById(rs.getInt("cd_categoria")),
+                    (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
             }
             ps.close();
@@ -218,7 +214,7 @@ public class DespesaRepository implements IPadraoRepository {
             JOptionPane.showMessageDialog(null, "Erro de getById em despesa:\n" +
                     ex.getMessage());
         }
-        return d;
+        return despesa;
     }
     
 }

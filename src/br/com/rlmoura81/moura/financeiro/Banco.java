@@ -49,10 +49,10 @@ public class Banco {
 
     public Banco() {
     }
-    
+
     @Override
     public String toString() {
-        return ds_banco + "(" + nm_banco + ")";
+        return "Banco{" + "cd_banco=" + cd_banco + ", ds_banco=" + ds_banco + ", nm_banco=" + nm_banco + ", cd_usuario=" + cd_usuario + '}';
     }
 
 }

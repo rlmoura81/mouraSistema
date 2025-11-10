@@ -1,7 +1,7 @@
 package br.com.rlmoura81.moura.principalinterface;
 
 import br.com.rlmoura81.moura.animal.Animal;
-import br.com.rlmoura81.moura.principalcadastrointerface.JIFPrestadorServico;
+import br.com.rlmoura81.moura.principalcadastrointerface.JIFEmpresa;
 import br.com.rlmoura81.moura.principalcadastrointerface.JIFCidade;
 import br.com.rlmoura81.moura.principalcadastrointerface.JIFCategoria;
 import br.com.rlmoura81.moura.principalcadastrointerface.JIFEstado;
@@ -75,7 +75,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMICidade = new javax.swing.JMenuItem();
         jMIGrupo = new javax.swing.JMenuItem();
         jMICategoria = new javax.swing.JMenuItem();
-        jMIPrestadorServico = new javax.swing.JMenuItem();
+        jMIEmpresa = new javax.swing.JMenuItem();
         jMIModulo = new javax.swing.JMenuItem();
         jMPessoa = new javax.swing.JMenuItem();
         jMUsuario = new javax.swing.JMenuItem();
@@ -196,13 +196,13 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
         jMGeral.add(jMICategoria);
 
-        jMIPrestadorServico.setText("Prestador de Serviços");
-        jMIPrestadorServico.addActionListener(new java.awt.event.ActionListener() {
+        jMIEmpresa.setText("Empresa");
+        jMIEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIPrestadorServicoActionPerformed(evt);
+                jMIEmpresaActionPerformed(evt);
             }
         });
-        jMGeral.add(jMIPrestadorServico);
+        jMGeral.add(jMIEmpresa);
 
         jMIModulo.setText("Módulos");
         jMIModulo.addActionListener(new java.awt.event.ActionListener() {
@@ -756,9 +756,9 @@ public class JFPrincipal extends javax.swing.JFrame {
         gerenciainterface.abrirInterface(JIFPessoaFisica.getInstancia());
     }//GEN-LAST:event_jMPessoaActionPerformed
 
-    private void jMIPrestadorServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIPrestadorServicoActionPerformed
-        gerenciainterface.abrirInterface(JIFPrestadorServico.getInstancia());
-    }//GEN-LAST:event_jMIPrestadorServicoActionPerformed
+    private void jMIEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEmpresaActionPerformed
+        gerenciainterface.abrirInterface(JIFEmpresa.getInstancia());
+    }//GEN-LAST:event_jMIEmpresaActionPerformed
 
     private void jMICategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICategoriaActionPerformed
         gerenciainterface.abrirInterface(JIFCategoria.getInstancia());
@@ -956,6 +956,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMICreditoCad;
     private javax.swing.JMenuItem jMIDespesasCad;
     private javax.swing.JMenuItem jMIDespesasRel;
+    private javax.swing.JMenuItem jMIEmpresa;
     private javax.swing.JMenuItem jMIEstado;
     private javax.swing.JMenuItem jMIFdInvestimentoAplic;
     private javax.swing.JMenuItem jMIFdInvestimentoCad;
@@ -970,7 +971,6 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIPetLista;
     private javax.swing.JMenuItem jMIPoupancaAplic;
     private javax.swing.JMenuItem jMIPoupancaCad;
-    private javax.swing.JMenuItem jMIPrestadorServico;
     private javax.swing.JMenuItem jMIProduto;
     private javax.swing.JMenuItem jMIProventoAcao;
     private javax.swing.JMenuItem jMIProventoFI;

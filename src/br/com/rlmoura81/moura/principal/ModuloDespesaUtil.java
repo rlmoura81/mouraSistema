@@ -154,7 +154,7 @@ public class ModuloDespesaUtil {
      * Formata data, valor unitário e total (valor × quantidade), incluindo Prestador e Produto.</p>
      */
     public void tabelaDespesaAnimal(JTable o, Animal a){
-        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Total", "Prestador", "Produto"};
+        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Total", "Empresa", "Produto"};
         lista = mdr.getListaAnimalDespesa(a);
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -165,7 +165,7 @@ public class ModuloDespesaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(adespesa.getNm_valor());
             dadosArray[i][4] = adespesa.getNm_qtde();
             dadosArray[i][5] = Utilidade.formatoValor.format(cf.calculoValorQtde(adespesa.getNm_valor(), adespesa.getNm_qtde()));
-            dadosArray[i][6] = adespesa.getPresserv();
+            dadosArray[i][6] = adespesa.getEmpresa();
             dadosArray[i][7] = adespesa.getProduto();
         }        
         DefaultTableModel tAnimalDesp = new DefaultTableModel(dadosArray, nomeColuna);
@@ -183,7 +183,7 @@ public class ModuloDespesaUtil {
      * Exibe data, nota, descrição, valor, quantidade, total, Prestador e Produto.</p>
      */
     public void tabelaDespesaAnimal(JTable o, Animal a, String dt_inicio, String dt_final){
-        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Total", "Prestador", "Produto"};
+        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Total", "Empresa", "Produto"};
         lista = mdr.getListaAnimalDespesa(a, dt_inicio, dt_final);
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -194,7 +194,7 @@ public class ModuloDespesaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(adespesa.getNm_valor());
             dadosArray[i][4] = adespesa.getNm_qtde();
             dadosArray[i][5] = Utilidade.formatoValor.format(cf.calculoValorQtde(adespesa.getNm_valor(), adespesa.getNm_qtde()));
-            dadosArray[i][6] = adespesa.getPresserv();
+            dadosArray[i][6] = adespesa.getEmpresa();
             dadosArray[i][7] = adespesa.getProduto();
         }        
         DefaultTableModel tAnimalDesp = new DefaultTableModel(dadosArray, nomeColuna);
@@ -212,7 +212,7 @@ public class ModuloDespesaUtil {
      * Exibe data, nota, descrição, valor, quantidade, total e Prestador.</p>
      */
     public void tabelaDespesaVeiculo(JTable o, Veiculo v){
-        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Total", "Prestador"};
+        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Total", "Empresa"};
         lista = mdr.getListaVeiculoDespesa(v);
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -223,7 +223,7 @@ public class ModuloDespesaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(vdespesa.getNm_valor());
             dadosArray[i][4] = vdespesa.getNm_qtde();
             dadosArray[i][5] = Utilidade.formatoValor.format(cf.calculoValorQtde(vdespesa.getNm_valor(), vdespesa.getNm_qtde()));
-            dadosArray[i][6] = vdespesa.getPresserv();
+            dadosArray[i][6] = vdespesa.getEmpresa();
         }        
         DefaultTableModel tVeiculoDesp = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tVeiculoDesp);
@@ -240,7 +240,7 @@ public class ModuloDespesaUtil {
      * Exibe data, nota, descrição, valor, quantidade, total e Prestador.</p>
      */
     public void tabelaDespesaVeiculo(JTable o, Veiculo v, String dt_inicio, String dt_final){
-        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Total", "Prestador"};
+        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Total", "Empresa"};
         lista = mdr.getListaVeiculoDespesa(v, dt_inicio, dt_final);
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -251,7 +251,7 @@ public class ModuloDespesaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(vdespesa.getNm_valor());
             dadosArray[i][4] = vdespesa.getNm_qtde();
             dadosArray[i][5] = Utilidade.formatoValor.format(cf.calculoValorQtde(vdespesa.getNm_valor(), vdespesa.getNm_qtde()));
-            dadosArray[i][6] = vdespesa.getPresserv();
+            dadosArray[i][6] = vdespesa.getEmpresa();
         }        
         DefaultTableModel tVeiculoDesp = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tVeiculoDesp);
@@ -268,7 +268,7 @@ public class ModuloDespesaUtil {
      * Exibe data, nota, descrição, valor, quantidade e Prestador.</p>
      */
     public void tabelaDespesaImovel(JTable o, Imovel im){
-        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Prestador"};
+        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Empresa"};
         lista = mdr.getListaImovelDespesa(im);
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -278,7 +278,7 @@ public class ModuloDespesaUtil {
             dadosArray[i][2] = idespesa.getDs_descricao();
             dadosArray[i][3] = Utilidade.formatoValor.format(idespesa.getNm_valor());
             dadosArray[i][4] = idespesa.getNm_qtde();
-            dadosArray[i][5] = idespesa.getPresserv();
+            dadosArray[i][5] = idespesa.getEmpresa();
         }
         DefaultTableModel tImovelDesp = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tImovelDesp);
@@ -295,7 +295,7 @@ public class ModuloDespesaUtil {
      * Exibe data, nota, descrição, valor, quantidade e Prestador.</p>
      */
     public void tabelaDespesaImovel(JTable o, Imovel im, String dt_inicio, String dt_final){
-        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Prestador"};
+        String[] nomeColuna = {"Data", "Nota", "Descrição", "Valor", "Qtde", "Empresa"};
         lista = mdr.getListaImovelDespesa(im, dt_inicio, dt_final);
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -305,7 +305,7 @@ public class ModuloDespesaUtil {
             dadosArray[i][2] = idespesa.getDs_descricao();
             dadosArray[i][3] = Utilidade.formatoValor.format(idespesa.getNm_valor());
             dadosArray[i][4] = idespesa.getNm_qtde();
-            dadosArray[i][5] = idespesa.getPresserv();
+            dadosArray[i][5] = idespesa.getEmpresa();
         }
         DefaultTableModel tImovelDesp = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tImovelDesp);

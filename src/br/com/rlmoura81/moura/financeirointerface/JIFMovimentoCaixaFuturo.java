@@ -763,7 +763,7 @@ public class JIFMovimentoCaixaFuturo extends javax.swing.JInternalFrame {
         if(jCBDespesa.getSelectedIndex() != 0){
             despesa = (Despesa)jCBDespesa.getSelectedItem();
             jFTFData.setText(Utilidade.formatoData.format(Calendar.getInstance().getTime()));
-            jTFDescricao.setText(despesa.getPresserv() + " " + despesa.getDs_despesa());
+            jTFDescricao.setText(despesa.getEmpresa()+ " " + despesa.getDs_despesa());
             jFTFValor.setText(Utilidade.formatoValor.format(despesa.getNm_valor()));
             jCBCategoria.setSelectedItem(despesa.getCategoria());            
         }

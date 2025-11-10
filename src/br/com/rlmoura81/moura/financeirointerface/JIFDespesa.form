@@ -76,7 +76,7 @@
                               <Component id="jLDespesa" max="32767" attributes="0"/>
                               <Component id="jLValor" max="32767" attributes="0"/>
                               <Component id="jLCategoria" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLPrestador" alignment="0" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="jLPrestador" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -141,7 +141,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBPrestadorActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;PrestadorServico&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;br.com.rlmoura81.moura.principalcadastro.Empresa&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="jBSalvar">

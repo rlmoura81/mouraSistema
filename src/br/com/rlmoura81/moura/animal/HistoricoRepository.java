@@ -1,8 +1,8 @@
 package br.com.rlmoura81.moura.animal;
 
 import br.com.rlmoura81.moura.principal.IPadraoRepository;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoRepository;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaRepository;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.sql.PreparedStatement;
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class HistoricoRepository implements IPadraoRepository{
     
     AnimalRepository animalr = new AnimalRepository();    
-    PrestadorServicoRepository presservr = new PrestadorServicoRepository();        
+    EmpresaRepository empresar = new EmpresaRepository();        
     TipoRepository tipor = new TipoRepository();    
     Utilidade util = new Utilidade();    
     String sql = "";
@@ -36,12 +36,12 @@ public class HistoricoRepository implements IPadraoRepository{
     public void inserir(Object o) {
         Historico h = (Historico) o;
         try{
-            sql = "INSERT INTO historico (cd_historico, dt_historico, ds_historico, cd_presserv, cd_animal, cd_tipo, cd_usuario)" +
+            sql = "INSERT INTO historico (cd_historico, dt_historico, ds_historico, cd_empresa, cd_animal, cd_tipo, cd_usuario)" +
                   "     VALUES (sq_historico.nextval, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, Utilidade.formatoData.format(h.getDt_historico().getTime()));
             ps.setString(2, h.getDs_historico());
-            ps.setInt(3, h.getPresserv().getCd_presserv());
+            ps.setInt(3, h.getEmpresa().getCd_empresa());
             ps.setInt(4, h.getAnimal().getCd_animal());
             ps.setInt(5, h.getTipo().getCd_tipo());
             ps.setInt(6, h.getCd_usuario());
@@ -74,7 +74,7 @@ public class HistoricoRepository implements IPadraoRepository{
             sql = "UPDATE historico " +
                   "   SET dt_historico = ?, " +
                   "       ds_historico = ?, " +
-                  "       cd_presserv = ?, " +
+                  "       cd_empresa = ?, " +
                   "       cd_tipo = ?" +
                   " WHERE cd_historico = ? " +
                   "   AND cd_animal = ? " +
@@ -82,7 +82,7 @@ public class HistoricoRepository implements IPadraoRepository{
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, Utilidade.formatoData.format(h.getDt_historico().getTime()));
             ps.setString(2, h.getDs_historico());
-            ps.setInt(3, h.getPresserv().getCd_presserv());
+            ps.setInt(3, h.getEmpresa().getCd_empresa());
             ps.setInt(4, h.getTipo().getCd_tipo());
             ps.setInt(5, h.getCd_historico());
             ps.setInt(6, h.getAnimal().getCd_animal());
@@ -150,7 +150,7 @@ public class HistoricoRepository implements IPadraoRepository{
     public ArrayList getLista(int cd_animal) {
         ArrayList historico = new ArrayList();
         try{
-            sql = "SELECT cd_historico, to_char(dt_historico,'dd/MM/yyyy'), ds_historico, cd_presserv, cd_animal, cd_tipo, cd_usuario" +
+            sql = "SELECT cd_historico, to_char(dt_historico,'dd/MM/yyyy'), ds_historico, cd_empresa, cd_animal, cd_tipo, cd_usuario" +
                   "  FROM historico" +
                   " WHERE cd_animal = ? " +
                   "   AND cd_usuario = ?" +
@@ -164,7 +164,7 @@ public class HistoricoRepository implements IPadraoRepository{
                     rs.getInt("cd_historico"),
                     util.recebeData(rs.getString("to_char(dt_historico,'dd/MM/yyyy')")),
                     rs.getString("ds_historico"),
-                    (PrestadorServico)presservr.getById(rs.getInt("cd_presserv")),
+                    (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     (Animal)animalr.getById(rs.getInt("cd_animal")),
                     (Tipo)tipor.getById(rs.getInt("cd_tipo")),
                     rs.getInt("cd_usuario"));
@@ -207,7 +207,7 @@ public class HistoricoRepository implements IPadraoRepository{
                     rs.getInt("cd_historico"),
                     util.recebeData(rs.getString("to_char(dt_historico,'dd/MM/yyyy')")),
                     rs.getString("ds_historico"),
-                    (PrestadorServico)presservr.getById(rs.getInt("cd_presserv")),
+                    (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     (Animal)animalr.getById(rs.getInt("cd_animal")),
                     (Tipo)tipor.getById(rs.getInt("cd_tipo")),
                     rs.getInt("cd_usuario"));

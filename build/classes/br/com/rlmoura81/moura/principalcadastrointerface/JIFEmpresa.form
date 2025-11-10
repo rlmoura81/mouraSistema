@@ -126,14 +126,16 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLPrestadorServico" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTFPrestadorServico" alignment="0" pref="385" max="32767" attributes="0"/>
+                      <Component id="jLEmpresa" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTFEmpresa" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLRazaoSocial" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jTFRazaoSocial" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLDocumento" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jFTFDocumento" min="-2" pref="150" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jCBTpEmpresa" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -147,11 +149,12 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLDocumento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jFTFDocumento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCBTpEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLPrestadorServico" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLEmpresa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTFPrestadorServico" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTFEmpresa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLRazaoSocial" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -174,17 +177,30 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTFRazaoSocial">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLPrestadorServico">
+        <Component class="javax.swing.JLabel" name="jLEmpresa">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nome/NomeFantasia:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFPrestadorServico">
+        <Component class="javax.swing.JTextField" name="jTFEmpresa">
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFTFDocumento">
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDocumentoFocusLost"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jCBTpEmpresa">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBTpEmpresaActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TipoEmpresa&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -225,7 +241,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTPrestadorServico">
+            <Component class="javax.swing.JTable" name="jTEmpresa">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="0" rowCount="4"/>
@@ -238,7 +254,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTPrestadorServicoMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTEmpresaMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

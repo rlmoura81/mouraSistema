@@ -1,7 +1,13 @@
 package br.com.rlmoura81.moura.financeiro;
 
+import br.com.rlmoura81.moura.cartao.CartaoParcelamento;
+import java.awt.Component;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +18,37 @@ public class ContaUtil {
     ContaRepository contar = new ContaRepository();        
     ArrayList lista = new ArrayList();
 
+    /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - CONTA
+    */
+    private void jcModelConta(JComboBox<Conta> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Conta){
+                        Conta c = (Conta) value;
+                        if(c.getCd_conta()== 0){
+                            setText("<Selecione>");
+                        }else if(c.getNm_conta()!= null){
+                            setText(c.getBanco().getDs_banco() + " - " + c.getNm_conta());
+                        }else{
+                            setText("Sem conta");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
+    
     /**
      * <p><strong>EN:</strong> Populates a combo box with all accounts, inserting a default placeholder item first.</p>
      * <p><strong>IT:</strong> Popola una combo box con tutti i conti, inserendo prima un elemento segnaposto predefinito.</p>
@@ -19,13 +56,17 @@ public class ContaUtil {
      *
      * @param o EN: combo box to populate | IT: combo box da popolare | PT-BR: combo box a ser preenchido
      */
-    public void jcConta(JComboBox o){
-        ArrayList<Conta> listaconta = contar.getLista();
-        Conta contaZero = new Conta(0, "<Agencia>", "<Conta>", null, null, 0);
-        o.addItem(contaZero);
-        for(Conta conta : listaconta){
-            o.addItem(conta);
+    public void jcConta(JComboBox<Conta> o){
+        List<Conta> lista = contar.getLista();
+        DefaultComboBoxModel<Conta> model = new DefaultComboBoxModel<>();
+        model.addElement(new Conta(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Conta conta : lista){
+                model.addElement(conta);
+            }            
         }
+        o.setModel(model);
+        jcModelConta(o);
     }
     
     /**

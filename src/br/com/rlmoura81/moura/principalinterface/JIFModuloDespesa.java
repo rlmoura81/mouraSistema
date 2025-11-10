@@ -10,8 +10,8 @@ import br.com.rlmoura81.moura.imovel.ImovelDespesa;
 import br.com.rlmoura81.moura.imovel.ImovelUtil;
 import br.com.rlmoura81.moura.principal.ModuloDespesaRepository;
 import br.com.rlmoura81.moura.principal.ModuloDespesaUtil;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoUtil;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaUtil;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import br.com.rlmoura81.moura.veiculo.Veiculo;
 import br.com.rlmoura81.moura.veiculo.VeiculoDespesa;
@@ -83,8 +83,8 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
     Imovel imovel = new Imovel();
     ImovelUtil imovelu = new ImovelUtil();    
     ImovelDespesa imoveld = new ImovelDespesa();    
-    PrestadorServico presserv = new PrestadorServico();
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();    
+    Empresa empresa = new Empresa();
+    EmpresaUtil empresau = new EmpresaUtil();    
     ModuloDespesaRepository modulodr = new ModuloDespesaRepository();
     ModuloDespesaUtil modulodu = new ModuloDespesaUtil();    
     Utilidade util = new Utilidade();
@@ -99,20 +99,20 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         
         if(o.getClass().equals(animal.getClass())){
             jcAnimal();
-            jcPresserv(2);
+            jcEmpresa(2);
             jCBProduto.setVisible(true);
             produtou.jcProduto(jCBProduto);
             jLTotal.setText("Total mês: " + Utilidade.formatoValor.format(modulodr.somaDespesa(animal)));
         }    
         if(o.getClass().equals(veiculo.getClass())){
             jcVeiculo();
-            jcPresserv(3);
+            jcEmpresa(3);
             jCBProduto.setVisible(false);
             jLTotal.setText("Total mês: " + Utilidade.formatoValor.format(modulodr.somaDespesa(veiculo)));
         }   
         if(o.getClass().equals(imovel.getClass())){
             jcImovel();
-            jcPresserv(4);
+            jcEmpresa(4);
             jCBProduto.setVisible(false);
             jLTotal.setText("Total mês: " + Utilidade.formatoValor.format(modulodr.somaDespesa(imovel)));
         }
@@ -128,7 +128,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPVeiculo = new javax.swing.JPanel();
         jCBModuloDespesa = new javax.swing.JComboBox<>();
-        jCBPresserv = new javax.swing.JComboBox<>();
+        jCBEmpresa = new javax.swing.JComboBox<>();
         jCBProduto = new javax.swing.JComboBox<>();
         jPCampos = new javax.swing.JPanel();
         jLNota = new javax.swing.JLabel();
@@ -194,9 +194,9 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
             }
         });
 
-        jCBPresserv.addActionListener(new java.awt.event.ActionListener() {
+        jCBEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBPresservActionPerformed(evt);
+                jCBEmpresaActionPerformed(evt);
             }
         });
 
@@ -214,7 +214,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jCBModuloDespesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jCBPresserv, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jCBProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -225,7 +225,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBModuloDespesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCBPresserv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -493,8 +493,8 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Carrega prestadores no combo, filtrando pelo módulo.</p>
      * @param num EN: Module identifier. IT/PT-BR: Identificador do módulo.
      */
-    private void jcPresserv(int num){
-        presservu.jcPresserv(jCBPresserv, num);
+    private void jcEmpresa(int num){
+        empresau.jcEmpresa(jCBEmpresa, num);
     }
     
     /**
@@ -571,7 +571,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Limpa os campos e restaura os controles para o padrão.</p>
      */
     private void limpaCampos(){
-        jCBPresserv.setSelectedIndex(0);
+        jCBEmpresa.setSelectedIndex(0);
         jTFNota.setText(null);
         jFTFData.setText(null);
         jFTFValor.setValue(null);
@@ -594,7 +594,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
     private void salvar(){
         if(obj.getClass().equals(animal.getClass())){
             animald.setAnimal(animal);
-            animald.setPresserv(presserv);
+            animald.setEmpresa(empresa);
             animald.setProduto(produto);
             animald.setNm_nota(jTFNota.getText());
             animald.setDt_despesa(util.recebeData(jFTFData.getText()));
@@ -606,7 +606,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }
         if(obj.getClass().equals(veiculo.getClass())){
             veiculod.setVeiculo(veiculo);
-            veiculod.setPresserv(presserv);
+            veiculod.setEmpresa(empresa);
             veiculod.setNm_nota(jTFNota.getText());
             veiculod.setDt_despesa(util.recebeData(jFTFData.getText()));
             veiculod.setNm_valor(Utilidade.converter(jFTFValor.getText()));
@@ -617,7 +617,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }
         if(obj.getClass().equals(imovel.getClass())){
             imoveld.setImovel(imovel);
-            imoveld.setPresserv(presserv);
+            imoveld.setEmpresa(empresa);
             imoveld.setNm_nota(jTFNota.getText());
             imoveld.setDt_despesa(util.recebeData(jFTFData.getText()));
             imoveld.setNm_valor(Utilidade.converter(jFTFValor.getText()));
@@ -636,7 +636,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
     private void alterar(){
         if(obj.getClass().equals(animal.getClass())){
             animald.setAnimal(animal);
-            animald.setPresserv(presserv);
+            animald.setEmpresa(empresa);
             animald.setProduto(produto);
             animald.setNm_nota(jTFNota.getText());
             animald.setDt_despesa(util.recebeData(jFTFData.getText()));
@@ -648,7 +648,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }
         if(obj.getClass().equals(veiculo.getClass())){
             veiculod.setVeiculo(veiculo);
-            veiculod.setPresserv(presserv);
+            veiculod.setEmpresa(empresa);
             veiculod.setNm_nota(jTFNota.getText());
             veiculod.setDt_despesa(util.recebeData(jFTFData.getText()));
             veiculod.setNm_valor(Utilidade.converter(jFTFValor.getText()));
@@ -659,7 +659,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }
         if(obj.getClass().equals(imovel.getClass())){
             imoveld.setImovel(imovel);
-            imoveld.setPresserv(presserv);
+            imoveld.setEmpresa(empresa);
             imoveld.setNm_nota(jTFNota.getText());
             imoveld.setDt_despesa(util.recebeData(jFTFData.getText()));
             imoveld.setNm_valor(Utilidade.converter(jFTFValor.getText()));
@@ -797,13 +797,13 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jCBModuloDespesaActionPerformed
 
-    private void jCBPresservActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPresservActionPerformed
-        if(jCBPresserv.getSelectedIndex() != 0){
-            presserv = (PrestadorServico)jCBPresserv.getSelectedItem();
+    private void jCBEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmpresaActionPerformed
+        if(jCBEmpresa.getSelectedIndex() != 0){
+            empresa = (Empresa)jCBEmpresa.getSelectedItem();
         }else{
-            presserv.setCd_presserv(0);
+            empresa.setCd_empresa(0);
         }
-    }//GEN-LAST:event_jCBPresservActionPerformed
+    }//GEN-LAST:event_jCBEmpresaActionPerformed
 
     private void jCBProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBProdutoActionPerformed
         if(jCBProduto.getSelectedIndex() != 0){
@@ -818,10 +818,10 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         if(obj.getClass().equals(animal.getClass())){
             animald = (AnimalDespesa)modulodu.getSelectObject(jTDespesa);
             jCBModuloDespesa.setSelectedItem(animald.getAnimal());
-            if(animald.getPresserv() == null){
-                jCBPresserv.setSelectedIndex(0);
+            if(animald.getEmpresa()== null){
+                jCBEmpresa.setSelectedIndex(0);
             }else{
-                jCBPresserv.getModel().setSelectedItem(animald.getPresserv());
+                jCBEmpresa.getModel().setSelectedItem(animald.getEmpresa());
             }
             jTFNota.setText(animald.getNm_nota());
             jFTFData.setText(Utilidade.formatoData.format(animald.getDt_despesa().getTime()));
@@ -837,10 +837,10 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         if(obj.getClass().equals(veiculo.getClass())){
             veiculod = (VeiculoDespesa)modulodu.getSelectObject(jTDespesa);
             jCBModuloDespesa.setSelectedItem(veiculod.getVeiculo());
-            if(veiculod.getPresserv() == null){
-                jCBPresserv.setSelectedIndex(0);
+            if(veiculod.getEmpresa()== null){
+                jCBEmpresa.setSelectedIndex(0);
             }else{
-                jCBPresserv.getModel().setSelectedItem(veiculod.getPresserv());
+                jCBEmpresa.getModel().setSelectedItem(veiculod.getEmpresa());
             }
             jTFNota.setText(veiculod.getNm_nota());
             jFTFData.setText(Utilidade.formatoData.format(veiculod.getDt_despesa().getTime()));
@@ -851,10 +851,10 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         if(obj.getClass().equals(imovel.getClass())){
             imoveld = (ImovelDespesa)modulodu.getSelectObject(jTDespesa);
             jCBModuloDespesa.setSelectedItem(imoveld.getImovel());
-            if(imoveld.getPresserv() == null){
-                jCBPresserv.setSelectedIndex(0);
+            if(imoveld.getEmpresa()== null){
+                jCBEmpresa.setSelectedIndex(0);
             }else{
-                jCBPresserv.getModel().setSelectedItem(imoveld.getPresserv());
+                jCBEmpresa.getModel().setSelectedItem(imoveld.getEmpresa());
             }
             jTFNota.setText(imoveld.getNm_nota());
             jFTFData.setText(Utilidade.formatoData.format(imoveld.getDt_despesa().getTime()));
@@ -894,8 +894,8 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBPesquisar;
     private javax.swing.JButton jBSalvar;
+    private javax.swing.JComboBox<Empresa> jCBEmpresa;
     private javax.swing.JComboBox<String> jCBModuloDespesa;
-    private javax.swing.JComboBox<String> jCBPresserv;
     private javax.swing.JComboBox<String> jCBProduto;
     private javax.swing.JFormattedTextField jFTFData;
     private javax.swing.JFormattedTextField jFTFDataFinal;

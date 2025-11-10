@@ -7,6 +7,7 @@ public class Catalogo {
     private int nm_numero;
     private int nm_volume;
     private int nm_edicao;
+    private int st_leitura;
     private String ds_observacao;
     private TipoMidia tipomidia;
     private Editora editora;
@@ -53,6 +54,14 @@ public class Catalogo {
         this.nm_edicao = nm_edicao;
     }
 
+    public int getSt_leitura() {
+        return st_leitura;
+    }
+
+    public void setSt_leitura(int st_leitura) {
+        this.st_leitura = st_leitura;
+    }
+
     public String getDs_observacao() {
         return ds_observacao;
     }
@@ -93,12 +102,13 @@ public class Catalogo {
         this.cd_usuario = cd_usuario;
     }
 
-    public Catalogo(int cd_catalogo, String ds_titulo, int nm_numero, int nm_volume, int nm_edicao, String ds_observacao, TipoMidia tipomidia, Editora editora, Status status, int cd_usuario) {
+    public Catalogo(int cd_catalogo, String ds_titulo, int nm_numero, int nm_volume, int nm_edicao, int st_leitura, String ds_observacao, TipoMidia tipomidia, Editora editora, Status status, int cd_usuario) {
         this.cd_catalogo = cd_catalogo;
         this.ds_titulo = ds_titulo;
         this.nm_numero = nm_numero;
         this.nm_volume = nm_volume;
         this.nm_edicao = nm_edicao;
+        this.st_leitura = st_leitura;
         this.ds_observacao = ds_observacao;
         this.tipomidia = tipomidia;
         this.editora = editora;

@@ -1,10 +1,15 @@
 package br.com.rlmoura81.moura.cartao;
 
 import br.com.rlmoura81.moura.utilidade.Utilidade;
+import java.awt.Component;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +21,37 @@ public class CartaoUtil {
     CartaoRepository cartaor = new CartaoRepository();    
     ArrayList lista = new ArrayList();
 
+        /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - CARTAO
+    */    
+    public void jcModelCartao(JComboBox<Cartao> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Cartao){
+                        Cartao cartao = (Cartao) value;
+                        if(cartao.getCd_cartao() == 0){
+                            setText("<Selecione>");
+                        }else if(cartao.getNm_cartao() != null){
+                            setText(cartao.getNm_cartao());
+                        }else{
+                            setText("Sem cartao");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
+    
     /**
      * <p><strong>EN:</strong> Populates a JComboBox with the list of cards for the specified bank, adding a default option at the beginning.</p>
      *
@@ -27,13 +63,17 @@ public class CartaoUtil {
      * @param cd_banco EN: bank identifier | IT: identificatore della banca | PT-BR: identificador do banco
      * @since 1.0.0
      */
-    public void jcCartao(JComboBox o, int cd_banco){
-        ArrayList<Cartao> listacartao = cartaor.getLista(cd_banco);
-        Cartao cartaoZero = new Cartao(0, "<Cartão>", null, null, null, null, 0);
-        o.addItem(cartaoZero);
-        for(Cartao cartao : listacartao){
-            o.addItem(cartao);
+    public void jcCartao(JComboBox<Cartao> o, int cd_banco){
+        List<Cartao> lista = cartaor.getLista(cd_banco);
+        DefaultComboBoxModel<Cartao> model = new DefaultComboBoxModel<>();
+        model.addElement(new Cartao(0, "<Cartão>", null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Cartao cartao : lista){
+                model.addElement(cartao);
+            }            
         }
+        o.setModel(model);
+        jcModelCartao(o);
     }
 
     /**

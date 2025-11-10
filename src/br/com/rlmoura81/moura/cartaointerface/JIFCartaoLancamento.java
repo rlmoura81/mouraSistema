@@ -12,6 +12,7 @@ import br.com.rlmoura81.moura.cartao.CartaoLancamentoUtil;
 import br.com.rlmoura81.moura.cartao.CartaoParcelamento;
 import br.com.rlmoura81.moura.cartao.CartaoParcelamentoRepository;
 import br.com.rlmoura81.moura.cartao.CartaoParcelamentoUtil;
+import br.com.rlmoura81.moura.cartao.CartaoRepository;
 import br.com.rlmoura81.moura.cartao.CartaoUtil;
 import br.com.rlmoura81.moura.financeiro.Despesa;
 import br.com.rlmoura81.moura.financeiro.DespesaUtil;
@@ -47,9 +48,10 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         }return jifcartaolancamento;
     }
     
-    Banco banco = new Banco();
+    Banco banco = null;
     BancoUtil bancou = new BancoUtil();    
     Cartao cartao = null;
+    CartaoRepository cartaor = new CartaoRepository();
     CartaoUtil cartaou = new CartaoUtil();    
     Categoria categoria = null;
     CategoriaUtil categoriau = new CategoriaUtil();    
@@ -70,17 +72,15 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         initComponents();
         
         jcBanco();
-        jcCategoria();
         jcDespesa();
+        jcCampos();
         formataData();
-        formataValor();     
-
-        jbBotaoFechamento();
-        jChkBFaturasFechadas.setEnabled(false);
-        jCBFaturasFechadas.setEnabled(false);
+        formataValor();  
+        jcCategoria();
+        jcBotoesTransacoes();   
+        jcParcela();
+        jcFechamento();
         
-        jRBEmAberto.setEnabled(false);
-        jBLancaParcela.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -98,6 +98,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         jTFParcela = new javax.swing.JTextField();
         jRBEmAberto = new javax.swing.JRadioButton();
         jBLancaParcela = new javax.swing.JButton();
+        jCBParcela = new javax.swing.JComboBox<>();
         jPGridTransacao = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTTransacao = new javax.swing.JTable();
@@ -113,11 +114,14 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         jBSalvarTransacao = new javax.swing.JButton();
         jBAlterarTransacao = new javax.swing.JButton();
         jBExcluirTransacao = new javax.swing.JButton();
+        jPFechamento = new javax.swing.JPanel();
         jBFechamento = new javax.swing.JButton();
         jLDtFechamento = new javax.swing.JLabel();
-        jFTFFechamento = new javax.swing.JFormattedTextField();
+        jFTFDtFechamento = new javax.swing.JFormattedTextField();
         jChkBFaturasFechadas = new javax.swing.JCheckBox();
+        jCBStPagamento = new javax.swing.JComboBox<>();
         jCBFaturasFechadas = new javax.swing.JComboBox<>();
+        jBPagar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -231,6 +235,12 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             }
         });
 
+        jCBParcela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBParcelaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPParcelaLayout = new javax.swing.GroupLayout(jPParcela);
         jPParcela.setLayout(jPParcelaLayout);
         jPParcelaLayout.setHorizontalGroup(
@@ -244,6 +254,8 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
                 .addComponent(jRBEmAberto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBLancaParcela)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPParcelaLayout.setVerticalGroup(
@@ -254,7 +266,8 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
                     .addComponent(jTFParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jChkBParcela)
                     .addComponent(jRBEmAberto)
-                    .addComponent(jBLancaParcela))
+                    .addComponent(jBLancaParcela)
+                    .addComponent(jCBParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
@@ -291,13 +304,19 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             jPGridTransacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPGridTransacaoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPTransacaoCampo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLData.setText("Data:");
+
+        jFTFData.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDataFocusGained(evt);
+            }
+        });
 
         jLDescricao.setText("Descrição:");
 
@@ -369,28 +388,6 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             }
         });
 
-        jBFechamento.setText("Fechar Fatura");
-        jBFechamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBFechamentoActionPerformed(evt);
-            }
-        });
-
-        jLDtFechamento.setText("Data de fechamento:");
-
-        jChkBFaturasFechadas.setText("Fechadas");
-        jChkBFaturasFechadas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jChkBFaturasFechadasMouseClicked(evt);
-            }
-        });
-
-        jCBFaturasFechadas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBFaturasFechadasActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPTransacaoBotoesLayout = new javax.swing.GroupLayout(jPTransacaoBotoes);
         jPTransacaoBotoes.setLayout(jPTransacaoBotoesLayout);
         jPTransacaoBotoesLayout.setHorizontalGroup(
@@ -402,31 +399,96 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
                 .addComponent(jBAlterarTransacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBExcluirTransacao)
-                .addGap(195, 195, 195)
-                .addComponent(jLDtFechamento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFTFFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBFechamento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jChkBFaturasFechadas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCBFaturasFechadas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPTransacaoBotoesLayout.setVerticalGroup(
             jPTransacaoBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPTransacaoBotoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPTransacaoBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBSalvarTransacao)
                     .addComponent(jBAlterarTransacao)
                     .addComponent(jBExcluirTransacao)
+                    .addComponent(jBSalvarTransacao))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPFechamento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jBFechamento.setText("Fechar Fatura");
+        jBFechamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFechamentoActionPerformed(evt);
+            }
+        });
+
+        jLDtFechamento.setText("Data de fechamento:");
+
+        jFTFDtFechamento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDtFechamentoFocusGained(evt);
+            }
+        });
+
+        jChkBFaturasFechadas.setText("Fechadas");
+        jChkBFaturasFechadas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jChkBFaturasFechadasMouseClicked(evt);
+            }
+        });
+
+        jCBStPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Em aberta", "Paga", "Atrasada" }));
+        jCBStPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBStPagamentoActionPerformed(evt);
+            }
+        });
+
+        jCBFaturasFechadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBFaturasFechadasActionPerformed(evt);
+            }
+        });
+
+        jBPagar.setText("Pagar");
+        jBPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPagarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPFechamentoLayout = new javax.swing.GroupLayout(jPFechamento);
+        jPFechamento.setLayout(jPFechamentoLayout);
+        jPFechamentoLayout.setHorizontalGroup(
+            jPFechamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPFechamentoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBFechamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLDtFechamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFTFDtFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jChkBFaturasFechadas)
+                .addGap(18, 18, 18)
+                .addComponent(jCBStPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jCBFaturasFechadas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBPagar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPFechamentoLayout.setVerticalGroup(
+            jPFechamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPFechamentoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPFechamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBFechamento)
-                    .addComponent(jFTFFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLDtFechamento)
+                    .addComponent(jFTFDtFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jChkBFaturasFechadas)
-                    .addComponent(jCBFaturasFechadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBFaturasFechadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBStPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBPagar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -442,7 +504,8 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
                     .addComponent(jPTransacaoBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPTransacaoCampo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPGridTransacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPParcela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPParcela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPFechamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -458,6 +521,8 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
                 .addComponent(jPParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPTransacaoBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPFechamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPGridTransacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -476,7 +541,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
      */
     private void formataData(){
         util.formataDataCampo(jFTFData);    
-        util.formataDataCampo(jFTFFechamento);
+        util.formataDataCampo(jFTFDtFechamento);
     }  
 
     /**
@@ -502,7 +567,8 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
      * @since 1.0.0
      */
     private void jcBanco(){
-        bancou.jcBanco(jCBBanco);
+        bancou.jcBanco(jCBBanco);     
+        jcCartao();
     }
 
     /**
@@ -515,8 +581,16 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
      * @since 1.0.0
      */    
     private void jcCartao(){
-        jCBCartao.removeAllItems();
-        cartaou.jcCartao(jCBCartao, banco.getCd_banco());
+        if(banco != null){
+            jCBCartao.setEnabled(true);
+            jCBCartao.removeAllItems();
+            cartaou.jcCartao(jCBCartao, banco.getCd_banco());              
+        }else{
+            jCBCartao.removeAllItems();
+            jCBCartao.setEnabled(false);
+            cartao = null;
+        }
+
     }
 
     /**
@@ -529,7 +603,13 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
      * @since 1.0.0
      */    
     private void jcCategoria() {
-        categoriau.jcCategoria(jCBCategoria);
+        if(cartao != null){
+            jCBCategoria.setEnabled(true);
+            categoriau.jcCategoria(jCBCategoria);            
+        }else{
+            jCBCategoria.setEnabled(false);
+        }
+
     }
 
     /**
@@ -542,28 +622,33 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
      * @since 1.0.0
      */
     private void jcDespesa(){
-        despesau.jcDespesa(jCBDespesa);
-    }
- 
-    /**
-     * <p><strong>EN:</strong> Enables or disables the invoice closing controls based on the existence of the user's last transaction.</p>
-     *
-     * <p><strong>IT:</strong> Abilita o disabilita i controlli di chiusura fattura in base all'esistenza dell'ultima transazione dell'utente.</p>
-     *
-     * <p><strong>PT-BR:</strong> Habilita ou desabilita os controles de fechamento da fatura conforme a existência do último lançamento do usuário.</p>
-     *
-     * @since 1.0.0
-     */
-    private void jbBotaoFechamento(){
-        if((CartaoLancamento)cartaolancr.ultimoRegistro(cartaolanc.getCd_usuario()) == null){
-            jFTFFechamento.setEnabled(false);
-            jBFechamento.setEnabled(false);
-            jBFechamento.setText("Fechar Fatura");
+        if(cartao != null){
+            jCBDespesa.setEnabled(true);
+            despesau.jcDespesa(jCBDespesa);
         }else{
-            jFTFFechamento.setEnabled(true);
-            jBFechamento.setEnabled(true);
+            jCBDespesa.setEnabled(false);
         }
     }
+    
+    /*
+    * EM TESTE - COLOCAR COMENTARIO
+    */
+ 
+    private void jcCampos(){
+        if(cartao != null){
+            jFTFData.setEnabled(true);
+            jTFDescricao.setEnabled(true);
+            jFTFValor.setEnabled(true);
+        }else{
+            jFTFData.setText(null);            
+            jFTFData.setEnabled(false);
+            jTFDescricao.setText(null);
+            jTFDescricao.setEnabled(false);
+            jFTFValor.setValue(null);            
+            jFTFValor.setEnabled(false);  
+        }
+    }    
+
 
     /**
      * <p><strong>EN:</strong> Enables or disables the 'launch installment' button depending on whether the user has installment records.</p>
@@ -582,6 +667,119 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         }
     }
     
+    /*
+    *TESTANDO - COLOCAR COMENTARIO
+    *JCOMBOBOX PARCELA
+    */
+    private void jcParcela(){
+        if(cartao != null){
+            jChkBParcela.setEnabled(true);
+            jTFParcela.setEnabled(true);
+            if(jRBEmAberto.isVisible() == true){
+                if(jRBEmAberto.isSelected() == true){
+                    jCBParcela.setEnabled(true);
+                    cartaoparcu.jcParcela(jCBParcela, cartao.getCd_cartao());
+                }else{
+                    cartaoparcu.jcParcela(jCBParcela,cartao.getCd_cartao());
+                    jCBParcela.setEnabled(false);
+                    jBLancaParcela.setEnabled(false);
+                }
+            }
+        }else{            
+            jChkBParcela.setEnabled(false);
+            jTFParcela.setText("1");
+            jTFParcela.setEnabled(false);
+            jCBParcela.removeAllItems();
+            jCBParcela.setEnabled(false);
+            jRBEmAberto.setEnabled(false);
+            jBLancaParcela.setEnabled(false);
+        }    
+    }
+    
+    /*
+    * EM TESTE - COLOCAR COMENTARIO
+    */
+    
+    private void jcBotoesTransacoes(){
+        if(cartao != null){
+            jBSalvarTransacao.setEnabled(true);
+            jBAlterarTransacao.setEnabled(true);
+            jBExcluirTransacao.setEnabled(true);
+        }else{
+            jBSalvarTransacao.setEnabled(false);
+            jBAlterarTransacao.setEnabled(false);
+            jBExcluirTransacao.setEnabled(false);            
+        }
+    }
+    
+    /**
+     * <p><strong>EN:</strong> Enables or disables the invoice closing controls based on the existence of the user's last transaction.</p>
+     *
+     * <p><strong>IT:</strong> Abilita o disabilita i controlli di chiusura fattura in base all'esistenza dell'ultima transazione dell'utente.</p>
+     *
+     * <p><strong>PT-BR:</strong> Habilita ou desabilita os controles de fechamento da fatura conforme a existência do último lançamento do usuário.</p>
+     *
+     * @since 1.0.0
+     */
+    
+    private void jcFechamento(){
+        if(banco == null){
+            jBFechamento.setEnabled(false);
+            jBFechamento.setText("Fechar Fatura");
+            jFTFDtFechamento.setEnabled(false);
+            jChkBFaturasFechadas.setSelected(false);
+            jChkBFaturasFechadas.setEnabled(false);
+            jCBStPagamento.setEnabled(false);
+            jCBFaturasFechadas.setEnabled(false);
+        }else{
+            jFTFDtFechamento.setEnabled(true);
+            jBFechamento.setEnabled(true);
+        }
+        jbPagar();
+        
+        /*
+        if((CartaoLancamento)cartaolancr.ultimoRegistro(cartaolanc.getCd_usuario()) == null){
+            jFTFFechamento.setEnabled(false);
+            jBFechamento.setEnabled(false);
+            jBFechamento.setText("Fechar Fatura");
+            jCBFaturasFechadas.setEnabled(false);
+            jCBStPagamento.setEnabled(false);
+        }else{
+            jFTFFechamento.setEnabled(true);
+            jBFechamento.setEnabled(true);
+        }
+        */
+    }
+    
+    /*
+    *EM TESTE - COLOCAR COMENTARIO
+    *VALIDA ST_PAGAMENTO
+    */
+    
+    private void jcStPagamento(){
+        if(jCBStPagamento.isEnabled() == true){
+            cartaolancfu.jcStFechamento(jCBFaturasFechadas, cartao.getCd_cartao(), jCBStPagamento.getSelectedIndex());
+            //cartaolancfu.jcFechamentoSt(jCBFaturasFechadas, cartao.getCd_cartao(), jCBStPagamento.getSelectedIndex());
+        }else{
+            //cartaolancfu.jcStFechamento(jCBFaturasFechadas, cartao.getCd_cartao(), jCBStPagamento.getSelectedIndex());
+        }
+        jbPagar();
+    }
+
+    /*
+    *EM TESTE - COLOCAR COMENTARIO
+    *FUNCAO PARA PAGAR FATURA EM ABERTO
+    */
+    
+    private void jbPagar(){
+        if(jCBStPagamento.getSelectedIndex() == 0 && jCBFaturasFechadas.isEnabled() == true && jCBFaturasFechadas.getSelectedIndex() != 0){
+            jBPagar.setEnabled(true);
+        }else{
+            jBPagar.setEnabled(false);
+            jFTFDtFechamento.setText(null);
+        }
+    }
+    
     /**
      * <p><strong>EN:</strong> Shows or hides transaction action controls depending on the selected filter (open vs. closed).</p>
      *
@@ -594,13 +792,21 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     private void jbBotaoTransacoes(){
         if(jRBEmAberto.isSelected() == true){
             jPTransacaoBotoes.setVisible(false);
-            jChkBParcela.setVisible(false);
         }else{
             jPTransacaoBotoes.setVisible(true);
+        }
+    }
+    
+    private void jpFechamento(){
+        if(jRBEmAberto.isSelected() == true){
+            jPFechamento.setVisible(false);
+            jChkBParcela.setVisible(false);
+        }else{
+            jPFechamento.setVisible(true);
             jChkBParcela.setVisible(true);
         }
     }
- 
+     
     /**
      * <p><strong>EN:</strong> Clears all form fields and resets selections to their defaults.</p>
      *
@@ -618,7 +824,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         jTFParcela.setText("1");
         jCBCategoria.setSelectedIndex(0);        
         jCBDespesa.setSelectedIndex(0);
-        jFTFFechamento.setText(null);
+        jFTFDtFechamento.setText(null);
     }
 
     /**
@@ -687,7 +893,11 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
      * @since 1.0.0
      */    
     private void valorFatura(){
-        jLVlFatura.setText("Valor Fatura: " + Utilidade.formatoValor.format(cartaolancu.calculaValorFatura(cartao.getCd_cartao())));        
+        if(cartao != null){
+            jLVlFatura.setText("Valor Fatura: " + Utilidade.formatoValor.format(cartaolancu.calculaValorFatura(cartao.getCd_cartao())));    
+        }else{
+            jLVlFatura.setText("Valor Fatura:");
+        }       
     }
  
     /**
@@ -716,12 +926,6 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             cartaoparc.setCategoria(categoria);
             cartaoparc.setNm_parcela(Integer.parseInt(jTFParcela.getText()));
             cartaoparc.setCd_usuario(JPLogin.codloginuser);
-            /*try {
-                cartaoparcr.inserirParcela(cartaoparc);
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao salvar:\n" +
-                    ex.getMessage(), "Cartão Parcelamento", JOptionPane.ERROR_MESSAGE);
-            }*/
             calculaParcela();
             JOptionPane.showMessageDialog(null, "Salvo Parcelamento.", "Cartão Parcelamento", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -867,6 +1071,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             jcCartao();
         }else{
             banco = null;
+            jcCartao();
         }
     }//GEN-LAST:event_jCBBancoActionPerformed
 
@@ -874,7 +1079,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         despesa = (Despesa)jCBDespesa.getSelectedItem();
         if(jCBDespesa.getSelectedIndex() != 0){
             jFTFData.setText(Utilidade.formatoData.format(Calendar.getInstance().getTime()));
-            jTFDescricao.setText(despesa.getDs_despesa() + " - " + despesa.getPresserv());
+            jTFDescricao.setText(despesa.getDs_despesa() + " - " + despesa.getEmpresa());
             jFTFValor.setText(Utilidade.formatoValor.format(despesa.getNm_valor()));
             jCBCategoria.getModel().setSelectedItem(despesa.getCategoria());
         }
@@ -886,7 +1091,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             salvar();
             limpaCampos();
             jRBEmAberto.setSelected(false);
-            jbBotaoFechamento();
+            jcFechamento();
             cartaolancu.tabelaCartaoLancamento(jTTransacao, cartao.getCd_cartao());
         }
     }//GEN-LAST:event_jBSalvarTransacaoActionPerformed
@@ -952,7 +1157,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         if(cartaolancu.getSelectObject(jTTransacao) != null){
             excluir();
             limpaCampos();
-            jbBotaoFechamento();
+            jcFechamento();
             cartaolancu.tabelaCartaoLancamento(jTTransacao, cartao.getCd_cartao());         
         }
     }//GEN-LAST:event_jBExcluirTransacaoActionPerformed
@@ -962,8 +1167,8 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         cartaolancf.setCd_usuario(JPLogin.codloginuser);
         cartaolanc.setCartao(cartao);
         if(jChkBFaturasFechadas.isSelected() == false){
-            if(!util.validaDataCampo(jFTFFechamento.getText())){
-                jFTFFechamento.requestFocus();
+            if(!util.validaDataCampo(jFTFDtFechamento.getText())){
+                jFTFDtFechamento.requestFocus();
             }else{  
                 if((CartaoLancamentoFechamento)cartaolancfr.ultimoRegistro(cartaolanc.getCd_usuario()) == null){
                     cartaolancf.setCd_cartaolancf(0);
@@ -971,10 +1176,12 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
                     cartaolancf = (CartaoLancamentoFechamento)cartaolancfr.ultimoRegistro(cartaolanc.getCd_usuario());
                     cartaolancf.setCd_cartaolancf(cartaolancf.getCd_cartaolancf() + 1); 
                 }
-                cartaolancf.setDt_fechamento(util.recebeData(jFTFFechamento.getText()));
+                cartaolancf.setDt_fechamento(util.recebeData(jFTFDtFechamento.getText()));
                 cartaolancf.setCartao(cartao);
                 try {
                     cartaolancfr.inserirFechamento(cartaolancf);
+                    cartaolancf.setSt_pagamento(0);
+                    cartaolancfr.inserirFechamentoSt(cartaolancf);
                 }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro a fechar a fatura:\n" +
                             ex.getMessage(), "Cartão Lançamento Fechamento", JOptionPane.INFORMATION_MESSAGE);
@@ -993,16 +1200,16 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
                 }
                 JOptionPane.showMessageDialog(null, "Fatura fechada.", "Cartão Lançamento Fechamento", JOptionPane.INFORMATION_MESSAGE);
                 limpaCampos();
-                jbBotaoFechamento();
+                jcFechamento();
                 cartaolancu.tabelaCartaoLancamento(jTTransacao, cartao.getCd_cartao());                
                 jLVlFatura.setText("Valor Fatura: 0,00");
             }
         }
         if(jChkBFaturasFechadas.isSelected() == true){
-            if(!util.validaDataCampo(jFTFFechamento.getText())){
-                jFTFFechamento.requestFocus();
+            if(!util.validaDataCampo(jFTFDtFechamento.getText())){
+                jFTFDtFechamento.requestFocus();
             }else{
-                cartaolancf.setDt_fechamento(util.recebeData(jFTFFechamento.getText()));
+                cartaolancf.setDt_fechamento(util.recebeData(jFTFDtFechamento.getText()));
                 cartaolancf.setCartao(cartao);                
                 cartaolancfu.tabelaCartaoFechamento(jTTransacao, cartaolancf.getDt_fechamento(), cartaolancf.getCartao().getCd_cartao());  
                 jLVlFatura.setText("Valor Fatura: " + Utilidade.formatoValor.format(cartaolancfu.calculaValorFatura(cartaolancf.getDt_fechamento(), cartaolancf.getCartao().getCd_cartao()))); 
@@ -1013,26 +1220,33 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     private void jCBCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCartaoActionPerformed
         if(jCBCartao.getSelectedIndex() != 0){
             cartao = (Cartao)jCBCartao.getSelectedItem();
+            valorFatura();
+            jcDespesa();
+            jcCampos();
+            jcCategoria();
+            jcParcela();
+            jcBotoesTransacoes(); 
+            jcFechamento();            
+            if(cartao != null){
+                cartaolancu.tabelaCartaoLancamento(jTTransacao, cartao.getCd_cartao());
+                valorFatura();
+                cartaolanc.setCd_usuario(cartao.getCd_usuario());
+                jcFechamento();
+                if(cartao.getCd_cartao() == 0){
+                    jFTFDtFechamento.setText(null);             
+                    jChkBFaturasFechadas.setSelected(false);
+                    jChkBFaturasFechadas.setEnabled(false);
+                    jCBFaturasFechadas.setEnabled(false);
+                    jCBFaturasFechadas.removeAllItems();
+                    jRBEmAberto.setSelected(false);
+                    jRBEmAberto.setEnabled(false);
+                }else{
+                    jChkBFaturasFechadas.setEnabled(true);
+                    jRBEmAberto.setEnabled(true);
+                }
+            }
         }else{
             cartao = null;
-        }
-        if(cartao != null){
-            cartaolancu.tabelaCartaoLancamento(jTTransacao, cartao.getCd_cartao());
-            valorFatura();
-            cartaolanc.setCd_usuario(cartao.getCd_usuario());
-            jbBotaoFechamento();
-            if(cartao.getCd_cartao() == 0){
-                jFTFFechamento.setText(null);             
-                jChkBFaturasFechadas.setSelected(false);
-                jChkBFaturasFechadas.setEnabled(false);
-                jCBFaturasFechadas.setEnabled(false);
-                jCBFaturasFechadas.removeAllItems();
-                jRBEmAberto.setSelected(false);
-                jRBEmAberto.setEnabled(false);
-            }else{
-                jChkBFaturasFechadas.setEnabled(true);
-                jRBEmAberto.setEnabled(true);
-            }
         }
     }//GEN-LAST:event_jCBCartaoActionPerformed
 
@@ -1041,32 +1255,44 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             jRBEmAberto.setSelected(false);
             jBFechamento.setText("Relatório");
             jBFechamento.setEnabled(true);
-            jFTFFechamento.setEnabled(true);
-            jCBFaturasFechadas.setEnabled(true);
-            cartaolancfu.jcDataFechamento(jCBFaturasFechadas, cartao.getCd_cartao());
+            jFTFDtFechamento.setEnabled(true);
+            jCBStPagamento.setEnabled(true);
+            jcStPagamento();
+            jCBFaturasFechadas.setEnabled(true);            
             jBSalvarTransacao.setEnabled(false);
             jBAlterarTransacao.setEnabled(false);
             jBExcluirTransacao.setEnabled(false);
-            jFTFFechamento.setEnabled(false);
+            jFTFDtFechamento.setEnabled(false);
             cartaolancu.tabelaCartaoLancamento(jTTransacao, 0);
         }else{
-            jbBotaoFechamento();
-            jFTFFechamento.setText(null);
+            jcFechamento();
+            jFTFDtFechamento.setText(null);
             jCBFaturasFechadas.setEnabled(false);
             jCBFaturasFechadas.removeAllItems();
+            jCBStPagamento.setSelectedIndex(0);
+            jCBStPagamento.setEnabled(false);
             jBFechamento.setText("Fechar Fatura");
             cartaolancu.tabelaCartaoLancamento(jTTransacao, cartao.getCd_cartao());
             jLVlFatura.setText("Valor Fatura: " + Utilidade.formatoValor.format(cartaolancu.calculaValorFatura(cartao.getCd_cartao())));
             jBSalvarTransacao.setEnabled(true);
             jBAlterarTransacao.setEnabled(true);
             jBExcluirTransacao.setEnabled(true); 
-            jFTFFechamento.setEnabled(true);
+            jFTFDtFechamento.setEnabled(true);
         }  
     }//GEN-LAST:event_jChkBFaturasFechadasMouseClicked
 
     private void jCBFaturasFechadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBFaturasFechadasActionPerformed
         if(jCBFaturasFechadas.isEnabled() == true){
-            jFTFFechamento.setText(jCBFaturasFechadas.getSelectedItem().toString());             
+            cartaolancf = (CartaoLancamentoFechamento) jCBFaturasFechadas.getSelectedItem();
+            if(cartaolancf.getCartao() == null){                  
+                cartaolancf.setCartao(cartao);  
+                if(cartaolancf.getDt_fechamento() != null){
+                    jFTFDtFechamento.setText(Utilidade.formatoData.format(cartaolancf.getDt_fechamento().getTime())); 
+                }else{
+                    jFTFDtFechamento.setText(null);
+                }    
+            } 
+            jbPagar();
         }
     }//GEN-LAST:event_jCBFaturasFechadasActionPerformed
 
@@ -1087,6 +1313,8 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         }
         limpaCampos();
         jbBotaoTransacoes();
+        jpFechamento();
+        jcParcela();
     }//GEN-LAST:event_jRBEmAbertoActionPerformed
 
     private void jBLancaParcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLancaParcelaActionPerformed
@@ -1094,7 +1322,6 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             ultimoRegistro();
             cartaolanc.setCartao(cartao);
             cartaolanc.setDespesa(despesa);
-            //cartaolanc.setDt_despesa(cartaoparc.getDt_parcela());
             cartaolanc.setDt_despesa(util.recebeData(jFTFData.getText()));
             cartaolanc.setDs_despesa(jTFDescricao.getText());
             cartaolanc.setNm_valor(Utilidade.converter(jFTFValor.getText()));
@@ -1107,26 +1334,57 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
             jRBEmAberto.setSelected(false);     
             jBLancaParcela.setEnabled(false);
             cartaoparcr.excluirParcelas(cartaoparc);
+            jcParcela();
             valorFatura();
-            jbBotaoTransacoes();            
+            jbBotaoTransacoes();
+            jpFechamento();
         }
     }//GEN-LAST:event_jBLancaParcelaActionPerformed
+
+    private void jCBParcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBParcelaActionPerformed
+        if(jCBParcela.getSelectedIndex() != 0){
+            cartaoparc = (CartaoParcelamento)jCBParcela.getSelectedItem();
+            if(cartaoparc != null){
+                cartaoparcu.tabelaCartaoParcela(jTTransacao, cartaoparc.getCd_parcela(), cartao.getCd_cartao());   
+            }
+        }        
+    }//GEN-LAST:event_jCBParcelaActionPerformed
+
+    private void jCBStPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBStPagamentoActionPerformed
+        jcStPagamento();
+    }//GEN-LAST:event_jCBStPagamentoActionPerformed
+
+    private void jBPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPagarActionPerformed
+        cartaolancfr.alterarStPagamento(cartaolancf);
+        jcStPagamento();
+    }//GEN-LAST:event_jBPagarActionPerformed
+
+    private void jFTFDataFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFocusGained
+        util.posicionaCursojFTFData(jFTFData);
+    }//GEN-LAST:event_jFTFDataFocusGained
+
+    private void jFTFDtFechamentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtFechamentoFocusGained
+        util.posicionaCursojFTFData(jFTFDtFechamento);
+    }//GEN-LAST:event_jFTFDtFechamentoFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterarTransacao;
     private javax.swing.JButton jBExcluirTransacao;
     private javax.swing.JButton jBFechamento;
     private javax.swing.JButton jBLancaParcela;
+    private javax.swing.JButton jBPagar;
     private javax.swing.JButton jBSalvarTransacao;
     private javax.swing.JComboBox<Banco> jCBBanco;
     private javax.swing.JComboBox<Cartao> jCBCartao;
     private javax.swing.JComboBox<Categoria> jCBCategoria;
     private javax.swing.JComboBox<Despesa> jCBDespesa;
-    private javax.swing.JComboBox<String> jCBFaturasFechadas;
+    private javax.swing.JComboBox<CartaoLancamentoFechamento> jCBFaturasFechadas;
+    private javax.swing.JComboBox<CartaoParcelamento> jCBParcela;
+    private javax.swing.JComboBox<String> jCBStPagamento;
     private javax.swing.JCheckBox jChkBFaturasFechadas;
     private javax.swing.JCheckBox jChkBParcela;
     private javax.swing.JFormattedTextField jFTFData;
-    private javax.swing.JFormattedTextField jFTFFechamento;
+    private javax.swing.JFormattedTextField jFTFDtFechamento;
     private javax.swing.JFormattedTextField jFTFValor;
     private javax.swing.JLabel jLData;
     private javax.swing.JLabel jLDescricao;
@@ -1134,6 +1392,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLValor;
     private javax.swing.JLabel jLVlFatura;
     private javax.swing.JPanel jPDespesa;
+    private javax.swing.JPanel jPFechamento;
     private javax.swing.JPanel jPGridTransacao;
     private javax.swing.JPanel jPParcela;
     private javax.swing.JPanel jPPrincipal;

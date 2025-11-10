@@ -3,8 +3,8 @@ package br.com.rlmoura81.moura.principalcadastrointerface;
 import br.com.rlmoura81.moura.principalcadastro.Assinatura;
 import br.com.rlmoura81.moura.principalcadastro.AssinaturaRepository;
 import br.com.rlmoura81.moura.principalcadastro.AssinaturaUtil;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoUtil;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaUtil;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.util.Calendar;
@@ -34,14 +34,14 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
     Assinatura assinatura = null;
     AssinaturaRepository assinaturar = new AssinaturaRepository();
     AssinaturaUtil assinaturau = new AssinaturaUtil();    
-    PrestadorServico presserv = new PrestadorServico();
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();    
+    Empresa empresa = new Empresa();
+    EmpresaUtil empresau = new EmpresaUtil();    
     Utilidade util = new Utilidade();
 
     public JIFAssinatura() {
         initComponents();
         
-        jcPresserv();
+        jcEmpresa();
         tabelaAssinatura();
         formataValor();
         formataData();
@@ -73,7 +73,7 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTAssinartura = new javax.swing.JTable();
         jPJCBox = new javax.swing.JPanel();
-        jCBPresserv = new javax.swing.JComboBox<>();
+        jCBEmpresa = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -257,9 +257,9 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
 
         jPJCBox.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jCBPresserv.addActionListener(new java.awt.event.ActionListener() {
+        jCBEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBPresservActionPerformed(evt);
+                jCBEmpresaActionPerformed(evt);
             }
         });
 
@@ -269,14 +269,14 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
             jPJCBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPJCBoxLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCBPresserv, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPJCBoxLayout.setVerticalGroup(
             jPJCBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPJCBoxLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCBPresserv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -319,8 +319,8 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Preenche o combo de prestadores com a lista de prestadores de serviço.
      * Insere a opção padrão “&lt;Prestador&gt;” e em seguida adiciona todos os prestadores obtidos.</p>
      */
-    private void jcPresserv(){
-        presservu.jcPresserv(jCBPresserv);
+    private void jcEmpresa(){
+        empresau.jcEmpresa(jCBEmpresa);
     }
     
     /**
@@ -376,7 +376,7 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
      * prestador na primeira opção, limpa serviço, login, senha, valor, tipo de plano e data de validade.</p>
      */
     private void limpaCampos(){
-        jCBPresserv.setSelectedIndex(0);
+        jCBEmpresa.setSelectedIndex(0);
         jTFServico.setText(null);
         jTFLogin.setText(null);
         jTFSenha.setText(null);
@@ -428,7 +428,7 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         }
         if(assinatura == null){
             assinatura = new Assinatura();
-            assinatura.setPresserv(presserv);
+            assinatura.setEmpresa(empresa);
             assinatura.setDs_servico(jTFServico.getText());
             assinatura.setDs_login(jTFLogin.getText());
             assinatura.setDs_senha(jTFSenha.getText());
@@ -448,7 +448,7 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
             assinaturar.inserir(assinatura);    
             assinatura = null;
         }else{
-            assinatura.setPresserv(presserv);
+            assinatura.setEmpresa(empresa);
             assinatura.setDs_servico(jTFServico.getText());
             assinatura.setDs_login(jTFLogin.getText());
             assinatura.setDs_senha(jTFSenha.getText());
@@ -504,10 +504,10 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
 
     private void jTAssinarturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTAssinarturaMouseClicked
         assinatura = (Assinatura)assinaturau.getSelectObject(jTAssinartura);
-        if(assinatura.getPresserv() == null){
-            jCBPresserv.setSelectedIndex(0);
+        if(assinatura.getEmpresa()== null){
+            jCBEmpresa.setSelectedIndex(0);
         }else{
-            jCBPresserv.getModel().setSelectedItem(assinatura.getPresserv());            
+            jCBEmpresa.getModel().setSelectedItem(assinatura.getEmpresa());            
         }
         jTFServico.setText(assinatura.getDs_servico());
         jTFLogin.setText(assinatura.getDs_login());
@@ -534,15 +534,15 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBPesquisarActionPerformed
 
-    private void jCBPresservActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPresservActionPerformed
-        if(jCBPresserv.getSelectedIndex() != 0){
-            presserv = (PrestadorServico)jCBPresserv.getSelectedItem();
-            jTFServico.setText(presserv.getDs_presserv());
+    private void jCBEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEmpresaActionPerformed
+        if(jCBEmpresa.getSelectedIndex() != 0){
+            empresa = (Empresa)jCBEmpresa.getSelectedItem();
+            jTFServico.setText(empresa.getDs_empresa());
         }else{
-            presserv.setCd_presserv(0);
+            empresa.setCd_empresa(0);
             jTFServico.setText(null);
         }
-    }//GEN-LAST:event_jCBPresservActionPerformed
+    }//GEN-LAST:event_jCBEmpresaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -550,7 +550,7 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBPesquisar;
     private javax.swing.JButton jBSalvar;
-    private javax.swing.JComboBox<String> jCBPresserv;
+    private javax.swing.JComboBox<Empresa> jCBEmpresa;
     private javax.swing.JFormattedTextField jFTFDtValidade;
     private javax.swing.JFormattedTextField jFTFValor;
     private javax.swing.JLabel jLDtValidade;

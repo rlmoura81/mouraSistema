@@ -37,8 +37,9 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
         jTFNumero.setText(Integer.toString(catalogo.getNm_numero()));
         jTFVolume.setText(Integer.toString(catalogo.getNm_volume()));
         jTFEdicao.setText(Integer.toString(catalogo.getNm_edicao()));
-        jCBEditora.setSelectedItem(catalogo.getEditora());
+        jCBEditora.getModel().setSelectedItem(catalogo.getEditora());
         jCBStatus.setSelectedItem(catalogo.getStatus());
+        jCBLeitura.setSelectedIndex(catalogo.getSt_leitura());
         jTAObservacao.setText(catalogo.getDs_observacao());
     }
 
@@ -64,6 +65,7 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
         jLObservacao = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTAObservacao = new javax.swing.JTextArea();
+        jCBLeitura = new javax.swing.JComboBox<>();
         jPBotoes = new javax.swing.JPanel();
         jBSalvar = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
@@ -126,6 +128,13 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
         jTAObservacao.setRows(5);
         jScrollPane1.setViewportView(jTAObservacao);
 
+        jCBLeitura.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ler", "Lendo", "Lido" }));
+        jCBLeitura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBLeituraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPCampoLayout = new javax.swing.GroupLayout(jPCampo);
         jPCampo.setLayout(jPCampoLayout);
         jPCampoLayout.setHorizontalGroup(
@@ -156,7 +165,10 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
                                             .addComponent(jLEdicao)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jTFEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPCampoLayout.createSequentialGroup()
+                                        .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCBLeitura, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 111, Short.MAX_VALUE))
                             .addComponent(jTFTitulo)))
                     .addGroup(jPCampoLayout.createSequentialGroup()
@@ -195,7 +207,8 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLStatus))
+                    .addComponent(jLStatus)
+                    .addComponent(jCBLeitura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLObservacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -360,6 +373,7 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
         jTFNumero.setText(null);
         jTFVolume.setText(null);
         jTFEdicao.setText(null);
+        jCBLeitura.setSelectedIndex(0);
         jTAObservacao.setText(null);
         jCBStatus.setSelectedIndex(0);
     }
@@ -384,6 +398,7 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
             catalogo.setNm_volume(Integer.parseInt(jTFVolume.getText()));
             catalogo.setNm_edicao(Integer.parseInt(jTFEdicao.getText()));
             catalogo.setStatus(status);
+            catalogo.setSt_leitura(jCBLeitura.getSelectedIndex());
             catalogo.setDs_observacao(jTAObservacao.getText());
             catalogo.setCd_usuario(JPLogin.codloginuser);
             catalogor.inserir(catalogo);
@@ -395,6 +410,7 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
             catalogo.setNm_volume(Integer.parseInt(jTFVolume.getText()));
             catalogo.setNm_edicao(Integer.parseInt(jTFEdicao.getText()));
             catalogo.setStatus(status);
+            catalogo.setSt_leitura(jCBLeitura.getSelectedIndex());
             catalogo.setDs_observacao(jTAObservacao.getText());
             catalogo.setCd_usuario(JPLogin.codloginuser);
             catalogor.alterar(catalogo);
@@ -464,10 +480,15 @@ public class JIFCatalogoCadastro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jCBStatusActionPerformed
 
+    private void jCBLeituraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBLeituraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBLeituraActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<Editora> jCBEditora;
+    private javax.swing.JComboBox<String> jCBLeitura;
     private javax.swing.JComboBox<Status> jCBStatus;
     private javax.swing.JComboBox<TipoMidia> jCBTipoMidia;
     private javax.swing.JLabel jLEdicao;

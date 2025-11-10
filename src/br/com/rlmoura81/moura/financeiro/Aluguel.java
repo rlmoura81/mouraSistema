@@ -1,7 +1,7 @@
 package br.com.rlmoura81.moura.financeiro;
 
 import br.com.rlmoura81.moura.imovel.Imovel;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
@@ -14,7 +14,7 @@ public class Aluguel {
     private int dt_deposito;
     private Calendar dt_contratovenc;
     private Imovel imovel;
-    private PrestadorServico presserv;
+    private Empresa empresa;
     private int cd_usuario;
 
     public int getCd_aluguel() {
@@ -73,12 +73,12 @@ public class Aluguel {
         this.imovel = imovel;
     }
 
-    public PrestadorServico getPresserv() {
-        return presserv;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setPresserv(PrestadorServico presserv) {
-        this.presserv = presserv;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public int getCd_usuario() {
@@ -89,7 +89,7 @@ public class Aluguel {
         this.cd_usuario = cd_usuario;
     }
 
-    public Aluguel(int cd_aluguel, String nm_contrato, BigDecimal nm_vlaluguel, BigDecimal nm_vladm, int dt_deposito, Calendar dt_contratovenc, Imovel imovel, PrestadorServico presserv, int cd_usuario) {
+    public Aluguel(int cd_aluguel, String nm_contrato, BigDecimal nm_vlaluguel, BigDecimal nm_vladm, int dt_deposito, Calendar dt_contratovenc, Imovel imovel, Empresa empresa, int cd_usuario) {
         this.cd_aluguel = cd_aluguel;
         this.nm_contrato = nm_contrato;
         this.nm_vlaluguel = nm_vlaluguel;
@@ -97,7 +97,7 @@ public class Aluguel {
         this.dt_deposito = dt_deposito;
         this.dt_contratovenc = dt_contratovenc;
         this.imovel = imovel;
-        this.presserv = presserv;
+        this.empresa = empresa;
         this.cd_usuario = cd_usuario;
     }
 

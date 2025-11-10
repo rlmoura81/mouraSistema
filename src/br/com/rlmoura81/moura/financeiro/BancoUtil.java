@@ -1,7 +1,11 @@
 package br.com.rlmoura81.moura.financeiro;
 
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -11,6 +15,37 @@ public class BancoUtil {
     Banco banco = new Banco();
     BancoRepository bancor = new BancoRepository();
     ArrayList lista = new ArrayList();
+    
+    /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - BANCO
+    */
+    private void jcModelBanco(JComboBox<Banco> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Banco){
+                        Banco banco = (Banco) value;
+                        if(banco.getCd_banco()== 0){
+                            setText("<Selecione>");
+                        }else if(banco.getDs_banco()!= null){
+                            setText(banco.getDs_banco() + " - " + banco.getNm_banco());
+                        }else{
+                            setText("Sem banco");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
     
     /**
      * <p><strong>EN:</strong> Loads the bank list into a combo box. Adds a default option
@@ -22,13 +57,17 @@ public class BancoUtil {
      *
      * @param o EN: combo box to fill | IT: combo box da riempire | PT-BR: combo box a ser preenchido
      */
-    public void jcBanco(JComboBox o){
-        ArrayList<Banco> listabanco = bancor.getLista();
-        Banco cZero = new Banco(0, "<Banco>", 0, 0);
-        o.addItem(cZero);
-        for(Banco banco : listabanco){
-            o.addItem(banco);
+    public void jcBanco(JComboBox<Banco> o){
+        ArrayList<Banco> lista = bancor.getLista();
+        DefaultComboBoxModel<Banco> model = new DefaultComboBoxModel<>();
+        model.addElement(new Banco(0, null, 0, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Banco banco : lista){
+                model.addElement(banco);
+            }            
         }
+        o.setModel(model);
+        jcModelBanco(o);
     }
     
     /**

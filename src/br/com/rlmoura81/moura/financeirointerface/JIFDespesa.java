@@ -5,8 +5,8 @@ import br.com.rlmoura81.moura.financeiro.DespesaRepository;
 import br.com.rlmoura81.moura.financeiro.DespesaUtil;
 import br.com.rlmoura81.moura.principalcadastro.Categoria;
 import br.com.rlmoura81.moura.principalcadastro.CategoriaUtil;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoUtil;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaUtil;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.beans.PropertyVetoException;
@@ -49,8 +49,8 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
     DespesaRepository despesar = new DespesaRepository();
     DespesaUtil despesau = new DespesaUtil();
 
-    PrestadorServico presserv = null;
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();
+    Empresa empresa = null;
+    EmpresaUtil empresau = new EmpresaUtil();
     
     Categoria categoria = null;
     CategoriaUtil categoriau = new CategoriaUtil();
@@ -60,7 +60,7 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
         
         formataValor();
         jcCategoria();
-        jcPresserv();
+        jcEmpresa();
         tabelaDespesa();
         calculaValorTotal();
     }
@@ -171,7 +171,7 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
                             .addComponent(jLDespesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLPrestador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCBPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,7 +301,7 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
             return false;
         }
 
-        if (presserv == null) {
+        if (empresa == null) {
             JOptionPane.showMessageDialog(null, "Selecione o prestador.", "Prestador de Serviço.", JOptionPane.INFORMATION_MESSAGE);
             jCBPrestador.requestFocus();
             return false;
@@ -328,8 +328,8 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
      * <p><strong>IT:</strong> Carica le opzioni del fornitore di servizi nella combo box.</p>
      * <p><strong>PT-BR:</strong> Carrega as opções de prestador de serviço no combo box.</p>
      */
-    private void jcPresserv() {
-        presservu.jcPresserv(jCBPrestador);
+    private void jcEmpresa() {
+        empresau.jcEmpresa(jCBPrestador);
     }
 
     /**
@@ -374,7 +374,7 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
         despesa = new Despesa();
         despesa.setDs_despesa(jTFDespesa.getText());
         despesa.setNm_valor(Utilidade.converter(jFTFValor.getText()));
-        despesa.setPresserv(presserv);
+        despesa.setEmpresa(empresa);
         despesa.setCategoria(categoria);
         despesa.setCd_usuario(JPLogin.codloginuser);
         despesar.inserir(despesa);
@@ -389,7 +389,7 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
     private void alterar(){
         despesa.setDs_despesa(jTFDespesa.getText());
         despesa.setNm_valor(Utilidade.converter(jFTFValor.getText()));
-        despesa.setPresserv(presserv);
+        despesa.setEmpresa(empresa);
         despesa.setCategoria(categoria);
         despesar.alterar(despesa);
     }
@@ -419,9 +419,9 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
 
     private void jCBPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPrestadorActionPerformed
         if(jCBPrestador.getSelectedIndex() != 0){
-            presserv = (PrestadorServico) jCBPrestador.getSelectedItem();
+            empresa = (Empresa) jCBPrestador.getSelectedItem();
         }else{
-            presserv = null;
+            empresa = null;
         }
     }//GEN-LAST:event_jCBPrestadorActionPerformed
 
@@ -438,7 +438,7 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
         despesa.setCd_despesa(despesa.getCd_despesa());
         jTFDespesa.setText(despesa.getDs_despesa());
         jFTFValor.setText(Utilidade.formatoValor.format(despesa.getNm_valor()));
-        jCBPrestador.getModel().setSelectedItem(despesa.getPresserv());
+        jCBPrestador.getModel().setSelectedItem(despesa.getEmpresa());
         jCBCategoria.getModel().setSelectedItem(despesa.getCategoria());
     }//GEN-LAST:event_jTDespesaMouseClicked
     
@@ -467,7 +467,7 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<Categoria> jCBCategoria;
-    private javax.swing.JComboBox<PrestadorServico> jCBPrestador;
+    private javax.swing.JComboBox<Empresa> jCBPrestador;
     private javax.swing.JFormattedTextField jFTFValor;
     private javax.swing.JLabel jLCategoria;
     private javax.swing.JLabel jLDespesa;

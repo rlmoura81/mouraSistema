@@ -185,6 +185,74 @@ public class CartaoParcelamentoRepository implements IPadraoRepository{
         return cartaop;
     }
 
+    //TESTANDO - COLOCAR COMENTARIO
+    public ArrayList getLista(int cd_parcela, int cd_cartao) {
+        ArrayList cartaop = new ArrayList();
+        try{
+            sql = "SELECT cd_parcela, to_char(dt_parcela,'dd/MM/yyyy'), nm_parcelapag, cd_cartaolanc, ds_despesa, nm_valor, nm_parcela, to_char(dt_despesa,'dd/MM/yyyy'), cd_despesa, cd_categoria, cd_cartao, cd_usuario" +
+                  "  FROM cartaoparc" +
+                  " WHERE cd_parcela = ? AND cd_cartao = ?" +
+                  "   AND cd_usuario = ?" +
+                  " ORDER BY cd_parcela, nm_parcelapag";
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, cd_parcela);
+            ps.setInt(2, cd_cartao);
+            ps.setInt(3, JPLogin.codloginuser);
+            ResultSet rs = ps.executeQuery();            
+            while(rs.next()){
+                CartaoParcelamento cp = new CartaoParcelamento(
+                        rs.getInt("cd_parcela"),
+                        util.recebeData(rs.getString("to_char(dt_parcela,'dd/MM/yyyy')")),
+                        rs.getInt("nm_parcelapag"),
+                        rs.getInt("cd_cartaolanc"),
+                        rs.getString("ds_despesa"),
+                        rs.getBigDecimal("nm_valor"),
+                        rs.getInt("nm_parcela"),
+                        util.recebeData(rs.getString("to_char(dt_despesa,'dd/MM/yyyy')")),
+                        (Despesa)despesar.getById(rs.getInt("cd_despesa")),
+                        (Categoria)categoriar.getById(rs.getInt("cd_categoria")),
+                        (Cartao)cartaor.getById(rs.getInt("cd_cartao")),
+                        rs.getInt("cd_usuario"));
+                cartaop.add(cp);
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de Cartão Parcelamento:\n" +
+                    ex.getMessage(), "Cartão Parcelamento", JOptionPane.ERROR_MESSAGE);
+        }
+        return cartaop;
+    }
+        
+    /*TESTANDO - COLOCAR COMENTARIO
+    *LISTA DE PARCELAS POR GRUPO
+    */
+    public ArrayList<CartaoParcelamento> getListaParcela(int cd_cartao) {
+        ArrayList<CartaoParcelamento> cartaop = new ArrayList();
+        try{
+            sql = "SELECT cd_parcela, ds_despesa" +
+                  "  FROM cartaoparc" +
+                  " WHERE cd_cartao = ? " +
+                  "   AND cd_usuario = ?" +
+                  " GROUP BY cd_parcela, ds_despesa" +  
+                  " ORDER BY ds_despesa";
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, cd_cartao);
+            ps.setInt(2, JPLogin.codloginuser);
+            ResultSet rs = ps.executeQuery();            
+            while(rs.next()){
+                CartaoParcelamento cp = new CartaoParcelamento(
+                        rs.getInt("cd_parcela"),
+                        rs.getString("ds_despesa"));
+                cartaop.add(cp);
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista agrupada de Cartão Parcelamento:\n" +
+                    ex.getMessage(), "Cartão Parcelamento", JOptionPane.ERROR_MESSAGE);
+        }
+        return cartaop;
+    }
+    
     /**
      * <p><strong>EN:</strong> Gets an installment (CartaoParcelamento) from the database by its ID.</p>
      *

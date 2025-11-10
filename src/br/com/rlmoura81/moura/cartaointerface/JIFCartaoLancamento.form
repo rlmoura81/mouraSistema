@@ -37,6 +37,7 @@
                   <Component id="jPTransacaoCampo" alignment="0" max="32767" attributes="0"/>
                   <Component id="jPGridTransacao" alignment="0" max="32767" attributes="0"/>
                   <Component id="jPParcela" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jPFechamento" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -55,6 +56,8 @@
               <Component id="jPParcela" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPTransacaoBotoes" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPFechamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPGridTransacao" max="32767" attributes="0"/>
           </Group>
@@ -199,6 +202,8 @@
                   <Component id="jRBEmAberto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jBLancaParcela" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jCBParcela" min="-2" pref="300" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -212,6 +217,7 @@
                       <Component id="jChkBParcela" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jRBEmAberto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBLancaParcela" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCBParcela" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="7" max="32767" attributes="0"/>
               </Group>
@@ -248,6 +254,19 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBLancaParcelaActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JComboBox" name="jCBParcela">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBParcelaActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;CartaoParcelamento&gt;"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPGridTransacao">
@@ -273,7 +292,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="237" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="192" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -357,6 +376,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFTFData">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDataFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLDescricao">
           <Properties>
@@ -409,17 +431,7 @@
                   <Component id="jBAlterarTransacao" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jBExcluirTransacao" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
-                  <Component id="jLDtFechamento" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jFTFFechamento" min="-2" pref="100" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jBFechamento" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jChkBFaturasFechadas" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jCBFaturasFechadas" min="-2" pref="150" max="-2" attributes="0"/>
-                  <EmptySpace pref="167" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -428,14 +440,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jBSalvarTransacao" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBAlterarTransacao" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBExcluirTransacao" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jBFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFTFFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLDtFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jChkBFaturasFechadas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCBFaturasFechadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBSalvarTransacao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -467,6 +474,58 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBExcluirTransacaoActionPerformed"/>
           </Events>
         </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPFechamento">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+            <EtchetBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jBFechamento" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLDtFechamento" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jFTFDtFechamento" min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jChkBFaturasFechadas" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jCBStPagamento" min="-2" pref="150" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jCBFaturasFechadas" min="-2" pref="150" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jBPagar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jBFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLDtFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFTFDtFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jChkBFaturasFechadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCBFaturasFechadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCBStPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBPagar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
         <Component class="javax.swing.JButton" name="jBFechamento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fechar Fatura"/>
@@ -480,7 +539,10 @@
             <Property name="text" type="java.lang.String" value="Data de fechamento:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFTFFechamento">
+        <Component class="javax.swing.JFormattedTextField" name="jFTFDtFechamento">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDtFechamentoFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jChkBFaturasFechadas">
           <Properties>
@@ -489,6 +551,23 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jChkBFaturasFechadasMouseClicked"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jCBStPagamento">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Em aberta"/>
+                <StringItem index="1" value="Paga"/>
+                <StringItem index="2" value="Atrasada"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBStPagamentoActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="jCBFaturasFechadas">
           <Properties>
@@ -500,8 +579,16 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBFaturasFechadasActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;CartaoLancamentoFechamento&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBPagar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pagar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBPagarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

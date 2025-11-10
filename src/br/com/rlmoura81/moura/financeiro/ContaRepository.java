@@ -119,8 +119,8 @@ public class ContaRepository implements IPadraoRepository{
      * @return EN: list of accounts | IT: elenco dei conti | PT-BR: lista de contas
      */
     @Override
-    public ArrayList getLista() {
-        ArrayList contas = new ArrayList();
+    public ArrayList<Conta> getLista() {
+        ArrayList<Conta> conta = new ArrayList();
         try{
             sql = "SELECT cd_conta, nm_agencia, nm_conta, cd_banco, cd_usuario, cd_tpconta" +
                   "  FROM conta" +
@@ -137,14 +137,14 @@ public class ContaRepository implements IPadraoRepository{
                     (Banco)br.getById(rs.getInt("cd_banco")),
                     (TipoConta)tpcr.getById(rs.getInt("cd_tpconta")),
                     rs.getInt("cd_usuario"));
-                    contas.add(c);
+                conta.add(c);
             }
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de contas:\n" + 
                     ex.getMessage(), "Conta", JOptionPane.ERROR_MESSAGE);
         }
-        return contas;
+        return conta;
     }
 
     /**

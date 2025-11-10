@@ -8,13 +8,13 @@ import java.util.Calendar;
 public class CartaoLancamento {
     
     private int cd_cartaolanc;
-    private String ds_despesa;
-    private BigDecimal nm_valor;
+    String ds_despesa;
+    BigDecimal nm_valor;
     private int nm_parcela;
     private Calendar dt_despesa;
     private Despesa despesa;
     private Categoria categoria;
-    private Cartao cartao;
+    Cartao cartao;
     private int cd_usuario;
 
     public int getCd_cartaolanc() {

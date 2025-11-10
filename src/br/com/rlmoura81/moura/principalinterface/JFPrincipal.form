@@ -51,12 +51,12 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMICategoriaActionPerformed"/>
                       </Events>
                     </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="jMIPrestadorServico">
+                    <MenuItem class="javax.swing.JMenuItem" name="jMIEmpresa">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Prestador de Servi&#xe7;os"/>
+                        <Property name="text" type="java.lang.String" value="Empresa"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIPrestadorServicoActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMIEmpresaActionPerformed"/>
                       </Events>
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="jMIModulo">

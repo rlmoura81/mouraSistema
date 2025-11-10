@@ -21,8 +21,8 @@ public class GrupoTransacaoRepository{
      * @return EN: list of transaction groups | IT: elenco dei gruppi di transazioni | PT-BR: lista de grupos de transações
      * @since 1.0.0
      */
-    public ArrayList getLista() {
-        ArrayList gptrans = new ArrayList();
+    public ArrayList<GrupoTransacao> getLista() {
+        ArrayList<GrupoTransacao> gptrans = new ArrayList();
         try{
             sql = "SELECT cd_gptrans, ds_gptrans " +
                   "  FROM gptrans";            
@@ -52,8 +52,8 @@ public class GrupoTransacaoRepository{
      * @return EN: list of buy and sell transaction groups | IT: elenco dei gruppi di transazioni di acquisto e vendita | PT-BR: lista de grupos de transações de compra e venda
      * @since 1.0.0
      */
-    public ArrayList getListaCompraVenda() {
-        ArrayList gptrans = new ArrayList();
+    public ArrayList<GrupoTransacao> getListaCompraVenda() {
+        ArrayList<GrupoTransacao> gptrans = new ArrayList();
         try{
             sql = "SELECT cd_gptrans, ds_gptrans " +
                   "  FROM gptrans" + 

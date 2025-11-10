@@ -86,7 +86,11 @@
                                               <Component id="jTFEdicao" min="-2" pref="50" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jCBStatus" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jCBStatus" min="-2" pref="150" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jCBLeitura" min="-2" pref="100" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
                               </Group>
@@ -140,6 +144,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jCBStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCBLeitura" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLObservacao" min="-2" max="-2" attributes="0"/>
@@ -253,6 +258,23 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JComboBox" name="jCBLeitura">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Ler"/>
+                <StringItem index="1" value="Lendo"/>
+                <StringItem index="2" value="Lido"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBLeituraActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPBotoes">

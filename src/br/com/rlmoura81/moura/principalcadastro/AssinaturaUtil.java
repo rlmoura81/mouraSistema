@@ -44,7 +44,7 @@ public class AssinaturaUtil {
      * Preenche as linhas com serviço, login, senha, valor, plano (mês/ano), validade e prestadora.</p>
      */
     public void tabelaAssinatura(JTable o){
-        String[] nomeColuna = {"Serviço", "Login", "Senha", "Valor", "Plano", "Validade", "Prestadora"};
+        String[] nomeColuna = {"Serviço", "Login", "Senha", "Valor", "Plano", "Validade", "Empresa"};
         lista = assinaturar.getLista();
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -55,7 +55,7 @@ public class AssinaturaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(assinatura.getNm_valor());
             dadosArray[i][4] = planoAssinatura(assinatura.getTp_assinatura());
             dadosArray[i][5] = Utilidade.formatoData.format(assinatura.getDt_validade().getTime());
-            dadosArray[i][6] = assinatura.getPresserv();
+            dadosArray[i][6] = assinatura.getEmpresa();
         }        
         DefaultTableModel tAssinatura = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tAssinatura);
@@ -72,7 +72,7 @@ public class AssinaturaUtil {
      * Carrega apenas assinaturas cujo serviço corresponde ao termo buscado (sem diferenciar maiúsculas/minúsculas).</p>
      */
     public void tabelaAssinatura(JTable o, String ds_servico){
-        String[] nomeColuna = {"Serviço", "Login", "Senha", "Valor", "Plano", "Validade", "Prestadora"};
+        String[] nomeColuna = {"Serviço", "Login", "Senha", "Valor", "Plano", "Validade", "Empresa"};
         lista = assinaturar.getLista(ds_servico);
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -83,7 +83,7 @@ public class AssinaturaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(assinatura.getNm_valor());
             dadosArray[i][4] = planoAssinatura(assinatura.getTp_assinatura());
             dadosArray[i][5] = Utilidade.formatoData.format(assinatura.getDt_validade().getTime());
-            dadosArray[i][6] = assinatura.getPresserv();
+            dadosArray[i][6] = assinatura.getEmpresa();
         }        
         DefaultTableModel tAssinatura = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tAssinatura);

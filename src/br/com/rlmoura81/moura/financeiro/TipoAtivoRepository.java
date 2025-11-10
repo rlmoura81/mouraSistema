@@ -20,8 +20,8 @@ public class TipoAtivoRepository{
      * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
-    public ArrayList getLista() {
-        ArrayList tpfundimob = new ArrayList();
+    public ArrayList<TipoAtivo> getLista() {
+        ArrayList<TipoAtivo> tpativo = new ArrayList();
         try{
             sql = "SELECT cd_tpativo, ds_tpativo " +
                   "  FROM tpativo " +
@@ -29,17 +29,17 @@ public class TipoAtivoRepository{
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();            
             while(rs.next()){
-                TipoAtivo tpativo = new TipoAtivo(
+                TipoAtivo tpa = new TipoAtivo(
                     rs.getInt("cd_tpativo"),
                     rs.getString("ds_tpativo"));
-                tpfundimob.add(tpativo);
+                tpativo.add(tpa);
             }
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de tipo de ativos:\n" + 
                     ex.getMessage());
         }
-        return tpfundimob;
+        return tpativo;
     }
     
     /**
@@ -48,11 +48,10 @@ public class TipoAtivoRepository{
      * <p><strong>PT-BR:</strong> Recupera apenas os tipos de ativo de renda fixa (IDs 3 e 4), ordenados pela descrição.</p>
      *
      * @return EN: list of fixed-income asset types | IT: elenco dei tipi di attivo a reddito fisso | PT-BR: lista de tipos de ativo de renda fixa
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
-    public ArrayList getListaTipoRendaFixa() {
-        ArrayList tpfundimob = new ArrayList();
+    public ArrayList<TipoAtivo> getListaTipoRendaFixa() {
+        ArrayList<TipoAtivo> tpativo = new ArrayList();
         try{
             sql = "SELECT cd_tpativo, ds_tpativo " +
                   "  FROM tpativo" +
@@ -61,17 +60,17 @@ public class TipoAtivoRepository{
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();            
             while(rs.next()){
-                TipoAtivo tpativo = new TipoAtivo(
+                TipoAtivo tpa = new TipoAtivo(
                     rs.getInt("cd_tpativo"),
                     rs.getString("ds_tpativo"));
-                tpfundimob.add(tpativo);
+                tpativo.add(tpa);
             }
             ps.close();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de tipo de ativos:\n" + 
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de tipo de ativos - Renda Fixa:\n" + 
                     ex.getMessage());
         }
-        return tpfundimob;
+        return tpativo;
     }
     
     /**
@@ -80,11 +79,10 @@ public class TipoAtivoRepository{
      * <p><strong>PT-BR:</strong> Recupera apenas os tipos de ativo de Ação e FII (IDs 1 e 2), ordenados pela descrição.</p>
      *
      * @return EN: list of stock/REIT asset types | IT: elenco dei tipi di attivo azionari/immobiliari | PT-BR: lista de tipos de ativo de Ação/FII
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
-    public ArrayList getListaTipoAtivoAcaoFII() {
-        ArrayList tpfundimob = new ArrayList();
+    public ArrayList<TipoAtivo> getListaTipoAtivoAcaoFII() {
+        ArrayList<TipoAtivo> tpativo = new ArrayList<>();
         try{
             sql = "SELECT cd_tpativo, ds_tpativo " +
                   "  FROM tpativo" +
@@ -93,17 +91,17 @@ public class TipoAtivoRepository{
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();            
             while(rs.next()){
-                TipoAtivo tpativo = new TipoAtivo(
+                TipoAtivo tpa = new TipoAtivo(
                     rs.getInt("cd_tpativo"),
                     rs.getString("ds_tpativo"));
-                tpfundimob.add(tpativo);
+                tpativo.add(tpa);
             }
             ps.close();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de tipo de ativos:\n" + 
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de tipo de ativos - Acao/FII:\n" + 
                     ex.getMessage());
         }
-        return tpfundimob;
+        return tpativo;
     }
 
     /**

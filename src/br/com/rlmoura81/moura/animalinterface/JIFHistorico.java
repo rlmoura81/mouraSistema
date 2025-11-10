@@ -7,8 +7,8 @@ import br.com.rlmoura81.moura.animal.HistoricoRepository;
 import br.com.rlmoura81.moura.animal.HistoricoUtil;
 import br.com.rlmoura81.moura.animal.Tipo;
 import br.com.rlmoura81.moura.animal.TipoUtil;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoUtil;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaUtil;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import javax.swing.JOptionPane;
@@ -42,8 +42,8 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
     HistoricoUtil historicou = new HistoricoUtil();    
     Animal animal = null;
     AnimalUtil animalu = new AnimalUtil();    
-    PrestadorServico presserv = new PrestadorServico();
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();    
+    Empresa empresa = new Empresa();
+    EmpresaUtil empresau = new EmpresaUtil();    
     Tipo tipo = new Tipo();
     TipoUtil tipou = new TipoUtil();    
     Utilidade util = new Utilidade();
@@ -296,7 +296,7 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
      */
     private void jcHistorico(){
         animalu.jcAnimal(jCBAnimal);
-        presservu.jcPresserv(jCBPresserv, 2);
+        empresau.jcEmpresa(jCBPresserv, 2);
         tipou.jcTipo(jCBTipo);
     }
     
@@ -386,7 +386,7 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
         if(historico == null){
             historico = new Historico();
             historico.setAnimal(animal);
-            historico.setPresserv(presserv);
+            historico.setEmpresa(empresa);
             historico.setTipo(tipo);
             historico.setDt_historico(util.recebeData(jFTFDataHistorico.getText()));
             historico.setDs_historico(jTFDescricao.getText());
@@ -394,7 +394,7 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
             historicor.inserir(historico);
             historico = null;
         }else{
-            historico.setPresserv(presserv);
+            historico.setEmpresa(empresa);
             historico.setTipo(tipo);
             historico.setDt_historico(util.recebeData(jFTFDataHistorico.getText()));
             historico.setDs_historico(jTFDescricao.getText());
@@ -427,9 +427,9 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
 
     private void jCBPresservActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPresservActionPerformed
         if(jCBPresserv.getSelectedIndex() != 0){
-            presserv = (PrestadorServico)jCBPresserv.getSelectedItem();            
+            empresa = (Empresa)jCBPresserv.getSelectedItem();            
         }else{
-            presserv = new PrestadorServico();
+            empresa = new Empresa();
         }
     }//GEN-LAST:event_jCBPresservActionPerformed
 
@@ -451,10 +451,10 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
 
     private void jTHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTHistoricoMouseClicked
         historico = (Historico)historicou.getSelectObject(jTHistorico);
-        if(historico.getPresserv() == null){
+        if(historico.getEmpresa()== null){
             jCBPresserv.setSelectedIndex(0);
         }else{
-            jCBPresserv.getModel().setSelectedItem(historico.getPresserv());            
+            jCBPresserv.getModel().setSelectedItem(historico.getEmpresa());            
         }
         jCBTipo.getModel().setSelectedItem(historico.getTipo());
         jFTFDataHistorico.setText(Utilidade.formatoData.format(historico.getDt_historico().getTime()));
@@ -465,7 +465,7 @@ public class JIFHistorico extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<String> jCBAnimal;
-    private javax.swing.JComboBox<String> jCBPresserv;
+    private javax.swing.JComboBox<Empresa> jCBPresserv;
     private javax.swing.JComboBox<String> jCBTipo;
     private javax.swing.JFormattedTextField jFTFDataHistorico;
     private javax.swing.JLabel jLData;

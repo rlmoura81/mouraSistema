@@ -32,18 +32,19 @@ public class CatalogoRepository implements IPadraoRepository{
     public void inserir(Object o) {        
         Catalogo c = (Catalogo) o;
         try{
-            sql = "INSERT INTO catalogo (cd_catalogo, ds_titulo, nm_numero, nm_volume, nm_edicao, ds_observacao, cd_tipomidia, cd_editora, cd_status, cd_usuario)" +
+            sql = "INSERT INTO catalogo (cd_catalogo, ds_titulo, nm_numero, nm_volume, nm_edicao, st_leitura, ds_observacao, cd_tipomidia, cd_editora, cd_status, cd_usuario)" +
                   "     VALUES (sq_catalogo.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, c.getDs_titulo());
             ps.setInt(2, c.getNm_numero());
             ps.setInt(3, c.getNm_volume());
             ps.setInt(4, c.getNm_edicao());
-            ps.setString(5, c.getDs_observacao());
-            ps.setInt(6, c.getTipomidia().getCd_midia());
-            ps.setInt(7, c.getEditora().getCd_editora());
-            ps.setInt(8, c.getStatus().getCd_status());
-            ps.setInt(9, c.getCd_usuario());
+            ps.setInt(5, c.getSt_leitura());
+            ps.setString(6, c.getDs_observacao());
+            ps.setInt(7, c.getTipomidia().getCd_midia());
+            ps.setInt(8, c.getEditora().getCd_editora());
+            ps.setInt(9, c.getStatus().getCd_status());
+            ps.setInt(10, c.getCd_usuario());
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Salvo.", "Catalogo", JOptionPane.INFORMATION_MESSAGE);
@@ -72,6 +73,7 @@ public class CatalogoRepository implements IPadraoRepository{
                   "       nm_numero = ?, " +
                   "       nm_volume = ?, " +
                   "       nm_edicao = ?, " +
+                  "       st_leitura = ?, " +  
                   "       ds_observacao = ?," +
                   "       cd_tipomidia = ?, " +
                   "       cd_editora = ?, " +
@@ -83,12 +85,13 @@ public class CatalogoRepository implements IPadraoRepository{
             ps.setInt(2, c.getNm_numero());
             ps.setInt(3, c.getNm_volume());
             ps.setInt(4, c.getNm_edicao());
-            ps.setString(5, c.getDs_observacao());
-            ps.setInt(6, c.getTipomidia().getCd_midia());
-            ps.setInt(7, c.getEditora().getCd_editora());
-            ps.setInt(8, c.getStatus().getCd_status());
-            ps.setInt(9, c.getCd_catalogo());
-            ps.setInt(10, c.getCd_usuario());
+            ps.setInt(5, c.getSt_leitura());
+            ps.setString(6, c.getDs_observacao());
+            ps.setInt(7, c.getTipomidia().getCd_midia());
+            ps.setInt(8, c.getEditora().getCd_editora());
+            ps.setInt(9, c.getStatus().getCd_status());
+            ps.setInt(10, c.getCd_catalogo());
+            ps.setInt(11, c.getCd_usuario());
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Alterado.", "Catalogo", JOptionPane.INFORMATION_MESSAGE);
@@ -141,7 +144,7 @@ public class CatalogoRepository implements IPadraoRepository{
     public ArrayList getLista() {
         catalogo.clear();
         try{
-            sql = "SELECT catalogo.cd_catalogo, catalogo.ds_titulo, catalogo.nm_numero, catalogo.nm_volume, catalogo.nm_edicao, catalogo.ds_observacao, " +
+            sql = "SELECT catalogo.cd_catalogo, catalogo.ds_titulo, catalogo.nm_numero, catalogo.nm_volume, catalogo.nm_edicao, catalogo.st_leitura, catalogo.ds_observacao, " +
                   "       tipomidia.cd_tipomidia, editora.cd_editora, status.cd_status, catalogo.cd_usuario" +
                   "  FROM catalogo, tipomidia, editora, status" +
                   " WHERE catalogo.cd_tipomidia = tipomidia.cd_tipomidia " +
@@ -159,6 +162,7 @@ public class CatalogoRepository implements IPadraoRepository{
                     rs.getInt("nm_numero"),
                     rs.getInt("nm_volume"),
                     rs.getInt("nm_edicao"),
+                    rs.getInt("st_leitura"),
                     rs.getString("ds_observacao"),
                     (TipoMidia)tmr.getById(rs.getInt("cd_tipomidia")),
                     (Editora)er.getById(rs.getInt("cd_editora")),
@@ -187,7 +191,7 @@ public class CatalogoRepository implements IPadraoRepository{
     public ArrayList getLista(String ds_titulo){
         catalogo.clear();
         try{
-            sql = "SELECT cd_catalogo, ds_titulo, nm_numero, nm_volume, nm_edicao, ds_observacao, " +
+            sql = "SELECT cd_catalogo, ds_titulo, nm_numero, nm_volume, nm_edicao, st_leitura, ds_observacao, " +
                   "       cd_tipomidia, cd_editora, cd_status, cd_usuario" +
                   "  FROM catalogo" +
                   " WHERE upper(ds_titulo) LIKE ? OR lower(ds_titulo) LIKE ?" +
@@ -195,7 +199,8 @@ public class CatalogoRepository implements IPadraoRepository{
                   " ORDER BY ds_titulo, nm_numero";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, "%"+ds_titulo+"%");
-            ps.setInt(2, JPLogin.codloginuser);
+            ps.setString(2, "%"+ds_titulo+"%");
+            ps.setInt(3, JPLogin.codloginuser);
             ResultSet rs = ps.executeQuery();            
             while (rs.next()){
                 Catalogo c = new Catalogo(
@@ -204,6 +209,7 @@ public class CatalogoRepository implements IPadraoRepository{
                     rs.getInt("nm_numero"),
                     rs.getInt("nm_volume"),
                     rs.getInt("nm_edicao"),
+                    rs.getInt("st_leitura"),
                     rs.getString("ds_observacao"),
                     (TipoMidia)tmr.getById(rs.getInt("cd_tipomidia")),
                     (Editora)er.getById(rs.getInt("cd_editora")),
@@ -234,7 +240,7 @@ public class CatalogoRepository implements IPadraoRepository{
     public Object getById(int id) {       
         Catalogo c = null;        
         try{
-            sql = "SELECT cd_catalogo, ds_titulo, nm_numero, nm_volume, nm_edicao, nm_edicao, ds_observacao " +
+            sql = "SELECT cd_catalogo, ds_titulo, nm_numero, nm_volume, nm_edicao, nm_edicao, st_leitura, ds_observacao " +
                   "       cd_tipomidia, cd_editora, cd_status, cd_usuario" +
                   "  FROM catalogo " +
                   " WHERE cd_catalogo = ?";
@@ -248,6 +254,7 @@ public class CatalogoRepository implements IPadraoRepository{
                     rs.getInt("nm_numero"),
                     rs.getInt("nm_volume"),
                     rs.getInt("nm_edicao"),
+                    rs.getInt("st_leitura"),    
                     rs.getString("ds_observacao"),
                     (TipoMidia)tmr.getById(rs.getInt("cd_tipomidia")),
                     (Editora)er.getById(rs.getInt("cd_editora")),

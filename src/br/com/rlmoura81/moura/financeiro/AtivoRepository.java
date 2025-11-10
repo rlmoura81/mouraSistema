@@ -107,8 +107,8 @@ public class AtivoRepository implements IPadraoRepository{
      * @return EN: list of Ativo objects | IT: elenco di oggetti Ativo | PT-BR: lista de objetos Ativo
      */
     @Override
-    public ArrayList getLista() {
-        ArrayList ativo = new ArrayList();
+    public ArrayList<Ativo> getLista(){
+        ArrayList<Ativo> ativo = new ArrayList();
         try{
             sql = "SELECT cd_ativo, ds_ativo, ds_sgativo, nm_cnpj, cd_tpativo, cd_usuario" +
                   "  FROM ativo" +
@@ -211,8 +211,8 @@ public class AtivoRepository implements IPadraoRepository{
      *
      * @return EN: list of Ativo objects | IT: elenco di oggetti Ativo | PT-BR: lista de objetos Ativo
      */    
-    public ArrayList getListaAcaoSaldo() {
-        ArrayList ativo = new ArrayList();
+    public ArrayList<Ativo> getListaAcaoSaldo() {
+        ArrayList<Ativo> ativo = new ArrayList();
         try{
             sql = "SELECT ativo.cd_ativo, ds_ativo, ds_sgativo, nm_cnpj, cd_tpativo, ativo.cd_usuario" +
                   "  FROM ativo, ativosaldo" +
@@ -287,8 +287,8 @@ public class AtivoRepository implements IPadraoRepository{
      *
      * @return EN: list of Ativo objects | IT: elenco di oggetti Ativo | PT-BR: lista de objetos Ativo
      */
-    public ArrayList getListaFII() {
-        ArrayList ativo = new ArrayList();
+    public ArrayList<Ativo> getListaFII() {
+        ArrayList<Ativo> ativo = new ArrayList();
         try{
             sql = "SELECT cd_ativo, ds_ativo, ds_sgativo, nm_cnpj, cd_tpativo, cd_usuario" +
                   "  FROM ativo" +

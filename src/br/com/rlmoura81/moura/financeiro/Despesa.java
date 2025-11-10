@@ -1,7 +1,7 @@
 package br.com.rlmoura81.moura.financeiro;
 
 import br.com.rlmoura81.moura.principalcadastro.Categoria;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
 import java.math.BigDecimal;
 
 public class Despesa {
@@ -9,7 +9,7 @@ public class Despesa {
     private String ds_despesa;
     private BigDecimal nm_valor;
     private Categoria categoria;
-    private PrestadorServico presserv;
+    private Empresa empresa;
     private int cd_usuario;
 
     public int getCd_despesa() {
@@ -44,12 +44,12 @@ public class Despesa {
         this.categoria = categoria;
     }
 
-    public PrestadorServico getPresserv() {
-        return presserv;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setPresserv(PrestadorServico presserv) {
-        this.presserv = presserv;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public int getCd_usuario() {
@@ -60,12 +60,12 @@ public class Despesa {
         this.cd_usuario = cd_usuario;
     }
 
-    public Despesa(int cd_despesa, String ds_despesa, BigDecimal nm_valor, Categoria categoria, PrestadorServico presserv, int cd_usuario) {
+    public Despesa(int cd_despesa, String ds_despesa, BigDecimal nm_valor, Categoria categoria, Empresa empresa, int cd_usuario) {
         this.cd_despesa = cd_despesa;
         this.ds_despesa = ds_despesa;
         this.nm_valor = nm_valor;
         this.categoria = categoria;
-        this.presserv = presserv;
+        this.empresa = empresa;
         this.cd_usuario = cd_usuario;
     }
 

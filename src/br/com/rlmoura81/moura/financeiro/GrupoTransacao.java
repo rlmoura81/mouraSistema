@@ -29,42 +29,11 @@ public class GrupoTransacao {
     }
 
     public GrupoTransacao() {
-    }
+    } 
 
     @Override
     public String toString() {
-        return ds_gptrans;
+        return "GrupoTransacao{" + "cd_gptrans=" + cd_gptrans + ", ds_gptrans=" + ds_gptrans + '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + this.cd_gptrans;
-        hash = 59 * hash + Objects.hashCode(this.ds_gptrans);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GrupoTransacao other = (GrupoTransacao) obj;
-        if (this.cd_gptrans != other.cd_gptrans) {
-            return false;
-        }
-        if (!Objects.equals(this.ds_gptrans, other.ds_gptrans)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
     
 }

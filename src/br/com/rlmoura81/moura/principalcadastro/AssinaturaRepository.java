@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class AssinaturaRepository implements IPadraoRepository{
         
     String sql = "";    
-    PrestadorServicoRepository presservr = new PrestadorServicoRepository();    
+    EmpresaRepository empresar = new EmpresaRepository();    
     Utilidade util = new Utilidade();
     
     /**
@@ -29,7 +29,7 @@ public class AssinaturaRepository implements IPadraoRepository{
     public void inserir(Object o) {
         Assinatura a = (Assinatura) o;
         try{
-            sql = "INSERT INTO assinatura (cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, dt_validade, cd_presserv, cd_usuario)" +
+            sql = "INSERT INTO assinatura (cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, dt_validade, cd_empresa, cd_usuario)" +
                   "     VALUES (sq_assinatura.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, a.getDs_servico());
@@ -38,7 +38,7 @@ public class AssinaturaRepository implements IPadraoRepository{
             ps.setBigDecimal(4, a.getNm_valor());
             ps.setInt(5, a.getTp_assinatura());
             ps.setString(6, Utilidade.formatoData.format(a.getDt_validade().getTime()));
-            ps.setInt(7, a.getPresserv().getCd_presserv());
+            ps.setInt(7, a.getEmpresa().getCd_empresa());
             ps.setInt(8, a.getCd_usuario());
             ps.execute();
             ps.close();
@@ -70,7 +70,7 @@ public class AssinaturaRepository implements IPadraoRepository{
                   "       nm_valor = ?, " +
                   "       tp_assinatura = ?, " +
                   "       dt_validade = ?, " +
-                  "       cd_presserv = ?" +
+                  "       cd_empresa = ?" +
                   " WHERE cd_assinatura = ? " +
                   "   AND cd_usuario = ?";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
@@ -80,7 +80,7 @@ public class AssinaturaRepository implements IPadraoRepository{
             ps.setBigDecimal(4, a.getNm_valor());
             ps.setInt(5, a.getTp_assinatura());
             ps.setString(6, Utilidade.formatoData.format(a.getDt_validade().getTime()));
-            ps.setInt(7, a.getPresserv().getCd_presserv());
+            ps.setInt(7, a.getEmpresa().getCd_empresa());
             ps.setInt(8, a.getCd_assinatura());
             ps.setInt(9, a.getCd_usuario());
             ps.execute();
@@ -132,7 +132,7 @@ public class AssinaturaRepository implements IPadraoRepository{
     public ArrayList getLista() {
         ArrayList assinatura = new ArrayList();
         try{
-            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, to_char(dt_validade,'dd/MM/yyyy'), cd_presserv, cd_usuario" +
+            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, to_char(dt_validade,'dd/MM/yyyy'), cd_empresa, cd_usuario" +
                   "  FROM assinatura" +
                   " WHERE cd_usuario = ?" +
                   " ORDER BY ds_servico";
@@ -148,7 +148,7 @@ public class AssinaturaRepository implements IPadraoRepository{
                     rs.getBigDecimal("nm_valor"),
                     rs.getInt("tp_assinatura"),
                     util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
-                    (PrestadorServico)presservr.getById(rs.getInt("cd_presserv")),
+                    (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
                 assinatura.add(a);
             }
@@ -173,7 +173,7 @@ public class AssinaturaRepository implements IPadraoRepository{
     public ArrayList getLista(String ds_servico) {
         ArrayList assinatura = new ArrayList();
         try{
-            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, to_char(dt_validade,'dd/MM/yyyy'), cd_presserv, cd_usuario" +
+            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, to_char(dt_validade,'dd/MM/yyyy'), cd_empresa, cd_usuario" +
                   "  FROM assinatura" +
                   " WHERE upper(ds_servico) LIKE ? OR lower(ds_servico) LIKE ?" +
                   "   AND cd_usuario = ?" +  
@@ -192,7 +192,7 @@ public class AssinaturaRepository implements IPadraoRepository{
                     rs.getBigDecimal("nm_valor"),
                     rs.getInt("tp_assinatura"),
                     util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
-                    (PrestadorServico)presservr.getById(rs.getInt("cd_presserv")),
+                    (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
                 assinatura.add(a);
             }
@@ -215,7 +215,7 @@ public class AssinaturaRepository implements IPadraoRepository{
     public Object getById(int id) {
         Assinatura assinatura = null;
         try{
-            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, to_char(dt_validade,'dd/MM/yyyy'), cd_presserv, cd_usuario" +
+            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, to_char(dt_validade,'dd/MM/yyyy'), cd_empresa, cd_usuario" +
                   "  FROM assinatura" +
                   " WHERE cd_assinatura = ?";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
@@ -230,7 +230,7 @@ public class AssinaturaRepository implements IPadraoRepository{
                     rs.getBigDecimal("nm_valor"),
                     rs.getInt("tp_assinatura"),
                     util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
-                    (PrestadorServico)presservr.getById(rs.getInt("cd_presserv")),
+                    (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
             }
             ps.close();

@@ -14,6 +14,17 @@ import javax.swing.text.NumberFormatter;
 
 public class Utilidade {
     
+    /*
+    *EM TESTE - COLOCAR COMENTARIO
+    *POSICIONA O CURSOR OU SELECIONA O CAMPO TODO DA JFTFFIELD NO ON FOCUS
+    */
+    
+    public JFormattedTextField posicionaCursojFTFData(JFormattedTextField o){
+        o.selectAll();
+        //o.setCaretPosition(0);
+        return o;
+    }
+    
     /**
      * <p><strong>EN:</strong> Default date format used in the system (dd/MM/yyyy).</p>
      * <p><strong>IT:</strong> Formato di data predefinito usato nel sistema (dd/MM/yyyy).</p>
@@ -187,6 +198,59 @@ public class Utilidade {
         }
     }
     
+    /*
+    *EM TESTE - COLOCAR COMENTARIO
+    *VALIDACAO DE CPF/CNPJ
+    */    
+    public boolean validaDocumento(String documento){
+        if(documento.length() == 11){
+            try {
+                int soma = 0;
+                for (int i = 0; i < 9; i++) {
+                    soma += (documento.charAt(i) - '0') * (10 - i);
+                }
+                int digito1 = 11 - (soma % 11);
+                digito1 = (digito1 > 9) ? 0 : digito1;
+
+                soma = 0;
+                for (int i = 0; i < 10; i++) {
+                    soma += (documento.charAt(i) - '0') * (11 - i);
+                }
+                int digito2 = 11 - (soma % 11);
+                digito2 = (digito2 > 9) ? 0 : digito2;
+
+                return (documento.charAt(9) - '0') == digito1 && (documento.charAt(10) - '0') == digito2;
+            }catch(Exception ex){
+                return false;
+            }
+        }
+        if(documento.length() == 14){
+            try {
+                int[] peso1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+                int[] peso2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+
+                int soma = 0;
+                for (int i = 0; i < 12; i++) {
+                    soma += (documento.charAt(i) - '0') * peso1[i];
+                }
+                int digito1 = soma % 11;
+                digito1 = (digito1 < 2) ? 0 : 11 - digito1;
+
+                soma = 0;
+                for (int i = 0; i < 13; i++) {
+                    soma += (documento.charAt(i) - '0') * peso2[i];
+                }
+                int digito2 = soma % 11;
+                digito2 = (digito2 < 2) ? 0 : 11 - digito2;
+
+                return (documento.charAt(12) - '0') == digito1 && (documento.charAt(13) - '0') == digito2;
+            } catch (Exception ex) {
+                return false;
+            }
+        }
+        return false;
+    } 
+    
     /**
      * <p><strong>EN:</strong> Returns the CPF or CNPJ formatted as a string with punctuation.</p>
      * <p><strong>IT:</strong> Restituisce il CPF o CNPJ formattato come stringa con punteggiatura.</p>
@@ -208,9 +272,10 @@ public class Utilidade {
      * <p><strong>IT:</strong> Rimuove la maschera del CPF o CNPJ (punteggiatura) e restituisce solo le cifre.</p>
      * <p><strong>PT-BR:</strong> Remove a máscara de CPF ou CNPJ (pontuação) e retorna apenas os dígitos.</p>
      */
-    public static String retiraMascaraDocumento(String numDoc){
-        String numConv = numDoc.replace(".", "").replace("-", "").replace("/", "");
-        return numConv;
+    public static String retiraMascaraDocumento(String documento){
+        //String documento = numDoc.replace(".", "").replace("-", "").replace("/", "");
+        //documento = documento.replaceAll("\\D", "");
+        return documento.replaceAll("\\D", "");
     }
     
     /**
@@ -218,7 +283,7 @@ public class Utilidade {
      * <p><strong>IT:</strong> Verifica se i campi CPF o CNPJ non sono vuoti.</p>
      * <p><strong>PT-BR:</strong> Valida se os campos de CPF ou CNPJ não estão em branco.</p>
      */
-    public boolean validaDocumentoCampo(String campodoc){
+    public boolean validaCampoDocumento(String campodoc){
         if(campodoc.equals("   .   .   -  ")){
             JOptionPane.showMessageDialog(null, "CPF em branco.");
             return false;

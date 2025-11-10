@@ -11,7 +11,6 @@ import br.com.rlmoura81.moura.financeiro.RendaUtil;
 import br.com.rlmoura81.moura.principalcadastro.Grupo;
 import br.com.rlmoura81.moura.principalcadastro.GrupoUtil;
 import br.com.rlmoura81.moura.relatorio.RelatorioFinanceiroCalculo;
-import br.com.rlmoura81.moura.relatorio.RelatorioFinanceiroRepository;
 import br.com.rlmoura81.moura.relatorio.RelatorioFinanceiroUtil;
 import br.com.rlmoura81.moura.utilidade.CalculoFinanceiro;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
@@ -447,15 +446,15 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void jcConta(){
-        contau.jcConta(jCBConta);
+        //contau.jcConta(jCBConta);
     }
     
     private void jcCartao(){
         if(this.cartao == null){
-            cartaou.jcCartao(jCBCartao, conta.getBanco().getCd_banco());
+            //cartaou.jcCartao(jCBCartao, conta.getBanco().getCd_banco());
         }else{
             jCBCartao.removeAllItems();
-            cartaou.jcCartao(jCBCartao, conta.getBanco().getCd_banco());
+            //cartaou.jcCartao(jCBCartao, conta.getBanco().getCd_banco());
         }
         campoChkCartao();        
     }
@@ -503,7 +502,7 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
     private void jcFechada(){
         if(this.cartao != null && jChkBFechada.isSelected() == true){
             jCBDtFechada.setEnabled(true);
-            cartaolancfu.jcDataFechamento(jCBDtFechada, cartao.getCd_cartao());
+            //cartaolancfu.jcDataFechamento(jCBDtFechada, cartao.getCd_cartao());
         }else{
             jCBDtFechada.removeAllItems();
             jCBDtFechada.setEnabled(false);

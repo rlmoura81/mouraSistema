@@ -94,6 +94,21 @@ public class CatalogoUtil {
         DefaultTableModel tEditora = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tEditora);        
     }
+
+    //EM TESTE - COLOCAR COMENTARIO
+    public String StLeitura(int st_leitura){
+        String stLeitura = "";
+        if(catalogo.getSt_leitura() == 0){
+            stLeitura = "Ler";
+        }
+        if(catalogo.getSt_leitura() == 1){
+            stLeitura = "Lendo";
+        }
+        if(catalogo.getSt_leitura() == 2){
+            stLeitura = "Lido";
+        }
+        return stLeitura;
+    }
     
     /**
      * <p><strong>EN:</strong> Populates a JTable with catalog items, including title, number, volume, edition, status, publisher, type, and notes.</p>
@@ -106,7 +121,7 @@ public class CatalogoUtil {
      * @since 1.0.0
      */
     public void tabelaCatalogo(JTable o){
-        String[] nomeColuna = {"Titulo", "Numero", "Volume", "Edicao", "Status", "Editora", "Tipo", "Observação"};
+        String[] nomeColuna = {"Titulo", "Numero", "Volume", "Edicao", "Status", "Editora", "Tipo", "Leitura", "Observação"};
         lista = catalogor.getLista();
         Object [][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for (int i = 0; i < lista.size(); i++){
@@ -118,7 +133,8 @@ public class CatalogoUtil {
             dadosArray [i][4] = catalogo.getStatus();
             dadosArray [i][5] = catalogo.getEditora();
             dadosArray [i][6] = catalogo.getTipomidia();
-            dadosArray [i][7] = catalogo.getDs_observacao();
+            dadosArray [i][7] = StLeitura(catalogo.getSt_leitura());
+            dadosArray [i][8] = catalogo.getDs_observacao();
         }        
         DefaultTableModel tCatalogo = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tCatalogo);
@@ -136,7 +152,7 @@ public class CatalogoUtil {
      * @since 1.0.0
      */
     public void tabelaCatalogo(JTable o, String ds_titulo){
-        String[] nomeColuna = {"Titulo", "Numero", "Volume", "Edicao", "Leitura", "Editora", "Tipo", "Status"};
+        String[] nomeColuna = {"Titulo", "Numero", "Volume", "Edicao", "Status", "Editora", "Tipo", "Leitura", "Observação"};
         lista = catalogor.getLista(ds_titulo);
         Object [][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for (int i = 0; i < lista.size(); i++){
@@ -145,15 +161,16 @@ public class CatalogoUtil {
             dadosArray [i][1] = catalogo.getNm_numero();
             dadosArray [i][2] = catalogo.getNm_volume();
             dadosArray [i][3] = catalogo.getNm_edicao();
-            dadosArray [i][4] = catalogo.getDs_observacao();
+            dadosArray [i][4] = catalogo.getStatus();
             dadosArray [i][5] = catalogo.getEditora();
             dadosArray [i][6] = catalogo.getTipomidia();
-            dadosArray [i][7] = catalogo.getStatus();
+            dadosArray [i][7] = catalogo.getSt_leitura();
+            dadosArray [i][8] = catalogo.getDs_observacao();
         }
         DefaultTableModel tCatalogo = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tCatalogo);
     }
-    
+        
     /**
      * <p><strong>EN:</strong> Retrieves the object corresponding to the selected row in the JTable.  
      * Shows an information dialog if no row is selected.</p>

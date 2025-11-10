@@ -677,7 +677,7 @@ public class JIFRenda extends javax.swing.JInternalFrame {
             jLValorAluguel.setText("Valor: " + Utilidade.formatoValor.format(valor));
             jFTFDescontoAluguel.setText("0,00");   
             jFTFData.setValue(util.concatenaData(aluguel.getDt_deposito()));            
-            jTFDescricao.setText(aluguel.getImovel().getDs_descricao() + " - " + aluguel.getPresserv());
+            jTFDescricao.setText(aluguel.getImovel().getDs_descricao() + " - " + aluguel.getEmpresa());
             jFTFValor.setText(Utilidade.formatoValor.format(valor));
         }else{
             aluguel = null;

@@ -81,7 +81,7 @@ public class DespesaUtil {
             despesa = (Despesa) lista.get(i);
             dadosArray[i][0] = despesa.getDs_despesa();
             dadosArray[i][1] = Utilidade.formatoValor.format(despesa.getNm_valor());
-            dadosArray[i][2] = despesa.getPresserv().getDs_presserv();
+            dadosArray[i][2] = despesa.getEmpresa().getDs_empresa();
             dadosArray[i][3] = despesa.getCategoria().getDs_Categoria();
         }
         DefaultTableModel tDespesa = new DefaultTableModel(dadosArray, nomeColuna);

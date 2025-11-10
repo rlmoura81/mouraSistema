@@ -70,6 +70,7 @@ public class Conta {
 
     @Override
     public String toString() {
-        return nm_agencia + " / " + nm_conta + " - " + tpconta + " / " + banco;
+        return "Conta{" + "cd_conta=" + cd_conta + ", nm_agencia=" + nm_agencia + ", nm_conta=" + nm_conta + ", banco=" + banco + ", tpconta=" + tpconta + ", cd_usuario=" + cd_usuario + '}';
     }
+
 }

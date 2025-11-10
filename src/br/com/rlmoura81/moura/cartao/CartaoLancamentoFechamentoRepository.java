@@ -80,7 +80,26 @@ public class CartaoLancamentoFechamentoRepository implements IPadraoRepository{
             ps.execute();
             ps.close();
     }
+    
+    /**
+     * EM TESTE - COLOCAR COMENTARIO
+     * INSERIR FECHAMENTO STATUS PAGAMENTO
+     */
 
+    public void inserirFechamentoSt(Object o) throws SQLException{
+        CartaoLancamentoFechamento clf = (CartaoLancamentoFechamento) o;
+            sql = "INSERT INTO cartaofechst (cd_cartaolancf, dt_fechamento, st_pagamento, cd_cartao, cd_usuario)" +
+                  "       VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, clf.getCd_cartaolancf());
+            ps.setString(2, Utilidade.formatoData.format(clf.getDt_fechamento().getTime()));
+            ps.setInt(3, clf.getSt_pagamento());
+            ps.setInt(4, clf.getCartao().getCd_cartao());
+            ps.setInt(5, clf.getCd_usuario());
+            ps.execute();
+            ps.close();
+    }
+    
     /**
      * <p><strong>EN:</strong> Updates a card closing (CartaoLancamentoFechamento), setting the closing ID and date for the selected card and user.</p>
      *
@@ -146,6 +165,32 @@ public class CartaoLancamentoFechamentoRepository implements IPadraoRepository{
             ps.close();
     }    
 
+    /*
+    *EM TESTE - COLOCAR COMENTARIO
+    *ALTERA STATUS DO PAGAMENTO
+    */    
+    public void alterarStPagamento(Object o) {
+        CartaoLancamentoFechamento clf = (CartaoLancamentoFechamento) o;
+        System.out.println(clf);
+        try{
+            sql = "UPDATE cartaofechst " +
+                  "   SET st_pagamento = 1 " +
+                  " WHERE cd_cartaolancf = ? " +
+                  "   AND cd_cartao = ? " +
+                  "   AND cd_usuario = ?";
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, clf.getCd_cartaolancf());
+            ps.setInt(2, clf.getCartao().getCd_cartao());
+            ps.setInt(3, clf.getCd_usuario());
+            ps.execute();
+            ps.close();
+            JOptionPane.showMessageDialog(null, "Fatura paga.", "Cartão Lançamento Fechamento", JOptionPane.INFORMATION_MESSAGE);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao pagar:\n" +
+                    ex.getMessage(), "Cartão Lançamento Fechamento", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+        
     /**
      * <p><strong>EN:</strong> Deletes all card transactions (CartaoLancamento) for the given card and user.</p>
      *
@@ -304,7 +349,7 @@ public class CartaoLancamentoFechamentoRepository implements IPadraoRepository{
      * @return EN: list of CartaoLancamentoFechamento objects with count and date | IT: elenco di oggetti CartaoLancamentoFechamento con conteggio e data | PT-BR: lista de objetos CartaoLancamentoFechamento com quantidade e data
      * @since 1.0.0
      */    
-    public ArrayList getLista(int cd_cartao) {
+    public ArrayList getListaFechamento(int cd_cartao) {
         ArrayList clancf = new ArrayList();
         try{
             sql = "SELECT COUNT(cd_cartaolancf), to_char(dt_fechamento,'dd/MM/yyyy')" +
@@ -312,7 +357,7 @@ public class CartaoLancamentoFechamentoRepository implements IPadraoRepository{
                   " WHERE cd_cartao = ? " +
                   "   AND cd_usuario = ?" +
                   " GROUP BY dt_fechamento" +
-                  " ORDER BY dt_fechamento";
+                  " ORDER BY dt_fechamento DESC";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, cd_cartao);
             ps.setInt(2, JPLogin.codloginuser);
@@ -326,6 +371,41 @@ public class CartaoLancamentoFechamentoRepository implements IPadraoRepository{
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de Faturas Fechadas:\n" +
+                    ex.getMessage(), "Cartão Lançamento Fechamento", JOptionPane.ERROR_MESSAGE);
+        }
+        return clancf;
+    }
+    
+    /**
+     * EM TESTE - COLOCAR COMENTARIO
+     * LISTA DO STATUS DO FECHAMENTO
+     */    
+    public ArrayList<CartaoLancamentoFechamento> getListaStFechamento(int cd_cartao, int st_pagamento) {
+        ArrayList<CartaoLancamentoFechamento> clancf = new ArrayList<>();
+        try{
+            sql = "SELECT cd_cartaolancf, to_char(dt_fechamento,'dd/MM/yyyy') AS dt_stpagamento, st_pagamento, cd_cartao, cd_usuario" +
+                  "  FROM cartaofechst" +
+                  " WHERE st_pagamento = ?" +
+                  "   AND cd_cartao = ? " +
+                  "   AND cd_usuario = ?" +
+                  " ORDER BY dt_fechamento DESC";
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, st_pagamento);
+            ps.setInt(2, cd_cartao);
+            ps.setInt(3, JPLogin.codloginuser);
+            ResultSet rs = ps.executeQuery();            
+            while(rs.next()){
+                CartaoLancamentoFechamento clf = new CartaoLancamentoFechamento(
+                        rs.getInt("cd_cartaolancf"),
+                        util.recebeData(rs.getString("dt_stpagamento")),
+                        rs.getInt("st_pagamento"),
+                        (Cartao)cartaor.getById(rs.getInt("cd_cartao")),
+                        rs.getInt("cd_usuario"));
+                clancf.add(clf);
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de Faturas Fechadas de Status de Pagamento:\n" +
                     ex.getMessage(), "Cartão Lançamento Fechamento", JOptionPane.ERROR_MESSAGE);
         }
         return clancf;
@@ -416,4 +496,5 @@ public class CartaoLancamentoFechamentoRepository implements IPadraoRepository{
         }
         return clancf;
     } 
+
 }

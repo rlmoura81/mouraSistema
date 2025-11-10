@@ -3,8 +3,8 @@ package br.com.rlmoura81.moura.financeiro;
 import br.com.rlmoura81.moura.imovel.Imovel;
 import br.com.rlmoura81.moura.imovel.ImovelRepository;
 import br.com.rlmoura81.moura.principal.IPadraoRepository;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoRepository;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaRepository;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ public class AluguelRepository implements IPadraoRepository{
     String sql = "";    
     Utilidade util = new Utilidade();    
     ImovelRepository imovelr = new ImovelRepository();    
-    PrestadorServicoRepository presservr = new PrestadorServicoRepository();
+    EmpresaRepository empresar = new EmpresaRepository();
     
     /**
      * <p><strong>EN:</strong> Inserts a new rental (Aluguel) record into the database.  
@@ -36,7 +36,7 @@ public class AluguelRepository implements IPadraoRepository{
     public void inserir(Object o) {
         Aluguel a = (Aluguel) o;
         try{
-            sql = "INSERT INTO aluguel (cd_aluguel, nm_contrato, nm_vlaluguel, nm_vladm, dt_deposito, dt_contratovenc, cd_imovel, cd_presserv, cd_usuario)" +
+            sql = "INSERT INTO aluguel (cd_aluguel, nm_contrato, nm_vlaluguel, nm_vladm, dt_deposito, dt_contratovenc, cd_imovel, cd_empresa, cd_usuario)" +
                   "     VALUES (sq_aluguel.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, a.getNm_contrato());
@@ -45,7 +45,7 @@ public class AluguelRepository implements IPadraoRepository{
             ps.setInt(4, a.getDt_deposito());
             ps.setString(5, Utilidade.formatoData.format(a.getDt_contratovenc().getTime()));
             ps.setInt(6, a.getImovel().getCd_imovel());
-            ps.setInt(7, a.getPresserv().getCd_presserv());
+            ps.setInt(7, a.getEmpresa().getCd_empresa());
             ps.setInt(8, a.getCd_usuario());
             ps.execute();
             ps.close();
@@ -78,7 +78,7 @@ public class AluguelRepository implements IPadraoRepository{
                   "       nm_vladm = ?, " +
                   "       dt_deposito = ?, " +
                   "       dt_contratovenc = ?, " +
-                  "       cd_imovel = ?, cd_presserv = ?" +
+                  "       cd_imovel = ?, cd_empresa = ?" +
                   " WHERE cd_aluguel = ? " +
                   "   AND cd_usuario = ?";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
@@ -88,7 +88,7 @@ public class AluguelRepository implements IPadraoRepository{
             ps.setInt(4, a.getDt_deposito());
             ps.setString(5, Utilidade.formatoData.format(a.getDt_contratovenc().getTime()));
             ps.setInt(6, a.getImovel().getCd_imovel());
-            ps.setInt(7, a.getPresserv().getCd_presserv());
+            ps.setInt(7, a.getEmpresa().getCd_empresa());
             ps.setInt(8, a.getCd_aluguel());
             ps.setInt(9, a.getCd_usuario());
             ps.execute();
@@ -144,7 +144,7 @@ public class AluguelRepository implements IPadraoRepository{
     public ArrayList getLista() {
         ArrayList aluguel = new ArrayList();
         try{
-            sql = "SELECT cd_aluguel, nm_contrato, nm_vlaluguel, nm_vladm, dt_deposito, to_char(dt_contratovenc,'dd/MM/yyyy'), cd_imovel, cd_presserv, cd_usuario" +
+            sql = "SELECT cd_aluguel, nm_contrato, nm_vlaluguel, nm_vladm, dt_deposito, to_char(dt_contratovenc,'dd/MM/yyyy'), cd_imovel, cd_empresa, cd_usuario" +
                   "  FROM aluguel " +
                   " WHERE cd_usuario = ?" +
                   " ORDER BY nm_contrato";
@@ -160,7 +160,7 @@ public class AluguelRepository implements IPadraoRepository{
                         rs.getInt("dt_deposito"),
                         util.recebeData(rs.getString("to_char(dt_contratovenc,'dd/MM/yyyy')")),
                         (Imovel)imovelr.getById(rs.getInt("cd_imovel")),
-                        (PrestadorServico)presservr.getById(rs.getInt("cd_presserv")),
+                        (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                         rs.getInt("cd_usuario"));
                 aluguel.add(a);
             }
@@ -189,7 +189,7 @@ public class AluguelRepository implements IPadraoRepository{
     public Object getById(int id) {
         Aluguel a = null;
         try{
-            sql = "SELECT cd_aluguel, nm_contrato, nm_vlaluguel, nm_vladm, dt_deposito, to_char(dt_contratovenc,'dd/MM/yyyy'), cd_imovel, cd_presserv, cd_usuario" +
+            sql = "SELECT cd_aluguel, nm_contrato, nm_vlaluguel, nm_vladm, dt_deposito, to_char(dt_contratovenc,'dd/MM/yyyy'), cd_imovel, cd_empresa, cd_usuario" +
                   "  FROM aluguel " +
                   " WHERE cd_aluguel = ?";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
@@ -204,7 +204,7 @@ public class AluguelRepository implements IPadraoRepository{
                         rs.getInt("dt_deposito"),
                         util.recebeData(rs.getString("to_char(dt_contratovenc,'dd/MM/yyyy')")),
                         (Imovel)imovelr.getById(rs.getInt("cd_imovel")),
-                        (PrestadorServico)presservr.getById(rs.getInt("cd_presserv")),
+                        (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                         rs.getInt("cd_usuario"));
             }
             ps.close();

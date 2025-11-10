@@ -68,10 +68,9 @@ public class Ativo {
 
     public Ativo() {
     }
-    
+
     @Override
     public String toString() {
-        return ds_sgativo;
-    }   
-    
+        return "Ativo{" + "cd_ativo=" + cd_ativo + ", ds_ativo=" + ds_ativo + ", ds_sgativo=" + ds_sgativo + ", nm_cnpj=" + nm_cnpj + ", tpativo=" + tpativo + ", cd_usuario=" + cd_usuario + '}';
+    }    
 }

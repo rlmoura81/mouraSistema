@@ -1,9 +1,8 @@
 package br.com.rlmoura81.moura.principal;
 
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Objects;
 
 public class ModuloDespesa {
     
@@ -13,7 +12,7 @@ public class ModuloDespesa {
     private String ds_descricao;
     private BigDecimal nm_valor;
     private int nm_qtde;
-    private PrestadorServico presserv;
+    private Empresa empresa;
     private int cd_usuario;
 
     public int getCd_despesa() {
@@ -64,12 +63,12 @@ public class ModuloDespesa {
         this.nm_qtde = nm_qtde;
     }
 
-    public PrestadorServico getPresserv() {
-        return presserv;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setPresserv(PrestadorServico presserv) {
-        this.presserv = presserv;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public int getCd_usuario() {
@@ -80,14 +79,14 @@ public class ModuloDespesa {
         this.cd_usuario = cd_usuario;
     }
 
-    public ModuloDespesa(int cd_despesa, Calendar dt_despesa, String nm_nota, String ds_descricao, BigDecimal nm_valor, int nm_qtde, PrestadorServico presserv, int cd_usuario) {
+    public ModuloDespesa(int cd_despesa, Calendar dt_despesa, String nm_nota, String ds_descricao, BigDecimal nm_valor, int nm_qtde, Empresa empresa, int cd_usuario) {
         this.cd_despesa = cd_despesa;
         this.dt_despesa = dt_despesa;
         this.nm_nota = nm_nota;
         this.ds_descricao = ds_descricao;
         this.nm_valor = nm_valor;
         this.nm_qtde = nm_qtde;
-        this.presserv = presserv;
+        this.empresa = empresa;
         this.cd_usuario = cd_usuario;
     }
 
@@ -100,7 +99,7 @@ public class ModuloDespesa {
 
     @Override
     public String toString() {
-        return "ModuloDespesa{" + "cd_despesa=" + cd_despesa + ", dt_despesa=" + dt_despesa + ", nm_nota=" + nm_nota + ", ds_descricao=" + ds_descricao + ", nm_valor=" + nm_valor + ", nm_qtde=" + nm_qtde + ", presserv=" + presserv + ", cd_usuario=" + cd_usuario + '}';
+        return "ModuloDespesa{" + "cd_despesa=" + cd_despesa + ", dt_despesa=" + dt_despesa + ", nm_nota=" + nm_nota + ", ds_descricao=" + ds_descricao + ", nm_valor=" + nm_valor + ", nm_qtde=" + nm_qtde + ", empresa=" + empresa + ", cd_usuario=" + cd_usuario + '}';
     }
         
 }

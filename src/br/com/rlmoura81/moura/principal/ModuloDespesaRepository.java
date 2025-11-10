@@ -8,8 +8,8 @@ import br.com.rlmoura81.moura.animal.ProdutoRepository;
 import br.com.rlmoura81.moura.imovel.Imovel;
 import br.com.rlmoura81.moura.imovel.ImovelDespesa;
 import br.com.rlmoura81.moura.imovel.ImovelRepository;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoRepository;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaRepository;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import br.com.rlmoura81.moura.veiculo.Veiculo;
@@ -31,7 +31,7 @@ public class ModuloDespesaRepository{
     VeiculoRepository veiculor = new VeiculoRepository();    
     ImovelDespesa imoveld = new ImovelDespesa();
     ImovelRepository imovelr = new ImovelRepository();    
-    PrestadorServicoRepository psr = new PrestadorServicoRepository();    
+    EmpresaRepository empresar = new EmpresaRepository();    
     ProdutoRepository produtor = new ProdutoRepository();    
     Utilidade util = new Utilidade();
     
@@ -55,7 +55,7 @@ public class ModuloDespesaRepository{
         if(o.getClass().equals(animald.getClass())){
             AnimalDespesa ad = (AnimalDespesa) o;
             try{
-                sql = "INSERT INTO animdesp (cd_despesa, dt_despesa, nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_animal, cd_produto, cd_usuario)" +
+                sql = "INSERT INTO animdesp (cd_despesa, dt_despesa, nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_animal, cd_produto, cd_usuario)" +
                       "     VALUES (sq_animdesp.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
                 ps.setString(1, Utilidade.formatoData.format(ad.getDt_despesa().getTime()));
@@ -63,7 +63,7 @@ public class ModuloDespesaRepository{
                 ps.setString(3, ad.getDs_descricao());
                 ps.setBigDecimal(4, ad.getNm_valor());
                 ps.setInt(5, ad.getNm_qtde());
-                ps.setInt(6, ad.getPresserv().getCd_presserv());
+                ps.setInt(6, ad.getEmpresa().getCd_empresa());
                 ps.setInt(7, ad.getAnimal().getCd_animal());
                 ps.setInt(8, ad.getProduto().getCd_produto());
                 ps.setInt(9, ad.getCd_usuario());
@@ -78,7 +78,7 @@ public class ModuloDespesaRepository{
         if(o.getClass().equals(veiculod.getClass())){
             VeiculoDespesa vd = (VeiculoDespesa) o;
             try{
-                sql = "INSERT INTO veicdesp (cd_despesa, dt_despesa, nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_veiculo, cd_usuario)" +
+                sql = "INSERT INTO veicdesp (cd_despesa, dt_despesa, nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_veiculo, cd_usuario)" +
                       "     VALUES (sq_veicdesp.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
                 ps.setString(1, Utilidade.formatoData.format(vd.getDt_despesa().getTime()));
@@ -86,7 +86,7 @@ public class ModuloDespesaRepository{
                 ps.setString(3, vd.getDs_descricao());
                 ps.setBigDecimal(4, vd.getNm_valor());
                 ps.setInt(5, vd.getNm_qtde());
-                ps.setInt(6, vd.getPresserv().getCd_presserv());
+                ps.setInt(6, vd.getEmpresa().getCd_empresa());
                 ps.setInt(7, vd.getVeiculo().getCd_veiculo());
                 ps.setInt(8, vd.getCd_usuario());
                 ps.execute();
@@ -100,7 +100,7 @@ public class ModuloDespesaRepository{
         if(o.getClass().equals(imoveld.getClass())){
             ImovelDespesa id = (ImovelDespesa) o;
             try{
-                sql = "INSERT INTO imovdesp (cd_despesa, dt_despesa, nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_imovel, cd_usuario)" +
+                sql = "INSERT INTO imovdesp (cd_despesa, dt_despesa, nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_imovel, cd_usuario)" +
                       "     VALUES (sq_imovdesp.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
                 ps.setString(1, Utilidade.formatoData.format(id.getDt_despesa().getTime()));
@@ -108,7 +108,7 @@ public class ModuloDespesaRepository{
                 ps.setString(3, id.getDs_descricao());
                 ps.setBigDecimal(4, id.getNm_valor());
                 ps.setInt(5, id.getNm_qtde());
-                ps.setInt(6, id.getPresserv().getCd_presserv());
+                ps.setInt(6, id.getEmpresa().getCd_empresa());
                 ps.setInt(7, id.getImovel().getCd_imovel());
                 ps.setInt(8, id.getCd_usuario());
                 ps.execute();
@@ -144,7 +144,7 @@ public class ModuloDespesaRepository{
                       "       ds_descricao = ?, " +
                       "       nm_valor = ?, " +
                       "       nm_qtde = ?, " +
-                      "       cd_presserv = ?, " +
+                      "       cd_empresa = ?, " +
                       "       cd_produto = ?" +
                       " WHERE cd_despesa = ?" +
                       "   AND cd_animal = ?" +
@@ -155,7 +155,7 @@ public class ModuloDespesaRepository{
                 ps.setString(3, ad.getDs_descricao());
                 ps.setBigDecimal(4, ad.getNm_valor());
                 ps.setInt(5, ad.getNm_qtde());
-                ps.setInt(6, ad.getPresserv().getCd_presserv());
+                ps.setInt(6, ad.getEmpresa().getCd_empresa());
                 ps.setInt(7, ad.getProduto().getCd_produto());
                 ps.setInt(8, ad.getCd_despesa());
                 ps.setInt(9, ad.getAnimal().getCd_animal());
@@ -177,7 +177,7 @@ public class ModuloDespesaRepository{
                       "       ds_descricao = ?, " +
                       "       nm_valor = ?, " +
                       "       nm_qtde = ?, " +
-                      "       cd_presserv = ?" +
+                      "       cd_empresa = ?" +
                       " WHERE cd_despesa = ?" +
                       "   AND cd_veiculo = ?" +
                       "   AND cd_usuario = ?";
@@ -187,7 +187,7 @@ public class ModuloDespesaRepository{
                 ps.setString(3, vd.getDs_descricao());
                 ps.setBigDecimal(4, vd.getNm_valor());
                 ps.setInt(5, vd.getNm_qtde());
-                ps.setInt(6, vd.getPresserv().getCd_presserv());
+                ps.setInt(6, vd.getEmpresa().getCd_empresa());
                 ps.setInt(7, vd.getCd_despesa());
                 ps.setInt(8, vd.getVeiculo().getCd_veiculo());
                 ps.setInt(9, vd.getCd_usuario());
@@ -208,7 +208,7 @@ public class ModuloDespesaRepository{
                       "       ds_descricao = ?, " +
                       "       nm_valor = ?, " +
                       "       nm_qtde = ?, " +
-                      "       cd_presserv = ?" +
+                      "       cd_empresa = ?" +
                       " WHERE cd_despesa = ?" +
                       "   AND cd_imovel = ?" +
                       "   AND cd_usuario = ?";
@@ -218,7 +218,7 @@ public class ModuloDespesaRepository{
                 ps.setString(3, id.getDs_descricao());
                 ps.setBigDecimal(4, id.getNm_valor());
                 ps.setInt(5, id.getNm_qtde());
-                ps.setInt(6, id.getPresserv().getCd_presserv());
+                ps.setInt(6, id.getEmpresa().getCd_empresa());
                 ps.setInt(7, id.getCd_despesa());
                 ps.setInt(8, id.getImovel().getCd_imovel());
                 ps.setInt(9, id.getCd_usuario());
@@ -318,7 +318,7 @@ public class ModuloDespesaRepository{
     public ArrayList getListaAnimalDespesa(Animal a) {
         ArrayList animalistad = new ArrayList();
             try{
-                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_animal, cd_produto, cd_usuario" +
+                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_animal, cd_produto, cd_usuario" +
                       "  FROM animdesp" +
                       " WHERE cd_animal = ?" +
                       "   AND dt_despesa BETWEEN (SELECT trunc(SYSDATE,'MM') FROM DUAL) AND (SELECT trunc(LAST_DAY(SYSDATE)) FROM DUAL)" +
@@ -338,7 +338,7 @@ public class ModuloDespesaRepository{
                             rs.getString("ds_descricao"),
                             rs.getBigDecimal("nm_valor"),
                             rs.getInt("nm_qtde"),
-                            (PrestadorServico)psr.getById(rs.getInt("cd_presserv")),
+                            (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                             rs.getInt("cd_usuario"));
                     animalistad.add(adespesa);
                 }
@@ -363,7 +363,7 @@ public class ModuloDespesaRepository{
     public ArrayList getListaAnimalDespesa(Animal a, String dt_inicio, String dt_final) {
         ArrayList animalistad = new ArrayList();
             try{
-                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_animal, cd_produto, cd_usuario" +
+                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_animal, cd_produto, cd_usuario" +
                       "  FROM animdesp" +
                       " WHERE cd_animal = ?" +
                       "   AND dt_despesa BETWEEN ? AND ?" +
@@ -385,7 +385,7 @@ public class ModuloDespesaRepository{
                             rs.getString("ds_descricao"),
                             rs.getBigDecimal("nm_valor"),
                             rs.getInt("nm_qtde"),
-                            (PrestadorServico)psr.getById(rs.getInt("cd_presserv")),
+                            (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                             rs.getInt("cd_usuario"));
                     animalistad.add(adespesa);
                 }
@@ -410,7 +410,7 @@ public class ModuloDespesaRepository{
     public Object getByIdAnimalDespesa(int id) {
         AnimalDespesa animalistad = null;
             try{
-                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_animal, cd_produto, cd_usuario" +
+                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_animal, cd_produto, cd_usuario" +
                       "  FROM animdesp" +
                       " WHERE cd_despesa = ?";                
                 PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
@@ -426,7 +426,7 @@ public class ModuloDespesaRepository{
                             rs.getString("ds_descricao"),
                             rs.getBigDecimal("nm_valor"),
                             rs.getInt("nm_qtde"),
-                            (PrestadorServico)psr.getById(rs.getInt("cd_presserv")),
+                            (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                             rs.getInt("cd_usuario"));
                 }
                 ps.close();
@@ -450,7 +450,7 @@ public class ModuloDespesaRepository{
     public ArrayList getListaVeiculoDespesa(Veiculo v) {
         ArrayList veiculolistad = new ArrayList();
             try{
-                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_veiculo, cd_usuario" +
+                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_veiculo, cd_usuario" +
                       "  FROM veicdesp" +
                       " WHERE cd_veiculo = ?" +
                       "   AND dt_despesa BETWEEN (SELECT trunc(SYSDATE,'MM') FROM DUAL) AND (SELECT trunc(LAST_DAY(SYSDATE)) FROM DUAL)" +  
@@ -469,7 +469,7 @@ public class ModuloDespesaRepository{
                             rs.getString("ds_descricao"),
                             rs.getBigDecimal("nm_valor"),
                             rs.getInt("nm_qtde"),
-                            (PrestadorServico)psr.getById(rs.getInt("cd_presserv")),
+                            (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                             rs.getInt("cd_usuario"));
                     veiculolistad.add(vdespesa);
                 }
@@ -494,7 +494,7 @@ public class ModuloDespesaRepository{
     public ArrayList getListaVeiculoDespesa(Veiculo v, String dt_inicio, String dt_final) {
         ArrayList veiculolistad = new ArrayList();
             try{
-                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_veiculo, cd_usuario" +
+                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_veiculo, cd_usuario" +
                       "  FROM veicdesp" +
                       " WHERE cd_veiculo = ?" +
                       "   AND dt_despesa BETWEEN ? AND ?" +  
@@ -515,7 +515,7 @@ public class ModuloDespesaRepository{
                             rs.getString("ds_descricao"),
                             rs.getBigDecimal("nm_valor"),
                             rs.getInt("nm_qtde"),
-                            (PrestadorServico)psr.getById(rs.getInt("cd_presserv")),
+                            (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                             rs.getInt("cd_usuario"));
                     veiculolistad.add(vdespesa);
                 }
@@ -540,7 +540,7 @@ public class ModuloDespesaRepository{
     public Object getByIdVeiculoDespesa(int id) {
         VeiculoDespesa veiculolistad = null;
             try{
-                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_veiculo, cd_usuario" +
+                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_veiculo, cd_usuario" +
                       "  FROM veicdesp" +
                       " WHERE cd_despesa = ?";                
                 PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
@@ -555,7 +555,7 @@ public class ModuloDespesaRepository{
                             rs.getString("ds_descricao"),
                             rs.getBigDecimal("nm_valor"),
                             rs.getInt("nm_qtde"),
-                            (PrestadorServico)psr.getById(rs.getInt("cd_presserv")),
+                            (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                             rs.getInt("cd_usuario"));
                 }
                 ps.close();
@@ -579,7 +579,7 @@ public class ModuloDespesaRepository{
     public ArrayList getListaImovelDespesa(Imovel i) {
         ArrayList imovellistad = new ArrayList();
             try{
-                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_imovel, cd_usuario" +
+                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_imovel, cd_usuario" +
                       "  FROM imovdesp" +
                       " WHERE cd_imovel = ?" +
                       "   AND cd_usuario = ?" +
@@ -597,7 +597,7 @@ public class ModuloDespesaRepository{
                             rs.getString("ds_descricao"),
                             rs.getBigDecimal("nm_valor"),
                             rs.getInt("nm_qtde"),
-                            (PrestadorServico)psr.getById(rs.getInt("cd_presserv")),
+                            (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                             rs.getInt("cd_usuario"));
                     imovellistad.add(idespesa);
                 }
@@ -622,7 +622,7 @@ public class ModuloDespesaRepository{
     public ArrayList getListaImovelDespesa(Imovel i, String dt_inicio, String dt_final) {
         ArrayList imovellistad = new ArrayList();
             try{
-                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_imovel, cd_usuario" +
+                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_imovel, cd_usuario" +
                       "  FROM imovdesp" +
                       " WHERE cd_imovel = ?" +
                       "   AND dt_despesa BETWEEN ? AND ?" +                         
@@ -643,7 +643,7 @@ public class ModuloDespesaRepository{
                             rs.getString("ds_descricao"),
                             rs.getBigDecimal("nm_valor"),
                             rs.getInt("nm_qtde"),
-                            (PrestadorServico)psr.getById(rs.getInt("cd_presserv")),
+                            (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                             rs.getInt("cd_usuario"));
                     imovellistad.add(idespesa);
                 }
@@ -668,7 +668,7 @@ public class ModuloDespesaRepository{
     public Object getByIdImovelDespesa(int id) {
         ImovelDespesa idespesa = null;
             try{
-                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_presserv, cd_imovel, cd_usuario" +
+                sql = "SELECT cd_despesa, to_char(dt_despesa,'dd/MM/yyyy'), nm_nota, ds_descricao, nm_valor, nm_qtde, cd_empresa, cd_imovel, cd_usuario" +
                       "  FROM imovdesp" +
                       " WHERE cd_despesa = ?";                
                 PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
@@ -683,7 +683,7 @@ public class ModuloDespesaRepository{
                             rs.getString("ds_descricao"),
                             rs.getBigDecimal("nm_valor"),
                             rs.getInt("nm_qtde"),
-                            (PrestadorServico)psr.getById(rs.getInt("cd_presserv")),
+                            (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                             rs.getInt("cd_usuario"));
                 }
                 ps.close();

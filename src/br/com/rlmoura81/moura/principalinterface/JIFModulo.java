@@ -7,8 +7,8 @@ import br.com.rlmoura81.moura.principal.ModuloAplicativoUtil;
 import br.com.rlmoura81.moura.principal.ModuloUtil;
 import br.com.rlmoura81.moura.principalcadastro.Categoria;
 import br.com.rlmoura81.moura.principalcadastro.CategoriaUtil;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoUtil;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaUtil;
 import javax.swing.JOptionPane;
 
 public class JIFModulo extends javax.swing.JInternalFrame {
@@ -45,8 +45,8 @@ public class JIFModulo extends javax.swing.JInternalFrame {
     ModuloAplicativoUtil modappu = new ModuloAplicativoUtil();    
     Categoria categoria = new Categoria();
     CategoriaUtil categoriau = new CategoriaUtil();    
-    PrestadorServico presserv = new PrestadorServico();
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();
+    Empresa empresa = new Empresa();
+    EmpresaUtil empresau = new EmpresaUtil();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -276,8 +276,8 @@ public class JIFModulo extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Preenche o combo box com prestadores de serviço 
      * do banco de dados.</p>
      */
-    private void jcPresserv(){
-        presservu.jcPresserv(jCBModuloApp);
+    private void jcEmpresa(){
+        empresau.jcEmpresa(jCBModuloApp);
     }
     
     /**
@@ -300,7 +300,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
             modappu.tabelaModuloAppCategoria(jTModulo);            
         }
         if(jRBPresServ.isSelected() == true){
-            jcPresserv();
+            jcEmpresa();
             modappu.tabelaModuloAppPresserv(jTModulo);            
         }
     }
@@ -370,7 +370,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
             modappu.tabelaModuloAppCategoria(jTModulo);
         }
         if(jRBPresServ.isSelected()){
-            modapp.setPresserv(presserv);
+            modapp.setEmpresa(empresa);
             modapp.setModulo(modulo);
             modappr.inserirPresServMod(modapp);
             modappu.tabelaModuloAppPresserv(jTModulo);
@@ -403,7 +403,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
             
         }
         try{
-            presserv = (PrestadorServico)jCBModuloApp.getSelectedItem();
+            empresa = (Empresa)jCBModuloApp.getSelectedItem();
         }catch(Exception ex){
             
         }
@@ -423,7 +423,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
             jCBModuloApp.setSelectedItem(modapp.getCategoria());
         }
         if(jRBPresServ.isSelected() == true){
-            jCBModuloApp.setSelectedItem(modapp.getPresserv());
+            jCBModuloApp.setSelectedItem(modapp.getEmpresa());
         }
         jCBModulo.setSelectedItem(modapp.getModulo());
     }//GEN-LAST:event_jTModuloMouseClicked
@@ -432,7 +432,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup bGModulo;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<String> jCBModulo;
-    private javax.swing.JComboBox<String> jCBModuloApp;
+    private javax.swing.JComboBox<Empresa> jCBModuloApp;
     private javax.swing.JPanel jPBotoes;
     private javax.swing.JPanel jPCampos;
     private javax.swing.JPanel jPGrid;

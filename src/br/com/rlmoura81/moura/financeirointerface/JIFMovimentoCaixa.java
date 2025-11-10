@@ -853,7 +853,7 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         if(jCBDespesa.getSelectedIndex() != 0){
             despesa = (Despesa)jCBDespesa.getSelectedItem();
             jFTFData.setText(Utilidade.formatoData.format(Calendar.getInstance().getTime()));
-            jTFDescricao.setText(despesa.getPresserv() + " " + despesa.getDs_despesa());
+            jTFDescricao.setText(despesa.getEmpresa()+ " " + despesa.getDs_despesa());
             jFTFValor.setText(Utilidade.formatoValor.format(despesa.getNm_valor()));
             jCBCategoria.getModel().setSelectedItem(despesa.getCategoria());            
         }
@@ -981,6 +981,9 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarActionPerformed
+        if(jFTFDataFinal.getText().equals("  /  /    ")){
+            jFTFDataFinal.setText(Utilidade.formatoData.format(Calendar.getInstance().getTime()));
+        }
         if(util.validaDataCampo(jFTFDataInicio.getText()) && util.validaDataCampo(jFTFDataFinal.getText())){
             movcxu.tablelaMovimentoCaixa(jTLancamento, conta.getCd_conta(), jFTFDataInicio.getText(), jFTFDataFinal.getText());
             calculaValoresPesquisa();

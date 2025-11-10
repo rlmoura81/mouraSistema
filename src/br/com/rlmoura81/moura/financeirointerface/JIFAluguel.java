@@ -5,8 +5,8 @@ import br.com.rlmoura81.moura.financeiro.AluguelRepository;
 import br.com.rlmoura81.moura.financeiro.AluguelUtil;
 import br.com.rlmoura81.moura.imovel.Imovel;
 import br.com.rlmoura81.moura.imovel.ImovelUtil;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoUtil;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaUtil;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import javax.swing.JOptionPane;
@@ -37,8 +37,8 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
     Imovel imovel = null;
     ImovelUtil imovelu = new ImovelUtil();
     
-    PrestadorServico presserv = null;
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();
+    Empresa empresa = null;
+    EmpresaUtil empresau = new EmpresaUtil();
     
     Aluguel aluguel = new Aluguel();
     AluguelRepository aluguelr = new AluguelRepository();
@@ -339,7 +339,7 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Preenche o combo box de imobiliárias utilizando a camada de serviço.</p>
      */
     private void jcImobiliaria(){
-        presservu.jcPresserv(jCBImobiliaria, 4);
+        empresau.jcEmpresa(jCBImobiliaria, 4);
         
     }
     
@@ -378,7 +378,7 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
      */
     private void salvar(){
         aluguel.setImovel(imovel);
-        aluguel.setPresserv(presserv);
+        aluguel.setEmpresa(empresa);
         aluguel.setNm_contrato(jTFContrato.getText());
         aluguel.setNm_vlaluguel(Utilidade.converter(jFTFValorAlguel.getText()));
         aluguel.setDt_deposito(Integer.parseInt(jTFDataAluguel.getText()));
@@ -395,7 +395,7 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
      */
     private void alterar(){
         aluguel.setImovel(imovel);
-        aluguel.setPresserv(presserv);
+        aluguel.setEmpresa(empresa);
         aluguel.setNm_contrato(jTFContrato.getText());
         aluguel.setNm_vlaluguel(Utilidade.converter(jFTFValorAlguel.getText()));
         aluguel.setDt_deposito(Integer.parseInt(jTFDataAluguel.getText()));
@@ -424,6 +424,11 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
     private boolean validaCampos(){
         if(imovel == null){
             JOptionPane.showMessageDialog(null, "Selecione o imovel.", "Imovel", JOptionPane.INFORMATION_MESSAGE);
+            jCBImovel.requestFocus();
+            return false;
+        }
+        if(empresa == null){
+            JOptionPane.showMessageDialog(null, "Selecione o prestador.", "Imovel", JOptionPane.INFORMATION_MESSAGE);
             jCBImovel.requestFocus();
             return false;
         }
@@ -502,16 +507,16 @@ public class JIFAluguel extends javax.swing.JInternalFrame {
 
     private void jCBImobiliariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBImobiliariaActionPerformed
         if(jCBImobiliaria.getSelectedIndex() != 0){
-            presserv = (PrestadorServico)jCBImobiliaria.getSelectedItem();
+            empresa = (Empresa)jCBImobiliaria.getSelectedItem();
         }else{
-            presserv = null;
+            empresa = null;
         }
     }//GEN-LAST:event_jCBImobiliariaActionPerformed
 
     private void jTAluguelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTAluguelMouseClicked
         aluguel = (Aluguel)aluguelu.getSelectObject(jTAluguel);
         jCBImovel.getModel().setSelectedItem(aluguel.getImovel());
-        jCBImobiliaria.getModel().setSelectedItem(aluguel.getPresserv());
+        jCBImobiliaria.getModel().setSelectedItem(aluguel.getEmpresa());
         jTFContrato.setText(aluguel.getNm_contrato());
         jFTFValorAlguel.setText(Utilidade.formatoValor.format(aluguel.getNm_vlaluguel()));
         jTFDataAluguel.setText(Integer.toString(aluguel.getDt_deposito()));

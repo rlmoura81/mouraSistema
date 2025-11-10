@@ -7,36 +7,38 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class PrestadorServicoRepository {
+public class EmpresaRepository {
 
     String sql = "";
+    TipoEmpresaRepository tpempresar = new TipoEmpresaRepository();
         
     /**
      * <p><strong>EN:</strong> Inserts a new Service Provider record into the database
-     * using the fields from the provided {@code PrestadorServico} object.</p>
+     * using the fields from the provided {@code Empresa} object.</p>
      *
      * <p><strong>IT:</strong> Inserisce un nuovo record di Fornitore di Servizi nel database
-     * utilizzando i campi dell’oggetto {@code PrestadorServico} fornito.</p>
+     * utilizzando i campi dell’oggetto {@code Empresa} fornito.</p>
      *
      * <p><strong>PT-BR:</strong> Insere um novo registro de Prestador de Serviço no banco de dados
-     * usando os campos do objeto {@code PrestadorServico} informado.</p>
+     * usando os campos do objeto {@code Empresa} informado.</p>
      */
     public void inserir(Object o){
-        PrestadorServico presserv = (PrestadorServico) o;
+        Empresa empresa = (Empresa) o;
         try{
-            sql = "INSERT INTO presserv (cd_presserv, ds_presserv, ds_razaosocial, nm_documento, cd_usuario)" +
-                  "     VALUES (sq_presserv.nextval,?, ?, ?, ?)";            
+            sql = "INSERT INTO empresa (cd_empresa, ds_empresa, ds_razaosocial, nm_documento, cd_tpempresa, cd_usuario)" +
+                  "     VALUES (sq_empresa.nextval, ?, ?, ?, ?, ?)";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
-            ps.setString(1, presserv.getDs_presserv());
-            ps.setString(2, presserv.getDs_razaosocial());
-            ps.setString(3, presserv.getNm_documento());
-            ps.setInt(4, presserv.getCd_usuario());
+            ps.setString(1, empresa.getDs_empresa());
+            ps.setString(2, empresa.getDs_razaosocial());
+            ps.setString(3, empresa.getNm_documento());
+            ps.setInt(4, empresa.getTpEmpresa().getCd_tpempresa());
+            ps.setInt(5, empresa.getCd_usuario());
             ps.execute();
             ps.close();
-            JOptionPane.showMessageDialog(null, "Salvo.", "Prestador de Serviço", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Salvo.", "Empresa", JOptionPane.INFORMATION_MESSAGE);
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao salvar:\n" +
-                    ex.getMessage(), "Prestador de Serviço", JOptionPane.ERROR_MESSAGE);
+                    ex.getMessage(), "Empresa", JOptionPane.ERROR_MESSAGE);
         }    
     }
     
@@ -51,26 +53,28 @@ public class PrestadorServicoRepository {
      * correspondente aos IDs informados, substituindo os campos pelos do objeto recebido.</p>
      */
     public void alterar(Object o){
-        PrestadorServico presserv = (PrestadorServico) o;
+        Empresa empresa = (Empresa) o;
         try{
-            sql = "UPDATE presserv " +
-                  "   SET ds_presserv = ?, " +
+            sql = "UPDATE empresa " +
+                  "   SET ds_empresa = ?, " +
                   "       ds_razaosocial = ?, " +
-                  "       nm_documento = ?" +
-                  " WHERE cd_presserv = ? " +
-                  "   AND cd_usuario = ?";            
+                  "       nm_documento = ?," +
+                  "       cd_tpempresa = ?," + 
+                  "       cd_usuario = ?" +
+                  " WHERE cd_empresa = ?";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
-            ps.setString(1, presserv.getDs_presserv());
-            ps.setString(2, presserv.getDs_razaosocial());
-            ps.setString(3, presserv.getNm_documento());
-            ps.setInt(4, presserv.getCd_presserv());
-            ps.setInt(5, presserv.getCd_usuario());
+            ps.setString(1, empresa.getDs_empresa());
+            ps.setString(2, empresa.getDs_razaosocial());
+            ps.setString(3, empresa.getNm_documento());
+            ps.setInt(4, empresa.getTpEmpresa().getCd_tpempresa());
+            ps.setInt(5, empresa.getCd_usuario());
+            ps.setInt(6, empresa.getCd_empresa());
             ps.execute();
             ps.close();
-            JOptionPane.showMessageDialog(null, "Salvo.", "Prestador de Serviço", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Salvo.", "Empresa", JOptionPane.INFORMATION_MESSAGE);
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao salvar:\n" +
-                    ex.getMessage(), "Prestador de Serviço", JOptionPane.ERROR_MESSAGE);
+                    ex.getMessage(), "Empresa", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -85,20 +89,18 @@ public class PrestadorServicoRepository {
      * identificado pelos IDs do prestador e do usuário.</p>
      */
     public void excluir(Object o){
-        PrestadorServico presserv = (PrestadorServico) o;
+        Empresa empresa = (Empresa) o;
         try{
-            sql = "DELETE FROM presserv " +
-                  " WHERE cd_presserv = ? " +
-                  "   AND cd_usuario = ?";
+            sql = "DELETE FROM empresa " +
+                  " WHERE cd_empresa = ? ";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
-            ps.setInt(1, presserv.getCd_presserv());
-            ps.setInt(2, presserv.getCd_usuario());
+            ps.setInt(1, empresa.getCd_empresa());
             ps.execute();
             ps.close();
-            JOptionPane.showMessageDialog(null, "Excluido", "Prestador de Serviço", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Excluido", "Empresa", JOptionPane.INFORMATION_MESSAGE);
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao excluir:\n" +
-                    ex.getMessage(), "Prestador de Serviço", JOptionPane.ERROR_MESSAGE);
+                    ex.getMessage(), "Empresa", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -113,30 +115,29 @@ public class PrestadorServicoRepository {
      * ordenada pelo nome do prestador.</p>
      */
     public ArrayList getLista(){        
-        ArrayList presservlista = new ArrayList();
+        ArrayList empresal = new ArrayList();
         try{
-            sql = "SELECT cd_presserv, ds_presserv, ds_razaosocial, nm_documento, cd_usuario" +
-                  "  FROM presserv" +
-                  " WHERE cd_usuario = ?" +
-                  " ORDER BY ds_presserv";            
+            sql = "SELECT cd_empresa, ds_empresa, ds_razaosocial, nm_documento, cd_tpempresa, cd_usuario" +
+                  "  FROM empresa" +
+                  " ORDER BY ds_empresa";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
-            ps.setInt(1, JPLogin.codloginuser);
             ResultSet rs = ps.executeQuery();        
             while(rs.next()){          
-                PrestadorServico presserv = new PrestadorServico(
-                    rs.getInt("cd_presserv"),
-                    rs.getString("ds_presserv"),
+                Empresa empresa = new Empresa(
+                    rs.getInt("cd_empresa"),
+                    rs.getString("ds_empresa"),
                     rs.getString("ds_razaosocial"),
                     rs.getString("nm_documento"),
+                    (TipoEmpresa)tpempresar.getById(rs.getInt("cd_tpempresa")),
                     rs.getInt("cd_usuario"));
-                presservlista.add(presserv);
+                empresal.add(empresa);
             }
             ps.close();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de prestadores de serviços:\n" +
-                    ex.getMessage(), "Prestador de Serviço", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de Empresas:\n" +
+                    ex.getMessage(), "Empresa", JOptionPane.ERROR_MESSAGE);
         }
-        return presservlista;
+        return empresal;
     }
 
     /**
@@ -150,70 +151,70 @@ public class PrestadorServicoRepository {
      * filtrados pelo usuário atual e ordenados pelo nome.</p>
      */
     public ArrayList getLista(int cd_modulo){       
-        ArrayList presservlista = new ArrayList();
+        ArrayList empresal = new ArrayList();
         try{
-            sql = "SELECT presserv.cd_presserv, ds_presserv, ds_razaosocial, nm_documento, presserv.cd_usuario" +
-                  "  FROM presserv, modulo, presservmod" +
-                  " WHERE presserv.cd_usuario = ?" +
+            sql = "SELECT empresa.cd_empresa, ds_empresa, ds_razaosocial, nm_documento, cd_tpempresa, empresa.cd_usuario" +
+                  "  FROM empresa, modulo, empresamod" +
+                  " WHERE empresa.cd_usuario = ?" +
                   "   AND modulo.cd_modulo = ?" +
-                  "   AND modulo.cd_modulo = presservmod.cd_modulo" +
-                  "   AND presserv.cd_presserv = presservmod.cd_presserv" +
-                  " ORDER BY ds_presserv";            
+                  "   AND modulo.cd_modulo = empresamod.cd_modulo" +
+                  "   AND empresa.cd_empresa = empresamod.cd_empresa" +
+                  " ORDER BY ds_empresa";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, JPLogin.codloginuser);
             ps.setInt(2, cd_modulo);
             ResultSet rs = ps.executeQuery();        
             while(rs.next()){          
-                PrestadorServico presserv = new PrestadorServico(
-                    rs.getInt("cd_presserv"),
-                    rs.getString("ds_presserv"),
+                Empresa empresa = new Empresa(
+                    rs.getInt("cd_empresa"),
+                    rs.getString("ds_empresa"),
                     rs.getString("ds_razaosocial"),
                     rs.getString("nm_documento"),
+                    (TipoEmpresa)tpempresar.getById(rs.getInt("cd_tpempresa")),
                     rs.getInt("cd_usuario"));
-                presservlista.add(presserv);
+                empresal.add(empresa);
             }
             ps.close();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de prestadores de serviços:\n" +
-                    ex.getMessage(), "Prestador de Serviços", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de Empresas:\n" +
+                    ex.getMessage(), "Empresa", JOptionPane.ERROR_MESSAGE);
         }
-        return presservlista;
+        return empresal;
     }
         
     /**
      * <p><strong>EN:</strong> Fetches a single Service Provider by its identifier, returning
-     * a populated {@code PrestadorServico} instance when found.</p>
+     * a populated {@code Empresa} instance when found.</p>
      *
      * <p><strong>IT:</strong> Recupera un singolo Fornitore di Servizi tramite il suo identificatore,
-     * restituendo un’istanza {@code PrestadorServico} popolata se trovato.</p>
+     * restituendo un’istanza {@code Empresa} popolata se trovato.</p>
      *
      * <p><strong>PT-BR:</strong> Busca um único Prestador de Serviço pelo seu identificador,
-     * retornando uma instância {@code PrestadorServico} preenchida quando encontrado.</p>
+     * retornando uma instância {@code Empresa} preenchida quando encontrado.</p>
      */
     public Object getById(int id){
-        PrestadorServico p = null;
+        Empresa empresa = null;
         try {
-            sql = "SELECT cd_presserv, ds_presserv, ds_razaosocial, nm_documento, cd_usuario"
-                + "  FROM presserv"
-                + " WHERE cd_presserv = ?";
+            sql = "SELECT cd_empresa, ds_empresa, ds_razaosocial, nm_documento, cd_tpempresa, cd_usuario"
+                + "  FROM empresa"
+                + " WHERE cd_empresa = ?";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                PrestadorServico presserv = new PrestadorServico();
-                presserv.setCd_presserv(rs.getInt("cd_presserv"));
-                p = new PrestadorServico(
-                    rs.getInt("cd_presserv"),
-                    rs.getString("ds_presserv"),
+                empresa = new Empresa(
+                    rs.getInt("cd_empresa"),
+                    rs.getString("ds_empresa"),
                     rs.getString("ds_razaosocial"),
                     rs.getString("nm_documento"),
+                    (TipoEmpresa)tpempresar.getById(rs.getInt("cd_tpempresa")),
                     rs.getInt("cd_usuario"));
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro de getById em Prestador de Servico" +
-                    ex.getMessage(), "Prestador de Serviços", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro de getById em Empresa" +
+                    ex.getMessage(), "Empresa", JOptionPane.ERROR_MESSAGE);
         }        
-        return p;        
+        return empresa;        
     }
 }

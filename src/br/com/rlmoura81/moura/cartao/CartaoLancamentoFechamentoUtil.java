@@ -1,10 +1,15 @@
 package br.com.rlmoura81.moura.cartao;
 
 import br.com.rlmoura81.moura.utilidade.Utilidade;
+import java.awt.Component;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +19,7 @@ public class CartaoLancamentoFechamentoUtil {
     CartaoLancamentoFechamento cartaolancf = new CartaoLancamentoFechamento();
     CartaoLancamentoFechamentoRepository cartaolancfr = new CartaoLancamentoFechamentoRepository();    
     ArrayList lista = new ArrayList();
+    List<CartaoLancamentoFechamento> listacartaolancf = new ArrayList<>();
    
     /**
      * <p><strong>EN:</strong> Calculates the total invoice amount for the given closing date and card.</p>
@@ -37,6 +43,56 @@ public class CartaoLancamentoFechamentoUtil {
         return resultado;
     }
 
+    /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - STATUS PAGAMENTO
+    */
+    
+    public void jcModelStPagamento(JComboBox<CartaoLancamentoFechamento> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof CartaoLancamentoFechamento){
+                        CartaoLancamentoFechamento clf = (CartaoLancamentoFechamento) value;
+                        if(clf.getCd_cartaolancf() == 0){
+                            setText("<Selecione>");
+                        }else if(clf.getDt_fechamento() != null){
+                            setText(Utilidade.formatoData.format(clf.getDt_fechamento().getTime()));
+                        }else{
+                            setText("Sem data");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
+    
+    /*
+    *EM TESTE - COLOCAR COMENTARIO
+    *JCOMBOBOX STATUS FECHAMENTO
+    */
+    
+    public void jcStFechamento(JComboBox<CartaoLancamentoFechamento> o, int cd_cartao, int st_pagamento){
+        List<CartaoLancamentoFechamento> lista = cartaolancfr.getListaStFechamento(cd_cartao, st_pagamento);        
+        DefaultComboBoxModel<CartaoLancamentoFechamento> model = new DefaultComboBoxModel<>();
+        model.addElement(new CartaoLancamentoFechamento(0, null, 0, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(CartaoLancamentoFechamento clf : lista){
+                model.addElement(clf);
+            }             
+        }       
+        o.setModel(model);
+        jcModelStPagamento(o);
+    }
+    
     /**
      * <p><strong>EN:</strong> Populates a JComboBox with the list of closing dates for the given card, adding a default option at the beginning.</p>
      *
@@ -48,15 +104,15 @@ public class CartaoLancamentoFechamentoUtil {
      * @param cd_cartao EN: card identifier | IT: identificatore della carta | PT-BR: identificador do cartão
      * @since 1.0.0
      */    
-    public void jcDataFechamento(JComboBox o, int cd_cartao){
-        ArrayList<CartaoLancamentoFechamento> lista = cartaolancfr.getLista(cd_cartao);
-        CartaoLancamentoFechamento cbZero = new CartaoLancamentoFechamento(0, null);
+    public void jcDataFechamento(JComboBox<CartaoLancamentoFechamento> o, int cd_cartao){
+        ArrayList<CartaoLancamentoFechamento> lista = cartaolancfr.getListaFechamento(cd_cartao);
+        CartaoLancamentoFechamento cbZero = new CartaoLancamentoFechamento(0, null, 0);
         o.addItem(cbZero);
         for(CartaoLancamentoFechamento clf : lista){
-            o.addItem(Utilidade.formatoData.format(clf.getDt_fechamento().getTime()));
+            o.addItem(clf);
         }
     }
- 
+     
     /**
      * <p><strong>EN:</strong> Populates a JTable with the card closing entries for the given date and card, formatting data into columns.</p>
      *

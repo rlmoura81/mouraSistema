@@ -1,8 +1,10 @@
 package br.com.rlmoura81.moura.principalcadastrointerface;
 
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServico;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoRepository;
-import br.com.rlmoura81.moura.principalcadastro.PrestadorServicoUtil;
+import br.com.rlmoura81.moura.principalcadastro.Empresa;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaRepository;
+import br.com.rlmoura81.moura.principalcadastro.EmpresaUtil;
+import br.com.rlmoura81.moura.principalcadastro.TipoEmpresa;
+import br.com.rlmoura81.moura.principalcadastro.TipoEmpresaUtil;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.beans.PropertyVetoException;
@@ -10,9 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class JIFPrestadorServico extends javax.swing.JInternalFrame {
+public class JIFEmpresa extends javax.swing.JInternalFrame {
     
-    private static JIFPrestadorServico jifprestadorservico;
+    private static JIFEmpresa jifempresa;
 
     /**
      * <p><strong>EN:</strong> Returns the singleton instance of the 
@@ -31,28 +33,31 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
      * Caso não exista, cria a instância, define o título e tenta maximizar a janela.  
      * Trata exceções exibindo uma mensagem de erro e registrando o problema.</p>
      */
-    public static JIFPrestadorServico getInstancia(){
-        if(jifprestadorservico == null){
-            jifprestadorservico = new JIFPrestadorServico();
-            jifprestadorservico.setTitle("Prestadores de serviços");
+    public static JIFEmpresa getInstancia(){
+        if(jifempresa == null){
+            jifempresa = new JIFEmpresa();
+            jifempresa.setTitle("Empresa");
             try {
-                jifprestadorservico.setMaximum(true);
+                jifempresa.setMaximum(true);
             } catch (PropertyVetoException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao abrir:\n" + ex.getMessage(), "Prestador de Serviço", JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(JIFPrestadorServico.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao abrir:\n" + ex.getMessage(), "Empresa", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(JIFEmpresa.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } return jifprestadorservico;
+        } return jifempresa;
     }
     
-    PrestadorServico presserv = null;
-    PrestadorServicoRepository presservr = new PrestadorServicoRepository();
-    PrestadorServicoUtil presservu = new PrestadorServicoUtil();    
+    Empresa empresa = null;
+    EmpresaRepository empresar = new EmpresaRepository();
+    EmpresaUtil empresau = new EmpresaUtil();    
+    TipoEmpresa tpempresa = new TipoEmpresa();
+    TipoEmpresaUtil tpempresau = new TipoEmpresaUtil();
     Utilidade util = new Utilidade();
         
-    public JIFPrestadorServico() {
+    public JIFEmpresa() {
         initComponents();
 
-        tabelaPresServ();        
+        jcTipoEmpresa();
+        tabelaEmpresa();        
     }
 
     @SuppressWarnings("unchecked")
@@ -67,12 +72,13 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
         jLDocumento = new javax.swing.JLabel();
         jLRazaoSocial = new javax.swing.JLabel();
         jTFRazaoSocial = new javax.swing.JTextField();
-        jLPrestadorServico = new javax.swing.JLabel();
-        jTFPrestadorServico = new javax.swing.JTextField();
+        jLEmpresa = new javax.swing.JLabel();
+        jTFEmpresa = new javax.swing.JTextField();
         jFTFDocumento = new javax.swing.JFormattedTextField();
+        jCBTpEmpresa = new javax.swing.JComboBox<>();
         jPGrid = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTPrestadorServico = new javax.swing.JTable();
+        jTEmpresa = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -139,11 +145,17 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
 
         jLRazaoSocial.setText("Razao Social:");
 
-        jLPrestadorServico.setText("Nome/NomeFantasia:");
+        jLEmpresa.setText("Nome/NomeFantasia:");
 
         jFTFDocumento.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jFTFDocumentoFocusLost(evt);
+            }
+        });
+
+        jCBTpEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBTpEmpresaActionPerformed(evt);
             }
         });
 
@@ -154,14 +166,16 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
             .addGroup(jPCamposLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLPrestadorServico)
-                    .addComponent(jTFPrestadorServico, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                    .addComponent(jLEmpresa)
+                    .addComponent(jTFEmpresa)
                     .addComponent(jLRazaoSocial)
                     .addComponent(jTFRazaoSocial)
                     .addGroup(jPCamposLayout.createSequentialGroup()
                         .addComponent(jLDocumento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFTFDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jFTFDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCBTpEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPCamposLayout.setVerticalGroup(
@@ -170,11 +184,12 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLDocumento)
-                    .addComponent(jFTFDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTFDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBTpEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLPrestadorServico)
+                .addComponent(jLEmpresa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFPrestadorServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLRazaoSocial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -184,7 +199,7 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
 
         jPGrid.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTPrestadorServico.setModel(new javax.swing.table.DefaultTableModel(
+        jTEmpresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -195,12 +210,12 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
 
             }
         ));
-        jTPrestadorServico.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTPrestadorServicoMouseClicked(evt);
+                jTEmpresaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTPrestadorServico);
+        jScrollPane1.setViewportView(jTEmpresa);
 
         javax.swing.GroupLayout jPGridLayout = new javax.swing.GroupLayout(jPGrid);
         jPGrid.setLayout(jPGridLayout);
@@ -245,6 +260,27 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /*
+    *EM TESTE - COLOCAR COMENTARIO
+    *CARREGA A JCOMBOBOX COM A LISTA DE TIPO DE EMPRSA
+    */
+    private void jcTipoEmpresa(){
+        tpempresau.jcTpEmpresa(jCBTpEmpresa);
+    }
+    /**
+     * <p><strong>EN:</strong> Loads and displays the Service Providers list into the JTable.
+     * Populates the table with name, company name, and document.</p>
+     *
+     * <p><strong>IT:</strong> Carica e visualizza l’elenco dei Fornitori di Servizi nella JTable.
+     * Popola la tabella con nome, ragione sociale e documento.</p>
+     *
+     * <p><strong>PT-BR:</strong> Carrega e exibe a lista de Prestadores de Serviço no JTable.
+     * Preenche a tabela com nome, razão social e documento.</p>
+     */
+    private void tabelaEmpresa(){
+        empresau.tabelaEmpresa(jTEmpresa);
+    }
     
     /**
      * <p><strong>EN:</strong> Validates mandatory fields for a Service Provider form.
@@ -258,13 +294,18 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
      */
     private boolean validaCampos(){
         if(jFTFDocumento.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Campo em branco.", "Prestador de Serviço", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Campo em branco.", "Empresa", JOptionPane.INFORMATION_MESSAGE);
             jFTFDocumento.requestFocus();
             return false;
         }
-        if(jTFPrestadorServico.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Campo em branco.", "Prestador de Serviço", JOptionPane.INFORMATION_MESSAGE);
-            jTFPrestadorServico.requestFocus();
+        if(tpempresa == null){
+            JOptionPane.showMessageDialog(null, "Selecione o tipo de empresa.", "Empresa", JOptionPane.INFORMATION_MESSAGE);
+            jCBTpEmpresa.requestFocus();
+            return false;            
+        }
+        if(jTFEmpresa.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo em branco.", "Empresa", JOptionPane.INFORMATION_MESSAGE);
+            jTFEmpresa.requestFocus();
             return false;
         }
         return true;
@@ -283,22 +324,9 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
     private void limpaCampos(){
         jFTFDocumento.setText(null);
         jFTFDocumento.setValue(null);
-        jTFPrestadorServico.setText(null);
+        jCBTpEmpresa.setSelectedIndex(0);
+        jTFEmpresa.setText(null);
         jTFRazaoSocial.setText(null);
-    }
-    
-    /**
-     * <p><strong>EN:</strong> Loads and displays the Service Providers list into the JTable.
-     * Populates the table with name, company name, and document.</p>
-     *
-     * <p><strong>IT:</strong> Carica e visualizza l’elenco dei Fornitori di Servizi nella JTable.
-     * Popola la tabella con nome, ragione sociale e documento.</p>
-     *
-     * <p><strong>PT-BR:</strong> Carrega e exibe a lista de Prestadores de Serviço no JTable.
-     * Preenche a tabela com nome, razão social e documento.</p>
-     */
-    private void tabelaPresServ(){
-        presservu.tabelaPresServ(jTPrestadorServico);
     }
     
     /**
@@ -312,21 +340,21 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
      * Caso seja um novo objeto, insere; caso contrário, atualiza o registro existente.</p>
      */
     private void salvar(){
-        if(presserv == null){
-            presserv = new PrestadorServico();
-            presserv.setNm_documento(Utilidade.retiraMascaraDocumento(jFTFDocumento.getText()));
-            presserv.setDs_presserv(jTFPrestadorServico.getText());
-            presserv.setDs_razaosocial(jTFRazaoSocial.getText());
-            presserv.setCd_usuario(JPLogin.codloginuser);
-            presservr.inserir(presserv);
-            presserv = null;
+        if(empresa == null){
+            empresa = new Empresa();
+            empresa.setNm_documento(Utilidade.retiraMascaraDocumento(jFTFDocumento.getText()));
+            empresa.setTpEmpresa(tpempresa);
+            empresa.setDs_empresa(jTFEmpresa.getText());
+            empresa.setDs_razaosocial(jTFRazaoSocial.getText());
+            empresa.setCd_usuario(JPLogin.codloginuser);
+            empresar.inserir(empresa);
         }else{
-            presserv.setNm_documento(Utilidade.retiraMascaraDocumento(jFTFDocumento.getText()));
-            presserv.setDs_presserv(jTFPrestadorServico.getText());
-            presserv.setDs_razaosocial(jTFRazaoSocial.getText());
-            presserv.setCd_usuario(JPLogin.codloginuser);
-            presservr.alterar(presserv);
-            presserv = null;
+            empresa.setNm_documento(Utilidade.retiraMascaraDocumento(jFTFDocumento.getText()));
+            empresa.setTpEmpresa(tpempresa);
+            empresa.setDs_empresa(jTFEmpresa.getText());
+            empresa.setDs_razaosocial(jTFRazaoSocial.getText());
+            empresa.setCd_usuario(JPLogin.codloginuser);
+            empresar.alterar(empresa);
         }         
     }
     
@@ -341,67 +369,76 @@ public class JIFPrestadorServico extends javax.swing.JInternalFrame {
      * do banco de dados com base em seu identificador único.</p>
      */
     private void excluir(){
-        presserv.setCd_presserv(presserv.getCd_presserv());
-        presservr.excluir(presserv);
-        presserv = null;
+        empresa.setCd_empresa(empresa.getCd_empresa());
+        empresar.excluir(empresa);
+        empresa = null;
     }
     
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        jifprestadorservico = null;
+        jifempresa = null;
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         if(validaCampos()){
             salvar();
             limpaCampos();
-            tabelaPresServ();
+            tabelaEmpresa();
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
-    private void jTPrestadorServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPrestadorServicoMouseClicked
-        presserv = (PrestadorServico)presservu.getSelectObject(jTPrestadorServico);        
-        jFTFDocumento.setValue(Utilidade.retornaDocumentoFormatado(presserv.getNm_documento(), presserv.getNm_documento().length()));        
-        jTFPrestadorServico.setText(presserv.getDs_presserv());
-        jTFRazaoSocial.setText(presserv.getDs_razaosocial());
-    }//GEN-LAST:event_jTPrestadorServicoMouseClicked
+    private void jTEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmpresaMouseClicked
+        empresa = (Empresa)empresau.getSelectObject(jTEmpresa);        
+        jFTFDocumento.setValue(Utilidade.retornaDocumentoFormatado(empresa.getNm_documento(), empresa.getNm_documento().length()));    
+        jCBTpEmpresa.getModel().setSelectedItem(empresa.getTpEmpresa());
+        jTFEmpresa.setText(empresa.getDs_empresa());
+        jTFRazaoSocial.setText(empresa.getDs_razaosocial());
+    }//GEN-LAST:event_jTEmpresaMouseClicked
     
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
-        presserv = (PrestadorServico)presservu.getSelectObject(jTPrestadorServico);
-        if(presserv != null){
+        empresa = (Empresa)empresau.getSelectObject(jTEmpresa);
+        if(empresa != null){
             excluir();
             limpaCampos();
-            tabelaPresServ();
+            tabelaEmpresa();
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jFTFDocumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDocumentoFocusLost
         if(!jFTFDocumento.getText().isEmpty()){
-            if(jFTFDocumento.getText().length() == 11 | jFTFDocumento.getText().length() == 14){
-                PrestadorServico ps = new PrestadorServico();
-                ps.setNm_documento(jFTFDocumento.getText());
+            String documento = Utilidade.retiraMascaraDocumento(jFTFDocumento.getText());
+            if(util.validaDocumento(documento) == true){
                 util.formataDocumento(jFTFDocumento, jFTFDocumento.getText().length());
-                jFTFDocumento.setText(ps.getNm_documento());
+                jFTFDocumento.setText(documento);                
             }else{
-                JOptionPane.showMessageDialog(null, "Documento inválido.", "Pretador de Serviço", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Documento inválido.", "Empresa", JOptionPane.INFORMATION_MESSAGE);
                 jFTFDocumento.requestFocus();
             }            
         }
     }//GEN-LAST:event_jFTFDocumentoFocusLost
+
+    private void jCBTpEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTpEmpresaActionPerformed
+        if(jCBTpEmpresa.getSelectedIndex() != 0){
+            tpempresa = (TipoEmpresa)jCBTpEmpresa.getSelectedItem();
+        }else{
+            tpempresa = null;
+        }
+    }//GEN-LAST:event_jCBTpEmpresaActionPerformed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGModulo;
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBSalvar;
+    private javax.swing.JComboBox<TipoEmpresa> jCBTpEmpresa;
     private javax.swing.JFormattedTextField jFTFDocumento;
     private javax.swing.JLabel jLDocumento;
-    private javax.swing.JLabel jLPrestadorServico;
+    private javax.swing.JLabel jLEmpresa;
     private javax.swing.JLabel jLRazaoSocial;
     private javax.swing.JPanel jPBotoes;
     private javax.swing.JPanel jPCampos;
     private javax.swing.JPanel jPGrid;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTFPrestadorServico;
+    private javax.swing.JTable jTEmpresa;
+    private javax.swing.JTextField jTFEmpresa;
     private javax.swing.JTextField jTFRazaoSocial;
-    private javax.swing.JTable jTPrestadorServico;
     // End of variables declaration//GEN-END:variables
 }

@@ -43,9 +43,9 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         }return jifnotacorretagem;
     }
     
-    NotaCorretagem nota = new NotaCorretagem();
-    NotaCorretagemRepository notar = new NotaCorretagemRepository();
-    NotaCorretagemUtil notau = new NotaCorretagemUtil();
+    NotaCorretagem notacorretagem = null;
+    NotaCorretagemRepository notacorretagemr = new NotaCorretagemRepository();
+    NotaCorretagemUtil notacorretagemu = new NotaCorretagemUtil();
     
     NotaCorretagemLancamento notalanc = null;
     NotaCorretagemLancamentoRepository notalancr = new NotaCorretagemLancamentoRepository();
@@ -63,7 +63,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     GrupoTransacao gptrans = null;
     GrupoTransacaoUtil gptransu = new GrupoTransacaoUtil();
 
-    AtivoSaldo asaldo = new AtivoSaldo();
+    AtivoSaldo asaldo = null;
     AtivoSaldoRepository asaldor = new AtivoSaldoRepository();
     AtivoSaldoUtil asaldou = new AtivoSaldoUtil();
     
@@ -309,6 +309,9 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         jLData.setText("Data:");
 
         jFTFData.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDataFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jFTFDataFocusLost(evt);
             }
@@ -458,8 +461,6 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         if(conta != null && !jFTFData.getText().equals("  /  /    ") && !jTFNumNota.getText().isEmpty()){
             jcTipoAtivo();
             jCBTpAtivo.setEnabled(true);
-            jCBAtivo.setEnabled(true);
-            jCBGpTransacao.setEnabled(true);
             jTFQtde.setEnabled(true);
             jFTFPreco.setEnabled(true);
             jBSalvar.setEnabled(true);
@@ -467,10 +468,6 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         }else{
             jCBTpAtivo.removeAllItems();
             jCBTpAtivo.setEnabled(false);
-            jCBAtivo.removeAllItems();
-            jCBAtivo.setEnabled(false);
-            jCBGpTransacao.removeAllItems();
-            jCBGpTransacao.setEnabled(false);
             jTFQtde.setText(null);
             jTFQtde.setEnabled(false);
             jFTFPreco.setValue(null);
@@ -488,7 +485,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Habilita o botão “Finalizar” apenas quando há nota e ao menos um lançamento.</p>
      */
     private void btFinalizar(){
-        if(nota != null && notalanc != null){
+        if(notacorretagem != null && notalanc != null){
             jBFinalizar.setEnabled(true);
         }else{
             jBFinalizar.setEnabled(false);
@@ -506,7 +503,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * conforme existirem lançamentos.</p>
      */
     private void btNovo(){
-        if(nota != null && jTNotaLancamento.getModel().getRowCount() != 0){
+        if(notacorretagem != null && jTNotaLancamento.getModel().getRowCount() != 0){
             jBNovo.setEnabled(true);
             jFTFData.setEnabled(false);
             jTFNumNota.setEnabled(false);
@@ -532,7 +529,6 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Preenche o combo de tipo de ativo (Ações e FII) e reinicia os itens anteriores.</p>
      */
     private void jcTipoAtivo(){
-        jCBTpAtivo.removeAllItems();
         tpativou.jcTipoAtivoAcaoFii(jCBTpAtivo);
     }
     
@@ -542,8 +538,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Preenche o combo de grupo de transação com opções Compra/Venda e reinicia.</p>
      */
     private void jcGpTrans(){
-        jCBGpTransacao.removeAllItems();
-        gptransu.jcGpTransCompraVenda(jCBGpTransacao);
+        gptransu.jcGpTransacao(jCBGpTransacao);
     }
     
     /**
@@ -557,14 +552,20 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * limpa quando a seleção é inválida.</p>
      */
     private void jcAtivo(){
-        jCBAtivo.removeAllItems();
-        if(tpativo != null && jCBTpAtivo.getSelectedIndex() != 0){
-            if(tpativo.getCd_tpativo() == 1){
-                ativou.jcAcao(jCBAtivo);
-            }    
-            if(tpativo.getCd_tpativo() == 2){
-                ativou.jcFundoImobiiario(jCBAtivo);
-            }   
+        if(tpativo != null){
+            jCBAtivo.setEnabled(true);
+            jCBGpTransacao.setEnabled(true);
+            if(tpativo != null && jCBTpAtivo.getSelectedIndex() != 0){
+                if(tpativo.getCd_tpativo() == 1){
+                    ativou.jcAcao(jCBAtivo);
+                }    
+                if(tpativo.getCd_tpativo() == 2){
+                    ativou.jcFundoImobiiario(jCBAtivo);
+                }   
+            }
+        }else{
+            jCBAtivo.setEnabled(false);
+            jCBGpTransacao.setEnabled(false);      
         }
     }    
     
@@ -592,7 +593,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Preenche a tabela de lançamentos com os itens da nota atual.</p>
      */
     private void tabelaNotaCorretagemLancamento(){
-        notalancu.tabelaNotaCorretagemLancamento(jTNotaLancamento, nota.getCd_nota());
+        notalancu.tabelaNotaCorretagemLancamento(jTNotaLancamento, notacorretagem.getCd_nota());
     }
 
     /**
@@ -640,14 +641,14 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * (nota, ativo, transação, quantidade, preço unitário, usuário).</p>
      */
     private void notaLancCampos(){
-        notalanc = new NotaCorretagemLancamento();
-        notalanc.setNota(nota);        
-        notalanc.setAtivo(ativo);
-        notalanc.setGptrans(gptrans);        
-        notalanc.setNm_qtde(Integer.parseInt(jTFQtde.getText()));
-        notalanc.setNm_valor(Utilidade.converter(jFTFPreco.getText()));
-        notalanc.setCd_usuario(nota.getCd_usuario());
-        notalancr.inserir(notalanc);
+            notalanc = new NotaCorretagemLancamento();
+            notalanc.setNota(notacorretagem);        
+            notalanc.setAtivo(ativo);
+            notalanc.setGptrans(gptrans);        
+            notalanc.setNm_qtde(Integer.parseInt(jTFQtde.getText()));
+            notalanc.setNm_valor(Utilidade.converter(jFTFPreco.getText()));
+            notalanc.setCd_usuario(notacorretagem.getCd_usuario());
+            notalancr.inserir(notalanc);            
     }
     
     /**
@@ -669,11 +670,14 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Monta e persiste o cabeçalho da nota (conta, data, número da nota, usuário).</p>
      */
     private void notaCampos(){
-        nota.setConta(conta);
-        nota.setDt_nota(util.recebeData(jFTFData.getText()));
-        nota.setNm_nota(Integer.parseInt(jTFNumNota.getText()));
-        nota.setCd_usuario(JPLogin.codloginuser);
-        notar.inserir(nota);
+        if(notacorretagem == null){
+            notacorretagem = new NotaCorretagem();
+            notacorretagem.setConta(conta);
+            notacorretagem.setDt_nota(util.recebeData(jFTFData.getText()));
+            notacorretagem.setNm_nota(Integer.parseInt(jTFNumNota.getText()));
+            notacorretagem.setCd_usuario(JPLogin.codloginuser);
+            notacorretagemr.inserir(notacorretagem);            
+        }
     }
     
     /**
@@ -685,7 +689,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
         jFTFData.setText(null);
         jTFNumNota.setText(null);
         limpaNotaLancCampos();
-        nota = null;
+        notacorretagem = null;
     }
     
     /**
@@ -698,15 +702,16 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Cria ou atualiza o saldo do ativo conforme o grupo de transação (compra/venda)
      * e a quantidade lançada.</p>
      */
-    private void transacaoAtivo(){
+    private void transacaoAtivo(){  
+        asaldo = (AtivoSaldo)asaldor.getById(ativo.getCd_ativo(), JPLogin.codloginuser);
         if(asaldo == null){
             asaldo = new AtivoSaldo();
-            asaldo.setAtivo(ativo);
+            asaldo.setAtivo(notalanc.getAtivo());
             asaldo.setNm_qtde(Integer.parseInt(jTFQtde.getText()));
             asaldo.setCd_usuario(JPLogin.codloginuser);
             asaldor.inserir(asaldo);
         }else{
-            asaldo.setAtivo(ativo);
+            asaldo.setAtivo(notalanc.getAtivo());
             asaldo.setNm_qtde(asaldou.atualizaSaldo(gptrans.getCd_gptrans(), asaldo.getNm_qtde(), notalanc.getNm_qtde()));
             asaldo.setCd_usuario(JPLogin.codloginuser);
             asaldor.alterar(asaldo);
@@ -717,7 +722,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     private void jCBContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBContaActionPerformed
         if(jCBConta.getSelectedIndex() != 0){
             conta = (Conta)jCBConta.getSelectedItem();
-            notau.tabelaNotaCorretagem(jTNota, conta.getCd_conta());
+            notacorretagemu.tabelaNotaCorretagem(jTNota, conta.getCd_conta());
             ((DefaultTableModel)jTNotaLancamento.getModel()).setNumRows(0);
         }else{
             conta = null;
@@ -731,15 +736,16 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
             jcAtivo();
         }else{
             tpativo = null;
-            jCBAtivo.removeAllItems();
+            jcTipoAtivo();
+            jcAtivo();
         }
     }//GEN-LAST:event_jCBTpAtivoActionPerformed
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         if(validaCampos()){
-            if(nota.getCd_nota() == 0){
+            if(notacorretagem == null){
                 notaCampos();
-                nota = (NotaCorretagem)notar.getByCodNota();             
+                notacorretagem = (NotaCorretagem)notacorretagemr.getByCodNota();             
                 notaLancCampos();
                 transacaoAtivo();
                 tabelaNotaCorretagemLancamento();
@@ -755,7 +761,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
 
     private void jBFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinalizarActionPerformed
         tabelaNotaCorretagemLancamento();
-        notau.tabelaNotaCorretagem(jTNota, conta.getCd_conta());
+        notacorretagemu.tabelaNotaCorretagem(jTNota, conta.getCd_conta());
         ((DefaultTableModel)jTNotaLancamento.getModel()).setRowCount(0);
         limpaNotaCampos();
         limpaNotaLancCampos();
@@ -775,10 +781,10 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
             jcGpTrans();
         }else{
             ativo = null;
-            jCBGpTransacao.removeAllItems();
+            gptransu.jcGpTransacao(jCBGpTransacao);
         }
         if(jCBTpAtivo.getSelectedIndex() != 0 && ativo != null){
-            asaldo = (AtivoSaldo)asaldor.getById(ativo.getCd_ativo());
+            asaldo = (AtivoSaldo)asaldor.getById(ativo.getCd_ativo(), JPLogin.codloginuser);
         }else{
             asaldo = null;
         }
@@ -802,10 +808,10 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTNotaLancamentoMouseClicked
 
     private void jTNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTNotaMouseClicked
-        nota = (NotaCorretagem)notau.getSelectObject(jTNota);
-        jFTFData.setText(Utilidade.formatoData.format(nota.getDt_nota().getTime()));
-        jTFNumNota.setText(String.valueOf(nota.getNm_nota()));
-        notalancu.tabelaNotaCorretagemLancamento(jTNotaLancamento, nota.getCd_nota());
+        notacorretagem = (NotaCorretagem)notacorretagemu.getSelectObject(jTNota);
+        jFTFData.setText(Utilidade.formatoData.format(notacorretagem.getDt_nota().getTime()));
+        jTFNumNota.setText(String.valueOf(notacorretagem.getNm_nota()));
+        notalancu.tabelaNotaCorretagemLancamento(jTNotaLancamento, notacorretagem.getCd_nota());
         btNovo();
     }//GEN-LAST:event_jTNotaMouseClicked
 
@@ -821,6 +827,10 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     private void jTFNumNotaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFNumNotaFocusLost
         camposNotaCorretagem();
     }//GEN-LAST:event_jTFNumNotaFocusLost
+
+    private void jFTFDataFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFocusGained
+        util.posicionaCursojFTFData(jFTFData);
+    }//GEN-LAST:event_jFTFDataFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBFinalizar;

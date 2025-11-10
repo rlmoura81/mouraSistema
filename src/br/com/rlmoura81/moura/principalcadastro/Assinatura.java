@@ -12,7 +12,7 @@ public class Assinatura {
     private BigDecimal nm_valor;
     private int tp_assinatura;
     private Calendar dt_validade;
-    private PrestadorServico presserv;
+    private Empresa empresa;
     private int cd_usuario;
 
     public int getCd_assinatura() {
@@ -71,12 +71,12 @@ public class Assinatura {
         this.dt_validade = dt_validade;
     }
 
-    public PrestadorServico getPresserv() {
-        return presserv;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setPresserv(PrestadorServico presserv) {
-        this.presserv = presserv;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public int getCd_usuario() {
@@ -87,7 +87,7 @@ public class Assinatura {
         this.cd_usuario = cd_usuario;
     }
 
-    public Assinatura(int cd_assinatura, String ds_servico, String ds_login, String ds_senha, BigDecimal nm_valor, int tp_assinatura, Calendar dt_validade, PrestadorServico presserv, int cd_usuario) {
+    public Assinatura(int cd_assinatura, String ds_servico, String ds_login, String ds_senha, BigDecimal nm_valor, int tp_assinatura, Calendar dt_validade, Empresa empresa, int cd_usuario) {
         this.cd_assinatura = cd_assinatura;
         this.ds_servico = ds_servico;
         this.ds_login = ds_login;
@@ -95,7 +95,7 @@ public class Assinatura {
         this.nm_valor = nm_valor;
         this.tp_assinatura = tp_assinatura;
         this.dt_validade = dt_validade;
-        this.presserv = presserv;
+        this.empresa = empresa;
         this.cd_usuario = cd_usuario;
     }
 
@@ -104,7 +104,7 @@ public class Assinatura {
 
     @Override
     public String toString() {
-        return "Assinatura{" + "cd_assinatura=" + cd_assinatura + ", ds_servico=" + ds_servico + ", ds_login=" + ds_login + ", ds_senha=" + ds_senha + ", nm_valor=" + nm_valor + ", tp_assinatura=" + tp_assinatura + ", dt_validade=" + dt_validade + ", presserv=" + presserv + ", cd_usuario=" + cd_usuario + '}';
+        return "Assinatura{" + "cd_assinatura=" + cd_assinatura + ", ds_servico=" + ds_servico + ", ds_login=" + ds_login + ", ds_senha=" + ds_senha + ", nm_valor=" + nm_valor + ", tp_assinatura=" + tp_assinatura + ", dt_validade=" + dt_validade + ", empresa=" + empresa + ", cd_usuario=" + cd_usuario + '}';
     }
     
 }

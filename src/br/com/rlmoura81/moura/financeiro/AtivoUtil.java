@@ -1,8 +1,13 @@
 package br.com.rlmoura81.moura.financeiro;
 
 import br.com.rlmoura81.moura.utilidade.Utilidade;
+import java.awt.Component;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +23,37 @@ public class AtivoUtil {
     FundoImobiliarioProventoRepository fipr = new FundoImobiliarioProventoRepository();    
     ArrayList lista = new ArrayList();
     
+        /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - ATIVO
+    */
+    public void jcModelAtivo(JComboBox<Ativo> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Ativo){
+                        Ativo at = (Ativo) value;
+                        if(at.getCd_ativo()== 0){
+                            setText("<Selecione>");
+                        }else if(at.getDs_sgativo()!= null){
+                            setText(at.getDs_sgativo());
+                        }else{
+                            setText("Sem ativo");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
+    
     /**
      * <p><strong>EN:</strong> Populates a JComboBox with stock assets (Ações): adds a placeholder and all items from the repository.</p>
      * <p><strong>IT:</strong> Popola un JComboBox con le azioni: aggiunge un segnaposto e tutti gli elementi dal repository.</p>
@@ -25,13 +61,17 @@ public class AtivoUtil {
      *
      * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
      */
-    public void jcAcao(JComboBox o){
-        ArrayList<Ativo> listaacao = ativor.getListaAcao();
-        Ativo atvZero = new Ativo(0, null, "<Ação>", null, null, 0);
-        o.addItem(atvZero);
-        for(Ativo atv : listaacao){
-            o.addItem(atv);
+    public void jcAcao(JComboBox<Ativo> o){
+        List<Ativo> lista = ativor.getListaAcao();
+        DefaultComboBoxModel<Ativo> model = new DefaultComboBoxModel<>();
+        model.addElement(new Ativo(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Ativo ativo : lista){
+                model.addElement(ativo);
+            }            
         }
+        o.setModel(model);
+        jcModelAtivo(o);
     }
     
     /**
@@ -41,13 +81,17 @@ public class AtivoUtil {
      *
      * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
      */
-    public void jcAcaoSaldo(JComboBox o){
-        ArrayList<Ativo> listaacaosaldo = ativor.getListaAcaoSaldo();
-        Ativo atvZero = new Ativo(0, null, "<Ação>", null, null, 0);
-        o.addItem(atvZero);
-        for(Ativo atv : listaacaosaldo){
-            o.addItem(atv);
+    public void jcAcaoSaldo(JComboBox<Ativo> o){
+        ArrayList<Ativo> lista = ativor.getListaAcaoSaldo();
+        DefaultComboBoxModel<Ativo> model = new DefaultComboBoxModel<>();
+        model.addElement(new Ativo(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Ativo ativo : lista){
+                model.addElement(ativo);
+            }            
         }
+        o.setModel(model);
+        jcModelAtivo(o);
     }
     
     /**
@@ -59,12 +103,16 @@ public class AtivoUtil {
      * @param num EN: benefit type ID (provento) | IT: ID del tipo di provento | PT-BR: ID do tipo de provento
      */
     public void jcAcaoProv(JComboBox o, int num){
-        ArrayList<Ativo> listaativo = ativor.getListaAcaoProv(num);
-        Ativo atvZero = new Ativo(0, null, "<Ação>", null, null, 0);
-        o.addItem(atvZero);
-        for(Ativo atv : listaativo){
-            o.addItem(atv);
+        ArrayList<Ativo> lista = ativor.getListaAcaoProv(num);
+        DefaultComboBoxModel<Ativo> model = new DefaultComboBoxModel<>();
+        model.addElement(new Ativo(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Ativo ativo : lista){
+                model.addElement(ativo);
+            }            
         }
+        o.setModel(model);
+        jcModelAtivo(o);
     }
     
     /**
@@ -76,12 +124,16 @@ public class AtivoUtil {
      * @param num EN: benefit type ID (provento) | IT: ID del tipo di provento | PT-BR: ID do tipo de provento
      */
     public void jcAcaoSaldoTpProv(JComboBox o, int num){
-        ArrayList<Ativo> listaacaosaldo = ativor.getListaAcaoSaldoTpProv(num);
-        Ativo atvZero = new Ativo(0, null, "<Ação>", null, null, 0);
-        o.addItem(atvZero);
-        for(Ativo atv : listaacaosaldo){
-            o.addItem(atv);
+        ArrayList<Ativo> lista = ativor.getListaAcaoSaldoTpProv(num);
+        DefaultComboBoxModel<Ativo> model = new DefaultComboBoxModel<>();
+        model.addElement(new Ativo(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Ativo ativo : lista){
+                model.addElement(ativo);
+            }            
         }
+        o.setModel(model);
+        jcModelAtivo(o);
     }
     
     /**
@@ -91,13 +143,17 @@ public class AtivoUtil {
      *
      * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
      */
-    public void jcFundoImobiiario(JComboBox o){
-        ArrayList<Ativo> listafi = ativor.getListaFII();
-        Ativo atvZero = new Ativo(0, null, "<FII>", null, null, 0);
-        o.addItem(atvZero);
-        for(Ativo atv : listafi){
-            o.addItem(atv);
+    public void jcFundoImobiiario(JComboBox<Ativo> o){
+        ArrayList<Ativo> lista = ativor.getListaFII();
+        DefaultComboBoxModel<Ativo> model = new DefaultComboBoxModel<>();
+        model.addElement(new Ativo(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Ativo ativo : lista){
+                model.addElement(ativo);
+            }            
         }
+        o.setModel(model);
+        jcModelAtivo(o);
     }
     
     /**
@@ -108,12 +164,16 @@ public class AtivoUtil {
      * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
      */
     public void jcFundoImobiiarioSaldo(JComboBox o){
-        ArrayList<Ativo> listafisalvo = ativor.getListaFIISaldo();
-        Ativo atvZero = new Ativo(0, null, "<FII>", null, null, 0);
-        o.addItem(atvZero);
-        for(Ativo atv : listafisalvo){
-            o.addItem(atv);
+        ArrayList<Ativo> lista = ativor.getListaFIISaldo();
+        DefaultComboBoxModel<Ativo> model = new DefaultComboBoxModel<>();
+        model.addElement(new Ativo(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Ativo ativo : lista){
+                model.addElement(ativo);
+            }            
         }
+        o.setModel(model);
+        jcModelAtivo(o);
     }
 
     /**
@@ -125,12 +185,16 @@ public class AtivoUtil {
      * @param num EN: benefit type ID (provento) | IT: ID del tipo di provento | PT-BR: ID do tipo de provento
      */
     public void jcFundoImobiiarioProv(JComboBox o, int num){
-        ArrayList<Ativo> listafiprov = ativor.getListaFIIProv(num);
-        Ativo atvZero = new Ativo(0, null, "<FII>", null, null, 0);
-        o.addItem(atvZero);
-        for(Ativo atv : listafiprov){
-            o.addItem(atv);
+        ArrayList<Ativo> lista = ativor.getListaFIIProv(num);
+        DefaultComboBoxModel<Ativo> model = new DefaultComboBoxModel<>();
+        model.addElement(new Ativo(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Ativo ativo : lista){
+                model.addElement(ativo);
+            }            
         }
+        o.setModel(model);
+        jcModelAtivo(o);
     }
     
     /**
@@ -142,12 +206,16 @@ public class AtivoUtil {
      * @param num EN: benefit type ID (provento) | IT: ID del tipo di provento | PT-BR: ID do tipo de provento
      */
     public void jcFundoImobiiarioSaldoTpProv(JComboBox o, int num){
-        ArrayList<Ativo> listafisaldo = ativor.getListaFIISaldoTpProv(num);
-        Ativo atvZero = new Ativo(0, null, "<FII>", null, null, 0);
-        o.addItem(atvZero);
-        for(Ativo atv : listafisaldo){
-            o.addItem(atv);
+        ArrayList<Ativo> lista = ativor.getListaFIISaldoTpProv(num);
+        DefaultComboBoxModel<Ativo> model = new DefaultComboBoxModel<>();
+        model.addElement(new Ativo(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Ativo ativo : lista){
+                model.addElement(ativo);
+            }            
         }
+        o.setModel(model);
+        jcModelAtivo(o);
     }
     
     /**
@@ -158,12 +226,16 @@ public class AtivoUtil {
      * @param o EN: target JComboBox | IT: JComboBox di destinazione | PT-BR: JComboBox de destino
      */    
     public void jcAtivoRendaFixa(JComboBox o){
-        ArrayList<TipoAtivo> listaativorenda = tpativor.getListaTipoRendaFixa();
-        TipoAtivo tpaZero = new TipoAtivo(0, "<Tipo de Ativo>");
-        o.addItem(tpaZero);
-        for(TipoAtivo tpa : listaativorenda){
-            o.addItem(tpa);
+        ArrayList<Ativo> lista = ativor.getLista();
+        DefaultComboBoxModel<Ativo> model = new DefaultComboBoxModel<>();
+        model.addElement(new Ativo(0, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Ativo ativo : lista){
+                model.addElement(ativo);
+            }            
         }
+        o.setModel(model);
+        jcModelAtivo(o);
     }
     
     /**
