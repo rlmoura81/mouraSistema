@@ -1,5 +1,6 @@
 package br.com.rlmoura81.moura.financeiro;
 
+import br.com.rlmoura81.moura.principalcadastro.Categoria;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -110,7 +111,6 @@ public class MovimentoCaixaUtil {
      *
      * @param o EN: target JTable | IT: JTable di destinazione | PT-BR: JTable de destino
      * @param cd_conta EN: account ID | IT: ID del conto | PT-BR: ID da conta
-     * @return EN: none | IT: nessuno | PT-BR: nenhum
      * @since 1.0.0
      */
     public void tablelaMovimentoCaixa(JTable o, int cd_conta){
@@ -142,7 +142,6 @@ public class MovimentoCaixaUtil {
      * @param cd_conta EN: account ID | IT: ID del conto | PT-BR: ID da conta
      * @param dt_inicio EN: start date (dd/MM/yyyy) | IT: data di inizio (dd/MM/yyyy) | PT-BR: data inicial (dd/MM/yyyy)
      * @param dt_final EN: end date (dd/MM/yyyy) | IT: data di fine (dd/MM/yyyy) | PT-BR: data final (dd/MM/yyyy)
-     * @return EN: none | IT: nessuno | PT-BR: nenhum
      * @since 1.0.0
      */
     public void tablelaMovimentoCaixa(JTable o, int cd_conta, String dt_inicio, String dt_final){
@@ -184,6 +183,25 @@ public class MovimentoCaixaUtil {
         }
         return selecionado;    
     }  
+
+    /**
+     * EM TESTE - COLOCAR COMENTARIO
+     * SELECIONA OBJETO DA JTABLE
+     * @param o
+     * @return 
+     */
+    public Object getSelectObjectMovcx(JTable o){
+        Object selecionado = null;
+        int linhaselecionada = o.getSelectedRow();
+        if(linhaselecionada >= 0){
+            int modelolinha = o.convertRowIndexToModel(linhaselecionada);
+            selecionado = lista.get(modelolinha);
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione uma movimentação da lista.");
+        }
+        return selecionado;    
+    }  
+    
     
     /**
      * <p><strong>EN:</strong> Sums all scheduled (future) credits for the given account.</p>
@@ -236,7 +254,6 @@ public class MovimentoCaixaUtil {
      *
      * @param o EN: target JTable | IT: JTable di destinazione | PT-BR: JTable de destino
      * @param cd_conta EN: account ID | IT: ID del conto | PT-BR: ID da conta
-     * @return EN: none | IT: nessuno | PT-BR: nenhum
      * @since 1.0.0
      */
     public void tablelaMovimentoCaixaLanc(JTable o, int cd_conta){
@@ -251,7 +268,7 @@ public class MovimentoCaixaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(movcx.getVl_credito());
             dadosArray[i][4] = Utilidade.formatoValor.format(movcx.getVl_debito());
             dadosArray[i][5] = movcx.getTipotransacao().getDs_tptrans();
-            dadosArray[i][6] = movcx.getCategoria();
+            dadosArray[i][6] = movcx.getCategoria().getDs_Categoria();
         }
         DefaultTableModel tMovCaixa = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tMovCaixa);

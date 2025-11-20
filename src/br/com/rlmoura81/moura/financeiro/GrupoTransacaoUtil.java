@@ -57,8 +57,8 @@ public class GrupoTransacaoUtil {
         DefaultComboBoxModel<GrupoTransacao>model = new DefaultComboBoxModel<>();
         model.addElement(new GrupoTransacao(0, null));
         if(lista != null && !lista.isEmpty()){
-            for(GrupoTransacao gpt : lista){
-                o.addItem(gpt);
+            for(GrupoTransacao gptrans : lista){
+                model.addElement(gptrans);
             }            
         }
         o.setModel(model);

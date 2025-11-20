@@ -393,6 +393,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFTFValor">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFValorFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jCBCategoria">
           <Properties>

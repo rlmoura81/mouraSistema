@@ -852,7 +852,7 @@ public class JIFMovimentoCaixaFuturo extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Categoria> jCBCategoria;
     private javax.swing.JComboBox<Conta> jCBConta;
     private javax.swing.JComboBox<Despesa> jCBDespesa;
-    private javax.swing.JComboBox<String> jCBRenda;
+    private javax.swing.JComboBox<Renda> jCBRenda;
     private javax.swing.JComboBox<TipoTransacao> jCBTpTransacao;
     private javax.swing.JCheckBox jChkBCredito;
     private javax.swing.JCheckBox jChkBDebito;

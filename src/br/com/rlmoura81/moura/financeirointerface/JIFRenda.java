@@ -71,13 +71,12 @@ public class JIFRenda extends javax.swing.JInternalFrame {
     
     TipoRenda tprenda = new TipoRenda();
     
-    Renda renda = new Renda();
+    Renda renda = null;
     RendaRepository rendar = new RendaRepository();
     RendaUtil rendau = new RendaUtil();
         
     Utilidade util = new Utilidade();
     
-    CalculoFinanceiro cf = new CalculoFinanceiro();
     
     public JIFRenda() {
         initComponents();
@@ -100,10 +99,10 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         jTFDescricao = new javax.swing.JTextField();
         jLValor = new javax.swing.JLabel();
         jFTFValor = new javax.swing.JFormattedTextField();
-        jBConfirmar = new javax.swing.JButton();
         jLData = new javax.swing.JLabel();
         jFTFData = new javax.swing.JFormattedTextField();
         jPBotoes = new javax.swing.JPanel();
+        jBSalvar = new javax.swing.JButton();
         jBExcluir = new javax.swing.JButton();
         jPGrid = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -147,10 +146,9 @@ public class JIFRenda extends javax.swing.JInternalFrame {
 
         jLValor.setText("Valor:");
 
-        jBConfirmar.setText("Confirmar");
-        jBConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBConfirmarActionPerformed(evt);
+        jFTFValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFValorFocusGained(evt);
             }
         });
 
@@ -173,8 +171,6 @@ public class JIFRenda extends javax.swing.JInternalFrame {
                 .addComponent(jLValor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBConfirmar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPCamposLayout.setVerticalGroup(
@@ -186,13 +182,19 @@ public class JIFRenda extends javax.swing.JInternalFrame {
                     .addComponent(jTFDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLValor)
                     .addComponent(jFTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBConfirmar)
                     .addComponent(jLData)
                     .addComponent(jFTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jPBotoes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jBSalvar.setText("Salvar");
+        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalvarActionPerformed(evt);
+            }
+        });
 
         jBExcluir.setText("Excluir");
         jBExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -207,6 +209,8 @@ public class JIFRenda extends javax.swing.JInternalFrame {
             jPBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBotoesLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jBSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBExcluir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -214,7 +218,9 @@ public class JIFRenda extends javax.swing.JInternalFrame {
             jPBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBotoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jBExcluir)
+                .addGroup(jPBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBExcluir)
+                    .addComponent(jBSalvar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -413,7 +419,9 @@ public class JIFRenda extends javax.swing.JInternalFrame {
      */
     private void formataValor(){
         jFTFDescontoAluguel.setFormatterFactory(Utilidade.formataValorCampo(ui));
+        util.insereTxtPadraoValor(jFTFDescontoAluguel);
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
+        util.insereTxtPadraoValor(jFTFValor);
     }
     
     /**
@@ -499,7 +507,7 @@ public class JIFRenda extends javax.swing.JInternalFrame {
     private void limpaCampos(){
         jFTFData.setText(null);
         jTFDescricao.setText(null);
-        jFTFValor.setValue(null);
+        util.insereTxtPadraoValor(jFTFValor);
     }
 
     /**
@@ -512,7 +520,7 @@ public class JIFRenda extends javax.swing.JInternalFrame {
     private void limpaCamposAluguel(){
         jCBAluguel.setSelectedIndex(0);
         jLValorAluguel.setText("Valor:");
-        jFTFDescontoAluguel.setValue(null);
+        util.insereTxtPadraoValor(jFTFDescontoAluguel);
     }
     
     /**
@@ -594,9 +602,8 @@ public class JIFRenda extends javax.swing.JInternalFrame {
             jTFDescricao.setVisible(false);
             jLValor.setVisible(false);
             jFTFValor.setVisible(false);
-            jBConfirmar.setVisible(false);
-            jPCampos.setVisible(false);
-            
+            jBSalvar.setVisible(false);
+            jPCampos.setVisible(false);            
             jBExcluir.setVisible(false);
             jPBotoes.setVisible(false);
         }else{
@@ -606,9 +613,8 @@ public class JIFRenda extends javax.swing.JInternalFrame {
             jTFDescricao.setVisible(true);
             jLValor.setVisible(true);
             jFTFValor.setVisible(true);
-            jBConfirmar.setVisible(true);
-            jPCampos.setVisible(true); 
-            
+            jBSalvar.setVisible(true);
+            jPCampos.setVisible(true);             
             jBExcluir.setVisible(true);
             jPBotoes.setVisible(true);            
         }
@@ -650,12 +656,23 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         if(jTPRenda.getSelectedIndex() == 2){
             tprenda.setCd_tprenda(2);
         }
-        renda.setTprenda(tprenda);
-        renda.setDt_renda(util.recebeData(jFTFData.getText()));
-        renda.setDs_renda(jTFDescricao.getText());
-        renda.setNm_valor(Utilidade.converter(jFTFValor.getText()));
-        renda.setCd_usuario(JPLogin.codloginuser);
-        rendar.inserir(renda);
+        if(renda == null){
+            renda = new Renda();
+            renda.setTprenda(tprenda);
+            renda.setDt_renda(util.recebeData(jFTFData.getText()));
+            renda.setDs_renda(jTFDescricao.getText());
+            renda.setNm_valor(Utilidade.converter(jFTFValor.getText()));
+            renda.setCd_usuario(JPLogin.codloginuser);
+            rendar.inserir(renda);            
+            renda = null;
+        }else{
+            renda.setTprenda(tprenda);
+            renda.setDt_renda(util.recebeData(jFTFData.getText()));
+            renda.setDs_renda(jTFDescricao.getText());
+            renda.setNm_valor(Utilidade.converter(jFTFValor.getText()));
+            renda.setCd_usuario(JPLogin.codloginuser);
+            rendar.alterar(renda);
+        }
     }
     
     /**
@@ -666,8 +683,11 @@ public class JIFRenda extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Exclui o registro de renda selecionado após definir seu identificador.</p>
      */
     private void excluir(){
+        if(renda != null){
         renda.setCd_renda(renda.getCd_renda());
-        rendar.excluir(renda);
+        rendar.excluir(renda);             
+        renda = null;
+        }
     }
     
     private void jCBAluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBAluguelActionPerformed
@@ -692,7 +712,7 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         jFTFValor.setText(Utilidade.formatoValor.format(aluguelu.valorDesconto(valor, Utilidade.converter(jFTFDescontoAluguel.getText()))));
     }//GEN-LAST:event_jFTFDescontoAluguelFocusLost
 
-    private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
+    private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         if(jTPRenda.getSelectedIndex() == 1){
             if(validaAluguel()){
                 salvar();
@@ -710,7 +730,7 @@ public class JIFRenda extends javax.swing.JInternalFrame {
                 rendau.tabelaRendaFiltro(jTRenda, 2);
             }
         }
-    }//GEN-LAST:event_jBConfirmarActionPerformed
+    }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jTRendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTRendaMouseClicked
         if(jTPRenda.getSelectedIndex() != 0){
@@ -805,9 +825,13 @@ public class JIFRenda extends javax.swing.JInternalFrame {
         }      
     }//GEN-LAST:event_jCBTpAtivoActionPerformed
 
+    private void jFTFValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFValorFocusGained
+        util.posicionaCursojFTFValor(jFTFValor);
+    }//GEN-LAST:event_jFTFValorFocusGained
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBConfirmar;
     private javax.swing.JButton jBExcluir;
+    private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<Aluguel> jCBAluguel;
     private javax.swing.JComboBox<Ativo> jCBAtivo;
     private javax.swing.JComboBox<TipoAtivo> jCBTpAtivo;

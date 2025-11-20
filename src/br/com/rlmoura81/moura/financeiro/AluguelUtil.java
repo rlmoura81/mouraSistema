@@ -1,9 +1,13 @@
 package br.com.rlmoura81.moura.financeiro;
 
 import br.com.rlmoura81.moura.utilidade.Utilidade;
+import java.awt.Component;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -54,6 +58,37 @@ public class AluguelUtil {
         return resultado;
     }
 
+        /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - ALUGUEL
+    */
+    private void jcModelAluguel(JComboBox<Aluguel> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Aluguel){
+                        Aluguel a = (Aluguel) value;
+                        if(a.getCd_aluguel()== 0){
+                            setText("<Selecione>");
+                        }else if(a.getNm_contrato()!= null){
+                            setText(a.getNm_contrato());
+                        }else{
+                            setText("Sem ativo");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
+    
     /**
      * <p><strong>EN:</strong> Populates a JComboBox with the rental list, adding a default "Aluguel" option first.</p>
      *
@@ -63,13 +98,17 @@ public class AluguelUtil {
      *
      * @param o EN: JComboBox to be populated | IT: JComboBox da popolare | PT-BR: JComboBox a ser preenchido
      */
-    public void jcAluguel(JComboBox o){
-        ArrayList<Aluguel> listaaluguel = aluguelr.getLista();
-        Aluguel aZero = new Aluguel(0, "Aluguel", null, null, 0, null, null, null, 0);
-        o.addItem(aZero);
-        for(Aluguel a : listaaluguel){
-            o.addItem(a);
+    public void jcAluguel(JComboBox<Aluguel> o){
+        ArrayList<Aluguel> lista = aluguelr.getListaContratoVencimento();
+        DefaultComboBoxModel<Aluguel> model = new DefaultComboBoxModel<>();
+        model.addElement(new Aluguel(0, "Aluguel", null, null, 0, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Aluguel aluguel : lista){
+                model.addElement(aluguel);
+            }            
         }
+        o.setModel(model);
+        jcModelAluguel(o);
     }
  
     /**

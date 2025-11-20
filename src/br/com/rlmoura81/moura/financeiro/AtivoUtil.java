@@ -14,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class AtivoUtil {
     
-    TipoAtivoRepository tpativor = new TipoAtivoRepository();    
     Ativo ativo = new Ativo();
     AtivoRepository ativor = new AtivoRepository();    
     AcaoProvento acaoprov = new AcaoProvento();
@@ -23,11 +22,11 @@ public class AtivoUtil {
     FundoImobiliarioProventoRepository fipr = new FundoImobiliarioProventoRepository();    
     ArrayList lista = new ArrayList();
     
-        /*
+    /*
     * EM TESTE - COLOCAR COMENTARIO
     * DEFAULTCOMBOBOXMODEL - ATIVO
     */
-    public void jcModelAtivo(JComboBox<Ativo> o){
+    private void jcModelAtivo(JComboBox<Ativo> o){
         o.setRenderer(new DefaultListCellRenderer(){
                 @Override
                 public Component getListCellRendererComponent(
@@ -312,6 +311,30 @@ public class AtivoUtil {
         DefaultTableModel tFiprov = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tFiprov);
     }
+    
+    /**
+     * EM TESTE COLOCAR COMENTARIO
+     * TABELA FILTRADA POR TIPO DE FUNDO IMOBILIARIO
+     * @param o 
+     * @param cd_ativo 
+     */
+    
+    public void tabelaFiProv(JTable o, int cd_ativo){
+        String[] nomeColuna = {"FII", "Data Pagamento", "Valor Provento", "Data Preço Base", "Valor Preço Base"};
+        lista = fipr.getLista(cd_ativo);
+        Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
+        for(int i=0; i < lista.size(); i++){
+            fip = (FundoImobiliarioProvento)lista.get(i);
+            dadosArray[i][0] = fip.getAtivo().getDs_sgativo();
+            dadosArray[i][1] = Utilidade.formatoData.format(fip.getDt_pagamento().getTime());
+            dadosArray[i][2] = Utilidade.formatoValor.format(fip.getVl_provento());
+            dadosArray[i][3] = Utilidade.formatoData.format(fip.getDt_precobase().getTime());
+            dadosArray[i][4] = Utilidade.formatoValor.format(fip.getVl_database());
+        }        
+        DefaultTableModel tFiprov = new DefaultTableModel(dadosArray, nomeColuna);
+        o.setModel(tFiprov);
+    }
+
 
     /**
      * <p><strong>EN:</strong> Returns the object mapped to the selected row in the JTable,

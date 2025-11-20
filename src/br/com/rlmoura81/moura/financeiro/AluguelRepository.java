@@ -172,6 +172,49 @@ public class AluguelRepository implements IPadraoRepository{
         return aluguel;
     }
 
+    /*
+    *EM TESTE - COLOCAR COMENTARIO
+    *EXIBE A DATA MAIS RECENTE DO CONTRATO
+    */
+    
+    public ArrayList getListaContratoVencimento() {
+        ArrayList aluguel = new ArrayList();
+        try{
+            sql = "SELECT a.cd_aluguel, a.nm_contrato, a.nm_vlaluguel, a.nm_vladm, a.dt_deposito, to_char(a.dt_contratovenc,'dd/MM/yyyy') AS dtcontratovenc, a.cd_imovel, a.cd_empresa, a.cd_usuario" +
+                  "  FROM aluguel a" +
+                  "  JOIN (SELECT nm_contrato, MAX(dt_contratovenc) AS datacontrato" +
+                  "          FROM aluguel" +
+                  "         WHERE cd_usuario = ?" +
+                  "         GROUP BY nm_contrato) m" +
+                  "    ON m.nm_contrato = a.nm_contrato" +
+                  "   AND m.datacontrato = a.dt_contratovenc" +
+                  " WHERE a.cd_usuario = ?" +  
+                  " ORDER BY a.nm_contrato";
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, JPLogin.codloginuser);
+            ps.setInt(2, JPLogin.codloginuser);
+            ResultSet rs = ps.executeQuery();            
+            while(rs.next()){
+                Aluguel a = new Aluguel(
+                        rs.getInt("cd_aluguel"),
+                        rs.getString("nm_contrato"),
+                        rs.getBigDecimal("nm_vlaluguel"),
+                        rs.getBigDecimal("nm_vladm"),
+                        rs.getInt("dt_deposito"),
+                        util.recebeData(rs.getString("dtcontratovenc")),
+                        (Imovel)imovelr.getById(rs.getInt("cd_imovel")),
+                        (Empresa)empresar.getById(rs.getInt("cd_empresa")),
+                        rs.getInt("cd_usuario"));
+                aluguel.add(a);
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de alugueis:\n" +
+                    ex.getMessage(), "Aluguel", JOptionPane.ERROR_MESSAGE);
+        }
+        return aluguel;
+    }
+        
     /**
      * <p><strong>EN:</strong> Retrieves a rental (Aluguel) record by its ID,  
      * mapping contract details, amounts, deposit day, due date, property, provider, and user.</p>

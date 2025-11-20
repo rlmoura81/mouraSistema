@@ -1,9 +1,13 @@
 package br.com.rlmoura81.moura.financeiro;
 
 import br.com.rlmoura81.moura.utilidade.Utilidade;
+import java.awt.Component;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -47,6 +51,37 @@ public class RendaUtil {
         resultado = vl_provento.multiply(BigDecimal.valueOf(nm_qtde));
         return resultado;
     }
+
+    /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - RENDA
+    */
+    private void jcModelRenda(JComboBox<Renda> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Renda){
+                        Renda r = (Renda) value;
+                        if(r.getCd_renda()== 0){
+                            setText("<Selecione>");
+                        }else if(r.getDs_renda()!= null){
+                            setText(r.getDs_renda());
+                        }else{
+                            setText("Sem renda");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
     
     /**
      * <p><strong>EN:</strong> Populates a combo box with all income records, adding a default placeholder first.</p>
@@ -56,14 +91,18 @@ public class RendaUtil {
      * @param o EN: target combo box to populate | IT: combo box di destinazione da popolare | PT-BR: combo box de destino a ser preenchido
      * @since 1.0.0
      */
-    public void jcRenda(JComboBox o){
-        ArrayList<Renda> listarenda = rendar.getLista();
-        Renda rZero = new Renda(0, null, "<Renda>", null, null, 0);
-        o.addItem(rZero);
-        for(Renda renda : listarenda){
-            o.addItem(renda);
-        }
-    } 
+    public void jcRenda(JComboBox<Renda> o){
+        ArrayList<Renda> lista = rendar.getLista();
+        DefaultComboBoxModel<Renda> model = new DefaultComboBoxModel<>();
+        model.addElement(new Renda(0, null, "<Renda>", null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Renda renda : lista){
+                model.addElement(renda);
+            }
+        } 
+        o.setModel(model);
+        jcModelRenda(o);
+    }    
 
     /**
      * <p><strong>EN:</strong> Populates a combo box with income records filtered by a date range, adding a default placeholder first.</p>
@@ -75,13 +114,17 @@ public class RendaUtil {
      * @param dtFinal EN: end date (inclusive) | IT: data finale (inclusiva) | PT-BR: data final (inclusiva)
      * @since 1.0.0
      */
-    public void jcRendaMes(JComboBox o, Object dtInicial, Object dtFinal){
-        ArrayList<Renda> listarenda = rendar.getLista(dtInicial, dtFinal);
-        Renda rZero = new Renda(0, null, "<Renda>", null, null, 0);
-        o.addItem(rZero);
-        for(Renda renda : listarenda){
-            o.addItem(renda);
+    public void jcRendaMes(JComboBox<Renda> o, Object dtInicial, Object dtFinal){
+        ArrayList<Renda> lista = rendar.getLista(dtInicial, dtFinal);
+        DefaultComboBoxModel<Renda> model = new DefaultComboBoxModel<>();
+        model.addElement(new Renda(0, null, "<Renda>", null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Renda renda : lista){
+                model.addElement(renda);
+            }            
         }
+        o.setModel(model);
+        jcModelRenda(o);
     } 
     
     /**

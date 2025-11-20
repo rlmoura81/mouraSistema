@@ -573,7 +573,7 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
             }
             if(jChkDebito.isSelected() == true){
                 if(jCBGrupo.getSelectedIndex() == 0){
-                    despesau.tabelaDespesa(jTRelatorioPrincipal);                    
+                    //despesau.tabelaDespesa(jTRelatorioPrincipal);                    
                 }else{
                     campoRelatorioGrupo();
                     valor1 = despesau.calculaDespesaGrupo(grupo.getCd_grupo());

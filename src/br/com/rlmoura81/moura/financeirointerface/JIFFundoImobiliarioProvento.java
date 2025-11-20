@@ -126,9 +126,33 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
 
         jLDtPagamento.setText("Data Pagamento:");
 
+        jFTFDtPagamento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDtPagamentoFocusGained(evt);
+            }
+        });
+
         jLPrecoDtBase.setText("Preço Data Base:");
 
+        jFTFRendimentoPago.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFRendimentoPagoFocusGained(evt);
+            }
+        });
+
+        jFTFPrecoDtBase.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFPrecoDtBaseFocusGained(evt);
+            }
+        });
+
         jLDtPrecoBase.setText("Data Preço Base:");
+
+        jFTFDtPrecoBase.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDtPrecoBaseFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPCampoLayout = new javax.swing.GroupLayout(jPCampo);
         jPCampo.setLayout(jPCampoLayout);
@@ -153,7 +177,7 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
                 .addGroup(jPCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFTFDtPrecoBase, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFTFDtPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPCampoLayout.setVerticalGroup(
             jPCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +326,9 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
      */
     private void formataValor() {        
         jFTFRendimentoPago.setFormatterFactory(Utilidade.formataValorCampo(ui));
+        util.insereTxtPadraoValor(jFTFRendimentoPago);
         jFTFPrecoDtBase.setFormatterFactory(Utilidade.formataValorCampo(ui));
+        util.insereTxtPadraoValor(jFTFPrecoDtBase);
     }  
 
     /**
@@ -369,9 +395,9 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
      */
     private void limpaCampos(){
         jCBAtivo.setSelectedIndex(0);
-        jFTFRendimentoPago.setValue(null);
+        util.insereTxtPadraoValor(jFTFRendimentoPago);
         jFTFDtPagamento.setText(null);
-        jFTFPrecoDtBase.setValue(null);
+        util.insereTxtPadraoValor(jFTFPrecoDtBase);
         jFTFDtPrecoBase.setText(null);
     }
     
@@ -386,7 +412,9 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
      * Recupera os registros cadastrados e exibe em {@code jTFiProv}.</p>
      */
     private void tabelaFiProv(){
-        ativou.tabelaFiProv(jTFiProv);
+        if(ativo == null){
+            ativou.tabelaFiProv(jTFiProv);   
+        }
     }
     
     /**
@@ -436,8 +464,10 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
     private void jCBAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBAtivoActionPerformed
         if(jCBAtivo.getSelectedIndex() != 0){
             ativo = (Ativo)jCBAtivo.getSelectedItem();
+            ativou.tabelaFiProv(jTFiProv, ativo.getCd_ativo());
         }else{
             ativo = null;
+            tabelaFiProv();
         }
     }//GEN-LAST:event_jCBAtivoActionPerformed
 
@@ -463,6 +493,22 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         jiffiiprov = null;
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void jFTFRendimentoPagoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFRendimentoPagoFocusGained
+        util.posicionaCursojFTFValor(jFTFRendimentoPago);
+    }//GEN-LAST:event_jFTFRendimentoPagoFocusGained
+
+    private void jFTFPrecoDtBaseFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFPrecoDtBaseFocusGained
+        util.posicionaCursojFTFValor(jFTFPrecoDtBase);
+    }//GEN-LAST:event_jFTFPrecoDtBaseFocusGained
+
+    private void jFTFDtPagamentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtPagamentoFocusGained
+        util.posicionaCursojFTFData(jFTFDtPagamento);
+    }//GEN-LAST:event_jFTFDtPagamentoFocusGained
+
+    private void jFTFDtPrecoBaseFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtPrecoBaseFocusGained
+        util.posicionaCursojFTFData(jFTFDtPrecoBase);
+    }//GEN-LAST:event_jFTFDtPrecoBaseFocusGained
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBExcluir;

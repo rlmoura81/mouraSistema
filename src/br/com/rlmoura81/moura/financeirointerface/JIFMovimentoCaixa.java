@@ -54,7 +54,7 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
     Categoria categoria = new Categoria();
     CategoriaUtil categoriau = new CategoriaUtil();
     
-    Renda renda = null;
+    Renda renda = new Renda();
     RendaUtil rendau = new RendaUtil();
     
     Despesa despesa = new Despesa();
@@ -74,17 +74,14 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
     CalculoFinanceiro cf = new CalculoFinanceiro();
     
     public JIFMovimentoCaixa() {
-        initComponents();
-        
-        formataValor();
-        formatarData();
-        
+        initComponents();                
+
         jcConta();
-        jcCategoria();
-        jcRenda();
-        jcDespesa();
         jcTpTrans();
         campoGpTransacao();
+        formatarData(); 
+        formataValor();
+        
         
     }
 
@@ -104,6 +101,7 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         jChkBDebito = new javax.swing.JCheckBox();
         jPBotoes = new javax.swing.JPanel();
         jBExcluir = new javax.swing.JButton();
+        jBSalvar = new javax.swing.JButton();
         jPCampos = new javax.swing.JPanel();
         jLData = new javax.swing.JLabel();
         jLDescricao = new javax.swing.JLabel();
@@ -113,7 +111,6 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         jFTFValor = new javax.swing.JFormattedTextField();
         jLValor = new javax.swing.JLabel();
         jCBCategoria = new javax.swing.JComboBox<>();
-        jBSalvar = new javax.swing.JButton();
         jCBTpTransacao = new javax.swing.JComboBox<>();
         jFTFData = new javax.swing.JFormattedTextField();
         jPGrid = new javax.swing.JPanel();
@@ -175,7 +172,7 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
                 .addComponent(jLSaldo)
                 .addGap(18, 18, 18)
                 .addComponent(jLSaldoMesAnterior)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(540, Short.MAX_VALUE))
         );
         jPContaLayout.setVerticalGroup(
             jPContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,21 +253,32 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
             }
         });
 
+        jBSalvar.setText("Salvar");
+        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalvarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPBotoesLayout = new javax.swing.GroupLayout(jPBotoes);
         jPBotoes.setLayout(jPBotoesLayout);
         jPBotoesLayout.setHorizontalGroup(
             jPBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBotoesLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jBSalvar)
+                .addGap(18, 18, 18)
                 .addComponent(jBExcluir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPBotoesLayout.setVerticalGroup(
             jPBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPBotoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jBExcluir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBotoesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBExcluir)
+                    .addComponent(jBSalvar))
+                .addContainerGap())
         );
 
         jPCampos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -282,6 +290,11 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         jLDocumento.setText("Documento:");
 
         jFTFValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        jFTFValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFValorFocusGained(evt);
+            }
+        });
 
         jLValor.setText("Valor:");
 
@@ -291,16 +304,15 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
             }
         });
 
-        jBSalvar.setText("Salvar");
-        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalvarActionPerformed(evt);
-            }
-        });
-
         jCBTpTransacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBTpTransacaoActionPerformed(evt);
+            }
+        });
+
+        jFTFData.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDataFocusGained(evt);
             }
         });
 
@@ -326,12 +338,10 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCBTpTransacao, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBTpTransacao, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBSalvar)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jCBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPCamposLayout.setVerticalGroup(
             jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,10 +356,9 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
                     .addComponent(jFTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLValor)
                     .addComponent(jCBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSalvar)
                     .addComponent(jCBTpTransacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jPGrid.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -425,7 +434,19 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
 
         jLDataInicio.setText("Data Inicio:");
 
+        jFTFDataInicio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDataInicioFocusGained(evt);
+            }
+        });
+
         jLDataFinal.setText("Data Final:");
+
+        jFTFDataFinal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDataFinalFocusGained(evt);
+            }
+        });
 
         jBPesquisar.setText("Pesquisar");
         jBPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -514,9 +535,10 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Aplica máscaras e formatação de data nos campos de data inicial, final e da transação.</p>
      */
     private void formatarData(){
+        util.formataDataCampo(jFTFData);   
         util.formataDataCampo(jFTFDataInicio);
         util.formataDataCampo(jFTFDataFinal);
-        util.formataDataCampo(jFTFData);       
+    
     }
     
     /**
@@ -526,6 +548,7 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
      */
     private void formataValor() {
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
+        util.insereTxtPadraoValor(jFTFValor);
     }
     
     /**
@@ -535,6 +558,41 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
      */
     private void jcConta(){
         contau.jcConta(jCBConta);
+    }
+    
+        /**
+     * <p><strong>EN:</strong> Enables/disables credit/debit options and related combos based on the selected account and group.</p>
+     * <p><strong>IT:</strong> Abilita/disabilita le opzioni di credito/debito e le relative combo in base al conto e al gruppo selezionati.</p>
+     * <p><strong>PT-BR:</strong> Habilita/desabilita opções de crédito/débito e combos relacionados conforme a conta e o grupo selecionados.</p>
+     */
+    private void campoGpTransacao(){
+        if(conta != null){
+            jChkBCredito.setEnabled(true);
+            jcRenda();
+            jChkBDebito.setEnabled(true);
+            jcDespesa();
+            if(jChkBCredito.isSelected() == true){
+                jCBRenda.setEnabled(true);                
+                jChkBDebito.setSelected(false);
+            }else{
+                jCBRenda.setEnabled(false);
+            }
+            if(jChkBDebito.isSelected() == true){
+                jCBDespesa.setEnabled(true);
+                jChkBCredito.setSelected(false);
+            }else{
+                jCBDespesa.setEnabled(false);
+            }        
+            jCBCategoria.setEnabled(true);
+        }else{
+            bGTransacao.clearSelection();
+            jChkBCredito.setEnabled(false); 
+            jCBRenda.setEnabled(false);
+            jChkBDebito.setEnabled(false);
+            jCBDespesa.setEnabled(false);
+            jCBCategoria.setEnabled(false);
+        }
+        campoPesquisa();
     }
     
     /**
@@ -552,7 +610,7 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Preenche o combo de rendas com as rendas cadastradas.</p>
      */
     private void jcRenda(){
-        rendau.jcRenda(jCBRenda);
+        rendau.jcRenda(jCBRenda); 
     }
     
     /**
@@ -571,65 +629,49 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
      */
     private void jcTpTrans(){
         jCBTpTransacao.removeAllItems();
-        tptransu.jcTpTransCredDeb(jCBTpTransacao, gptrans.getCd_gptrans());
+        jCBTpTransacao.setEnabled(false);
+        tptrans = null;
+        if(conta != null && gptrans != null){
+            //jCBTpTransacao.setEnabled(true);
+            tptransu.jcTpTransCredDeb(jCBTpTransacao, gptrans.getCd_gptrans());            
+            if(jCBTpTransacao.getItemCount() > 0){
+                jCBTpTransacao.setEnabled(true);
+            }else{
+                jCBTpTransacao.removeAllItems();
+                jCBTpTransacao.setEnabled(false);
+                tptrans = null;
+            }
+        }
     }
-    
+   
     /**
-     * <p><strong>EN:</strong> Clears the form fields and resets selections to their default state.</p>
-     * <p><strong>IT:</strong> Pulisce i campi del modulo e ripristina le selezioni allo stato predefinito.</p>
-     * <p><strong>PT-BR:</strong> Limpa os campos do formulário e restaura as seleções ao padrão.</p>
+     * EM TESTE - COLOCAR COMENTARIO
+     * LIMPA O FORMULARIO
      */
-    private void limpaCampos(){
+    private void limpaFormulario(){
         bGTransacao.clearSelection();
         if(jCBRenda.isEnabled()){
-            jCBRenda.setSelectedIndex(0);
+            rendau.jcRenda(jCBRenda);
             jCBRenda.setEnabled(false);
         }
         if(jCBDespesa.isEnabled()){
-            jCBDespesa.setSelectedIndex(0);
+            despesau.jcDespesa(jCBDespesa);
             jCBDespesa.setEnabled(false);
         }
         campoGpTransacao();
-        jFTFData.setText(null);
-        jTFDescricao.setText(null);
-        jTFDocumento.setText(null);
-        jFTFValor.setValue(null);
-        jCBTpTransacao.setSelectedIndex(0);
-        jCBCategoria.setSelectedIndex(0);        
-        despesa = (Despesa)jCBDespesa.getSelectedItem();
-        renda = (Renda)jCBRenda.getSelectedItem();
+        limpaCampos();        
         movcx = null;
     }
     
     /**
-     * <p><strong>EN:</strong> Enables/disables credit/debit options and related combos based on the selected account and group.</p>
-     * <p><strong>IT:</strong> Abilita/disabilita le opzioni di credito/debito e le relative combo in base al conto e al gruppo selezionati.</p>
-     * <p><strong>PT-BR:</strong> Habilita/desabilita opções de crédito/débito e combos relacionados conforme a conta e o grupo selecionados.</p>
+     * EM TESTE - COLOCAR COMENTARIO
+     * LIMPA OS CAMPOS DA TRANSACAO
      */
-    private void campoGpTransacao(){
-        if(conta != null){
-            jChkBCredito.setEnabled(true);
-            jChkBDebito.setEnabled(true);
-            if(jChkBCredito.isSelected() == true){
-                jCBRenda.setEnabled(true);
-                jChkBDebito.setSelected(false);
-                jCBDespesa.setSelectedIndex(0);
-                jCBDespesa.setEnabled(false);
-            }
-            if(jChkBDebito.isSelected() == true){
-                jCBDespesa.setEnabled(true);
-                jChkBCredito.setSelected(false);
-                jCBRenda.setSelectedIndex(0);
-                jCBRenda.setEnabled(false);
-            }            
-        }else{
-            bGTransacao.clearSelection();
-            jChkBCredito.setEnabled(false);
-            jCBRenda.setEnabled(false);           
-            jChkBDebito.setEnabled(false);
-            jCBDespesa.setEnabled(false);
-        }
-        campoPesquisa();
+    private void limpaCampos(){
+        jFTFData.setText(null);
+        jTFDescricao.setText(null);
+        jTFDocumento.setText(null);
+        util.insereTxtPadraoValor(jFTFValor);   
     }
     
     /**
@@ -722,22 +764,22 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
             movcx.setDs_descricao(jTFDescricao.getText());
             if(gptrans.getCd_gptrans() == 1){
                 movcx.setRenda(renda);
-                movcx.setDespesa(despesa);
+                movcx.setDespesa(despesa = new Despesa());
                 movcx.setVl_credito(Utilidade.converter(jFTFValor.getText()));
                 movcx.setVl_debito(null);
             }
             if(gptrans.getCd_gptrans() == 2){
                 movcx.setDespesa(despesa);
-                movcx.setRenda(renda);
+                movcx.setRenda(renda = new Renda());
                 movcx.setVl_credito(null);
                 movcx.setVl_debito(Utilidade.converter(jFTFValor.getText()));
             }
             movcx.setNm_documento(jTFDocumento.getText());
             movcx.setTipotransacao(tptrans);
-            movcx.setCategoria(categoria);
+            movcx.setCategoria(categoria);    
             movcx.setCd_usuario(JPLogin.codloginuser);
             movcxr.alterar(movcx);  
-        }     
+        }   
     }
 
     /**
@@ -838,24 +880,26 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
             saldoMesAnterior();
             movcxu.tablelaMovimentoCaixa(jTLancamento, conta.getCd_conta());
             calculaValoresMes();
-            limpaCampos();   
+            limpaFormulario();   
+            jcCategoria();
             jBPesquisar.setEnabled(true);
         }else{
             conta = null;
+            jLSaldo.setText("Saldo: 0,00");
+            jLSaldo.setText("Mês anterior: 0,00");
             movcxu.tablelaMovimentoCaixa(jTLancamento, 0);
-            jLSaldo.setText("Saldo: ");
-            jLSaldo.setText("Mês anterior: ");
-        }   
-        campoGpTransacao();        
+        }    
+        campoGpTransacao();
     }//GEN-LAST:event_jCBContaActionPerformed
 
     private void jCBDespesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBDespesaActionPerformed
         if(jCBDespesa.getSelectedIndex() != 0){
-            despesa = (Despesa)jCBDespesa.getSelectedItem();
+            despesa = (Despesa)jCBDespesa.getModel().getSelectedItem();
             jFTFData.setText(Utilidade.formatoData.format(Calendar.getInstance().getTime()));
             jTFDescricao.setText(despesa.getEmpresa()+ " " + despesa.getDs_despesa());
             jFTFValor.setText(Utilidade.formatoValor.format(despesa.getNm_valor()));
-            jCBCategoria.getModel().setSelectedItem(despesa.getCategoria());            
+            jCBCategoria.getModel().setSelectedItem(despesa.getCategoria());       
+            jcTpTrans();
         }
     }//GEN-LAST:event_jCBDespesaActionPerformed
 
@@ -864,7 +908,6 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
             categoria = (Categoria)jCBCategoria.getSelectedItem();
         }else{
             categoria = new Categoria();
-            categoria.setCd_Categoria(0);
         }
     }//GEN-LAST:event_jCBCategoriaActionPerformed
 
@@ -872,20 +915,20 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         if(validaCampos()){
             salvar();          
             saldoConta();
-            limpaCampos();
+            limpaFormulario();
             movcxu.tablelaMovimentoCaixa(jTLancamento, conta.getCd_conta());
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jChkBCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChkBCreditoActionPerformed
-        campoGpTransacao();
         gptrans.setCd_gptrans(1);
+        campoGpTransacao();
         jcTpTrans();
     }//GEN-LAST:event_jChkBCreditoActionPerformed
 
     private void jChkBDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChkBDebitoActionPerformed
-        campoGpTransacao();
         gptrans.setCd_gptrans(2);
+        campoGpTransacao();
         jcTpTrans();
     }//GEN-LAST:event_jChkBDebitoActionPerformed
 
@@ -899,25 +942,27 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
 
     private void jCBRendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBRendaActionPerformed
         if(jCBRenda.getSelectedIndex() != 0){
-            renda = (Renda)jCBRenda.getSelectedItem();
+            renda = (Renda)jCBRenda.getModel().getSelectedItem();
             jFTFData.setText(Utilidade.formatoData.format(Calendar.getInstance().getTime()));
             jTFDescricao.setText(renda.getDs_renda());
-            jFTFValor.setText(Utilidade.formatoValor.format(renda.getNm_valor()));            
+            jFTFValor.setText(Utilidade.formatoValor.format(renda.getNm_valor()));   
+            jcTpTrans();
         }
     }//GEN-LAST:event_jCBRendaActionPerformed
 
     private void jTLancamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTLancamentoMouseClicked
-        movcx = (MovimentoCaixa)movcxu.getSelectObject(jTLancamento);
+        movcx = (MovimentoCaixa)movcxu.getSelectObjectMovcx(jTLancamento);
+        System.out.println(movcx);
         if(movcx.getTipotransacao().getGptrans().getCd_gptrans() == 1){
             gptrans.setCd_gptrans(1);
             jChkBCredito.getModel().setSelected(true);
             jCBRenda.setEnabled(true);
+            jcRenda();
             if(movcx.getRenda() != null){
                 jCBRenda.getModel().setSelectedItem(movcx.getRenda());                
             }else{
                 jCBRenda.setSelectedIndex(0);
             }
-            jcTpTrans();
             jCBTpTransacao.getModel().setSelectedItem(movcx.getTipotransacao());            
             jFTFValor.setText(Utilidade.formatoValor.format(movcx.getVl_credito()));
         }
@@ -925,12 +970,12 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
             gptrans.setCd_gptrans(2);
             jChkBDebito.getModel().setSelected(true);
             jCBDespesa.setEnabled(true);
+            jcDespesa();
             if(movcx.getDespesa()!= null){
                 jCBDespesa.getModel().setSelectedItem(movcx.getDespesa());                
             }else{
                 jCBDespesa.setSelectedIndex(0);
-            }
-            jcTpTrans();            
+            }           
             jCBTpTransacao.getModel().setSelectedItem(movcx.getTipotransacao());
             jFTFValor.setText(Utilidade.formatoValor.format(movcx.getVl_debito()));
         }
@@ -938,7 +983,7 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         jTFDescricao.setText(movcx.getDs_descricao());
         jTFDocumento.setText(movcx.getNm_documento());        
         if(movcx.getCategoria() == null){
-            jCBCategoria.setSelectedIndex(0);
+            jcCategoria();
         }else{
             jCBCategoria.getModel().setSelectedItem(movcx.getCategoria());            
         }
@@ -958,7 +1003,6 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
             movcx2 = null;
         }        
         campoGpTransacao();
-
     }//GEN-LAST:event_jTLancamentoMouseClicked
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
@@ -974,7 +1018,7 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
             csaldor.alterar(csaldo);
             movcxr.excluir(movcx);
             movcx2 = null;
-            limpaCampos();
+            limpaFormulario();
             jLSaldo.setText("Saldo: " + Utilidade.formatoValor.format(csaldo.getVl_saldo()));
             movcxu.tablelaMovimentoCaixa(jTLancamento, conta.getCd_conta());
         }        
@@ -990,6 +1034,22 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBPesquisarActionPerformed
 
+    private void jFTFValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFValorFocusGained
+        util.posicionaCursojFTFValor(jFTFValor);
+    }//GEN-LAST:event_jFTFValorFocusGained
+
+    private void jFTFDataFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFocusGained
+        util.posicionaCursojFTFData(jFTFData);
+    }//GEN-LAST:event_jFTFDataFocusGained
+
+    private void jFTFDataInicioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataInicioFocusGained
+        util.posicionaCursojFTFData(jFTFDataInicio);
+    }//GEN-LAST:event_jFTFDataInicioFocusGained
+
+    private void jFTFDataFinalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFinalFocusGained
+        util.posicionaCursojFTFData(jFTFDataFinal);
+    }//GEN-LAST:event_jFTFDataFinalFocusGained
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPCamposResumo;
     private javax.swing.ButtonGroup bGTransacao;
@@ -999,7 +1059,7 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Categoria> jCBCategoria;
     private javax.swing.JComboBox<Conta> jCBConta;
     private javax.swing.JComboBox<Despesa> jCBDespesa;
-    private javax.swing.JComboBox<String> jCBRenda;
+    private javax.swing.JComboBox<Renda> jCBRenda;
     private javax.swing.JComboBox<TipoTransacao> jCBTpTransacao;
     private javax.swing.JCheckBox jChkBCredito;
     private javax.swing.JCheckBox jChkBDebito;

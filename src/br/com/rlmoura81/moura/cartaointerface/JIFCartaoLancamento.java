@@ -12,7 +12,6 @@ import br.com.rlmoura81.moura.cartao.CartaoLancamentoUtil;
 import br.com.rlmoura81.moura.cartao.CartaoParcelamento;
 import br.com.rlmoura81.moura.cartao.CartaoParcelamentoRepository;
 import br.com.rlmoura81.moura.cartao.CartaoParcelamentoUtil;
-import br.com.rlmoura81.moura.cartao.CartaoRepository;
 import br.com.rlmoura81.moura.cartao.CartaoUtil;
 import br.com.rlmoura81.moura.financeiro.Despesa;
 import br.com.rlmoura81.moura.financeiro.DespesaUtil;
@@ -51,7 +50,6 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     Banco banco = null;
     BancoUtil bancou = new BancoUtil();    
     Cartao cartao = null;
-    CartaoRepository cartaor = new CartaoRepository();
     CartaoUtil cartaou = new CartaoUtil();    
     Categoria categoria = null;
     CategoriaUtil categoriau = new CategoriaUtil();    
@@ -322,6 +320,12 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
 
         jLValor.setText("Valor:");
 
+        jFTFValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFValorFocusGained(evt);
+            }
+        });
+
         jCBCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBCategoriaActionPerformed(evt);
@@ -555,6 +559,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
      */
     private void formataValor() {        
         jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(ui));
+        util.insereTxtPadraoValor(jFTFValor);
     }  
 
     /**
@@ -759,9 +764,6 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     private void jcStPagamento(){
         if(jCBStPagamento.isEnabled() == true){
             cartaolancfu.jcStFechamento(jCBFaturasFechadas, cartao.getCd_cartao(), jCBStPagamento.getSelectedIndex());
-            //cartaolancfu.jcFechamentoSt(jCBFaturasFechadas, cartao.getCd_cartao(), jCBStPagamento.getSelectedIndex());
-        }else{
-            //cartaolancfu.jcStFechamento(jCBFaturasFechadas, cartao.getCd_cartao(), jCBStPagamento.getSelectedIndex());
         }
         jbPagar();
     }
@@ -1366,6 +1368,10 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     private void jFTFDtFechamentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtFechamentoFocusGained
         util.posicionaCursojFTFData(jFTFDtFechamento);
     }//GEN-LAST:event_jFTFDtFechamentoFocusGained
+
+    private void jFTFValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFValorFocusGained
+        util.posicionaCursojFTFValor(jFTFValor);
+    }//GEN-LAST:event_jFTFValorFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterarTransacao;

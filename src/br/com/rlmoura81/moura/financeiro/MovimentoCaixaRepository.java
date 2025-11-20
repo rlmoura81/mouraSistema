@@ -29,8 +29,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      * <p><strong>PT-BR:</strong> Insere um registro de movimento de caixa.</p>
      *
      * @param o EN: object (MovimentoCaixa) to be inserted | IT: oggetto (MovimentoCaixa) da inserire | PT-BR: objeto (MovimentoCaixa) a ser inserido
-     * @return EN: none | IT: nessuno | PT-BR: nenhum
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     @Override
@@ -68,8 +66,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      * <p><strong>PT-BR:</strong> Atualiza um registro existente de movimento de caixa.</p>
      *
      * @param o EN: object (MovimentoCaixa) with updated fields | IT: oggetto (MovimentoCaixa) con campi aggiornati | PT-BR: objeto (MovimentoCaixa) com campos atualizados
-     * @return EN: none | IT: nessuno | PT-BR: nenhum
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     @Override
@@ -115,8 +111,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      * <p><strong>PT-BR:</strong> Exclui um registro de movimento de caixa.</p>
      *
      * @param o EN: object (MovimentoCaixa) identifying the record to delete | IT: oggetto (MovimentoCaixa) che identifica il record da eliminare | PT-BR: objeto (MovimentoCaixa) que identifica o registro a excluir
-     * @return EN: none | IT: nessuno | PT-BR: nenhum
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     @Override
@@ -148,7 +142,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      * <p><strong>PT-BR:</strong> Recupera todos os movimentos de caixa do usuário logado.</p>
      *
      * @return EN: list of MovimentoCaixa records | IT: elenco di record MovimentoCaixa | PT-BR: lista de registros MovimentoCaixa
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     @Override
@@ -195,7 +188,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      *
      * @param cd_conta EN: account ID | IT: ID conto | PT-BR: ID da conta
      * @return EN: list of MovimentoCaixa records for the account | IT: elenco dei record MovimentoCaixa per il conto | PT-BR: lista de registros MovimentoCaixa da conta
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public ArrayList getLista(int cd_conta) {
@@ -245,7 +237,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      * @param dt_inicio EN: start date (dd/MM/yyyy) | IT: data di inizio (dd/MM/yyyy) | PT-BR: data inicial (dd/MM/yyyy)
      * @param dt_final EN: end date (dd/MM/yyyy) | IT: data di fine (dd/MM/yyyy) | PT-BR: data final (dd/MM/yyyy)
      * @return EN: filtered list of MovimentoCaixa records | IT: elenco filtrato di record MovimentoCaixa | PT-BR: lista filtrada de registros MovimentoCaixa
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public ArrayList getLista(int cd_conta, String dt_inicio, String dt_final) {
@@ -296,7 +287,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      *
      * @param cd_conta EN: account ID | IT: ID conto | PT-BR: ID da conta
      * @return EN: list of current-month MovimentoCaixa records | IT: elenco dei record MovimentoCaixa del mese corrente | PT-BR: lista de registros MovimentoCaixa do mês corrente
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public ArrayList getListaMes(int cd_conta) {
@@ -345,7 +335,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      *
      * @param id EN: cash movement ID | IT: ID del movimento di cassa | PT-BR: ID do movimento de caixa
      * @return EN: MovimentoCaixa record if found; otherwise null | IT: record MovimentoCaixa se trovato; altrimenti null | PT-BR: registro MovimentoCaixa se encontrado; caso contrário null
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     @Override
@@ -390,7 +379,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      *
      * @param id EN: account ID | IT: ID conto | PT-BR: ID da conta
      * @return EN: MovimentoCaixa with summed credit, debit and net values | IT: MovimentoCaixa con somme di credito, debito e netto | PT-BR: MovimentoCaixa com somatórios de crédito, débito e líquido
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public Object getSaldoMesAnterior(int id) {
@@ -466,8 +454,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      * <p><strong>PT-BR:</strong> Atualiza um lançamento de caixa programado (futuro).</p>
      *
      * @param o EN: object (MovimentoCaixa) with updated future entry data | IT: oggetto (MovimentoCaixa) con dati aggiornati della registrazione futura | PT-BR: objeto (MovimentoCaixa) com dados atualizados do lançamento futuro
-     * @return EN: none | IT: nessuno | PT-BR: nenhum
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public void alterarLanc(Object o) {
@@ -512,8 +498,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      * <p><strong>PT-BR:</strong> Exclui um lançamento de caixa programado (futuro).</p>
      *
      * @param o EN: object (MovimentoCaixa) identifying the scheduled entry to delete | IT: oggetto (MovimentoCaixa) che identifica la registrazione futura da eliminare | PT-BR: objeto (MovimentoCaixa) que identifica o lançamento futuro a excluir
-     * @return EN: none | IT: nessuno | PT-BR: nenhum
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public void excluirLanc(Object o) {
@@ -545,7 +529,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      *
      * @param cd_conta EN: account ID | IT: ID conto | PT-BR: ID da conta
      * @return EN: list of scheduled MovimentoCaixa records | IT: elenco di record MovimentoCaixa pianificati | PT-BR: lista de registros MovimentoCaixa programados
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public ArrayList getListaContaLanc(int cd_conta) {
@@ -593,7 +576,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      *
      * @param id EN: scheduled cash movement ID | IT: ID del movimento di cassa pianificato | PT-BR: ID do lançamento futuro de caixa
      * @return EN: MovimentoCaixa future entry if found; otherwise null | IT: registrazione futura MovimentoCaixa se trovata; altrimenti null | PT-BR: lançamento futuro MovimentoCaixa se encontrado; caso contrário null
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public Object getByIdLanc(int id) {
@@ -637,7 +619,6 @@ public class MovimentoCaixaRepository implements IPadraoRepository{
      *
      * @param cd_usuario EN: user ID | IT: ID utente | PT-BR: ID do usuário
      * @return EN: latest MovimentoCaixa future entry, or null if none | IT: ultima registrazione futura MovimentoCaixa, o null se assente | PT-BR: último lançamento futuro MovimentoCaixa, ou null se inexistente
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public Object ultimoRegistroLanc(int cd_usuario) {

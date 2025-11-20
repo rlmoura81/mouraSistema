@@ -41,6 +41,7 @@ public class TipoTransacao {
 
     @Override
     public String toString() {
-        return ds_tptrans;
+        return "TipoTransacao{" + "cd_tptrans=" + cd_tptrans + ", ds_tptrans=" + ds_tptrans + ", gptrans=" + gptrans + '}';
     }
+
 }

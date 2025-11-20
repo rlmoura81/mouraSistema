@@ -2,7 +2,7 @@ package br.com.rlmoura81.moura.principalcadastro;
 
 public class Categoria {
     
-    private Integer cd_Categoria;
+    private int cd_Categoria;
     private String ds_Categoria;
     private Grupo grupo;
     private int cd_usuario;
@@ -49,10 +49,10 @@ public class Categoria {
     public Categoria(){
         
     }
-    
+
     @Override
     public String toString() {
-        return ds_Categoria;
+        return "Categoria{" + "cd_Categoria=" + cd_Categoria + ", ds_Categoria=" + ds_Categoria + ", grupo=" + grupo + ", cd_usuario=" + cd_usuario + '}';
     }
-    
+        
 }

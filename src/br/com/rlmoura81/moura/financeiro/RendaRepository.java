@@ -48,7 +48,29 @@ public class RendaRepository implements IPadraoRepository{
 
     @Override
     public void alterar(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Renda r = (Renda) o;
+        try{
+            sql = "UPDATE renda" +
+                  "   SET dt_renda = ?," +
+                  "       ds_renda = ?," +
+                  "       nm_valor = ?" +
+                  " WHERE cd_renda = ?" +
+                  "   AND cd_tprenda = ?" +
+                  "   AND cd_usuario = ?";
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setString(1, Utilidade.formatoData.format(r.getDt_renda().getTime()));
+            ps.setString(2, r.getDs_renda());
+            ps.setBigDecimal(3, r.getNm_valor());
+            ps.setInt(4, r.getCd_renda());
+            ps.setInt(5, r.getTprenda().getCd_tprenda());
+            ps.setInt(6, r.getCd_usuario());
+            ps.execute();
+            ps.close();
+            JOptionPane.showMessageDialog(null, "Salvo.", "Renda", JOptionPane.INFORMATION_MESSAGE);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao salvar:\n" +
+                    ex.getMessage(), "Renda", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -90,8 +112,8 @@ public class RendaRepository implements IPadraoRepository{
      * @since 1.0.0
      */
     @Override
-    public ArrayList getLista() {
-        ArrayList renda = new ArrayList();
+    public ArrayList<Renda> getLista() {
+        ArrayList<Renda> renda = new ArrayList();
         try{
             sql = "SELECT cd_renda, to_char(dt_renda,'dd/MM/yyyy'), ds_renda, nm_valor, cd_tprenda, cd_usuario" +
                   "  FROM renda" +
@@ -123,17 +145,17 @@ public class RendaRepository implements IPadraoRepository{
      * <p><strong>PT-BR:</strong> Recupera registros de renda filtrados por tipo de renda.</p>
      *
      * @param cd_tprenda EN: income type ID filter | IT: ID del tipo di reddito | PT-BR: ID do tipo de renda
-     * @return EN: list of matching income records | IT: elenco dei record corrispondenti | PT-BR: lista de registros correspondentes
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @return EN: list of matching income records | IT: elenco dei record corrispondenti | PT-BR: lista de registros correspoe dados
      * @since 1.0.0
      */
-    public ArrayList getLista(int cd_tprenda) {
-        ArrayList renda = new ArrayList();
+    public ArrayList<Renda> getLista(int cd_tprenda) {
+        ArrayList<Renda> renda = new ArrayList();
         try{
             sql = "SELECT cd_renda, to_char(dt_renda,'dd/MM/yyyy'), ds_renda, nm_valor, cd_tprenda, cd_usuario" +
                   "  FROM renda" +
                   " WHERE cd_tprenda = ?" +
-                  "   AND cd_usuario = ?";            
+                  "   AND cd_usuario = ?" +
+                  " ORDER BY dt_renda";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, cd_tprenda);
             ps.setInt(2, JPLogin.codloginuser);
@@ -164,11 +186,10 @@ public class RendaRepository implements IPadraoRepository{
      * @param dtInicial EN: start date (inclusive) | IT: data iniziale (inclusiva) | PT-BR: data inicial (inclusiva)
      * @param dtFinal EN: end date (inclusive) | IT: data finale (inclusiva) | PT-BR: data final (inclusiva)
      * @return EN: list of income records in the given range | IT: elenco dei record di reddito nell'intervallo | PT-BR: lista de registros de renda no intervalo
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
-    public ArrayList getLista(Object dtInicial, Object dtFinal) {
-        ArrayList renda = new ArrayList();
+    public ArrayList<Renda> getLista(Object dtInicial, Object dtFinal) {
+        ArrayList<Renda> renda = new ArrayList();
         try{
             sql = "SELECT cd_renda, to_char(dt_renda,'dd/MM/yyyy'), ds_renda, nm_valor, cd_tprenda, cd_usuario" +
                   "  FROM renda" +
@@ -203,8 +224,7 @@ public class RendaRepository implements IPadraoRepository{
      * <p><strong>PT-BR:</strong> Recupera um único registro de renda pelo seu ID.</p>
      *
      * @param id EN: income ID | IT: ID del reddito | PT-BR: ID da renda
-     * @return EN: income record or null if not found | IT: record di reddito o null se non trovato | PT-BR: registro de renda ou null se não encontrado
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
+     * @return EN: income record or null if not found | IT: record di reddito o null se non trovato | PT-BR: registro de renda ou null se não ence dados
      * @since 1.0.0
      */
     @Override
@@ -232,6 +252,5 @@ public class RendaRepository implements IPadraoRepository{
                     ex.getMessage(), "Renda", JOptionPane.ERROR_MESSAGE);
         }
         return renda;
-    }
-    
+    }    
 }

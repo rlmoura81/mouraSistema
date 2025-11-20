@@ -24,6 +24,27 @@ public class Utilidade {
         //o.setCaretPosition(0);
         return o;
     }
+
+    /*
+    *EM TESTE - COLOCAR COMENTARIO
+    *POSICIONA O CURSOR OU SELECIONA O CAMPO TODO DA JFTFFIELD NO ON FOCUS
+    */
+    
+    public JFormattedTextField posicionaCursojFTFValor(JFormattedTextField o){
+        o.selectAll();
+        //o.setCaretPosition(0);
+        return o;
+    }
+    
+    /**
+    *EM TESTE - COLOCAR COMENTARIO
+    * INSERE UM TEXTE PADRAO NO CAMPO VALOR
+    */
+    
+    public JFormattedTextField insereTxtPadraoValor(JFormattedTextField o){
+        o.setText("0,00");
+        return o;
+    }
     
     /**
      * <p><strong>EN:</strong> Default date format used in the system (dd/MM/yyyy).</p>

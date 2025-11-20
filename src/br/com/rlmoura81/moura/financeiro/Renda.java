@@ -74,7 +74,7 @@ public class Renda {
 
     @Override
     public String toString() {
-        return ds_renda;
+        return "Renda{" + "cd_renda=" + cd_renda + ", dt_renda=" + dt_renda + ", ds_renda=" + ds_renda + ", nm_valor=" + nm_valor + ", tprenda=" + tprenda + ", cd_usuario=" + cd_usuario + '}';
     }
 
 }

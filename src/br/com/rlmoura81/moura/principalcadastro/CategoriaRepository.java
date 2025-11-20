@@ -113,8 +113,8 @@ public class CategoriaRepository {
      * <p><strong>PT-BR:</strong> Busca todas as Categorias do usuário logado.
      * Retorna uma lista ordenada por nome, mapeando cada linha para um objeto Categoria com seu Grupo.</p>
      */
-    public ArrayList getLista(){        
-        ArrayList categorias = new ArrayList();        
+    public ArrayList<Categoria> getLista(){        
+        ArrayList<Categoria> categoria = new ArrayList();        
         try{
             sql = "SELECT cd_categoria, ds_categoria, cd_grupo, cd_usuario " +
                   "  FROM categoria " +
@@ -129,14 +129,14 @@ public class CategoriaRepository {
                         rs.getString("ds_categoria"),
                         (Grupo)grupor.getById(rs.getInt("cd_grupo")),
                         rs.getInt("cd_usuario"));
-                categorias.add(c);
+                categoria.add(c);
             }
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de categorias:\n" +
                     ex.getMessage(), "Categoria", JOptionPane.ERROR_MESSAGE);
         }
-        return categorias;
+        return categoria;
     }
     
     /**

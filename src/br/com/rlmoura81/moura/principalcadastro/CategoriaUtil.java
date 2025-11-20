@@ -1,7 +1,12 @@
 package br.com.rlmoura81.moura.principalcadastro;
 
+import java.awt.Component;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +17,37 @@ public class CategoriaUtil {
     CategoriaRepository categoriar = new CategoriaRepository();    
     ArrayList lista = new ArrayList();
        
+    /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - CATEGORIA
+    */
+    private void jcModelCategoria(JComboBox<Categoria> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Categoria){
+                        Categoria c = (Categoria) value;
+                        if(c.getCd_Categoria()== 0){
+                            setText("<Selecione>");
+                        }else if(c.getDs_Categoria()!= null){
+                            setText(c.getDs_Categoria());
+                        }else{
+                            setText("Sem categoria");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
+    
     /**
      * <p><strong>EN:</strong> Populates a combo box with a list of Categories.
      * Adds a default placeholder (“&lt;Categoria&gt;”) followed by all categories from the repository.</p>
@@ -22,13 +58,17 @@ public class CategoriaUtil {
      * <p><strong>PT-BR:</strong> Preenche um combo box com a lista de Categorias.
      * Adiciona um item padrão (“&lt;Categoria&gt;”) seguido de todas as categorias do repositório.</p>
      */
-    public  void jcCategoria(JComboBox o){
-        ArrayList<Categoria> listacategoria = categoriar.getLista();
-        Categoria cZero = new Categoria(0, "<Categoria>", null, 0);
-        o.addItem(cZero);
-        for(Categoria categoria : listacategoria){
-            o.addItem(categoria);
+    public  void jcCategoria(JComboBox<Categoria> o){
+        List<Categoria> lista = categoriar.getLista();
+        DefaultComboBoxModel<Categoria> model = new DefaultComboBoxModel<>();
+        model.addElement(new Categoria(0, "<Categoria>", null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Categoria categoria : lista){
+                model.addElement(categoria);
+            }            
         }
+        o.setModel(model);
+        jcModelCategoria(o);
     } 
     
     /**

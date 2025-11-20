@@ -364,7 +364,7 @@ public class JIFCategoria extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBSalvar;
-    private javax.swing.JComboBox<String> jCBGrupo;
+    private javax.swing.JComboBox<Grupo> jCBGrupo;
     private javax.swing.JLabel jLCategoria;
     private javax.swing.JPanel jPCampos;
     private javax.swing.JPanel jPGrid;

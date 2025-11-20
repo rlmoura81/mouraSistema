@@ -175,6 +175,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFTFDtPagamento">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDtPagamentoFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLPrecoDtBase">
           <Properties>
@@ -182,8 +185,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFTFRendimentoPago">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFRendimentoPagoFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFTFPrecoDtBase">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFPrecoDtBaseFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLDtPrecoBase">
           <Properties>
@@ -191,6 +200,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFTFDtPrecoBase">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDtPrecoBaseFocusGained"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

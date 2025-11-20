@@ -136,7 +136,7 @@ public class CartaoLancamentoFechamentoUtil {
             dadosArray[i][1] = cartaolancf.getDs_despesa();
             dadosArray[i][2] = Utilidade.formatoValor.format(cartaolancf.getNm_valor());
             dadosArray[i][3] = cartaolancf.getNm_parcela();
-            dadosArray[i][4] = cartaolancf.getCategoria();
+            dadosArray[i][4] = cartaolancf.getCategoria().getDs_Categoria();
         }
         DefaultTableModel tCartaoLanc = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tCartaoLanc);

@@ -81,8 +81,6 @@
                   <Component id="jLValor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jFTFValor" min="-2" pref="150" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jBConfirmar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -96,11 +94,10 @@
                       <Component id="jTFDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLValor" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jFTFValor" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jBConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLData" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jFTFData" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -119,13 +116,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFTFValor">
-        </Component>
-        <Component class="javax.swing.JButton" name="jBConfirmar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Confirmar"/>
-          </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBConfirmarActionPerformed"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFValorFocusGained"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLData">
@@ -151,6 +143,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jBSalvar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jBExcluir" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -160,13 +154,24 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jBExcluir" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jBExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JButton" name="jBSalvar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Salvar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSalvarActionPerformed"/>
+          </Events>
+        </Component>
         <Component class="javax.swing.JButton" name="jBExcluir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>

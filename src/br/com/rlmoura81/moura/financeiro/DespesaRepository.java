@@ -6,6 +6,7 @@ import br.com.rlmoura81.moura.principalcadastro.CategoriaRepository;
 import br.com.rlmoura81.moura.principalcadastro.Empresa;
 import br.com.rlmoura81.moura.principalcadastro.EmpresaRepository;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
+import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ public class DespesaRepository implements IPadraoRepository {
     String sql = "";    
     CategoriaRepository categoriar = new CategoriaRepository();    
     EmpresaRepository empresar = new EmpresaRepository();
+    Utilidade util = new Utilidade();
 
     /**
      * <p><strong>EN:</strong> Inserts a new expense record into the database using the data from the provided object.</p>
@@ -29,14 +31,16 @@ public class DespesaRepository implements IPadraoRepository {
     public void inserir(Object o) {
         Despesa d = (Despesa) o;
         try{
-            sql = "INSERT INTO despesa (cd_despesa, ds_despesa, nm_valor, cd_categoria, cd_empresa, cd_usuario)"
-                + "     VALUES (sq_despesa.nextval, ?, ?, ?, ?, ?)";            
+            sql = "INSERT INTO despesa (cd_despesa, ds_despesa, nm_valor, dt_validade, tp_plano, cd_categoria, cd_empresa, cd_usuario)"
+                + "     VALUES (sq_despesa.nextval, ?, ?, ?, ?, ?, ?, ?)";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, d.getDs_despesa());
             ps.setBigDecimal(2, d.getNm_valor());
-            ps.setInt(3, d.getCategoria().getCd_Categoria());
-            ps.setInt(4, d.getEmpresa().getCd_empresa());
-            ps.setInt(5, d.getCd_usuario());
+            ps.setString(3, Utilidade.formatoData.format(d.getDt_validade().getTime()));
+            ps.setInt(4, d.getTp_plano());
+            ps.setInt(5, d.getCategoria().getCd_Categoria());
+            ps.setInt(6, d.getEmpresa().getCd_empresa());
+            ps.setInt(7, d.getCd_usuario());
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Salvo.", "Despesa.", JOptionPane.INFORMATION_MESSAGE);
@@ -60,6 +64,8 @@ public class DespesaRepository implements IPadraoRepository {
             sql = "UPDATE despesa " +
                   "   SET ds_despesa = ?, " +
                   "       nm_valor = ?, " +
+                  "       dt_validade = ?, " +
+                  "       tp_plano = ?, " +
                   "       cd_categoria = ?, " +
                   "       cd_empresa = ? " +
                   " WHERE cd_despesa = ? " +
@@ -67,10 +73,12 @@ public class DespesaRepository implements IPadraoRepository {
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, d.getDs_despesa());
             ps.setBigDecimal(2, d.getNm_valor());
-            ps.setInt(3, d.getCategoria().getCd_Categoria());
-            ps.setInt(4, d.getEmpresa().getCd_empresa());
-            ps.setInt(5, d.getCd_despesa());
-            ps.setInt(6, d.getCd_usuario());
+            ps.setString(3, Utilidade.formatoData.format(d.getDt_validade().getTime()));
+            ps.setInt(4, d.getTp_plano());
+            ps.setInt(5, d.getCategoria().getCd_Categoria());
+            ps.setInt(6, d.getEmpresa().getCd_empresa());
+            ps.setInt(7, d.getCd_despesa());
+            ps.setInt(8, d.getCd_usuario());
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Alterado.", "Despesa", JOptionPane.INFORMATION_MESSAGE);
@@ -114,10 +122,10 @@ public class DespesaRepository implements IPadraoRepository {
      * @return EN: list of expenses | IT: elenco delle spese | PT-BR: lista de despesas
      */
     @Override
-    public ArrayList getLista() {
-        ArrayList despesas = new ArrayList();
+    public ArrayList<Despesa> getLista() {
+        ArrayList<Despesa> despesa = new ArrayList();
         try{
-            sql = "SELECT cd_despesa, ds_despesa, nm_valor, cd_categoria, cd_empresa, cd_usuario" +
+            sql = "SELECT cd_despesa, ds_despesa, nm_valor, to_char(dt_validade,'dd/MM/yyyy'), tp_plano, cd_categoria, cd_empresa, cd_usuario" +
                   "  FROM despesa" +
                   " WHERE cd_usuario = ?" +
                   " ORDER BY ds_despesa";            
@@ -129,17 +137,57 @@ public class DespesaRepository implements IPadraoRepository {
                     rs.getInt("cd_despesa"),
                     rs.getString("ds_despesa"),
                     rs.getBigDecimal("nm_valor"),
+                    util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
+                    rs.getInt("tp_plano"),
                     (Categoria)categoriar.getById(rs.getInt("cd_categoria")),
                     (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
-                    despesas.add(d);
+                    despesa.add(d);
             }
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de despesa:\n" + 
                     ex.getMessage());
         }
-        return despesas;
+        return despesa;
+    }
+    
+    /**
+     * EM TESTE - COLOCAR COMENTARIO
+     * LISTA DE DESPESA POR TIPO DE PLANO(MES/ANO)
+     * @param plano
+     * @return 
+     */
+    public ArrayList<Despesa> getListaPlano(int plano) {
+        ArrayList<Despesa> despesa = new ArrayList();
+        try{
+            sql = "SELECT cd_despesa, ds_despesa, nm_valor, to_char(dt_validade,'dd/MM/yyyy'), tp_plano, cd_categoria, cd_empresa, cd_usuario" +
+                  "  FROM despesa" +
+                  " WHERE tp_plano = ?" +
+                  "   AND cd_usuario = ?"  +
+                  " ORDER BY ds_despesa";            
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, plano);
+            ps.setInt(2, JPLogin.codloginuser);
+            ResultSet rs = ps.executeQuery();            
+            while(rs.next()){
+                Despesa d = new Despesa(
+                    rs.getInt("cd_despesa"),
+                    rs.getString("ds_despesa"),
+                    rs.getBigDecimal("nm_valor"),
+                    util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
+                    rs.getInt("tp_plano"),
+                    (Categoria)categoriar.getById(rs.getInt("cd_categoria")),
+                    (Empresa)empresar.getById(rs.getInt("cd_empresa")),
+                    rs.getInt("cd_usuario"));
+                    despesa.add(d);
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de despesa de planos:\n" + 
+                    ex.getMessage());
+        }
+        return despesa;
     }
 
     /**
@@ -150,10 +198,10 @@ public class DespesaRepository implements IPadraoRepository {
      * @param grupo EN: group identifier to filter expenses | IT: identificativo del gruppo per filtrare le spese | PT-BR: identificador do grupo para filtrar as despesas
      * @return EN: list of expenses for the group | IT: elenco delle spese del gruppo | PT-BR: lista de despesas do grupo
      */
-    public ArrayList getLista(int grupo) {
-        ArrayList despesas = new ArrayList();
+    public ArrayList<Despesa> getLista(int grupo) {
+        ArrayList<Despesa> despesa = new ArrayList();
         try{
-            sql = "SELECT cd_despesa, ds_despesa, nm_valor, categoria.cd_categoria, cd_empresa, despesa.cd_usuario" +
+            sql = "SELECT cd_despesa, ds_despesa, nm_valor, to_char(dt_validade,'dd/MM/yyyy'), tp_plano, categoria.cd_categoria, cd_empresa, despesa.cd_usuario" +
                   "  FROM despesa, grupo, categoria" +
                   " WHERE categoria.cd_grupo = grupo.cd_grupo" +
                   "   AND grupo.cd_grupo = ?" +
@@ -169,17 +217,19 @@ public class DespesaRepository implements IPadraoRepository {
                     rs.getInt("cd_despesa"),
                     rs.getString("ds_despesa"),
                     rs.getBigDecimal("nm_valor"),
+                    util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
+                    rs.getInt("tp_plano"),
                     (Categoria)categoriar.getById(rs.getInt("cd_categoria")),
                     (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
-                    despesas.add(d);
+                    despesa.add(d);
             }
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de despesa por grupo:\n" + 
                     ex.getMessage());
         }
-        return despesas;
+        return despesa;
     }    
 
     /**
@@ -194,7 +244,7 @@ public class DespesaRepository implements IPadraoRepository {
     public Object getById(int id) {
         Despesa despesa = null;
         try{
-            sql = "SELECT cd_despesa, ds_despesa, nm_valor, cd_categoria, cd_empresa, cd_usuario" +
+            sql = "SELECT cd_despesa, ds_despesa, nm_valor, to_char(dt_validade,'dd/MM/yyyy'), tp_plano, cd_categoria, cd_empresa, cd_usuario" +
                   "  FROM despesa" +
                   " WHERE cd_despesa = ?";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
@@ -205,6 +255,8 @@ public class DespesaRepository implements IPadraoRepository {
                     rs.getInt("cd_despesa"),
                     rs.getString("ds_despesa"),
                     rs.getBigDecimal("nm_valor"),
+                    util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
+                    rs.getInt("tp_plano"),
                     (Categoria)categoriar.getById(rs.getInt("cd_categoria")),
                     (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));

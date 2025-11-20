@@ -1,6 +1,5 @@
 package br.com.rlmoura81.moura.financeiro;
 
-import br.com.rlmoura81.moura.cartao.CartaoParcelamento;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,7 @@ import javax.swing.JList;
 public class TipoAtivoUtil {
     
     TipoAtivoRepository tpativor = new TipoAtivoRepository();    
+    ArrayList lista = new ArrayList();
 
     /*
     * EM TESTE - COLOCAR COMENTARIO

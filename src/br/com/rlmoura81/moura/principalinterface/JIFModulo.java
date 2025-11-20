@@ -263,7 +263,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
      * vindas do banco de dados.</p>
      */
     private void jcCategoria(){
-        categoriau.jcCategoria(jCBModuloApp);
+        //categoriau.jcCategoria(jCBModuloApp);
     }
     
     /**
@@ -277,7 +277,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
      * do banco de dados.</p>
      */
     private void jcEmpresa(){
-        empresau.jcEmpresa(jCBModuloApp);
+        //empresau.jcEmpresa(jCBModuloApp);
     }
     
     /**
@@ -432,7 +432,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup bGModulo;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<String> jCBModulo;
-    private javax.swing.JComboBox<Empresa> jCBModuloApp;
+    private javax.swing.JComboBox<Categoria> jCBModuloApp;
     private javax.swing.JPanel jPBotoes;
     private javax.swing.JPanel jPCampos;
     private javax.swing.JPanel jPGrid;

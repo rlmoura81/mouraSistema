@@ -108,6 +108,41 @@ public class FundoImobiliarioProventoRepository implements IPadraoRepository{
         }
         return fimobr;
     }
+    
+    /**
+    *EM TESTE - COLOCAR COMENTARIO
+    *FILTRO DE LISTA POR FUNDO IMOBILIARIO
+    */
+    
+    public ArrayList getLista(int cd_ativo) {
+        ArrayList fimobr = new ArrayList();
+        try{
+            sql = "SELECT cd_fdimprov, cd_ativo, to_char(dt_pagamento,'dd/MM/yyyy'), vl_provento, to_char(dt_precobase,'dd/MM/yyyy'), vl_database, cd_tpprovento, cd_usuario" +
+                  "  FROM fdimprov" +
+                  " WHERE cd_ativo = ?" +
+                  " ORDER BY cd_ativo, dt_pagamento";
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, cd_ativo);
+            ResultSet rs = ps.executeQuery();            
+            while(rs.next()){
+                FundoImobiliarioProvento fir = new FundoImobiliarioProvento(
+                    rs.getInt("cd_fdimprov"),
+                    (Ativo)ativor.getById(rs.getInt("cd_ativo")),
+                    util.recebeData(rs.getString("to_char(dt_pagamento,'dd/MM/yyyy')")),
+                    util.recebeData(rs.getString("to_char(dt_precobase,'dd/MM/yyyy')")),
+                    rs.getBigDecimal("vl_provento"),    
+                    rs.getBigDecimal("vl_database"),
+                    (TipoProvento)tppr.getById(rs.getInt("cd_tpprovento")),
+                    rs.getInt("cd_usuario"));
+                fimobr.add(fir);
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de Fundos Imobiliários Provento:\n" +
+                    ex.getMessage(), "Fundo Imobiliário Provento", JOptionPane.ERROR_MESSAGE);
+        }
+        return fimobr;
+    }
 
     /**
      * <p><strong>EN:</strong> Retrieves a single real estate fund dividend record by its id.</p>

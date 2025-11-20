@@ -21,7 +21,6 @@ public class NotaCorretagemLancamentoUtil {
      *
      * @param o EN: target JTable to populate | IT: JTable di destinazione da popolare | PT-BR: JTable de destino a ser preenchida
      * @param cd_nota EN: brokerage note ID used to filter entries | IT: ID della nota di intermediazione per filtrare le righe | PT-BR: ID da nota de corretagem para filtrar os lançamentos
-     * @return EN: none | IT: nessuno | PT-BR: nenhum
      * @since 1.0.0
      */
     public void tabelaNotaCorretagemLancamento(JTable o, int cd_nota){
@@ -31,10 +30,10 @@ public class NotaCorretagemLancamentoUtil {
         for(int i=0; i < lista.size(); i++){
             notalanc = (NotaCorretagemLancamento)lista.get(i);
             dadosArray[i][0] = notalanc.getNota().getNm_nota();
-            dadosArray[i][1] = notalanc.getAtivo();
+            dadosArray[i][1] = notalanc.getAtivo().getDs_ativo();
             dadosArray[i][2] = notalanc.getNm_qtde();
             dadosArray[i][3] = Utilidade.formatoValor.format(notalanc.getNm_valor());
-            dadosArray[i][4] = notalanc.getGptrans();
+            dadosArray[i][4] = notalanc.getGptrans().getDs_gptrans();
         }
         DefaultTableModel tPoupap = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tPoupap);

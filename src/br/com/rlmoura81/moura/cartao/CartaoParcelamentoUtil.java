@@ -92,13 +92,16 @@ public class CartaoParcelamentoUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(cartaoparc.getNm_valor());
             dadosArray[i][4] = cartaoparc.getNm_parcelapag();
             dadosArray[i][5] = cartaoparc.getNm_parcela();
-            dadosArray[i][6] = cartaoparc.getCategoria();
+            dadosArray[i][6] = cartaoparc.getCategoria().getDs_Categoria();
         }
         DefaultTableModel tCartaoLanc = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tCartaoLanc);
     }   
     
-    //TESTANDO - COLOCAR COMENTARIO
+    /**
+     * TESTANDO - COLOCAR COMENTARIO
+     * CARREGA TABELA DE CARTAO POR PARCELA
+     */
     public void tabelaCartaoParcela(JTable o, int parcela, int cartao){
         String[] nomeColuna = {"Descrição", "Data Parcela", "Data Despesa", "Valor", "Parcela", "Qtde Parcela", "Categoria"};
         lista = cartaoparcr.getLista(parcela, cartao);
@@ -111,7 +114,7 @@ public class CartaoParcelamentoUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(cartaoparc.getNm_valor());
             dadosArray[i][4] = cartaoparc.getNm_parcelapag();
             dadosArray[i][5] = cartaoparc.getNm_parcela();
-            dadosArray[i][6] = cartaoparc.getCategoria();
+            dadosArray[i][6] = cartaoparc.getCategoria().getDs_Categoria();
         }
         DefaultTableModel tCartaoLanc = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tCartaoLanc);

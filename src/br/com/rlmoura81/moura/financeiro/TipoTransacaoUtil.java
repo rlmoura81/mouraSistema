@@ -1,12 +1,48 @@
 package br.com.rlmoura81.moura.financeiro;
 
+import br.com.rlmoura81.moura.principalcadastro.Categoria;
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 
 public class TipoTransacaoUtil {
     
     TipoTransacaoRepository tptransr = new TipoTransacaoRepository();    
 
+        /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - TIPO TRANSACAO
+    */
+    private void jcModelTipoTransacao(JComboBox<TipoTransacao> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof TipoTransacao){
+                        TipoTransacao tt = (TipoTransacao) value;
+                        if(tt.getCd_tptrans()== 0){
+                            setText("<Selecione>");
+                        }else if(tt.getDs_tptrans()!= null){
+                            setText(tt.getDs_tptrans());
+                        }else{
+                            setText("Sem Tipo de Transacao");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
+    
     /**
      * <p><strong>EN:</strong> Populates a JComboBox with the complete list of transaction types (TipoTransacao).</p>
      * <p><strong>IT:</strong> Popola un JComboBox con l'elenco completo dei tipi di transazione (TipoTransacao).</p>
@@ -16,13 +52,17 @@ public class TipoTransacaoUtil {
      *          IT: JComboBox da popolare |
      *          PT-BR: JComboBox a ser preenchido
      */
-    public void jcTpTransacao(JComboBox o){
+    public void jcTpTransacao(JComboBox<TipoTransacao> o){
         ArrayList<TipoTransacao> lista = tptransr.getLista();
-        TipoTransacao tptZero = new TipoTransacao(0, "<Transação>", null);
-        o.addItem(tptZero);
-        for(TipoTransacao tpt : lista){
-            o.addItem(tpt);
+        DefaultComboBoxModel<TipoTransacao> model = new DefaultComboBoxModel<>();
+        model.addElement(new TipoTransacao(0, "<Transação>", null));
+        if(lista != null && !lista.isEmpty()){
+            for(TipoTransacao tpt : lista){
+                model.addElement(tpt);
+            }            
         }
+        o.setModel(model);
+        jcModelTipoTransacao(o);
     }
 
     /**
@@ -38,12 +78,16 @@ public class TipoTransacaoUtil {
      *                   IT: ID del gruppo di transazioni usato come filtro |
      *                   PT-BR: ID do grupo de transações usado como filtro
      */
-    public void jcTpTransCredDeb(JComboBox o, int cd_gptrans){
+    public void jcTpTransCredDeb(JComboBox<TipoTransacao> o, int cd_gptrans){
         ArrayList<TipoTransacao> lista = tptransr.getLista(cd_gptrans);
-        TipoTransacao tptZero = new TipoTransacao(0, "<Transação>", null);
-        o.addItem(tptZero);
-        for(TipoTransacao tpt : lista){
-            o.addItem(tpt);
+        DefaultComboBoxModel<TipoTransacao> model = new DefaultComboBoxModel<>();
+        model.addElement(new TipoTransacao(0, "<Transação>", null));
+        if(lista != null && !lista.isEmpty()){
+            for(TipoTransacao tpt : lista){
+                model.addElement(tpt);
+            }            
         }
+        o.setModel(model);
+        jcModelTipoTransacao(o);
     }    
 }

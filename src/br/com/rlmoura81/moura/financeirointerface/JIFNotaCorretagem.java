@@ -72,10 +72,13 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     public JIFNotaCorretagem() {
         initComponents();
         
+        jcConta();
         formataData();
         formataValor(); 
-        jcConta();
         camposNotaCorretagem();
+        jcTipoAtivo();
+        jcAtivo();
+        jcGpTrans();
         
     }
 
@@ -164,7 +167,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
             jPGridNotaLancamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPGridNotaLancamentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -385,7 +388,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
             jPGridNotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPGridNotaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -460,14 +463,10 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     private void camposNotaLancamento(){
         if(conta != null && !jFTFData.getText().equals("  /  /    ") && !jTFNumNota.getText().isEmpty()){
             jcTipoAtivo();
-            jCBTpAtivo.setEnabled(true);
-            jTFQtde.setEnabled(true);
             jFTFPreco.setEnabled(true);
             jBSalvar.setEnabled(true);
             limpaNotaLancCampos();
         }else{
-            jCBTpAtivo.removeAllItems();
-            jCBTpAtivo.setEnabled(false);
             jTFQtde.setText(null);
             jTFQtde.setEnabled(false);
             jFTFPreco.setValue(null);
@@ -529,16 +528,15 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
      * <p><strong>PT-BR:</strong> Preenche o combo de tipo de ativo (Ações e FII) e reinicia os itens anteriores.</p>
      */
     private void jcTipoAtivo(){
-        tpativou.jcTipoAtivoAcaoFii(jCBTpAtivo);
-    }
-    
-    /**
-     * <p><strong>EN:</strong> Populates the transaction group combo with Buy/Sell options and resets previous items.</p>
-     * <p><strong>IT:</strong> Popola la combo del gruppo transazione con opzioni Acquisto/Vendita e reimposta.</p>
-     * <p><strong>PT-BR:</strong> Preenche o combo de grupo de transação com opções Compra/Venda e reinicia.</p>
-     */
-    private void jcGpTrans(){
-        gptransu.jcGpTransacao(jCBGpTransacao);
+        if(conta != null){
+            jCBTpAtivo.setEnabled(true);
+            jTFQtde.setEnabled(true);
+            tpativou.jcTipoAtivoAcaoFii(jCBTpAtivo);
+        }else{
+            tpativo = null;
+            jCBTpAtivo.removeAllItems();
+            jCBTpAtivo.setEnabled(false);
+        }
     }
     
     /**
@@ -554,7 +552,6 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     private void jcAtivo(){
         if(tpativo != null){
             jCBAtivo.setEnabled(true);
-            jCBGpTransacao.setEnabled(true);
             if(tpativo != null && jCBTpAtivo.getSelectedIndex() != 0){
                 if(tpativo.getCd_tpativo() == 1){
                     ativou.jcAcao(jCBAtivo);
@@ -564,11 +561,28 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
                 }   
             }
         }else{
-            jCBAtivo.setEnabled(false);
-            jCBGpTransacao.setEnabled(false);      
+            ativo = null;
+            jCBAtivo.removeAllItems();
+            jCBAtivo.setEnabled(false);      
         }
-    }    
+    } 
     
+    /**
+     * <p><strong>EN:</strong> Populates the transaction group combo with Buy/Sell options and resets previous items.</p>
+     * <p><strong>IT:</strong> Popola la combo del gruppo transazione con opzioni Acquisto/Vendita e reimposta.</p>
+     * <p><strong>PT-BR:</strong> Preenche o combo de grupo de transação com opções Compra/Venda e reinicia.</p>
+     */
+    private void jcGpTrans(){
+        if(ativo != null){
+            jCBGpTransacao.setEnabled(true);
+            gptransu.jcGpTransacao(jCBGpTransacao);    
+        }else{
+            gptrans = null;
+            jCBGpTransacao.removeAllItems();
+            jCBGpTransacao.setEnabled(false);
+        }
+    }
+        
     /**
      * <p><strong>EN:</strong> Applies date formatting to the note date field.</p>
      * <p><strong>IT:</strong> Applica il formato data al campo della data della nota.</p>
@@ -726,6 +740,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
             ((DefaultTableModel)jTNotaLancamento.getModel()).setNumRows(0);
         }else{
             conta = null;
+            limpaNotaCampos();
         }
         camposNotaCorretagem();
     }//GEN-LAST:event_jCBContaActionPerformed
@@ -781,7 +796,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
             jcGpTrans();
         }else{
             ativo = null;
-            gptransu.jcGpTransacao(jCBGpTransacao);
+            jcGpTrans();
         }
         if(jCBTpAtivo.getSelectedIndex() != 0 && ativo != null){
             asaldo = (AtivoSaldo)asaldor.getById(ativo.getCd_ativo(), JPLogin.codloginuser);
@@ -799,12 +814,21 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCBGpTransacaoActionPerformed
 
     private void jTNotaLancamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTNotaLancamentoMouseClicked
-        notalanc = (NotaCorretagemLancamento)notalancu.getSelectObject(jTNotaLancamento);
-        jCBTpAtivo.getModel().setSelectedItem(notalanc.getAtivo().getTpativo());
-        jCBGpTransacao.getModel().setSelectedItem(notalanc.getGptrans());
-        jCBAtivo.getModel().setSelectedItem(notalanc.getAtivo());
-        jTFQtde.setText(Utilidade.formatoValor.format(notalanc.getNm_qtde()));
-        jFTFPreco.setText(Utilidade.formatoValor.format(notalanc.getNm_valor()));
+        notalanc = (NotaCorretagemLancamento)notalancu.getSelectObject(jTNotaLancamento);     
+        if(notalanc != null){
+            jcTipoAtivo();
+            jCBTpAtivo.getModel().setSelectedItem(notalanc.getAtivo().getTpativo());
+            jCBAtivo.getModel().setSelectedItem(notalanc.getAtivo());
+            jCBGpTransacao.getModel().setSelectedItem(notalanc.getGptrans());       
+            jTFQtde.setText(Utilidade.formatoValor.format(notalanc.getNm_qtde()));
+            jFTFPreco.setText(Utilidade.formatoValor.format(notalanc.getNm_valor())); 
+            
+            jCBTpAtivo.setEnabled(false);
+            jCBAtivo.setEnabled(false);
+            jCBGpTransacao.setEnabled(false);
+            jTFQtde.setEnabled(false);
+            jFTFPreco.setEnabled(false);
+       }
     }//GEN-LAST:event_jTNotaLancamentoMouseClicked
 
     private void jTNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTNotaMouseClicked
@@ -816,8 +840,8 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTNotaMouseClicked
 
     private void jBNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNovoActionPerformed
-        limpaNotaCampos();
         jCBConta.setSelectedIndex(0);
+        limpaNotaCampos();
     }//GEN-LAST:event_jBNovoActionPerformed
 
     private void jFTFDataFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFocusLost

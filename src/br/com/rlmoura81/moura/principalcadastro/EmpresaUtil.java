@@ -22,7 +22,7 @@ public class EmpresaUtil {
     *EM TESTE - COLOCAR COMENTARIO
     *DEFAULTCOMBOBOXMODEL - EMPRESA
     */
-    public void jcModelEmpresa(JComboBox<Empresa> o){
+    private void jcModelEmpresa(JComboBox<Empresa> o){
         o.setRenderer(new DefaultListCellRenderer(){
                 @Override
                 public Component getListCellRendererComponent(
@@ -55,9 +55,9 @@ public class EmpresaUtil {
      *
      * <p><strong>IT:</strong> Popola un {@code JComboBox} con l’elenco dei Fornitori di Servizi,
      * aggiungendo una voce predefinita ("&lt;Prestador&gt;") come prima posizione.</p>
-     *
      * <p><strong>PT-BR:</strong> Preenche um {@code JComboBox} com a lista de Prestadores de Serviço,
      * adicionando uma entrada padrão ("&lt;Prestador&gt;") na primeira posição.</p>
+     * @param o
      */
     public void jcEmpresa(JComboBox<Empresa> o) {
         List<Empresa> lista = empresar.getLista(); 

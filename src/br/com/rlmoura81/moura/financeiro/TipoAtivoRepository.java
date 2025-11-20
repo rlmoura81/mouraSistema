@@ -17,7 +17,6 @@ public class TipoAtivoRepository{
      * <p><strong>PT-BR:</strong> Recupera todos os tipos de ativo ordenados pela descrição.</p>
      *
      * @return EN: list of all asset types | IT: elenco di tutti i tipi di attivo | PT-BR: lista de todos os tipos de ativo
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public ArrayList<TipoAtivo> getLista() {
@@ -111,7 +110,6 @@ public class TipoAtivoRepository{
      *
      * @param id EN: asset type ID to search | IT: ID del tipo di attivo da cercare | PT-BR: ID do tipo de ativo a pesquisar
      * @return EN: asset type object if found, otherwise null | IT: oggetto del tipo di attivo se trovato, altrimenti null | PT-BR: objeto do tipo de ativo se encontrado, caso contrário null
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public Object getById(int id) {
