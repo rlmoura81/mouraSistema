@@ -11,7 +11,6 @@ import javax.swing.JList;
 public class TipoAtivoUtil {
     
     TipoAtivoRepository tpativor = new TipoAtivoRepository();    
-    ArrayList lista = new ArrayList();
 
     /*
     * EM TESTE - COLOCAR COMENTARIO
