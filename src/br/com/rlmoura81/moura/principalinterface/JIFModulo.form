@@ -104,7 +104,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBModuloAppActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Categoria&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="jBSalvar">
@@ -203,7 +203,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jRBCategoria" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jRBPresServ" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRBEmpresa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -214,7 +214,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jRBCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRBPresServ" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRBEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -233,15 +233,15 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRBCategoriaMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRBPresServ">
+        <Component class="javax.swing.JRadioButton" name="jRBEmpresa">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bGModulo"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Prestador de Servi&#xe7;os"/>
+            <Property name="text" type="java.lang.String" value="Empresa"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRBPresServMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRBEmpresaMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

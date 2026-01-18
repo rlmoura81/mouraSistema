@@ -43,15 +43,12 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         
         jcEmpresa();
         tabelaAssinatura();
-        formataValor();
-        formataData();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bGTp_assinatura = new javax.swing.ButtonGroup();
         jPCampos = new javax.swing.JPanel();
         jLServico = new javax.swing.JLabel();
         jTFServico = new javax.swing.JTextField();
@@ -59,12 +56,6 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         jTFLogin = new javax.swing.JTextField();
         jLSenha = new javax.swing.JLabel();
         jTFSenha = new javax.swing.JTextField();
-        jLValor = new javax.swing.JLabel();
-        jFTFValor = new javax.swing.JFormattedTextField();
-        jLDtValidade = new javax.swing.JLabel();
-        jFTFDtValidade = new javax.swing.JFormattedTextField();
-        jRBMensal = new javax.swing.JRadioButton();
-        jRBAnual = new javax.swing.JRadioButton();
         jPBotoes = new javax.swing.JPanel();
         jBSalvar = new javax.swing.JButton();
         jBExcluir = new javax.swing.JButton();
@@ -104,47 +95,23 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
 
         jLSenha.setText("Senha:");
 
-        jLValor.setText("Valor:");
-
-        jLDtValidade.setText("Validade:");
-
-        bGTp_assinatura.add(jRBMensal);
-        jRBMensal.setText("Mensal");
-
-        bGTp_assinatura.add(jRBAnual);
-        jRBAnual.setText("Anual");
-
         javax.swing.GroupLayout jPCamposLayout = new javax.swing.GroupLayout(jPCampos);
         jPCampos.setLayout(jPCamposLayout);
         jPCamposLayout.setHorizontalGroup(
             jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPCamposLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPCamposLayout.createSequentialGroup()
-                        .addComponent(jLServico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFServico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLLogin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLSenha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPCamposLayout.createSequentialGroup()
-                        .addComponent(jLValor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRBMensal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRBAnual)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLDtValidade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFTFDtValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLServico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFServico, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLSenha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPCamposLayout.setVerticalGroup(
@@ -158,16 +125,6 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
                     .addComponent(jTFLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLSenha))
-                .addGap(18, 18, 18)
-                .addGroup(jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLDtValidade)
-                        .addComponent(jFTFDtValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLValor)
-                        .addComponent(jFTFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jRBMensal)
-                        .addComponent(jRBAnual)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -251,7 +208,7 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
             jPGridLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPGridLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -338,34 +295,6 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
     }
     
     /**
-     * <p><strong>EN:</strong> Applies a currency formatter to the value field,
-     * enforcing monetary input formatting.</p>
-     *
-     * <p><strong>IT:</strong> Applica un formattatore di valuta al campo valore,
-     * garantendo la formattazione monetaria dell’input.</p>
-     *
-     * <p><strong>PT-BR:</strong> Aplica um formatador monetário ao campo de valor,
-     * garantindo a formatação de moeda na digitação.</p>
-     */
-    private void formataValor(){
-        jFTFValor.setFormatterFactory(Utilidade.formataValorCampo(jFTFValor));
-    }
-    
-    /**
-     * <p><strong>EN:</strong> Applies a date mask/formatter to the validity date field,
-     * standardizing the date input.</p>
-     *
-     * <p><strong>IT:</strong> Applica una maschera/format di data al campo di validità,
-     * standardizzando l’inserimento della data.</p>
-     *
-     * <p><strong>PT-BR:</strong> Aplica máscara/formatador de data ao campo de validade,
-     * padronizando a digitação da data.</p>
-     */
-    private void formataData(){
-        util.formataDataCampo(jFTFDtValidade);
-    }
-    
-    /**
      * <p><strong>EN:</strong> Clears the form fields and resets selections:
      * provider to first option, clears service, login, password, value, plan type and validity date.</p>
      *
@@ -380,9 +309,6 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         jTFServico.setText(null);
         jTFLogin.setText(null);
         jTFSenha.setText(null);
-        jFTFValor.setValue(null);
-        bGTp_assinatura.clearSelection();
-        jFTFDtValidade.setText(null);
     }
     
     /**
@@ -423,27 +349,12 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
      * plano (mensal ou anual), data de validade (hoje se inválida) e usuário; caso contrário, atualiza o registro existente.</p>
      */
     private void salvar(){
-        if(jFTFValor.getText().isEmpty()){
-            jFTFValor.setText("0,00");
-        }
         if(assinatura == null){
             assinatura = new Assinatura();
             assinatura.setEmpresa(empresa);
             assinatura.setDs_servico(jTFServico.getText());
             assinatura.setDs_login(jTFLogin.getText());
             assinatura.setDs_senha(jTFSenha.getText());
-            assinatura.setNm_valor(Utilidade.converter(jFTFValor.getText()));
-            if(jRBMensal.isSelected()){
-                assinatura.setTp_assinatura(1);
-            }
-            if(jRBAnual.isSelected()){
-                assinatura.setTp_assinatura(2);
-            }
-        if(util.validaDataCampo(jFTFDtValidade.getText()) == false){
-            assinatura.setDt_validade(Calendar.getInstance());
-        }else{
-            assinatura.setDt_validade(util.recebeData(jFTFDtValidade.getText()));
-        }
             assinatura.setCd_usuario(JPLogin.codloginuser);
             assinaturar.inserir(assinatura);    
             assinatura = null;
@@ -452,14 +363,6 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
             assinatura.setDs_servico(jTFServico.getText());
             assinatura.setDs_login(jTFLogin.getText());
             assinatura.setDs_senha(jTFSenha.getText());
-            assinatura.setNm_valor(Utilidade.converter(jFTFValor.getText()));
-            if(jRBMensal.isSelected()){
-                assinatura.setTp_assinatura(1);
-            }
-            if(jRBAnual.isSelected()){
-                assinatura.setTp_assinatura(2);
-            }
-            assinatura.setDt_validade(util.recebeData(jFTFDtValidade.getText()));
             assinaturar.alterar(assinatura);
             assinatura = null;
         }
@@ -512,14 +415,6 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
         jTFServico.setText(assinatura.getDs_servico());
         jTFLogin.setText(assinatura.getDs_login());
         jTFSenha.setText(assinatura.getDs_senha());
-        jFTFValor.setText(Utilidade.formatoValor.format(assinatura.getNm_valor()));
-        if(assinatura.getTp_assinatura() == 1){
-            jRBMensal.setSelected(true);
-        }
-        if(assinatura.getTp_assinatura() == 2){
-            jRBAnual.setSelected(true);
-        }
-        jFTFDtValidade.setText(Utilidade.formatoData.format(assinatura.getDt_validade().getTime()));
     }//GEN-LAST:event_jTAssinarturaMouseClicked
 
     private void jBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarActionPerformed
@@ -546,24 +441,17 @@ public class JIFAssinatura extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup bGTp_assinatura;
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBPesquisar;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<Empresa> jCBEmpresa;
-    private javax.swing.JFormattedTextField jFTFDtValidade;
-    private javax.swing.JFormattedTextField jFTFValor;
-    private javax.swing.JLabel jLDtValidade;
     private javax.swing.JLabel jLLogin;
     private javax.swing.JLabel jLSenha;
     private javax.swing.JLabel jLServico;
-    private javax.swing.JLabel jLValor;
     private javax.swing.JPanel jPBotoes;
     private javax.swing.JPanel jPCampos;
     private javax.swing.JPanel jPGrid;
     private javax.swing.JPanel jPJCBox;
-    private javax.swing.JRadioButton jRBAnual;
-    private javax.swing.JRadioButton jRBMensal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTAssinartura;
     private javax.swing.JTextField jTFLogin;

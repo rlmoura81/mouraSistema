@@ -9,6 +9,7 @@ import br.com.rlmoura81.moura.principalcadastro.Categoria;
 import br.com.rlmoura81.moura.principalcadastro.CategoriaUtil;
 import br.com.rlmoura81.moura.principalcadastro.Empresa;
 import br.com.rlmoura81.moura.principalcadastro.EmpresaUtil;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class JIFModulo extends javax.swing.JInternalFrame {
@@ -54,7 +55,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
 
         bGModulo = new javax.swing.ButtonGroup();
         jPCampos = new javax.swing.JPanel();
-        jCBModuloApp = new javax.swing.JComboBox<>();
+        jCBModuloApp = new javax.swing.JComboBox();
         jBSalvar = new javax.swing.JButton();
         jCBModulo = new javax.swing.JComboBox<>();
         jPGrid = new javax.swing.JPanel();
@@ -62,7 +63,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
         jTModulo = new javax.swing.JTable();
         jPBotoes = new javax.swing.JPanel();
         jRBCategoria = new javax.swing.JRadioButton();
-        jRBPresServ = new javax.swing.JRadioButton();
+        jRBEmpresa = new javax.swing.JRadioButton();
 
         setClosable(true);
         setResizable(true);
@@ -176,11 +177,11 @@ public class JIFModulo extends javax.swing.JInternalFrame {
             }
         });
 
-        bGModulo.add(jRBPresServ);
-        jRBPresServ.setText("Prestador de Serviços");
-        jRBPresServ.addMouseListener(new java.awt.event.MouseAdapter() {
+        bGModulo.add(jRBEmpresa);
+        jRBEmpresa.setText("Empresa");
+        jRBEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRBPresServMouseClicked(evt);
+                jRBEmpresaMouseClicked(evt);
             }
         });
 
@@ -192,7 +193,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jRBCategoria)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRBPresServ)
+                .addComponent(jRBEmpresa)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPBotoesLayout.setVerticalGroup(
@@ -201,7 +202,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRBCategoria)
-                    .addComponent(jRBPresServ))
+                    .addComponent(jRBEmpresa))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -263,7 +264,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
      * vindas do banco de dados.</p>
      */
     private void jcCategoria(){
-        //categoriau.jcCategoria(jCBModuloApp);
+        categoriau.jcCategoria(jCBModuloApp);
     }
     
     /**
@@ -277,7 +278,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
      * do banco de dados.</p>
      */
     private void jcEmpresa(){
-        //empresau.jcEmpresa(jCBModuloApp);
+        empresau.jcEmpresa(jCBModuloApp);
     }
     
     /**
@@ -299,9 +300,9 @@ public class JIFModulo extends javax.swing.JInternalFrame {
             jcCategoria();
             modappu.tabelaModuloAppCategoria(jTModulo);            
         }
-        if(jRBPresServ.isSelected() == true){
+        if(jRBEmpresa.isSelected() == true){
             jcEmpresa();
-            modappu.tabelaModuloAppPresserv(jTModulo);            
+            modappu.tabelaModuloAppEmpresa(jTModulo);            
         }
     }
     
@@ -369,11 +370,11 @@ public class JIFModulo extends javax.swing.JInternalFrame {
             modappr.inserirCatMod(modapp);
             modappu.tabelaModuloAppCategoria(jTModulo);
         }
-        if(jRBPresServ.isSelected()){
+        if(jRBEmpresa.isSelected()){
             modapp.setEmpresa(empresa);
             modapp.setModulo(modulo);
             modappr.inserirPresServMod(modapp);
-            modappu.tabelaModuloAppPresserv(jTModulo);
+            modappu.tabelaModuloAppEmpresa(jTModulo);
         }
     }
     
@@ -381,9 +382,9 @@ public class JIFModulo extends javax.swing.JInternalFrame {
         jcModApp();
     }//GEN-LAST:event_jRBCategoriaMouseClicked
 
-    private void jRBPresServMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRBPresServMouseClicked
+    private void jRBEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRBEmpresaMouseClicked
         jcModApp();
-    }//GEN-LAST:event_jRBPresServMouseClicked
+    }//GEN-LAST:event_jRBEmpresaMouseClicked
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         if(validaCampos()){
@@ -422,7 +423,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
         if(jRBCategoria.isSelected() == true){
             jCBModuloApp.setSelectedItem(modapp.getCategoria());
         }
-        if(jRBPresServ.isSelected() == true){
+        if(jRBEmpresa.isSelected() == true){
             jCBModuloApp.setSelectedItem(modapp.getEmpresa());
         }
         jCBModulo.setSelectedItem(modapp.getModulo());
@@ -432,12 +433,12 @@ public class JIFModulo extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup bGModulo;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<String> jCBModulo;
-    private javax.swing.JComboBox<Categoria> jCBModuloApp;
+    private javax.swing.JComboBox jCBModuloApp;
     private javax.swing.JPanel jPBotoes;
     private javax.swing.JPanel jPCampos;
     private javax.swing.JPanel jPGrid;
     private javax.swing.JRadioButton jRBCategoria;
-    private javax.swing.JRadioButton jRBPresServ;
+    private javax.swing.JRadioButton jRBEmpresa;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTModulo;
     // End of variables declaration//GEN-END:variables

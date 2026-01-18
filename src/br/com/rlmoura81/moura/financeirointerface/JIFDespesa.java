@@ -755,7 +755,7 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jFTFDtVencimentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtVencimentoFocusGained
-        util.posicionaCursojFTFData(jFTFDtVencimento);
+        util.posicionaCursorjFTFData(jFTFDtVencimento);
     }//GEN-LAST:event_jFTFDtVencimentoFocusGained
 
     private void jChkBAnualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChkBAnualActionPerformed
@@ -781,7 +781,7 @@ public class JIFDespesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTDespesaAnoMouseClicked
 
     private void jFTFValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFValorFocusGained
-        util.posicionaCursojFTFValor(jFTFValor);
+        util.posicionaCursorjFTFValor(jFTFValor);
     }//GEN-LAST:event_jFTFValorFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -31,7 +31,7 @@ public class ModuloAplicativoUtil {
         for(int i=0; i < lista.size(); i++){
             modapp = (ModuloAplicativo)lista.get(i);
             dadosArray[i][0] = modapp.getModulo();
-            dadosArray[i][1] = modapp.getCategoria();
+            dadosArray[i][1] = modapp.getCategoria().getDs_Categoria();
         }
         DefaultTableModel tModApp = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tModApp);
@@ -50,9 +50,9 @@ public class ModuloAplicativoUtil {
      * Usa <code>modappr.getListaPresservMod()</code> e carrega a tabela
      * com módulo e prestador.</p>
      */
-    public void tabelaModuloAppPresserv(JTable o){
+    public void tabelaModuloAppEmpresa(JTable o){
         String[] nomeColuna = {"Modulo", "Empresa"};
-        lista = modappr.getListaPresservMod();
+        lista = modappr.getListaEmpresaMod();
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
             modapp = (ModuloAplicativo)lista.get(i);

@@ -186,6 +186,7 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFTFDocumento">
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDocumentoFocusGained"/>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFTFDocumentoFocusLost"/>
           </Events>
         </Component>

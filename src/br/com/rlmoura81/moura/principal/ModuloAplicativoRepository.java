@@ -132,7 +132,7 @@ public class ModuloAplicativoRepository {
      * Faz JOIN entre <code>modulo</code>, <code>presserv</code> e <code>presservmod</code>, filtrando pelo usuário logado.  
      * Devolve uma lista de {@link ModuloAplicativo} com módulo e prestador preenchidos.</p>
      */
-    public ArrayList getListaPresservMod() {
+    public ArrayList getListaEmpresaMod() {
         ArrayList modapp = new ArrayList();
         try{
             sql = "SELECT modulo.cd_modulo, empresa.cd_empresa, empresamod.cd_usuario" +
@@ -172,7 +172,7 @@ public class ModuloAplicativoRepository {
      * Filtra pelo id do módulo e realiza JOIN entre <code>modulo</code>, <code>presserv</code> e <code>presservmod</code>.  
      * Retorna uma lista de {@link ModuloAplicativo} daquele módulo.</p>
      */
-    public ArrayList getListaPresServMod(int cd_modulo) {
+    public ArrayList getListaEmpresaMod(int cd_modulo) {
         ArrayList modapp = new ArrayList();
         try{
             sql = "SELECT modulo.cd_modulo, empresa.cd_empresa, empresamod.cd_usuario" +
@@ -192,7 +192,7 @@ public class ModuloAplicativoRepository {
             }
             ps.close();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de MódulosApp - Empresa:\n" +
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a lista de MódulosApp - Empresa por Modulo:\n" +
                     ex.getMessage(), "Empresa - Modulo", JOptionPane.ERROR_MESSAGE);
         }
         return modapp;

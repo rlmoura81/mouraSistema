@@ -154,6 +154,12 @@ public class JIFRenda extends javax.swing.JInternalFrame {
 
         jLData.setText("Data:");
 
+        jFTFData.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDataFocusGained(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPCamposLayout = new javax.swing.GroupLayout(jPCampos);
         jPCampos.setLayout(jPCamposLayout);
         jPCamposLayout.setHorizontalGroup(
@@ -826,8 +832,12 @@ public class JIFRenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCBTpAtivoActionPerformed
 
     private void jFTFValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFValorFocusGained
-        util.posicionaCursojFTFValor(jFTFValor);
+        util.posicionaCursorjFTFValor(jFTFValor);
     }//GEN-LAST:event_jFTFValorFocusGained
+
+    private void jFTFDataFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFocusGained
+        util.posicionaCursorjFTFData(jFTFData);
+    }//GEN-LAST:event_jFTFDataFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBExcluir;

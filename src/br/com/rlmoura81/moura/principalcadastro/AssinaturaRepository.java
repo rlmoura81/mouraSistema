@@ -29,17 +29,14 @@ public class AssinaturaRepository implements IPadraoRepository{
     public void inserir(Object o) {
         Assinatura a = (Assinatura) o;
         try{
-            sql = "INSERT INTO assinatura (cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, dt_validade, cd_empresa, cd_usuario)" +
-                  "     VALUES (sq_assinatura.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO assinatura (cd_assinatura, ds_servico, ds_login, ds_senha, cd_empresa, cd_usuario)" +
+                  "     VALUES (sq_assinatura.nextval, ?, ?, ?, ?, ?)";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setString(1, a.getDs_servico());
             ps.setString(2, a.getDs_login());
             ps.setString(3, a.getDs_senha());
-            ps.setBigDecimal(4, a.getNm_valor());
-            ps.setInt(5, a.getTp_assinatura());
-            ps.setString(6, Utilidade.formatoData.format(a.getDt_validade().getTime()));
-            ps.setInt(7, a.getEmpresa().getCd_empresa());
-            ps.setInt(8, a.getCd_usuario());
+            ps.setInt(4, a.getEmpresa().getCd_empresa());
+            ps.setInt(5, a.getCd_usuario());
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Salvo.", "Assinatura", JOptionPane.INFORMATION_MESSAGE);
@@ -67,9 +64,6 @@ public class AssinaturaRepository implements IPadraoRepository{
                   "   SET ds_servico = ?, " +
                   "       ds_login = ?, " +
                   "       ds_senha = ?, " +
-                  "       nm_valor = ?, " +
-                  "       tp_assinatura = ?, " +
-                  "       dt_validade = ?, " +
                   "       cd_empresa = ?" +
                   " WHERE cd_assinatura = ? " +
                   "   AND cd_usuario = ?";
@@ -77,12 +71,9 @@ public class AssinaturaRepository implements IPadraoRepository{
             ps.setString(1, a.getDs_servico());
             ps.setString(2, a.getDs_login());
             ps.setString(3, a.getDs_senha());
-            ps.setBigDecimal(4, a.getNm_valor());
-            ps.setInt(5, a.getTp_assinatura());
-            ps.setString(6, Utilidade.formatoData.format(a.getDt_validade().getTime()));
-            ps.setInt(7, a.getEmpresa().getCd_empresa());
-            ps.setInt(8, a.getCd_assinatura());
-            ps.setInt(9, a.getCd_usuario());
+            ps.setInt(4, a.getEmpresa().getCd_empresa());
+            ps.setInt(5, a.getCd_assinatura());
+            ps.setInt(6, a.getCd_usuario());
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Salvo.", "Assinatura", JOptionPane.INFORMATION_MESSAGE);
@@ -132,7 +123,7 @@ public class AssinaturaRepository implements IPadraoRepository{
     public ArrayList getLista() {
         ArrayList assinatura = new ArrayList();
         try{
-            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, to_char(dt_validade,'dd/MM/yyyy'), cd_empresa, cd_usuario" +
+            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, cd_empresa, cd_usuario" +
                   "  FROM assinatura" +
                   " WHERE cd_usuario = ?" +
                   " ORDER BY ds_servico";
@@ -145,9 +136,6 @@ public class AssinaturaRepository implements IPadraoRepository{
                     rs.getString("ds_servico"),
                     rs.getString("ds_login"),
                     rs.getString("ds_senha"),
-                    rs.getBigDecimal("nm_valor"),
-                    rs.getInt("tp_assinatura"),
-                    util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
                     (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
                 assinatura.add(a);
@@ -173,7 +161,7 @@ public class AssinaturaRepository implements IPadraoRepository{
     public ArrayList getLista(String ds_servico) {
         ArrayList assinatura = new ArrayList();
         try{
-            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, to_char(dt_validade,'dd/MM/yyyy'), cd_empresa, cd_usuario" +
+            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, cd_empresa, cd_usuario" +
                   "  FROM assinatura" +
                   " WHERE upper(ds_servico) LIKE ? OR lower(ds_servico) LIKE ?" +
                   "   AND cd_usuario = ?" +  
@@ -189,9 +177,6 @@ public class AssinaturaRepository implements IPadraoRepository{
                     rs.getString("ds_servico"),
                     rs.getString("ds_login"),
                     rs.getString("ds_senha"),
-                    rs.getBigDecimal("nm_valor"),
-                    rs.getInt("tp_assinatura"),
-                    util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
                     (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
                 assinatura.add(a);
@@ -215,7 +200,7 @@ public class AssinaturaRepository implements IPadraoRepository{
     public Object getById(int id) {
         Assinatura assinatura = null;
         try{
-            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, nm_valor, tp_assinatura, to_char(dt_validade,'dd/MM/yyyy'), cd_empresa, cd_usuario" +
+            sql = "SELECT cd_assinatura, ds_servico, ds_login, ds_senha, cd_empresa, cd_usuario" +
                   "  FROM assinatura" +
                   " WHERE cd_assinatura = ?";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
@@ -227,9 +212,6 @@ public class AssinaturaRepository implements IPadraoRepository{
                     rs.getString("ds_servico"),
                     rs.getString("ds_login"),
                     rs.getString("ds_senha"),
-                    rs.getBigDecimal("nm_valor"),
-                    rs.getInt("tp_assinatura"),
-                    util.recebeData(rs.getString("to_char(dt_validade,'dd/MM/yyyy')")),
                     (Empresa)empresar.getById(rs.getInt("cd_empresa")),
                     rs.getInt("cd_usuario"));
             }

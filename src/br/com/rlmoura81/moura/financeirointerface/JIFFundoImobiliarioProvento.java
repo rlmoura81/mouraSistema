@@ -495,19 +495,19 @@ public class JIFFundoImobiliarioProvento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void jFTFRendimentoPagoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFRendimentoPagoFocusGained
-        util.posicionaCursojFTFValor(jFTFRendimentoPago);
+        util.posicionaCursorjFTFValor(jFTFRendimentoPago);
     }//GEN-LAST:event_jFTFRendimentoPagoFocusGained
 
     private void jFTFPrecoDtBaseFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFPrecoDtBaseFocusGained
-        util.posicionaCursojFTFValor(jFTFPrecoDtBase);
+        util.posicionaCursorjFTFValor(jFTFPrecoDtBase);
     }//GEN-LAST:event_jFTFPrecoDtBaseFocusGained
 
     private void jFTFDtPagamentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtPagamentoFocusGained
-        util.posicionaCursojFTFData(jFTFDtPagamento);
+        util.posicionaCursorjFTFData(jFTFDtPagamento);
     }//GEN-LAST:event_jFTFDtPagamentoFocusGained
 
     private void jFTFDtPrecoBaseFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtPrecoBaseFocusGained
-        util.posicionaCursojFTFData(jFTFDtPrecoBase);
+        util.posicionaCursorjFTFData(jFTFDtPrecoBase);
     }//GEN-LAST:event_jFTFDtPrecoBaseFocusGained
         
     // Variables declaration - do not modify//GEN-BEGIN:variables

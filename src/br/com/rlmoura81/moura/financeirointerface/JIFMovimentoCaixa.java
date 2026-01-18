@@ -1035,19 +1035,19 @@ public class JIFMovimentoCaixa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBPesquisarActionPerformed
 
     private void jFTFValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFValorFocusGained
-        util.posicionaCursojFTFValor(jFTFValor);
+        util.posicionaCursorjFTFValor(jFTFValor);
     }//GEN-LAST:event_jFTFValorFocusGained
 
     private void jFTFDataFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFocusGained
-        util.posicionaCursojFTFData(jFTFData);
+        util.posicionaCursorjFTFData(jFTFData);
     }//GEN-LAST:event_jFTFDataFocusGained
 
     private void jFTFDataInicioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataInicioFocusGained
-        util.posicionaCursojFTFData(jFTFDataInicio);
+        util.posicionaCursorjFTFData(jFTFDataInicio);
     }//GEN-LAST:event_jFTFDataInicioFocusGained
 
     private void jFTFDataFinalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFinalFocusGained
-        util.posicionaCursojFTFData(jFTFDataFinal);
+        util.posicionaCursorjFTFData(jFTFDataFinal);
     }//GEN-LAST:event_jFTFDataFinalFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

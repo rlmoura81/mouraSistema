@@ -146,7 +146,6 @@ public class NotaCorretagemRepository implements IPadraoRepository{
      *
      * @param id EN: brokerage note ID to search | IT: ID della nota da cercare | PT-BR: ID da nota a pesquisar
      * @return EN: brokerage note found or null (NotaCorretagem) | IT: nota trovata oppure null (NotaCorretagem) | PT-BR: nota encontrada ou null (NotaCorretagem)
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     @Override
@@ -158,8 +157,7 @@ public class NotaCorretagemRepository implements IPadraoRepository{
                   " WHERE cd_nota = ?";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            
+            ResultSet rs = ps.executeQuery();            
             if(rs.next()){
                 notac = new NotaCorretagem(
                         rs.getInt("cd_nota"),
@@ -184,7 +182,6 @@ public class NotaCorretagemRepository implements IPadraoRepository{
      * <p><strong>PT-BR:</strong> Recupera a nota de corretagem mais recente.</p>
      *
      * @return EN: latest brokerage note or null (NotaCorretagem) | IT: ultima nota oppure null (NotaCorretagem) | PT-BR: última nota ou null (NotaCorretagem)
-     * @throws SQLException EN: if a database access error occurs | IT: se si verifica un errore di accesso al database | PT-BR: se ocorrer erro de acesso ao banco de dados
      * @since 1.0.0
      */
     public Object getByCodNota() {
@@ -194,8 +191,7 @@ public class NotaCorretagemRepository implements IPadraoRepository{
                   "  FROM notacorretagem" +
                   " ORDER BY cd_nota DESC";
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            
+            ResultSet rs = ps.executeQuery();            
             if(rs.next()){
                 notac = new NotaCorretagem(
                         rs.getInt("cd_nota"),

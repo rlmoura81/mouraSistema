@@ -11,27 +11,7 @@ public class AssinaturaUtil {
     Assinatura assinatura = new Assinatura();
     AssinaturaRepository assinaturar = new AssinaturaRepository();    
     ArrayList lista = new ArrayList();
-       
-    /**
-     * <p><strong>EN:</strong> Converts the subscription plan code to a label.
-     * Returns “Mês” for <code>1</code>, “Ano” for <code>2</code>, or “-” for unknown codes.</p>
-     *
-     * <p><strong>IT:</strong> Converte il codice del piano di abbonamento in un’etichetta.
-     * Restituisce “Mês” per <code>1</code>, “Ano” per <code>2</code> o “-” per codici sconosciuti.</p>
-     *
-     * <p><strong>PT-BR:</strong> Converte o código do plano de assinatura em rótulo.
-     * Retorna “Mês” para <code>1</code>, “Ano” para <code>2</code> ou “-” para códigos desconhecidos.</p>
-     */
-    private String planoAssinatura(int tpassinatura){
-        String plano = "-";
-        if(tpassinatura == 1){
-            plano = "Mês";
-        }
-        if(tpassinatura == 2){
-            plano = "Ano";
-        }
-        return plano;
-    }
+      
         
     /**
      * <p><strong>EN:</strong> Builds the “Assinatura” table with all subscriptions.
@@ -44,7 +24,7 @@ public class AssinaturaUtil {
      * Preenche as linhas com serviço, login, senha, valor, plano (mês/ano), validade e prestadora.</p>
      */
     public void tabelaAssinatura(JTable o){
-        String[] nomeColuna = {"Serviço", "Login", "Senha", "Valor", "Plano", "Validade", "Empresa"};
+        String[] nomeColuna = {"Serviço", "Login", "Senha", "Empresa"};
         lista = assinaturar.getLista();
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -52,10 +32,7 @@ public class AssinaturaUtil {
             dadosArray[i][0] = assinatura.getDs_servico();
             dadosArray[i][1] = assinatura.getDs_login();
             dadosArray[i][2] = assinatura.getDs_senha();
-            dadosArray[i][3] = Utilidade.formatoValor.format(assinatura.getNm_valor());
-            dadosArray[i][4] = planoAssinatura(assinatura.getTp_assinatura());
-            dadosArray[i][5] = Utilidade.formatoData.format(assinatura.getDt_validade().getTime());
-            dadosArray[i][6] = assinatura.getEmpresa();
+            dadosArray[i][3] = assinatura.getEmpresa();
         }        
         DefaultTableModel tAssinatura = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tAssinatura);
@@ -72,7 +49,7 @@ public class AssinaturaUtil {
      * Carrega apenas assinaturas cujo serviço corresponde ao termo buscado (sem diferenciar maiúsculas/minúsculas).</p>
      */
     public void tabelaAssinatura(JTable o, String ds_servico){
-        String[] nomeColuna = {"Serviço", "Login", "Senha", "Valor", "Plano", "Validade", "Empresa"};
+        String[] nomeColuna = {"Serviço", "Login", "Senha", "Empresa"};
         lista = assinaturar.getLista(ds_servico);
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];        
         for(int i=0; i < lista.size(); i++){
@@ -80,10 +57,7 @@ public class AssinaturaUtil {
             dadosArray[i][0] = assinatura.getDs_servico();
             dadosArray[i][1] = assinatura.getDs_login();
             dadosArray[i][2] = assinatura.getDs_senha();
-            dadosArray[i][3] = Utilidade.formatoValor.format(assinatura.getNm_valor());
-            dadosArray[i][4] = planoAssinatura(assinatura.getTp_assinatura());
-            dadosArray[i][5] = Utilidade.formatoData.format(assinatura.getDt_validade().getTime());
-            dadosArray[i][6] = assinatura.getEmpresa();
+            dadosArray[i][3] = assinatura.getEmpresa();
         }        
         DefaultTableModel tAssinatura = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tAssinatura);

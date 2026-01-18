@@ -853,7 +853,7 @@ public class JIFNotaCorretagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFNumNotaFocusLost
 
     private void jFTFDataFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFocusGained
-        util.posicionaCursojFTFData(jFTFData);
+        util.posicionaCursorjFTFData(jFTFData);
     }//GEN-LAST:event_jFTFDataFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

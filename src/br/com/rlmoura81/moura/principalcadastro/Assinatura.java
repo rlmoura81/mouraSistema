@@ -9,9 +9,6 @@ public class Assinatura {
     private String ds_servico;
     private String ds_login;
     private String ds_senha;
-    private BigDecimal nm_valor;
-    private int tp_assinatura;
-    private Calendar dt_validade;
     private Empresa empresa;
     private int cd_usuario;
 
@@ -47,30 +44,6 @@ public class Assinatura {
         this.ds_senha = ds_senha;
     }
 
-    public BigDecimal getNm_valor() {
-        return nm_valor;
-    }
-
-    public void setNm_valor(BigDecimal nm_valor) {
-        this.nm_valor = nm_valor;
-    }
-
-    public int getTp_assinatura() {
-        return tp_assinatura;
-    }
-
-    public void setTp_assinatura(int tp_assinatura) {
-        this.tp_assinatura = tp_assinatura;
-    }
-
-    public Calendar getDt_validade() {
-        return dt_validade;
-    }
-
-    public void setDt_validade(Calendar dt_validade) {
-        this.dt_validade = dt_validade;
-    }
-
     public Empresa getEmpresa() {
         return empresa;
     }
@@ -87,14 +60,11 @@ public class Assinatura {
         this.cd_usuario = cd_usuario;
     }
 
-    public Assinatura(int cd_assinatura, String ds_servico, String ds_login, String ds_senha, BigDecimal nm_valor, int tp_assinatura, Calendar dt_validade, Empresa empresa, int cd_usuario) {
+    public Assinatura(int cd_assinatura, String ds_servico, String ds_login, String ds_senha, Empresa empresa, int cd_usuario) {
         this.cd_assinatura = cd_assinatura;
         this.ds_servico = ds_servico;
         this.ds_login = ds_login;
         this.ds_senha = ds_senha;
-        this.nm_valor = nm_valor;
-        this.tp_assinatura = tp_assinatura;
-        this.dt_validade = dt_validade;
         this.empresa = empresa;
         this.cd_usuario = cd_usuario;
     }
@@ -104,7 +74,7 @@ public class Assinatura {
 
     @Override
     public String toString() {
-        return "Assinatura{" + "cd_assinatura=" + cd_assinatura + ", ds_servico=" + ds_servico + ", ds_login=" + ds_login + ", ds_senha=" + ds_senha + ", nm_valor=" + nm_valor + ", tp_assinatura=" + tp_assinatura + ", dt_validade=" + dt_validade + ", empresa=" + empresa + ", cd_usuario=" + cd_usuario + '}';
+        return "Assinatura{" + "cd_assinatura=" + cd_assinatura + ", ds_servico=" + ds_servico + ", ds_login=" + ds_login + ", ds_senha=" + ds_senha + ", empresa=" + empresa + ", cd_usuario=" + cd_usuario + '}';
     }
     
 }

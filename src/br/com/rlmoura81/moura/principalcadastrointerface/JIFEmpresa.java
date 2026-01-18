@@ -148,6 +148,9 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
         jLEmpresa.setText("Nome/NomeFantasia:");
 
         jFTFDocumento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFTFDocumentoFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jFTFDocumentoFocusLost(evt);
             }
@@ -423,6 +426,10 @@ public class JIFEmpresa extends javax.swing.JInternalFrame {
             tpempresa = null;
         }
     }//GEN-LAST:event_jCBTpEmpresaActionPerformed
+
+    private void jFTFDocumentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDocumentoFocusGained
+        util.posicionaCursorjFTFDocumento(jFTFDocumento);
+    }//GEN-LAST:event_jFTFDocumentoFocusGained
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGModulo;

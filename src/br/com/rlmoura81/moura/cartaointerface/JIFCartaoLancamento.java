@@ -1362,15 +1362,15 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBPagarActionPerformed
 
     private void jFTFDataFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDataFocusGained
-        util.posicionaCursojFTFData(jFTFData);
+        util.posicionaCursorjFTFData(jFTFData);
     }//GEN-LAST:event_jFTFDataFocusGained
 
     private void jFTFDtFechamentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFDtFechamentoFocusGained
-        util.posicionaCursojFTFData(jFTFDtFechamento);
+        util.posicionaCursorjFTFData(jFTFDtFechamento);
     }//GEN-LAST:event_jFTFDtFechamentoFocusGained
 
     private void jFTFValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTFValorFocusGained
-        util.posicionaCursojFTFValor(jFTFValor);
+        util.posicionaCursorjFTFValor(jFTFValor);
     }//GEN-LAST:event_jFTFValorFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

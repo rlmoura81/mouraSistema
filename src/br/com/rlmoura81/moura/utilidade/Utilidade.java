@@ -19,7 +19,7 @@ public class Utilidade {
     *POSICIONA O CURSOR OU SELECIONA O CAMPO TODO DA JFTFFIELD NO ON FOCUS
     */
     
-    public JFormattedTextField posicionaCursojFTFData(JFormattedTextField o){
+    public JFormattedTextField posicionaCursorjFTFData(JFormattedTextField o){
         o.selectAll();
         //o.setCaretPosition(0);
         return o;
@@ -30,9 +30,15 @@ public class Utilidade {
     *POSICIONA O CURSOR OU SELECIONA O CAMPO TODO DA JFTFFIELD NO ON FOCUS
     */
     
-    public JFormattedTextField posicionaCursojFTFValor(JFormattedTextField o){
+    public JFormattedTextField posicionaCursorjFTFValor(JFormattedTextField o){
         o.selectAll();
         //o.setCaretPosition(0);
+        return o;
+    }
+    
+    public JFormattedTextField posicionaCursorjFTFDocumento(JFormattedTextField o){
+        //o.selectAll();
+        o.setCaretPosition(0);
         return o;
     }
     
