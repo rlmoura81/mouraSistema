@@ -869,8 +869,8 @@ public class JFPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMICreditoCadActionPerformed
 
     private void jMIVeiculoDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIVeiculoDespesasActionPerformed
-        Veiculo v = new Veiculo();
-        gerenciainterface.abrirInterface(JIFModuloDespesa.getInstancia(v));
+        Veiculo veiculo = new Veiculo();
+        gerenciainterface.abrirInterface(JIFModuloDespesa.getInstancia(veiculo));
     }//GEN-LAST:event_jMIVeiculoDespesasActionPerformed
 
     private void jMIProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIProdutoActionPerformed
@@ -882,13 +882,13 @@ public class JFPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMIModuloActionPerformed
 
     private void jMIImovelDespesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIImovelDespesaActionPerformed
-        Imovel i = new Imovel();
-        gerenciainterface.abrirInterface(JIFModuloDespesa.getInstancia(i));
+        Imovel imovel = new Imovel();
+        gerenciainterface.abrirInterface(JIFModuloDespesa.getInstancia(imovel));
     }//GEN-LAST:event_jMIImovelDespesaActionPerformed
 
     private void jMIAnimalDespesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAnimalDespesaActionPerformed
-        Animal a = new Animal();
-        gerenciainterface.abrirInterface(JIFModuloDespesa.getInstancia(a));
+        Animal animal = new Animal();
+        gerenciainterface.abrirInterface(JIFModuloDespesa.getInstancia(animal));
     }//GEN-LAST:event_jMIAnimalDespesaActionPerformed
 
     private void JMIHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIHistoricoActionPerformed

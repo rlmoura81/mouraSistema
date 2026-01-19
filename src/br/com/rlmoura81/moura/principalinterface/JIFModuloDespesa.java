@@ -54,18 +54,20 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
      * "Despesas - Imóvel".</p>
      */
     public static JIFModuloDespesa getInstancia(Object o){      
-        Animal a = new Animal();        
-        if(jifmodulodespesa == null | o.getClass().equals(a.getClass())){
-            jifmodulodespesa = new JIFModuloDespesa(a);
-            jifmodulodespesa.setTitle("Despesas - Animal");
+        
+        if(jifmodulodespesa != null){
+            return jifmodulodespesa;
         }
-        Veiculo v = new Veiculo();
-        if(jifmodulodespesa == null | o.getClass().equals(v.getClass())){
+        if(o instanceof Animal){
+            Animal a = (Animal) o;
+            jifmodulodespesa = new JIFModuloDespesa(a);
+            jifmodulodespesa.setTitle("Despesas - Animal");;
+        }else if(o instanceof  Veiculo){
+            Veiculo v = (Veiculo) o;
             jifmodulodespesa = new JIFModuloDespesa(v);
             jifmodulodespesa.setTitle("Despesas - Veículo");
-        }
-        Imovel i = new Imovel();
-        if(jifmodulodespesa == null | o.getClass().equals(i.getClass())){
+        }else if(o instanceof Imovel){
+            Imovel i = (Imovel) o;
             jifmodulodespesa = new JIFModuloDespesa(i);
             jifmodulodespesa.setTitle("Despesas - Imóvel");
         }
@@ -92,17 +94,17 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
     
     public JIFModuloDespesa(Object o) {
         initComponents();
-
-        obj = o;
         
-        desativaBotoes();
-        
+        desativaBotoes();        
+        obj = o;        
+                
         if(o.getClass().equals(animal.getClass())){
             jcAnimal();
             jcEmpresa(2);
             jCBProduto.setVisible(true);
             produtou.jcProduto(jCBProduto);
             jLTotal.setText("Total mês: " + Utilidade.formatoValor.format(modulodr.somaDespesa(animal)));
+            System.out.println("Passou por ANIMAL");
         }    
         if(o.getClass().equals(veiculo.getClass())){
             jcVeiculo();
