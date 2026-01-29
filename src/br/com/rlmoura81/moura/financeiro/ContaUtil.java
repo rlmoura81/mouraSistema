@@ -1,6 +1,5 @@
 package br.com.rlmoura81.moura.financeiro;
 
-import br.com.rlmoura81.moura.cartao.CartaoParcelamento;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class ContaUtil {
                         if(c.getCd_conta()== 0){
                             setText("<Selecione>");
                         }else if(c.getNm_conta()!= null){
-                            setText(c.getBanco().getDs_banco() + " - " + c.getNm_conta());
+                            setText(c.getBanco().getDs_banco() + " - " + c.getNm_conta() + " / " + c.getTpconta().getDs_tpconta());
                         }else{
                             setText("Sem conta");
                         }

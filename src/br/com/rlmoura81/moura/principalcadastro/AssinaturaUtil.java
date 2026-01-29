@@ -1,6 +1,5 @@
 package br.com.rlmoura81.moura.principalcadastro;
 
-import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -12,7 +11,22 @@ public class AssinaturaUtil {
     AssinaturaRepository assinaturar = new AssinaturaRepository();    
     ArrayList lista = new ArrayList();
       
-        
+    /**
+     * EM TESTE - ADICIONAR COMENTARIO
+     * TRATA O A TEBELA DA ASSINATURA QUANDO A EMPRESA E NULA
+     * @param o
+     * @return 
+     */
+    private String empresaTrativaTabela(Object o){
+        Assinatura a = (Assinatura) o;
+        String empresa;
+        if(a.getEmpresa() == null){
+            empresa = "-";
+        }else{
+            empresa = a.getEmpresa().getDs_empresa();
+        }
+        return empresa;
+    }    
     /**
      * <p><strong>EN:</strong> Builds the “Assinatura” table with all subscriptions.
      * Populates rows with service, login, password, value, plan (month/year), validity date, and provider.</p>
@@ -32,7 +46,7 @@ public class AssinaturaUtil {
             dadosArray[i][0] = assinatura.getDs_servico();
             dadosArray[i][1] = assinatura.getDs_login();
             dadosArray[i][2] = assinatura.getDs_senha();
-            dadosArray[i][3] = assinatura.getEmpresa();
+            dadosArray[i][3] = empresaTrativaTabela(assinatura);
         }        
         DefaultTableModel tAssinatura = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tAssinatura);

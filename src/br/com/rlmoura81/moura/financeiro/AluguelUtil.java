@@ -127,7 +127,7 @@ public class AluguelUtil {
         for(int i = 0; i < lista.size(); i++){
             aluguel = (Aluguel) lista.get(i);
             dadosArray[i][0] = aluguel.getNm_contrato();
-            dadosArray[i][1] = aluguel.getImovel();
+            dadosArray[i][1] = aluguel.getImovel().getDs_descricao();
             dadosArray[i][2] = Utilidade.formatoValor.format(aluguel.getNm_vlaluguel());
             dadosArray[i][3] = Utilidade.formatoValor.format(aluguel.getNm_vladm());
             dadosArray[i][4] = aluguel.getDt_deposito();

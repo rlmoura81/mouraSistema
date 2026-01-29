@@ -96,23 +96,24 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
         initComponents();
         
         desativaBotoes();        
-        obj = o;        
-                
-        if(o.getClass().equals(animal.getClass())){
+        obj = o;                     
+        if(o instanceof Animal){
+            Animal a = (Animal) o;
             jcAnimal();
             jcEmpresa(2);
             jCBProduto.setVisible(true);
             produtou.jcProduto(jCBProduto);
             jLTotal.setText("Total mês: " + Utilidade.formatoValor.format(modulodr.somaDespesa(animal)));
-            System.out.println("Passou por ANIMAL");
         }    
-        if(o.getClass().equals(veiculo.getClass())){
+        if(o instanceof Veiculo){
+            Veiculo v = (Veiculo) o;
             jcVeiculo();
             jcEmpresa(3);
             jCBProduto.setVisible(false);
             jLTotal.setText("Total mês: " + Utilidade.formatoValor.format(modulodr.somaDespesa(veiculo)));
         }   
-        if(o.getClass().equals(imovel.getClass())){
+        if(o instanceof Imovel){
+            Imovel i = (Imovel) o;
             jcImovel();
             jcEmpresa(4);
             jCBProduto.setVisible(false);
@@ -129,7 +130,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPVeiculo = new javax.swing.JPanel();
-        jCBModuloDespesa = new javax.swing.JComboBox<>();
+        jCBModuloDespesa = new javax.swing.JComboBox();
         jCBEmpresa = new javax.swing.JComboBox<>();
         jCBProduto = new javax.swing.JComboBox<>();
         jPCampos = new javax.swing.JPanel();
@@ -897,7 +898,7 @@ public class JIFModuloDespesa extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBPesquisar;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<Empresa> jCBEmpresa;
-    private javax.swing.JComboBox<String> jCBModuloDespesa;
+    private javax.swing.JComboBox jCBModuloDespesa;
     private javax.swing.JComboBox<String> jCBProduto;
     private javax.swing.JFormattedTextField jFTFData;
     private javax.swing.JFormattedTextField jFTFDataFinal;

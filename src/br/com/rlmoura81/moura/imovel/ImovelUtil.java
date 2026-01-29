@@ -1,8 +1,12 @@
 package br.com.rlmoura81.moura.imovel;
 
 import br.com.rlmoura81.moura.utilidade.Utilidade;
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +16,37 @@ public class ImovelUtil {
     Imovel imovel = new Imovel();
     ImovelRepository imovelr = new ImovelRepository();    
     ArrayList lista = new ArrayList();
+
+    /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - IMOVEL
+    */
+    private void jcModelImovel(JComboBox<Imovel> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Imovel){
+                        Imovel imovel = (Imovel) value;
+                        if(imovel.getCd_imovel()== 0){
+                            setText("<Selecione>");
+                        }else if(imovel.getDs_descricao()!= null){
+                            setText(imovel.getDs_descricao()+ " - " + imovel.getNm_matricula());
+                        }else{
+                            setText("Sem imovel");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
     
     /**
      * <p><strong>EN:</strong> Populates a {@link javax.swing.JComboBox} with {@link Imovel} options.
@@ -26,13 +61,17 @@ public class ImovelUtil {
      * Adiciona o placeholder "<Imovel>" (id = 0) e, em seguida, insere todos os itens retornados por
      * <code>imovelr.getLista()</code>.</p>
      */
-    public void jcImovel(JComboBox o){
-        ArrayList<Imovel> listaimovel = imovelr.getLista();
-        Imovel iZero = new Imovel(0, "<Imovel>", null, null, null, null, null, 0);
-        o.addItem(iZero);
-        for(Imovel imovel : listaimovel){
-            o.addItem(imovel);
+    public void jcImovel(JComboBox<Imovel> o){
+        ArrayList<Imovel> lista = imovelr.getLista();
+        DefaultComboBoxModel<Imovel>model = new DefaultComboBoxModel<>();
+        model.addElement(new Imovel(0, "<Imovel>", null, null, null, null, null, 0));
+        if(lista != null && !lista.isEmpty()){
+            for(Imovel imovel : lista){
+                model.addElement(imovel);
+            }
         }
+        o.setModel(model);
+        jcModelImovel(o);
     }
     
     /**

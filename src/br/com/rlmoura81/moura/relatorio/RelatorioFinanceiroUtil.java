@@ -32,7 +32,10 @@ public class RelatorioFinanceiroUtil {
 
         for (int i=0; i < lista.size(); i++) {
             relatoriofin = (RelatorioFinanceiro)lista.get(i);
-            dadosArray[i][0] = relatoriofin.getConta();
+            dadosArray[i][0] = relatoriofin.getConta().getBanco().getDs_banco() + " - " + 
+                                relatoriofin.getConta().getNm_agencia() + " / " + 
+                                relatoriofin.getConta().getNm_conta() + " - " + 
+                                relatoriofin.getConta().getTpconta().getDs_tpconta();
             dadosArray[i][1] = Utilidade.formatoValor.format(relatoriofin.getContasaldo().getVl_saldo());
             dadosArray[i][2] = Utilidade.formatoValor.format(relatoriofin.getVl_credito());
             dadosArray[i][3] = Utilidade.formatoValor.format(relatoriofin.getVl_debito());

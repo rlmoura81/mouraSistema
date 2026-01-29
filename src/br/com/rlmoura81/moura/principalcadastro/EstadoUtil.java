@@ -1,7 +1,11 @@
 package br.com.rlmoura81.moura.principalcadastro;
 
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +16,37 @@ public class EstadoUtil {
     EstadoRepository estador = new EstadoRepository();    
     ArrayList lista = new ArrayList();    
         
+    /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - ESTADO
+    */
+    private void jcModelEstado(JComboBox<Estado> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Estado){
+                        Estado estado = (Estado) value;
+                        if(estado.getCd_estado()== 0){
+                            setText("<Selecione>");
+                        }else if(estado.getDs_siglaEstado()!= null){
+                            setText(estado.getDs_siglaEstado()+ " - " + estado.getDs_estado());
+                        }else{
+                            setText("Sem estado");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
+    
     /**
      * <p><strong>EN:</strong> Populates the JComboBox with a list of States.
      * Adds a default placeholder option ("&lt;UF&gt;") followed by all registered States.</p>
@@ -22,13 +57,17 @@ public class EstadoUtil {
      * <p><strong>PT-BR:</strong> Preenche o JComboBox com a lista de Estados.
      * Adiciona uma opção padrão ("&lt;UF&gt;") seguida por todos os Estados cadastrados.</p>
      */
-    public void jcEstado(JComboBox o){        
-        ArrayList<Estado> listaestado = estador.getLista();
-        Estado eZero = new Estado(0, null, "<UF>");
-        o.addItem(eZero);
-        for(Estado estado : listaestado){
-            o.addItem(estado);
-        }      
+    public void jcEstado(JComboBox<Estado> o){        
+        ArrayList<Estado> lista = estador.getLista();
+        DefaultComboBoxModel<Estado> model = new DefaultComboBoxModel<>();
+        model.addElement(new Estado(0, null, "<UF>"));
+        if(lista != null && !lista.isEmpty()){
+            for(Estado estado : lista){
+                model.addElement(estado);
+            }      
+        } 
+        o.setModel(model);
+        jcModelEstado(o);
     }
     
     /**

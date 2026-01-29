@@ -588,7 +588,6 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
     private void jcCartao(){
         if(banco != null){
             jCBCartao.setEnabled(true);
-            jCBCartao.removeAllItems();
             cartaou.jcCartao(jCBCartao, banco.getCd_banco());              
         }else{
             jCBCartao.removeAllItems();
@@ -1081,7 +1080,7 @@ public class JIFCartaoLancamento extends javax.swing.JInternalFrame {
         despesa = (Despesa)jCBDespesa.getSelectedItem();
         if(jCBDespesa.getSelectedIndex() != 0){
             jFTFData.setText(Utilidade.formatoData.format(Calendar.getInstance().getTime()));
-            jTFDescricao.setText(despesa.getDs_despesa() + " - " + despesa.getEmpresa());
+            jTFDescricao.setText(despesa.getDs_despesa() + " - " + despesa.getEmpresa().getDs_empresa());
             jFTFValor.setText(Utilidade.formatoValor.format(despesa.getNm_valor()));
             jCBCategoria.getModel().setSelectedItem(despesa.getCategoria());
         }

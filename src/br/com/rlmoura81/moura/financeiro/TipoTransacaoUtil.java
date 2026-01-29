@@ -1,6 +1,5 @@
 package br.com.rlmoura81.moura.financeiro;
 
-import br.com.rlmoura81.moura.principalcadastro.Categoria;
 import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;

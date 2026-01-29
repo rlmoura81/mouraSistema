@@ -165,7 +165,7 @@ public class ModuloDespesaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(adespesa.getNm_valor());
             dadosArray[i][4] = adespesa.getNm_qtde();
             dadosArray[i][5] = Utilidade.formatoValor.format(cf.calculoValorQtde(adespesa.getNm_valor(), adespesa.getNm_qtde()));
-            dadosArray[i][6] = adespesa.getEmpresa();
+            dadosArray[i][6] = adespesa.getEmpresa().getDs_empresa();
             dadosArray[i][7] = adespesa.getProduto();
         }        
         DefaultTableModel tAnimalDesp = new DefaultTableModel(dadosArray, nomeColuna);
@@ -194,7 +194,7 @@ public class ModuloDespesaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(adespesa.getNm_valor());
             dadosArray[i][4] = adespesa.getNm_qtde();
             dadosArray[i][5] = Utilidade.formatoValor.format(cf.calculoValorQtde(adespesa.getNm_valor(), adespesa.getNm_qtde()));
-            dadosArray[i][6] = adespesa.getEmpresa();
+            dadosArray[i][6] = adespesa.getEmpresa().getDs_empresa();
             dadosArray[i][7] = adespesa.getProduto();
         }        
         DefaultTableModel tAnimalDesp = new DefaultTableModel(dadosArray, nomeColuna);
@@ -223,7 +223,7 @@ public class ModuloDespesaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(vdespesa.getNm_valor());
             dadosArray[i][4] = vdespesa.getNm_qtde();
             dadosArray[i][5] = Utilidade.formatoValor.format(cf.calculoValorQtde(vdespesa.getNm_valor(), vdespesa.getNm_qtde()));
-            dadosArray[i][6] = vdespesa.getEmpresa();
+            dadosArray[i][6] = vdespesa.getEmpresa().getDs_empresa();
         }        
         DefaultTableModel tVeiculoDesp = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tVeiculoDesp);

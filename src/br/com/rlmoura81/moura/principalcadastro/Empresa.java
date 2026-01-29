@@ -70,8 +70,7 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return ds_empresa;
+        return "Empresa{" + "cd_empresa=" + cd_empresa + ", ds_empresa=" + ds_empresa + ", ds_razaosocial=" + ds_razaosocial + ", nm_documento=" + nm_documento + ", tpEmpresa=" + tpEmpresa + ", cd_usuario=" + cd_usuario + '}';
     }
-
 
 }

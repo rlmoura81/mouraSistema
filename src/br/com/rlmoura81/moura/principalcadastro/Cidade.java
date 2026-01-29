@@ -39,10 +39,10 @@ public class Cidade {
     public Cidade (){
         
     }
-    
+
     @Override
     public String toString() {
-        return ds_Cidade + " - " + estado;
+        return "Cidade{" + "cd_Cidade=" + cd_Cidade + ", ds_Cidade=" + ds_Cidade + ", estado=" + estado + '}';
     }
-
+    
 }

@@ -62,10 +62,10 @@ public class ModuloAplicativoRepository {
      * Usa módulo, prestador e usuário do {@link ModuloAplicativo} e executa o INSERT.  
      * Exibe mensagem de sucesso ou diálogo de erro se falhar.</p>
      */
-    public void inserirPresServMod(Object o) {
+    public void inserirEmpresaMod(Object o) {
         ModuloAplicativo modapp = (ModuloAplicativo) o;
         try{
-            sql = "INSERT INTO presservmod (cd_modulo, cd_presserv, cd_usuario)" +
+            sql = "INSERT INTO empresamod (cd_modulo, cd_empresa, cd_usuario)" +
                   "     VALUES (?, ?, ?)";            
             PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
             ps.setInt(1, modapp.getModulo().getCd_modulo());
@@ -80,6 +80,56 @@ public class ModuloAplicativoRepository {
         }
     }
 
+    /**
+    * EM TESTE - COLOCAR COMENTARIO
+    * DELETE - CATEGORIA MODULO
+    */
+
+    public void deleteCatMod(Object o) {
+        ModuloAplicativo modapp = (ModuloAplicativo) o;
+        try{
+            sql = "DELETE FROM catmod " +
+                  " WHERE cd_modulo = ?" +
+                  "   AND cd_categoria = ?" +
+                  "   AND cd_usuario = ?";            
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, modapp.getModulo().getCd_modulo());
+            ps.setInt(2, modapp.getCategoria().getCd_Categoria());
+            ps.setInt(3, modapp.getCd_usuario());
+            ps.execute();
+            ps.close();
+            JOptionPane.showMessageDialog(null, "Excluido.", "Categoria - Modulo", JOptionPane.INFORMATION_MESSAGE);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao excluir:\n" +
+                    ex.getMessage(), "Categoria - Modulo", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    /**
+    * EM TESTE - COLOCAR COMENTARIO
+    * DELETE - EMPRESA MODULO
+    */
+
+    public void deleteEmpresaMod(Object o) {
+        ModuloAplicativo modapp = (ModuloAplicativo) o;
+        try{
+            sql = "DELETE FROM empresamod " +
+                  " WHERE cd_modulo = ?" +
+                  "   AND cd_empresa = ?" +
+                  "   AND cd_usuario = ?";            
+            PreparedStatement ps = JPLogin.conn.prepareStatement(sql);
+            ps.setInt(1, modapp.getModulo().getCd_modulo());
+            ps.setInt(2, modapp.getEmpresa().getCd_empresa());
+            ps.setInt(3, modapp.getCd_usuario());
+            ps.execute();
+            ps.close();
+            JOptionPane.showMessageDialog(null, "Excluido.", "Categoria - Modulo", JOptionPane.INFORMATION_MESSAGE);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao excluir:\n" +
+                    ex.getMessage(), "Categoria - Modulo", JOptionPane.ERROR_MESSAGE);
+        }
+    }    
+        
     /**
      * <p><strong>EN:</strong> Retrieves all Module–Category links visible to the current user.  
      * Performs a JOIN across <code>modulo</code>, <code>categoria</code>, and <code>catmod</code>, filtering by logged-in user.  
@@ -249,7 +299,7 @@ public class ModuloAplicativoRepository {
      * Realiza JOIN entre <code>modulo</code>, <code>presserv</code> e <code>presservmod</code>, filtrando pelo id informado.  
      * Retorna o {@link ModuloAplicativo} correspondente ou <code>null</code> se não houver resultado.</p>
      */
-    public Object getByIdPresServMod(int id) {
+    public Object getByIdEmpresaMod(int id) {
         ModuloAplicativo modapp = null;
         try{
             sql = "SELECT empresa.cd_empresa, modulo.cd_modulo, empresamod.cd_usuario" +

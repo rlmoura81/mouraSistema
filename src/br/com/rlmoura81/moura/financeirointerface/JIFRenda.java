@@ -19,7 +19,6 @@ import br.com.rlmoura81.moura.financeiro.TipoProvento;
 import br.com.rlmoura81.moura.financeiro.TipoProventoUtil;
 import br.com.rlmoura81.moura.financeiro.TipoRenda;
 import br.com.rlmoura81.moura.principalinterface.JPLogin;
-import br.com.rlmoura81.moura.utilidade.CalculoFinanceiro;
 import br.com.rlmoura81.moura.utilidade.Utilidade;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;

@@ -83,7 +83,7 @@ public class EmpresaUtil {
      * adicionando uma entrada padrão ("&lt;Prestador&gt;").</p>
      */
         public void jcEmpresa(JComboBox<Empresa> o, int cd_modulo) {
-        List<Empresa> lista = empresar.getLista(); 
+        List<Empresa> lista = empresar.getLista(cd_modulo); 
         DefaultComboBoxModel<Empresa> model = new DefaultComboBoxModel<>();
         model.addElement(new Empresa(0, null, null, null, null, 0));
         if(lista !=  null && !lista.isEmpty()){

@@ -58,7 +58,7 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
     public JIFRelatorioFinanceiro() {   
         initComponents();
         
-
+        jcConta();
     }
 
     @SuppressWarnings("unchecked")
@@ -74,7 +74,7 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
         jPCartao = new javax.swing.JPanel();
         jCBCartao = new javax.swing.JComboBox<>();
         jChkBFechada = new javax.swing.JCheckBox();
-        jCBDtFechada = new javax.swing.JComboBox<>();
+        jCBDtFechada = new javax.swing.JComboBox();
         jPCaixa = new javax.swing.JPanel();
         jChkBPeriodo = new javax.swing.JCheckBox();
         jFTFDTInicio = new javax.swing.JFormattedTextField();
@@ -85,15 +85,15 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
         jLCaixa = new javax.swing.JLabel();
         jCBGrupo = new javax.swing.JComboBox<>();
         jLTotal = new javax.swing.JLabel();
-        jPGridRelatorioAux = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTRelatorioAuxiliar = new javax.swing.JTable();
         jPCampos = new javax.swing.JPanel();
         jBGerar = new javax.swing.JButton();
         jLValor = new javax.swing.JLabel();
         jPGridRelatorioPrincipal = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTRelatorioPrincipal = new javax.swing.JTable();
+        jPGridRelatorioAux = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTRelatorioAuxiliar = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -118,6 +118,10 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
             }
         });
 
+        jPRelatorio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jTPRelatorio.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatorio"));
+
         jPFinanceiro.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jPFinanceiroComponentShown(evt);
@@ -139,7 +143,7 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
                 .addGroup(jPFinanceiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jChkCredito)
                     .addComponent(jChkDebito))
-                .addContainerGap(351, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
         jPFinanceiroLayout.setVerticalGroup(
             jPFinanceiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +194,7 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
                         .addComponent(jChkBFechada)
                         .addGap(18, 18, 18)
                         .addComponent(jCBDtFechada, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         jPCartaoLayout.setVerticalGroup(
             jPCartaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +235,7 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
                         .addComponent(jFTFDTInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jFTFDTFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         jPCaixaLayout.setVerticalGroup(
             jPCaixaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,6 +256,8 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
                 jCBContaActionPerformed(evt);
             }
         });
+
+        jPRelatorioResumo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLCartao.setText("Cartão:");
 
@@ -292,36 +298,6 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTRelatorioAuxiliar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(jTRelatorioAuxiliar);
-
-        javax.swing.GroupLayout jPGridRelatorioAuxLayout = new javax.swing.GroupLayout(jPGridRelatorioAux);
-        jPGridRelatorioAux.setLayout(jPGridRelatorioAuxLayout);
-        jPGridRelatorioAuxLayout.setHorizontalGroup(
-            jPGridRelatorioAuxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPGridRelatorioAuxLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPGridRelatorioAuxLayout.setVerticalGroup(
-            jPGridRelatorioAuxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPGridRelatorioAuxLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout jPRelatorioLayout = new javax.swing.GroupLayout(jPRelatorio);
         jPRelatorio.setLayout(jPRelatorioLayout);
         jPRelatorioLayout.setHorizontalGroup(
@@ -334,24 +310,21 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
                         .addComponent(jTPRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPRelatorioResumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPGridRelatorioAux, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPRelatorioLayout.setVerticalGroup(
             jPRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPRelatorioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPGridRelatorioAux, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPRelatorioLayout.createSequentialGroup()
-                        .addComponent(jCBConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPRelatorioResumo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTPRelatorio))))
+                .addComponent(jCBConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTPRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPRelatorioResumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPCampos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jBGerar.setText("Gerar");
         jBGerar.addActionListener(new java.awt.event.ActionListener() {
@@ -383,6 +356,8 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPGridRelatorioPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jTRelatorioPrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -407,14 +382,45 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
             jPGridRelatorioPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPGridRelatorioPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1127, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPGridRelatorioPrincipalLayout.setVerticalGroup(
             jPGridRelatorioPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPGridRelatorioPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPGridRelatorioAux.setBorder(javax.swing.BorderFactory.createTitledBorder("Contas"));
+
+        jTRelatorioAuxiliar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTRelatorioAuxiliar);
+
+        javax.swing.GroupLayout jPGridRelatorioAuxLayout = new javax.swing.GroupLayout(jPGridRelatorioAux);
+        jPGridRelatorioAux.setLayout(jPGridRelatorioAuxLayout);
+        jPGridRelatorioAuxLayout.setHorizontalGroup(
+            jPGridRelatorioAuxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPGridRelatorioAuxLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+        );
+        jPGridRelatorioAuxLayout.setVerticalGroup(
+            jPGridRelatorioAuxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPGridRelatorioAuxLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -427,14 +433,20 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPGridRelatorioPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPGridRelatorioAux, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPGridRelatorioAux, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -446,17 +458,11 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void jcConta(){
-        //contau.jcConta(jCBConta);
+        contau.jcConta(jCBConta);
     }
     
     private void jcCartao(){
-        if(this.cartao == null){
-            //cartaou.jcCartao(jCBCartao, conta.getBanco().getCd_banco());
-        }else{
-            jCBCartao.removeAllItems();
-            //cartaou.jcCartao(jCBCartao, conta.getBanco().getCd_banco());
-        }
-        campoChkCartao();        
+        cartaou.jcCartao(jCBCartao, conta.getCd_conta());
     }
     
     private void jcGrupo(){
@@ -490,7 +496,7 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
     }
     
     private void campoChkCartao(){
-        if(this.cartao == null || cartao.getCd_cartao() == 0){
+        if(cartao == null || cartao.getCd_cartao() == 0){
             jChkBFechada.setSelected(false);
             jChkBFechada.setEnabled(false);
         }else{
@@ -502,7 +508,7 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
     private void jcFechada(){
         if(this.cartao != null && jChkBFechada.isSelected() == true){
             jCBDtFechada.setEnabled(true);
-            //cartaolancfu.jcDataFechamento(jCBDtFechada, cartao.getCd_cartao());
+            cartaolancfu.jcDataFechamento(jCBDtFechada, cartao.getCd_cartao());
         }else{
             jCBDtFechada.removeAllItems();
             jCBDtFechada.setEnabled(false);
@@ -743,9 +749,9 @@ public class JIFRelatorioFinanceiro extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGFinanceiro;
     private javax.swing.JButton jBGerar;
-    private javax.swing.JComboBox<String> jCBCartao;
-    private javax.swing.JComboBox<String> jCBConta;
-    private javax.swing.JComboBox<String> jCBDtFechada;
+    private javax.swing.JComboBox<Cartao> jCBCartao;
+    private javax.swing.JComboBox<Conta> jCBConta;
+    private javax.swing.JComboBox jCBDtFechada;
     private javax.swing.JComboBox<String> jCBGrupo;
     private javax.swing.JCheckBox jChkBFechada;
     private javax.swing.JCheckBox jChkBPeriodo;

@@ -57,7 +57,7 @@ public class ModuloAplicativoUtil {
         for(int i=0; i < lista.size(); i++){
             modapp = (ModuloAplicativo)lista.get(i);
             dadosArray[i][0] = modapp.getModulo();
-            dadosArray[i][1] = modapp.getEmpresa();
+            dadosArray[i][1] = modapp.getEmpresa().getDs_empresa();
         }
         DefaultTableModel tModApp = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tModApp);

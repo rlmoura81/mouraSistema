@@ -1,7 +1,11 @@
 package br.com.rlmoura81.moura.principalcadastro;
 
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -11,6 +15,37 @@ public class CidadeUtil {
     Cidade cidade = new Cidade();
     CidadeRepository cidader = new CidadeRepository();    
     ArrayList lista = new ArrayList();
+    
+        /*
+    * EM TESTE - COLOCAR COMENTARIO
+    * DEFAULTCOMBOBOXMODEL - CIDADE
+    */
+    private void jcModelCidade(JComboBox<Cidade> o){
+        o.setRenderer(new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<?> list, 
+                    Object value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus){
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof Cidade){
+                        Cidade cidade = (Cidade) value;
+                        if(cidade.getCd_Cidade()== 0){
+                            setText("<Selecione>");
+                        }else if(cidade.getDs_Cidade()!= null){
+                            setText(cidade.getDs_Cidade()+ " - " + cidade.getEstado().getDs_siglaEstado());
+                        }else{
+                            setText("Sem cidade");
+                        }
+                    }else{
+                        setText("");
+                    }
+                return this;
+            }
+        });
+    }
     
     /**
      * <p><strong>EN:</strong> Loads the City list into a ComboBox.
@@ -22,13 +57,17 @@ public class CidadeUtil {
      * <p><strong>PT-BR:</strong> Carrega a lista de Cidades em um ComboBox.
      * Adiciona a opção padrão "&lt;Cidade&gt;" e insere todas as cidades do banco de dados.</p>
      */
-    public void jcCidade(JComboBox o){
-        ArrayList<Cidade> listacidade =  cidader.getLista();
-        Cidade cZero = new Cidade(0, "<Cidade>", null);
-        o.addItem(cZero);
-        for(Cidade cidade : listacidade){
-            o.addItem(cidade);
+    public void jcCidade(JComboBox<Cidade> o){
+        ArrayList<Cidade> lista =  cidader.getLista();
+        DefaultComboBoxModel<Cidade> model = new DefaultComboBoxModel<>();
+        model.addElement(new Cidade(0, "<Cidade>", null));
+        if(lista != null && !lista.isEmpty()){
+            for(Cidade cidade : lista){
+                o.addItem(cidade);
+            }
         }
+        o.setModel(model);
+        jcModelCidade(o);
     }
     
     /**
@@ -48,7 +87,7 @@ public class CidadeUtil {
         for(int i = 0; i < lista.size(); i++){
             cidade = (Cidade) lista.get(i);
             dadosArray[i][0] = cidade.getDs_Cidade();
-            dadosArray[i][1] = cidade.getEstado();
+            dadosArray[i][1] = cidade.getEstado().getDs_siglaEstado();
         }
         DefaultTableModel tCidade = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tCidade);

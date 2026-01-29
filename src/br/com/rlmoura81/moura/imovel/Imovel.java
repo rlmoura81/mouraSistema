@@ -93,7 +93,7 @@ public class Imovel {
 
     @Override
     public String toString() {
-        return ds_descricao + " / " + nm_matricula;
+        return "Imovel{" + "cd_imovel=" + cd_imovel + ", nm_matricula=" + nm_matricula + ", nm_metragem=" + nm_metragem + ", nm_valorMatricula=" + nm_valorMatricula + ", ds_descricao=" + ds_descricao + ", tpimovel=" + tpimovel + ", cidade=" + cidade + ", cd_usuario=" + cd_usuario + '}';
     }
     
 }

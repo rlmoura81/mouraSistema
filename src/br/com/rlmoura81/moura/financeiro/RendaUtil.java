@@ -136,7 +136,7 @@ public class RendaUtil {
      * @since 1.0.0
      */
     public void tabelaRenda(JTable o) {
-        String[] nomeColuna = {"Data", "Despesa", "Valor", "Tipo"};
+        String[] nomeColuna = {"Data", "Descricao", "Valor", "Tipo"};
         lista = rendar.getLista();
         Object[][] dadosArray = new Object[lista.size()][nomeColuna.length];
         for (int i = 0; i < lista.size(); i++) {

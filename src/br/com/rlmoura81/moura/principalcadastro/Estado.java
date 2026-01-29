@@ -44,6 +44,7 @@ public class Estado {
 
     @Override
     public String toString() {
-        return ds_SiglaEstado;
-    }     
+        return "Estado{" + "cd_Estado=" + cd_Estado + ", ds_Estado=" + ds_Estado + ", ds_SiglaEstado=" + ds_SiglaEstado + '}';
+    }
+   
 }

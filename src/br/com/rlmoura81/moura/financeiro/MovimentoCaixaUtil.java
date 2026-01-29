@@ -103,6 +103,23 @@ public class MovimentoCaixaUtil {
     }
     
     /**
+     * EM TESTE - ADICIONAR COMENTARIO
+     * TRATA O A TEBELA DO MOVIMENTO CAIXA QUANDO A CATEGORIA E NULA
+     * @param o
+     * @return 
+     */
+    private String categoriaTrativaTabela(Object o){
+        MovimentoCaixa mc = (MovimentoCaixa) o;
+        String categoria;
+        if(mc.getCategoria() == null){
+            categoria = "-";
+        }else{
+            categoria = mc.getCategoria().getDs_Categoria();
+        }
+        return categoria;
+    }
+    
+    /**
      * <p><strong>EN:</strong> Fills a JTable with current-month cash movements for the given account.</p>
      *
      * <p><strong>IT:</strong> Popola una JTable con i movimenti di cassa del mese corrente per il conto indicato.</p>
@@ -125,7 +142,7 @@ public class MovimentoCaixaUtil {
             dadosArray[i][3] = Utilidade.formatoValor.format(movcx.getVl_credito());
             dadosArray[i][4] = Utilidade.formatoValor.format(movcx.getVl_debito());
             dadosArray[i][5] = movcx.getTipotransacao().getDs_tptrans();
-            dadosArray[i][6] = movcx.getCategoria();
+            dadosArray[i][6] = categoriaTrativaTabela(movcx);
         }
         DefaultTableModel tMovCaixa = new DefaultTableModel(dadosArray, nomeColuna);
         o.setModel(tMovCaixa);

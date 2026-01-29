@@ -9,7 +9,6 @@ import br.com.rlmoura81.moura.principalcadastro.Categoria;
 import br.com.rlmoura81.moura.principalcadastro.CategoriaUtil;
 import br.com.rlmoura81.moura.principalcadastro.Empresa;
 import br.com.rlmoura81.moura.principalcadastro.EmpresaUtil;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class JIFModulo extends javax.swing.JInternalFrame {
@@ -58,6 +57,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
         jCBModuloApp = new javax.swing.JComboBox();
         jBSalvar = new javax.swing.JButton();
         jCBModulo = new javax.swing.JComboBox<>();
+        jBExcluir = new javax.swing.JButton();
         jPGrid = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTModulo = new javax.swing.JTable();
@@ -66,6 +66,8 @@ public class JIFModulo extends javax.swing.JInternalFrame {
         jRBEmpresa = new javax.swing.JRadioButton();
 
         setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         setResizable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -106,6 +108,13 @@ public class JIFModulo extends javax.swing.JInternalFrame {
             }
         });
 
+        jBExcluir.setText("Excluir");
+        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPCamposLayout = new javax.swing.GroupLayout(jPCampos);
         jPCampos.setLayout(jPCamposLayout);
         jPCamposLayout.setHorizontalGroup(
@@ -117,6 +126,8 @@ public class JIFModulo extends javax.swing.JInternalFrame {
                 .addComponent(jCBModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBExcluir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPCamposLayout.setVerticalGroup(
@@ -126,7 +137,8 @@ public class JIFModulo extends javax.swing.JInternalFrame {
                 .addGroup(jPCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBModuloApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBSalvar)
-                    .addComponent(jCBModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBExcluir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -341,8 +353,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
      * reseta o combo box de módulo-app e as seleções dos botões de opção.</p>
      */
     private void limpaCampos(){
-        bGModulo.clearSelection();
-        jCBModuloApp.removeAllItems();
+        jCBModuloApp.setSelectedIndex(0);
         jCBModulo.setSelectedIndex(0);
     }
     
@@ -373,7 +384,7 @@ public class JIFModulo extends javax.swing.JInternalFrame {
         if(jRBEmpresa.isSelected()){
             modapp.setEmpresa(empresa);
             modapp.setModulo(modulo);
-            modappr.inserirPresServMod(modapp);
+            modappr.inserirEmpresaMod(modapp);
             modappu.tabelaModuloAppEmpresa(jTModulo);
         }
     }
@@ -421,16 +432,34 @@ public class JIFModulo extends javax.swing.JInternalFrame {
     private void jTModuloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTModuloMouseClicked
         modapp = (ModuloAplicativo)modappu.getSelectObject(jTModulo);
         if(jRBCategoria.isSelected() == true){
-            jCBModuloApp.setSelectedItem(modapp.getCategoria());
+            jCBModuloApp.getModel().setSelectedItem(modapp.getCategoria());
         }
         if(jRBEmpresa.isSelected() == true){
-            jCBModuloApp.setSelectedItem(modapp.getEmpresa());
+            jCBModuloApp.getModel().setSelectedItem(modapp.getEmpresa());
         }
-        jCBModulo.setSelectedItem(modapp.getModulo());
+        jCBModulo.getModel().setSelectedItem(modapp.getModulo());
     }//GEN-LAST:event_jTModuloMouseClicked
+
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+        if(modapp != null){
+            if(jRBCategoria.isSelected()){
+                modapp.setCategoria(categoria);
+                modapp.setModulo(modulo);
+                modappr.deleteCatMod(modapp);
+                modappu.tabelaModuloAppCategoria(jTModulo);
+            }
+            if(jRBEmpresa.isSelected()){
+                modapp.setEmpresa(empresa);
+                modapp.setModulo(modulo);
+                modappr.deleteEmpresaMod(modapp);
+                modappu.tabelaModuloAppEmpresa(jTModulo);
+            }
+        }
+    }//GEN-LAST:event_jBExcluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGModulo;
+    private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<String> jCBModulo;
     private javax.swing.JComboBox jCBModuloApp;
